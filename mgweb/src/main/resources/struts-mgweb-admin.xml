@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	
+	   	<package name="struts-mgweb-admin" namespace="/admin" extends="struts-mgweb-default"> 
+
+	   	<action name="adminPage" class="com.mg.web.struts.action.home.HomePage">
+			<interceptor-ref name="i18nStack" />
+			<result name="success" type="tiles">/adminPage.tiles</result>
+		</action>
+		
+	   	<action name="logon" class="com.mg.web.struts.action.BasicTilesAction">
+		    <param name="currentLanguage">en</param>
+			<interceptor-ref name="defaultMgWeb" />
+			<result name="success" type="tiles">/logon.tiles</result>
+		</action>
+		
+		<action name="aeUser" class="com.mg.web.struts.action.user.AddEditUser" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result> 
+            <result name="input" type="tiles">/addEditUser.tiles</result>  
+            <result name="error" type="tiles">/errorAdmin.tiles</result>               
+        </action> 
+        
+        <action name="saveUser" class="com.mg.web.struts.action.user.AddEditUser" method="save" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<interceptor-ref name="token"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="redirect">/admin/userList.action</result>    
+            <result name="error" type="tiles">/errorAdmin.tiles</result>              
+        </action> 
+        
+         <action name="userList" class="com.mg.web.struts.action.user.UserList" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="tiles">/userList.tiles</result>    
+            <result name="error" type="tiles">/errorAdmin.tiles</result>              
+        </action> 
+        
+        <action name="aeCc" class="com.mg.web.struts.action.collection.AddEditCustomComponent" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="input" type="tiles">/addEditCustomComponent.tiles</result>   
+            <result name="error" type="tiles">/errorAdmin.tiles</result>               
+        </action> 
+        
+        <action name="saveCc" class="com.mg.web.struts.action.collection.AddEditCustomComponent" method="save" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<interceptor-ref name="token"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="redirect">/admin/ccList.action</result>     
+            <result name="error" type="tiles">/errorAdmin.tiles</result>             
+        </action> 
+        
+        <action name="ccList" class="com.mg.web.struts.action.collection.CustomComponentList" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="tiles">/CustomComponentList.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action> 
+        
+        <action name="collectionList" class="com.mg.web.struts.action.collection.CollectionList" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="tiles">/CollectionList.tiles</result> 
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                 
+        </action> 
+                
+        <action name="aeCollection" class="com.mg.web.struts.action.collection.AddEditCollection" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="input" type="tiles">/addEditCollection.tiles</result> 
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                 
+        </action> 
+        
+        <action name="saveCollection" class="com.mg.web.struts.action.collection.AddEditCollection" method="save" >
+			<interceptor-ref name="fileUpload">
+		        <param name="maximumSize">10485760</param>
+		        <param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
+		    </interceptor-ref>
+		    <interceptor-ref name="defaultStack"></interceptor-ref>
+		    <interceptor-ref name="token"/>
+            <result name="success" type="redirect">/admin/collectionList.action</result>  
+            <result name="input" type="tiles">/addEditCollection.tiles</result> 
+            <result name="error" type="tiles">/errorAdmin.tiles</result>               
+        </action> 
+        
+        <action name="aeCccTranslation" class="com.mg.web.struts.action.collection.AddEditCustomComponentCollection" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="input" type="tiles">/addEditCccTranslacion.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action> 
+        
+        <action name="saveCccTranslation" class="com.mg.web.struts.action.collection.AddEditCustomComponentCollection" method="save">
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<interceptor-ref name="token"/>
+            <result name="success" type="redirect">${referer}</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action> 
+        
+        <action name="aeTranslation" class="com.mg.web.struts.action.application.AddEditTranslation" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="input" type="tiles">/addEditTranslation.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action> 
+        
+        <action name="saveTranslation" class="com.mg.web.struts.action.application.AddEditTranslation" method="save">
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<interceptor-ref name="token"/>
+            <result name="success" type="redirect">${referer}</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action> 
+        
+        <action name="aeImage" class="com.mg.web.struts.action.image.AddEditImage" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+            <result name="input" type="tiles">/viewImage.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action> 
+        
+        <action name="productList" class="com.mg.web.struts.action.product.ProductList" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="tiles">/productList.tiles</result> 
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                 
+        </action> 
+                
+        <action name="aeProduct" class="com.mg.web.struts.action.product.AddEditProduct" >
+        	<interceptor-ref name="errorInjectionInterceptor"/>
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="input" type="tiles">/addEditProduct.tiles</result> 
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                 
+        </action> 
+        
+        <action name="saveProduct" class="com.mg.web.struts.action.product.AddEditProduct" method="save" >
+			<!-- <interceptor-ref name="defaultStack">
+				<param name="fileUpload.maximumSize">10485760</param>
+				<param name="fileUpload.allowedTypes">text/plain,image/jpeg,image/png</param>
+			</interceptor-ref>
+			 -->
+			<interceptor-ref name="fileUpload">
+		        <param name="maximumSize">10485760</param>
+		        <param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
+		    </interceptor-ref>
+		    <interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="token"/>
+            <result name="success" type="redirect">/admin/productList.action</result>
+            <result name="input" type="redirect">/admin/aeProduct.action</result> 
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                
+        </action> 
+        
+        <action name="methodShippingList" class="com.mg.web.struts.action.shopping.MethodShippingList" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="tiles">/methodShippingList.tiles</result>  
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                
+        </action> 
+        
+        <action name="aeMethodShipping" class="com.mg.web.struts.action.shopping.AddEditMethodShipping" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="input" type="tiles">/addEditMethodShipping.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action> 
+        
+        <action name="saveMethodShipping" class="com.mg.web.struts.action.shopping.AddEditMethodShipping" method="save" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<interceptor-ref name="token"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+			<result name="success" type="redirect">/admin/methodShippingList.action</result>
+			<result name="error" type="tiles">/errorAdmin.tiles</result>                
+        </action> 
+        
+        <action name="removeMethodShipping" class="com.mg.web.struts.action.shopping.AddEditMethodShipping" method="remove" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<interceptor-ref name="token"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="redirect">/admin/methodShippingList.action</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action> 
+        
+        <action name="taxesList" class="com.mg.web.struts.action.shopping.TaxesList" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="tiles">/taxesList.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action>
+        
+        <action name="aeTaxes" class="com.mg.web.struts.action.shopping.AddEditTaxes" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="input" type="tiles">/addEditTaxes.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action> 
+        
+        <action name="saveTaxes" class="com.mg.web.struts.action.shopping.AddEditTaxes" method="save" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<interceptor-ref name="token"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="redirect">/admin/taxesList.action</result>
+			<result name="error" type="tiles">/errorAdmin.tiles</result>                 
+        </action> 
+        
+        <action name="removeTaxes" class="com.mg.web.struts.action.shopping.AddEditTaxes" method="remove" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<interceptor-ref name="token"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="redirect">/admin/taxesList.action</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action> 
+        
+        <action name="resetCacheProduct" class="com.mg.web.struts.action.tools.ResetCacheProduct" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>  
+            <result name="success" type="tiles">/adminPage.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                 
+        </action> 
+        
+        <action name="resetCacheDefault" class="com.mg.web.struts.action.tools.ResetCacheProduct" method="resetDefaultCache" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>  
+            <result name="success" type="tiles">/adminPage.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                 
+        </action>
+        
+        <action name="resetCollections" class="com.mg.web.struts.action.tools.ResetCacheProduct" method="resetCollections" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>  
+            <result name="success" type="tiles">/adminPage.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                 
+        </action> 
+        
+        <action name="resetCacheTranslations" class="com.mg.web.struts.action.tools.ResetCacheProduct" method="resetTranslationsCache">
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>  
+            <result name="success" type="tiles">/adminPage.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                 
+        </action> 
+        
+        <action name="shoppingCartList" class="com.mg.web.struts.action.shopping.ShoppingCartList" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="tiles">/shoppingCartList.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action>
+        
+        <action name="aeShoppingCart" class="com.mg.web.struts.action.shopping.AddEditShoppingCart" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="input" type="tiles">/addEditShoppingCart.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action>
+        
+        <action name="saveShoppingCart" class="com.mg.web.struts.action.shopping.AddEditShoppingCart" method="save" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<interceptor-ref name="token"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="redirect">/admin/shoppingCartList.action</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>               
+        </action>
+        
+        <action name="couponManagerList" class="com.mg.web.struts.action.coupon.CouponManagerList" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="tiles">/copounManagerList.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action>
+        
+        <action name="aeCouponsType" class="com.mg.web.struts.action.coupon.AddEditCoupon" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="input" type="tiles">/addEditCouponManager.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action> 
+        
+        <action name="saveCouponsType" class="com.mg.web.struts.action.coupon.AddEditCoupon" method="save" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<interceptor-ref name="token"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="redirect">/admin/couponManagerList.action</result>
+			<result name="error" type="tiles">/errorAdmin.tiles</result>                 
+        </action> 
+        
+        <action name="removeCouponsType" class="com.mg.web.struts.action.coupon.AddEditCoupon" method="remove" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<interceptor-ref name="token"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="redirect">/admin/couponManagerList.action</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action>
+        
+        <action name="createCouponsType" class="com.mg.web.struts.action.coupon.AddEditCoupon" method="create" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<interceptor-ref name="token"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="redirect">/admin/couponList.action</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action>
+        
+        <action name="couponList" class="com.mg.web.struts.action.coupon.CouponList" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="tiles">/copounList.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action>
+        
+        <action name="auditList" class="com.mg.web.struts.action.application.AuditList" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="tiles">/auditList.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action>
+        
+        <action name="logList" class="com.mg.web.struts.action.application.LogList" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="tiles">/logList.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action>
+        
+        <action name="translationList" class="com.mg.web.struts.action.application.TranslationList" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="tiles">/translationList.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action>
+        
+        <action name="datamining" class="com.mg.web.struts.action.application.MiningDataAction" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>  
+            <result name="success" type="tiles">/adminPage.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                 
+        </action> 
+        
+        <action name="*" class="com.mg.web.struts.action.BasicAction">
+			<interceptor-ref name="i18nStack" />
+			<result type="tiles">/{1}.tiles</result>
+		</action>
+    
+                 
+    </package>   
+    
+	<package name="struts-admin-ajax" namespace="/admin/ajax" extends="json-default">
+		<action name="deleteCCC" class="com.mg.web.struts.action.collection.AddEditCollection" method="delete">
+			<result type="json" name="success" />
+		</action>
+		
+		<action name="deleteCCI" class="com.mg.web.struts.action.product.AddEditProduct" method="delete">
+			<result type="json" name="success" />
+		</action>
+		
+		<action name="changeStatusCCC" class="com.mg.web.struts.action.ajax.AdminPageAjax" method="changeStatusCCC">
+			<result type="json" name="success" />
+		</action>	
+		
+		<action name="changeStatusCCI" class="com.mg.web.struts.action.ajax.AdminPageAjax" method="changeStatusCCI">
+			<result type="json" name="success" />
+		</action>
+		
+		<action name="colllectionList" class="com.mg.web.struts.action.ajax.AdminPageAjax" method="colllectionList">
+			<result type="json" name="success" />
+		</action>	        
+		
+		<action name="customComponentListById" class="com.mg.web.struts.action.ajax.AdminPageAjax" method="customComponentListById">
+			<result type="json" name="success" />
+		</action>	
+		
+		<action name="customComponentList" class="com.mg.web.struts.action.ajax.AdminPageAjax" method="customComponentList">
+			<result type="json" name="success" />
+		</action>	
+		
+		<action name="componentCollectionList" class="com.mg.web.struts.action.ajax.AdminPageAjax" method="componentCollectionList">
+			<result type="json" name="success" />
+		</action>	
+		
+		<action name="componentImage" class="com.mg.web.struts.action.ajax.ImageAjax" method="loadImagePath">
+			<result type="json" name="success" />
+		</action>	
+		
+		<action name="customComponentList" class="com.mg.web.struts.action.ajax.AdminPageAjax" method="customComponentList">
+			<result type="json" name="success" />
+		</action>	
+		
+		<action name="addProductPrice" class="com.mg.web.struts.action.ajax.PriceAjax" method="addProductPrice">
+			<result type="json" name="success" />
+		</action>	
+		
+		<action name="addMethodShippingPrice" class="com.mg.web.struts.action.ajax.PriceAjax" method="addMethodShippingPrice">
+			<result type="json" name="success" />
+		</action>	
+		
+		<action name="deletePriceEntry" class="com.mg.web.struts.action.ajax.PriceAjax" method="deletePriceEntry">
+			<result type="json" name="success" />
+		</action>
+		
+		<action name="savePriceEntry" class="com.mg.web.struts.action.ajax.PriceAjax" method="savePriceEntry">
+			<result type="json" name="success" />
+		</action>
+		
+		<action name="deleteProductImage" class="com.mg.web.struts.action.ajax.AjaxUploadFile" method="deleteProductImage">
+			<result type="json" name="success" />
+		</action>
+		
+		<action name="retrieveCustomComponentCollection" class="com.mg.web.struts.action.ajax.CollectionAjax" method="retrieveCustomComponentCollection">
+			<result type="json" name="success" />
+		</action>
+		
+		<action name="uploadImage"  method="uploadImage" class="com.mg.web.struts.action.ajax.AjaxUploadFile">
+        	<interceptor-ref name="i18nStack"/>
+       		<interceptor-ref name="fileUpload" />
+       		<interceptor-ref name="basicStack" />
+        </action>
+	</package>   
+
+	<!-- <package name="struts-mgweb-user" namespace="/user" extends="struts-mgweb-default"> 
+			<action name="login" class="com.mg.web.struts.action.user.Login"> 
+				<result name="success" type="tiles">/login.tiles</result> 
+			</action> 
+			<action name="welcome" 	class="com.mg.web.struts.action.user.WelcomeUserAction"> 
+				<result name="SUCCESS">../../WEB-INF/jsp/user/welcome_user.jsp</result> 
+			</action> 
+		</package> -->
+		
+
+</struts>
