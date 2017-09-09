@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+
+	<display-name>Bolsos</display-name>
+	<!-- Project Context Listener -->
+	<listener>
+		<listener-class>com.mg.web.listener.application.InitializeContextListener</listener-class>
+	</listener>
+	
+
+	<!-- Character Encoding Filter -->
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>com.mg.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Locale Filter -->
+	<filter>
+		<filter-name>LocaleFilter</filter-name>
+		<filter-class>com.mg.web.filter.LocaleFilter</filter-class>
+		<init-param>
+			<param-name>detectUserBrowser</param-name>
+			<param-value>false</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>LocaleFilter</filter-name>
+		<url-pattern>*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+
+	<!-- Jsession Filter -->
+	<filter>
+		<filter-name>JsessionFilter</filter-name>
+		<filter-class>com.mg.web.filter.JsessionFilter</filter-class>
+		<init-param>
+			<param-name>truncateJsession</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>JsessionFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Timing Filter -->
+	<filter>
+		<filter-name>Timing</filter-name>
+		<filter-class>com.mg.web.filter.TimingFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Timing</filter-name>
+		<url-pattern>*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+	
+	<!-- Request Filter -->
+	<filter>
+		<filter-name>RequestFilter</filter-name>
+		<filter-class>com.mg.web.filter.RequestFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>RequestFilter</filter-name>
+		<url-pattern>*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+
+	<!-- Tiles Conf -->
+	<listener>
+		<listener-class>org.apache.struts2.tiles.StrutsTilesListener
+		</listener-class>
+		<!-- <listener-class>org.apache.tiles.extras.complete.CompleteAutoloadTilesListener</listener-class> -->
+	</listener>
+	<context-param>
+		<param-name>tilesDefinitions</param-name>
+		<param-value>/WEB-INF/tiles.xml</param-value>
+	</context-param>
+
+	<jsp-config>
+		<jsp-property-group>
+			<url-pattern>*.jsp</url-pattern>
+			<page-encoding>UTF-8</page-encoding>
+		</jsp-property-group>
+	</jsp-config>
+
+	<display-name>Struts 2 Web Application</display-name>
+
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>
+			org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter
+		</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+
+	<!-- <security-constraint> <web-resource-collection> <web-resource-name>SecureConnection</web-resource-name> 
+		<url-pattern>/*</url-pattern> </web-resource-collection> <user-data-constraint> 
+		<transport-guarantee>CONFIDENTIAL</transport-guarantee> </user-data-constraint> 
+		</security-constraint> <security-constraint> <web-resource-collection> <web-resource-name>NonSecureConnectionOK</web-resource-name> 
+		<url-pattern>*.ico</url-pattern> </web-resource-collection> <user-data-constraint> 
+		<transport-guarantee>NONE</transport-guarantee> </user-data-constraint> </security-constraint> -->
+	<!-- Welcome And Error Pages -->
+	<welcome-file-list>
+		<welcome-file>/WEB-INF/jsp/application/index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/error.action</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error.action</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error.action</location>
+	</error-page>
+
+
+
+	<!-- <servlet> <servlet-name>servletCreateUser</servlet-name> <servlet-class>com.mg.web.servlet.ServletCreateUser</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>servletCreateUser</servlet-name> 
+		<url-pattern>/servletCreateUser</url-pattern> </servlet-mapping> -->
+
+	<resource-ref>
+		<description>DB postgres</description>
+		<res-ref-name>jdbc/postgresDS</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
+</web-app>
