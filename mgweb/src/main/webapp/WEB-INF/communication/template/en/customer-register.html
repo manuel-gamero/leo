@@ -1,0 +1,225 @@
+<title>#TITLE#</title>
+<style>
+.table {
+    margin-bottom: 20px;
+    max-width: 100%;
+    width: 100%;
+    background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.media-icon {
+	width: 30px;
+	height: 30px;
+	padding-bottom: 18px;
+}
+
+tbody tr td img, #basket .table tbody tr td img, #customer-order .table tbody tr td img {
+    width: 100px;
+}
+img {
+    vertical-align: middle;
+}
+img {
+    border: 0 none;
+}
+
+a .link{
+    color: #38a7bb;
+    text-decoration: none;
+    transition: all 0.2s ease-out 0s;
+}
+a, button {
+    transition: all 0.2s ease-out 0s;
+}
+a {
+    color: ##38a7bb;
+    text-decoration: none;
+}
+a {
+    background-color: transparent;
+}
+
+.table > thead > tr > th {
+    border-bottom: 2px solid #ddd;
+    vertical-align: bottom;
+}
+
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+    border-top: 1px solid #ddd;
+    line-height: 1.42857;
+    padding: 8px;
+    vertical-align: top;
+}
+
+.table tfoot th {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.text-right {
+    text-align: right;
+    padding-right: 15px;
+}
+
+th {
+    text-align: left;
+}
+td, th {
+    padding: 0;
+    width: 130px;
+    border-top: 1px solid #ddd;
+    vertical-align: middle;
+    line-height: 1.42857;
+}
+
+body {
+    color: #555555;
+    font-family: "Roboto",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857;
+}
+
+</style>
+<div id="heading-breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7">
+				<a href='http://latelierdeleo.no-ip.org/'>
+					<img src="http://latelierdeleo.no-ip.org/images/logo_small.jpg"/>
+				</a>
+			</div>
+			<br>
+			<div class="col-md-7">
+				<h1>Welcome to L'atelier de LEO</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="content">
+	<div class="container">
+
+		<div class="row">
+
+			<div class="col-md-9 clearfix" id="customer-order">
+
+				<p class="lead">
+					You just created a user account on the website <a href="http://latelierdeleo.no-ip.org/">L'atelier de LEO.</a> 
+				</p>
+				<p class="lead text-muted">
+					You are now able to manage your orders at all times.
+				</p>
+				<h3 class="text-uppercase">
+					Personal information summary:
+				</h3>
+			
+			</div>
+			
+			<div class="box">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+							</thead>
+							<tbody>
+								<tr> 
+									<td>
+										<strong>
+										Login:
+										</strong>
+									</td>
+									<td>
+										#LOGIN#
+									</td>
+								</tr>
+								<tr> 
+									<td>
+										<strong>
+										First Name:
+										</strong>
+									</td>
+									<td>
+										#FIRSTNAME#
+									</td>
+								</tr>
+								<tr> 
+									<td>
+										<strong>
+										Last Name:
+										</strong>
+									</td>
+									<td>
+										#LASTNAME#
+									</td>
+								</tr>
+								<tr> 
+									<td>
+										<strong>
+										Email:
+										</strong>
+									</td>
+									<td>
+										#EMAIL#
+									</td>
+								</tr>
+								<tr> 
+									<td>
+										<strong>
+										Phone:
+										</strong>
+									</td>
+									<td>
+										#PHONE#
+									</td> 
+								</tr>
+							</tbody>
+							<tfoot>
+							</tfoot>
+						</table>
+
+					</div>
+					<!-- /.table-responsive -->
+
+					<div class="row addresses">
+						<div class="col-sm-6">
+							<h3 class="text-uppercase">Shipping address: </h3>
+							<p>
+								#SHIIPINGADDRESS#
+							</p>
+						</div>
+					</div>
+					<!-- /.addresses -->
+
+				</div>
+				<!-- /.box -->
+
+			<div class="col-md-9 clearfix" id="customer-order">
+
+				<p class="lead">
+					Stay connected and join our community; you will always be informed of the latest news and will participate in the prestige of your workshop!
+				</p>
+				<div class="row">
+					<a href='https://www.facebook.com/Latelier-de-Leo-1602516443339552'> 
+						<img class="media-icon" src="http://latelierdeleo.no-ip.org/images/facebook icon_f66c6c.png" alt="Facebook de L'atelier de Leo" />
+					</a> 
+					<a href='https://www.instagram.com/latelier_de_leo/'> 
+						<img class="media-icon" src="http://latelierdeleo.no-ip.org/images/instagram icon_f66c6c.png" alt="Instagram de L'atelier de Leo" />
+					</a> 
+					<a href='http://latelierdeleo.no-ip.org/contact.action'> 
+						<img class="media-icon" src="http://latelierdeleo.no-ip.org/images/email icon_f66c6c.png" />
+					</a>
+				</div>
+				<p class="lead text-muted">
+					View or change my <a href="http://latelierdeleo.no-ip.org/shoppingCartAuthorization.action"> personal account information.</a>
+					If you have any question, visit our <a href="http://latelierdeleo.no-ip.org/faq.action">FAQ</a>  section or <a href="http://latelierdeleo.no-ip.org/contact.action">contact us</a>.
+				</p>
+			
+			</div>
+		</div>
+		<!-- /.row -->
+
+	</div>
+	<!-- /.container -->
+</div>
+<!-- /#content -->
