@@ -1,0 +1,228 @@
+<title>#TITLE#</title>
+<style>
+.table {
+	margin-bottom: 20px;
+	max-width: 100%;
+	width: 100%;
+	background-color: transparent;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+tbody tr td img,#basket .table tbody tr td img,#customer-order .table tbody tr td img
+	{
+	width: 100px;
+}
+
+img {
+	vertical-align: middle;
+}
+
+img {
+	border: 0 none;
+}
+
+a .link {
+	color: #38a7bb;
+	text-decoration: none;
+	transition: all 0.2s ease-out 0s;
+}
+
+a .product-name{
+	width: 25%;
+	font-weight: bold;
+}
+
+a,button {
+	transition: all 0.2s ease-out 0s;
+}
+
+a {
+	color: ##38a7bb;
+	text-decoration: none;
+}
+
+a {
+	background-color: transparent;
+}
+
+.table>thead>tr>th {
+	border-bottom: 2px solid #ddd;
+	vertical-align: bottom;
+}
+
+.table>tbody>tr>td,.table>tbody>tr>th,.table>tfoot>tr>td,.table>tfoot>tr>th,.table>thead>tr>td,.table>thead>tr>th
+	{
+	border-top: 1px solid #ddd;
+	line-height: 1.42857;
+	padding: 8px;
+	vertical-align: top;
+}
+
+.table tfoot th {
+	font-size: 18px;
+	font-weight: 300;
+}
+
+.text-right {
+	text-align: right;
+	padding-right: 15px;
+}
+
+.text-center {
+	text-align: center;
+	padding-right: 15px;
+}
+
+.title-column{
+	font-size: 17px;
+	text-align: center;
+}
+
+th {
+	text-align: left;
+}
+
+td,th {
+	padding: 0;
+	width: 130px;
+	border-top: 1px solid #ddd;
+	vertical-align: middle;
+	line-height: 1.42857;
+}
+
+body {
+	color: #555555;
+	font-family: "Roboto", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.42857;
+}
+</style>
+
+<div id="heading-breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7">
+				<a href='http://www.latelierdeleo.com/'> <img src="http://www.latelierdeleo.com/images/logo_small.jpg" />
+				</a>
+			</div>
+			<br>
+		</div>
+	</div>
+</div>
+
+<div id="content">
+	<div class="container">
+
+		<div class="row">
+
+			<!-- *** LEFT COLUMN ***
+			 _________________________________________________________ -->
+
+			<div class="col-md-9 clearfix" id="customer-order">
+
+				<p class="lead">Hello #FIRSTNAME#, #LASTNAME#</p>
+
+				<p class="lead text-muted">Thank you for creating and ordering with L'atelier de Leo. Here is the summary of
+					your order.</p>
+
+				<div class="box">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th colspan="2" class="title-column">Product</th>
+									<th class="title-column">Quantity</th>
+									<th class="title-column">Unit price</th>
+									<th class="title-column">Discount</th>
+									<th class="title-column">Total</th>
+								</tr>
+							</thead>
+							<tbody>#ITEMLIST#
+							</tbody>
+							<tfoot>
+								<tr>
+									<th colspan="5" class="text-right">Order subtotal</th>
+									<th>#SUBTOTAL#</th>
+								</tr>
+								<tr>
+									<th colspan="5" class="text-right">Embroidery</th>
+									<th>#EMBROIDERY#</th>
+								</tr>
+								<tr>
+									<th colspan="5" class="text-right">Shipping and handling</th>
+									<th>#SHIPPING#</th>
+								</tr>
+								<tr>
+									<th colspan="5" class="text-right">Tax</th>
+									<th>#TAXES#</th>
+								</tr>
+								#COUPONDISCOUNTSECTION#
+								<tr>
+									<th colspan="5" class="text-right">Total</th>
+									<th>#TOTAL#</th>
+								</tr>
+							</tfoot>
+						</table>
+
+					</div>
+					<!-- /.table-responsive -->
+
+					<div class="row addresses">
+						<div class="col-sm-6">
+							<h3 class="text-uppercase">Shipping address</h3>
+							<p>#SHIIPINGADDRESS#</p>
+						</div>
+					</div>
+					<!-- /.addresses -->
+
+					<div class="col-md-9 clearfix" id="customer-order">
+
+						<p class="lead">The order #REFERENCE# placed on #CREATEDATE# is CREATED (if you have chosen a
+							delivery method with tracking, please see the information below).</p>
+
+						<p class="lead">
+							<strong>Delivery method:</strong> #METHODSHIPPING#
+						</p>
+
+						<p class="lead text-muted">
+							To track your shipment, visit Canada Post website and follow the instructions.<br> An international
+							shipment, once the package sent by Canada Post, is handled by the local carrier /deliverer (La Poste, Correos,
+							etc.); you will need to track your shipment directly from your local institution after a couple of days.
+
+						</p>
+						
+						<p class="lead text-muted">
+							You can access your order information at any time in your user account. If you have any question, do not hesitate to <a href="http://latelierdeleo.no-ip.org/en/contact">contact us</a>.
+						</p>
+						
+						<p class="lead text-muted">
+							See you on <a href="http://latelierdeleo.no-ip.org/en/homePage">www.latelierdeleo.com</a>!
+						</p>
+						
+
+					</div>
+
+				</div>
+				<!-- /.box -->
+
+			</div>
+			<!-- /.col-md-9 -->
+
+			<!-- *** LEFT COLUMN END *** -->
+
+			<!-- *** RIGHT COLUMN ***
+			 _________________________________________________________ -->
+
+			<div class="col-md-3"></div>
+
+			<!-- *** RIGHT COLUMN END *** -->
+
+		</div>
+		<!-- /.row -->
+
+
+	</div>
+	<!-- /.container -->
+</div>
+<!-- /#content -->
