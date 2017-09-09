@@ -1,0 +1,706 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<package name="struts-mgweb-support" namespace="/" extends="struts-mgweb-default">	
+		
+		<action name="/*/homePage" class="com.mg.web.struts.action.home.HomePage">
+		    <param name="currentLanguage">{1}</param>
+			<interceptor-ref name="defaultMgWeb" />
+			<result name="success" type="tiles">/homePage.tiles</result>
+			<result name="error" type="tiles">/error.tiles</result>
+		</action>
+		
+		<action name="/*/workshop" class="com.mg.web.struts.action.BasicTilesAction">
+		    <param name="currentLanguage">{1}</param>
+		    <param name="resource">company</param>
+			<interceptor-ref name="defaultMgWeb" />
+			<result name="success" type="tiles">/company.tiles</result>
+		</action>
+		
+		<action name="/*/atelier" class="com.mg.web.struts.action.BasicTilesAction">
+		    <param name="currentLanguage">{1}</param>
+		    <param name="resource">company</param>
+			<interceptor-ref name="defaultMgWeb" />
+			<result name="success" type="tiles">/company.tiles</result>
+		</action>
+		
+		<action name="/*/contact" class="com.mg.web.struts.action.BasicTilesAction">
+		    <param name="currentLanguage">{1}</param>
+		    <param name="resource">contact</param>
+			<interceptor-ref name="defaultMgWeb" />
+			<result name="success" type="tiles">/contact.tiles</result>
+		</action>
+		
+		<action name="/*/faq" class="com.mg.web.struts.action.BasicTilesAction">
+		    <param name="currentLanguage">{1}</param>
+		    <param name="resource">contact</param>
+			<interceptor-ref name="defaultMgWeb" />
+			<result name="success" type="tiles">/faq.tiles</result>
+		</action>
+		
+		<action name="/*/termsConditions" class="com.mg.web.struts.action.BasicTilesAction">
+		    <param name="currentLanguage">{1}</param>
+			<interceptor-ref name="defaultMgWeb" />
+			<result name="success" type="tiles">/termConditions.tiles</result>
+		</action>
+		
+		<action name="/*/conditionsGenerales" class="com.mg.web.struts.action.BasicTilesAction">
+		    <param name="currentLanguage">{1}</param>
+			<interceptor-ref name="defaultMgWeb" />
+			<result name="success" type="tiles">/termConditions.tiles</result>
+		</action>
+		
+		<action name="/*/user/create" class="com.mg.web.struts.action.BasicTilesAction">
+		    <param name="currentLanguage">{1}</param>
+			<interceptor-ref name="defaultMgWeb" />
+			<result name="success" type="tiles">/createAccount.tiles</result>
+		</action>
+		
+		<action name="/*/utilisateur/creer" class="com.mg.web.struts.action.BasicTilesAction">
+		    <param name="currentLanguage">{1}</param>
+			<interceptor-ref name="defaultMgWeb" />
+			<result name="success" type="tiles">/createAccount.tiles</result>
+		</action>
+		
+		<action name="/*/company" class="com.mg.web.struts.action.BasicTilesAction">
+		    <param name="currentLanguage">{1}</param>
+			<interceptor-ref name="defaultMgWeb" />
+			<result name="success" type="tiles">/company.tiles</result>
+		</action>
+		
+		<action name="/*/collections" class="com.mg.web.struts.action.BasicTilesAction">
+		    <param name="currentLanguage">{1}</param>
+			<interceptor-ref name="defaultMgWeb" />
+			<result name="success" type="tiles">/ourCollections.tiles</result>
+		</action>
+		
+		<action name="sendEmail" class="com.mg.web.struts.action.home.Contact">
+			<interceptor-ref name="defaultMgWeb" />
+			<interceptor-ref name="token"/>
+			<result name="success" type="redirect">/${currentLanguage}/contact</result>
+			<result name="error" type="tiles">/error.tiles</result>
+			<result name="invalid.token">/error.tiles</result>
+		</action>
+		
+		<action name="/*/collections/products/*" class="com.mg.web.struts.action.product.OurProduct" >
+		    <param name="currentLanguage">{1}</param>
+		    <param name="nameUrlCollection">{2}</param>
+        	<interceptor-ref name="defaultMgWeb"/>
+			<result name="success" type="tiles">/ourProduct.tiles</result>  
+			<result name="error" type="tiles">/error.tiles</result> 
+        </action>
+        
+		 <action name="/*/collections/produits/*" class="com.mg.web.struts.action.product.OurProduct" >
+		    <param name="currentLanguage">{1}</param>
+		    <param name="nameUrlCollection">{2}</param>
+        	<interceptor-ref name="defaultMgWeb"/>
+			<result name="success" type="tiles">/ourProduct.tiles</result>  
+			<result name="error" type="tiles">/error.tiles</result> 
+        </action>
+        
+		<action name="/*/type/products/custom/*" class="com.mg.web.struts.action.product.OurProduct" >
+		    <param name="currentLanguage">{1}</param>
+		    <param name="nameUrlType">{2}</param>
+		    <param name="customProduct">true</param>
+        	<interceptor-ref name="defaultMgWeb"/>
+			<result name="success" type="tiles">/ourProduct.tiles</result>  
+			<result name="error" type="tiles">/error.tiles</result> 
+        </action>
+        
+		<action name="/*/type/produits/personnalise/*" class="com.mg.web.struts.action.product.OurProduct" >
+		    <param name="currentLanguage">{1}</param>
+		    <param name="nameUrlType">{2}</param>
+		    <param name="customProduct">true</param>
+        	<interceptor-ref name="defaultMgWeb"/>
+			<result name="success" type="tiles">/ourProduct.tiles</result>  
+			<result name="error" type="tiles">/error.tiles</result> 
+        </action>
+        
+        <!-- <action name="/*/type/products/*" class="com.mg.web.struts.action.product.OurProduct" >
+		    <param name="currentLanguage">{1}</param>
+		    <param name="nameUrlType">{2}</param>
+		    <param name="customProduct">true</param>
+        	<interceptor-ref name="defaultMgWeb"/>
+			<result name="success" type="tiles">/ourProduct.tiles</result>  
+			<result name="error" type="tiles">/error.tiles</result> 
+        </action> -->
+        
+        <action name="/*/type/products/*" class="com.mg.web.struts.action.product.OurProduct" >
+		    <param name="currentLanguage">{1}</param>
+		    <param name="nameUrlType">{2}</param>
+		    <param name="customProduct">false</param>
+        	<interceptor-ref name="defaultMgWeb"/>
+			<result name="success" type="tiles">/ourProduct.tiles</result>  
+			<result name="error" type="tiles">/error.tiles</result> 
+        </action>
+        
+		<!-- <action name="/*/type/produits/*" class="com.mg.web.struts.action.product.OurProduct" >
+		    <param name="currentLanguage">{1}</param>
+		    <param name="nameUrlType">{2}</param>
+		    <param name="customProduct">true</param>
+        	<interceptor-ref name="defaultMgWeb"/>
+			<result name="success" type="tiles">/ourProduct.tiles</result>  
+			<result name="error" type="tiles">/error.tiles</result> 
+        </action> -->
+        
+        <action name="/*/type/produits/*" class="com.mg.web.struts.action.product.OurProduct" >
+		    <param name="currentLanguage">{1}</param>
+		    <param name="nameUrlType">{2}</param>
+		    <param name="customProduct">false</param>
+        	<interceptor-ref name="defaultMgWeb"/>
+			<result name="success" type="tiles">/ourProduct.tiles</result>  
+			<result name="error" type="tiles">/error.tiles</result> 
+        </action>
+        
+		<action name="/*/product/*/*" class="com.mg.web.struts.action.product.Product" >
+		    <param name="currentLanguage">{1}</param>
+		    <param name="id">{2}</param>
+			<param name="nameUrlProduct">{3}</param>
+		    <interceptor-ref name="defaultMgWeb"/>
+			<result name="success" type="tiles">/product.tiles</result>   
+			<result name="error" type="tiles">/error.tiles</result>
+        </action>
+        
+		<action name="/*/produit/*/*" class="com.mg.web.struts.action.product.Product" >
+		    <param name="currentLanguage">{1}</param>
+			<param name="id">{2}</param>
+			<param name="nameUrlProduct">{3}</param>
+		    <interceptor-ref name="defaultMgWeb"/>
+			<result name="success" type="tiles">/product.tiles</result>   
+			<result name="error" type="tiles">/error.tiles</result>
+        </action>
+        
+		<action name="/*/shoppingcart" class="com.mg.web.struts.action.shopping.ShoppingCart" method="showShoppingCart" >
+		    <param name="currentLanguage">{1}</param>
+        	<interceptor-ref name="defaultMgWeb"/>
+			<result name="success" type="tiles">/shoppingCart.tiles</result>
+			<result name="summary" type="redirect">${getText('url.shoppingcart.summary')}</result>
+			<result name="error" type="tiles">/error.tiles</result> 
+        </action>
+        
+		<action name="coupon" class="com.mg.web.struts.action.coupon.CouponManager" >
+        	<interceptor-ref name="defaultMgWeb"/>
+        	<result name="input" type="redirectAction">${currentLanguage}/shoppingcart</result>   
+			<result name="success" type="redirect">/${currentLanguage}/shoppingcart</result>   
+			<result name="error" type="tiles">/error.tiles</result> 
+        </action>
+        
+		<action name="/*/panier" class="com.mg.web.struts.action.shopping.ShoppingCart" method="showShoppingCart" >
+		    <param name="currentLanguage">{1}</param>
+        	<interceptor-ref name="defaultMgWeb"/>
+			<result name="success" type="tiles">/shoppingCart.tiles</result>
+			<result name="summary" type="redirect">${getText('url.shoppingcart.summary')}</result>
+			<result name="error" type="tiles">/error.tiles</result> 
+        </action>
+        
+        <action name="add/*/*" class="com.mg.web.struts.action.shopping.ShoppingCart" method="addProduct" >
+        	<param name="id">{1}</param>
+			<interceptor-ref name="defaultMgWeb"/>
+			<result name="success" type="redirect">${url}</result>
+			<result name="error" type="tiles">/error.tiles</result>  
+			<result name="invalid.token">/error.tiles</result>
+        </action>
+        
+		<action name="addShoppingCart" class="com.mg.web.struts.action.shopping.ShoppingCart" method="addProduct" >
+			<interceptor-ref name="defaultMgWeb"/>
+        	<interceptor-ref name="token"/>
+			<result name="success" type="redirect">/${currentLanguage}/shoppingcart</result> 
+			<result name="error" type="tiles">/error.tiles</result>  
+			<result name="invalid.token">/error.tiles</result>
+        </action>
+        
+		<action name="removeItem" class="com.mg.web.struts.action.shopping.ShoppingCart" method="remove" >
+		    <interceptor-ref name="defaultMgWeb"/>
+        	<interceptor-ref name="token"/>
+			<result name="success" type="redirect">/${currentLanguage}/shoppingcart</result>   
+			<result name="error" type="tiles">/error.tiles</result>
+			<result name="invalid.token">/error.tiles</result>
+        </action>
+        
+		<action name="/*/shoppingcart/address" class="com.mg.web.struts.action.shopping.ShoppingCartAddress" >
+		    <param name="currentLanguage">{1}</param>
+        	<interceptor-ref name="defaultMgWebAuth"/>
+        	<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>  
+			<result name="success" type="tiles">/shoppingCartAddress.tiles</result>   
+			<result name="error" type="tiles">/error.tiles</result>
+        </action>
+        
+		<action name="/*/panier/adresse" class="com.mg.web.struts.action.shopping.ShoppingCartAddress" >
+		    <param name="currentLanguage">{1}</param>
+        	<interceptor-ref name="defaultMgWebAuth"/>
+        	<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>  
+			<result name="success" type="tiles">/shoppingCartAddress.tiles</result>   
+			<result name="error" type="tiles">/error.tiles</result>
+        </action>
+        
+		<action name="/*/shoppingcart/shipping" class="com.mg.web.struts.action.shopping.ShoppingCartShippingMethod" >
+		    <param name="currentLanguage">{1}</param>
+        	<interceptor-ref name="defaultMgWebAuth"/>
+        	<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>  
+			<result name="success" type="tiles">/shoppingCartShippingMethod.tiles</result>  
+			<result name="error" type="tiles">/error.tiles</result> 
+        </action>
+        
+		<action name="/*/panier/livraison" class="com.mg.web.struts.action.shopping.ShoppingCartShippingMethod" >
+		    <param name="currentLanguage">{1}</param>
+        	<interceptor-ref name="defaultMgWebAuth"/>
+        	<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>  
+			<result name="success" type="tiles">/shoppingCartShippingMethod.tiles</result>  
+			<result name="error" type="tiles">/error.tiles</result> 
+        </action>
+        
+        <action name="/*/shoppingcart/payment" class="com.mg.web.struts.action.shopping.ShoppingCartSummary" >
+		    <param name="currentLanguage">{1}</param>
+        	<interceptor-ref name="defaultMgWebAuth"/>
+        	<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>  
+			<result name="success" type="tiles">/shoppingCartPaymentMethod.tiles</result>  
+			<result name="error" type="tiles">/error.tiles</result>
+			<result name="methodshipping" type="redirectAction">${currentLanguage}/shoppingcart/shipping</result>
+        </action>
+        
+        <action name="/*/panier/paiement" class="com.mg.web.struts.action.shopping.ShoppingCartSummary" >
+		    <param name="currentLanguage">{1}</param>
+        	<interceptor-ref name="defaultMgWebAuth"/>
+        	<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>  
+			<result name="success" type="tiles">/shoppingCartPaymentMethod.tiles</result>  
+			<result name="error" type="tiles">/error.tiles</result> 
+			<result name="methodshipping" type="redirectAction">${currentLanguage}/panier/livraison</result>
+        </action>
+        
+		<action name="/*/shoppingcart/summary" class="com.mg.web.struts.action.shopping.ShoppingCartSummary" >
+		    <param name="currentLanguage">{1}</param>
+        	<interceptor-ref name="defaultMgWebAuth"/>
+        	<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>  
+			<result name="success" type="tiles">/shoppingCartSummary.tiles</result>   
+			<result name="error" type="tiles">/error.tiles</result>
+			<result name="methodshipping" type="redirectAction">${currentLanguage}/shoppingcart/shipping</result>
+        </action>
+        
+		<action name="/*/panier/resume" class="com.mg.web.struts.action.shopping.ShoppingCartSummary" >
+		    <param name="currentLanguage">{1}</param>
+        	<interceptor-ref name="defaultMgWebAuth"/>
+        	<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>  
+			<result name="success" type="tiles">/shoppingCartSummary.tiles</result>   
+			<result name="error" type="tiles">/error.tiles</result>
+			<result name="methodshipping" type="redirectAction">${currentLanguage}/panier/livraison</result>
+        </action>
+        
+		<action name="shoppingCartPaymentSend" class="com.mg.web.struts.action.shopping.payment.rbc.ShoppingCartPaymentSend" >
+			<interceptor-ref name="defaultMgWebAuth"/>
+        	<interceptor-ref name="token"/>
+        	<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>
+        	<result name="input" type="redirect">${getText('url.shoppingcart.summary')}</result>
+			<result name="success" type="redirect">${bankUrl}</result>   
+			<result name="error" type="tiles">/error.tiles</result>
+			<result name="invalid.token">/error.tiles</result>
+			<result name="free" type="redirectAction">
+				 <param name="actionName">shoppingCartPaymentReceive</param>
+				 <param name="MAC">${sChaineMAC}</param>
+				 <param name="coderetour">paiement</param>
+				 <param name="reference">${reference}</param>
+				 <param name="montant">${montant}</param>
+				 <param name="brand">FREE</param>
+				 <param name="TPE">${tpe}</param>
+			</result>
+        </action>
+
+	<action name="shoppingCartPaypalSend"
+		class="com.mg.web.struts.action.shopping.payment.paypal.ShoppingCartPaylPalCheckout">
+		<interceptor-ref name="defaultMgWebAuth"/>
+        <interceptor-ref name="token"/>
+		<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>
+		<result name="input" type="redirect">${getText('url.shoppingcart.summary')}</result>
+		<result name="success" type="redirect">${paypalUrl}</result>
+		<result name="error" type="tiles">/error.tiles</result>
+		<result name="invalid.token">/error.tiles</result>
+	</action>
+        
+		<action name="shoppingCartPaymentReceive" class="com.mg.web.struts.action.shopping.payment.rbc.ShoppingCartPayment" >
+        	<interceptor-ref name="acceptPaymentBank"/> 
+        	<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>
+        	<result name="success" type="stream">
+        	    <param name="contentType">text/html</param>
+     			<param name="inputName">inputStream</param>
+			</result>
+        	<result name="error" type="stream">
+        	    <param name="contentType">text/html</param>
+     			<param name="inputName">inputStream</param>
+			</result>
+			<result name="free" type="redirectAction">shoppingCartPaymentOk</result>
+			<result name="errorFree" type="tiles">/shoppingCartPaymentError.tiles</result>
+        </action>
+
+	<action name="shoppingCartPaypalReceive" class="com.mg.web.struts.action.shopping.payment.paypal.ShoppingCartPaylPalCheckoutResponde">
+		<interceptor-ref name="acceptPaymentBank" />
+		<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>
+		<result name="success" type="tiles">/shoppingCartPaymentOK.tiles</result>
+		<result name="error" type="tiles">/error.tiles</result>
+		<result name="free" type="redirectAction">shoppingCartPaymentOk</result>
+		<result name="errorFree" type="tiles">/shoppingCartPaymentError.tiles</result>
+	</action>
+        
+		<action name="shoppingCartPaymentOk" class="com.mg.web.struts.action.shopping.payment.rbc.ShoppingCartPaymentOk" >
+        	<interceptor-ref name="defaultMgWeb"/>
+        	<result name="success" type="tiles">/shoppingCartPaymentOK.tiles</result>
+        	<result name="error" type="tiles">/error.tiles</result>
+        </action>
+        
+        <action name="shoppingCartPaymentErr" class="com.mg.web.struts.action.shopping.payment.rbc.ShoppingCartPayment" >
+        	<interceptor-ref name="defaultMgWebAuth"/>
+        	<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>
+        	<result name="error" type="tiles">/error.tiles</result>
+        </action>
+        
+        <action name="shoppingCartPaymentReturn" class="com.mg.web.struts.action.shopping.payment.rbc.ShoppingCartPaymentVerify">
+			<interceptor-ref name="defaultMgWeb" />
+			<result name="success" type="tiles">/homePage.tiles</result>
+			<result name="error" type="tiles">/shoppingCartPaymentError.tiles</result>
+		</action>
+        
+        <action name="shoppingCartPayment" class="com.mg.web.struts.action.shopping.payment.rbc.ShoppingCartPayment" >
+        	<interceptor-ref name="defaultMgWebAuth"/>
+        	<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>
+        	<result name="error" type="tiles">/error.tiles</result>
+        </action>
+        
+        <action name="/*/shoppingcart/detail/*" class="com.mg.web.struts.action.shopping.AddEditShoppingCart" >
+            <param name="currentLanguage">{1}</param>
+            <param name="id">{2}</param>
+			<interceptor-ref name="defaultMgWebAuth"/>
+			<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>  
+            <result name="input" type="tiles">/shoppingCartDetail.tiles</result>       
+            <result name="error" type="tiles">/error.tiles</result>        
+        </action>
+        
+        <action name="/*/panier/detail/*" class="com.mg.web.struts.action.shopping.AddEditShoppingCart" >
+            <param name="currentLanguage">{1}</param>
+            <param name="id">{2}</param>
+			<interceptor-ref name="defaultMgWebAuth"/>
+			<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>  
+            <result name="input" type="tiles">/shoppingCartDetail.tiles</result>       
+            <result name="error" type="tiles">/error.tiles</result>        
+        </action>
+        
+		<action name="aeUserAddress" class="com.mg.web.struts.action.user.AddEditUserAddress" >
+			<interceptor-ref name="defaultMgWebAuth"/>
+			<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>  
+            <result name="input" type="tiles">/addEditUserAddressPop.tiles</result> 
+            <result name="error" type="tiles">/error.tiles</result>              
+        </action> 
+        
+        <action name="saveUserAddress" class="com.mg.web.struts.action.user.AddEditUserAddress" method="save">
+			<interceptor-ref name="defaultMgWebAuth"/>
+			<interceptor-ref name="token"/>
+            <!-- <result name="success" type="redirect">shoppingCartAddress.action</result>  -->
+            <result name="success" type="redirect">${referer}</result>         
+            <result name="error" type="tiles">/error.tiles</result>
+            <result name="invalid.token">/error.tiles</result>     
+        </action>
+        
+        <action name="/*/user/account" class="com.mg.web.struts.action.user.ModifyUser">
+            <param name="currentLanguage">{1}</param>
+			<interceptor-ref name="defaultMgWebAuth"/>
+			<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>  
+			<result name="input" type="tiles">/account.tiles</result>           
+			<result name="error" type="tiles">/error.tiles</result>    
+        </action> 
+        
+        <action name="/*/utilisateur/compte" class="com.mg.web.struts.action.user.ModifyUser">
+            <param name="currentLanguage">{1}</param>
+			<interceptor-ref name="defaultMgWebAuth"/>
+			<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>  
+			<result name="input" type="tiles">/account.tiles</result>           
+			<result name="error" type="tiles">/error.tiles</result>    
+        </action> 
+        
+       <action name="/*/user/modify" class="com.mg.web.struts.action.user.ModifyUser">
+            <param name="currentLanguage">{1}</param>
+			<interceptor-ref name="defaultMgWebAuth"/>
+			<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result> 
+			<result name="input" type="tiles">/modifyAccount.tiles</result>            
+			<result name="error" type="tiles">/error.tiles</result>   
+        </action> 
+        
+       <action name="/*/utilisateur/modifier" class="com.mg.web.struts.action.user.ModifyUser">
+            <param name="currentLanguage">{1}</param>
+			<interceptor-ref name="defaultMgWebAuth"/>
+			<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>  
+			<result name="input" type="tiles">/modifyAccount.tiles</result>            
+			<result name="error" type="tiles">/error.tiles</result>   
+        </action>
+       
+       <action name="saveModifyUser" class="com.mg.web.struts.action.user.ModifyUser" method="save" >
+            <param name="currentLanguage">{1}</param>
+			<interceptor-ref name="defaultMgWebAuth"/>
+			<interceptor-ref name="token"/>
+			<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>  
+			<result name="success" type="redirectAction">${urlRedirect}</result>      
+			<result name="error" type="tiles">/error.tiles</result>
+			<result name="invalid.token">/error.tiles</result>  
+        </action> 
+        
+       <action name="saveModifyPassword" class="com.mg.web.struts.action.user.ModifyUser" method="savePassword" >
+            <param name="currentLanguage">{1}</param>
+			<interceptor-ref name="defaultMgWebAuth"/>
+			<interceptor-ref name="token"/>
+			<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>  
+			<result name="success" type="redirectAction">${urlRedirect}</result>      
+			<result name="error" type="tiles">/error.tiles</result>
+			<result name="invalid.token">/error.tiles</result>  
+        </action> 
+         
+       <action name="/*/shoppingcart/user" class="com.mg.web.struts.action.user.ShoppingCartUser">
+            <param name="currentLanguage">{1}</param>
+			<interceptor-ref name="defaultMgWebAuth"/>
+			<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>  
+			<result name="success" type="tiles">/shoppingCartUser.tiles</result>
+			<result name="error" type="tiles">/error.tiles</result>                 
+       </action> 
+       
+       <action name="/*/panier/utilisateur" class="com.mg.web.struts.action.user.ShoppingCartUser">
+            <param name="currentLanguage">{1}</param>
+			<interceptor-ref name="defaultMgWebAuth"/>
+			<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>  
+			<result name="success" type="tiles">/shoppingCartUser.tiles</result>
+			<result name="error" type="tiles">/error.tiles</result>                 
+       </action>
+        
+       <action name="removeAddress" class="com.mg.web.struts.action.user.ModifyUser" method="remove" >
+            <interceptor-ref name="defaultMgWebAuth"/>
+			<interceptor-ref name="token"/>
+			<result name="authentification" type="tiles">/shoppingCartAuthorization.tiles</result>    
+            <result name="success" type="redirectAction">${urlRedirect}</result> 
+            <result name="error" type="tiles">/error.tiles</result>
+            <result name="invalid.token">/error.tiles</result>            
+       </action>
+		
+		<action name="**" class="com.mg.web.struts.action.BasicAction">
+			<interceptor-ref name="defaultMgWeb"/>
+			<result type="tiles">/{1}.tiles</result>
+			<result name="error" type="tiles">/errorUrl.tiles</result> 
+			<!-- <result name="error" type="httpheader">
+			    <param name="status">404</param>
+			</result> -->
+		</action>
+		
+		
+
+	</package>
+	
+	<package name="struts-mgweb-user" namespace="/user" extends="struts-mgweb-default"> 
+
+		<action name="*User" class="com.mg.web.struts.action.user.UserCUD" method="{1}">
+			<interceptor-ref name="i18nStack"/>
+            <result name="success" type="redirect">/homePage.action</result>               
+        </action>
+        
+		<action name="loginShoppingCart" class="com.mg.web.struts.action.user.Login" >
+		    <param name="site">SHOPPING</param>
+        	<interceptor-ref name="defaultMgWeb"/>
+        	<result name="input" type="tiles">/shoppingCartAuthorization.tiles</result>  
+            <result name="home" type="redirect">/${currentLanguage}/homePage</result>
+            <result name="success" type="redirect">${referer}</result>
+            <result name="shopping" type="redirect">/${currentLanguage}/shoppingcart/address</result> 
+            <result name="error" type="tiles">/error.tiles</result>
+        </action>
+                
+		<action name="loginWeb" class="com.mg.web.struts.action.user.Login" >
+		    <param name="site">WEB</param>
+        	<interceptor-ref name="defaultMgWeb"/>
+            <result name="home" type="redirect">/${currentLanguage}/homePage</result>
+            <result name="error" type="tiles">/error.tiles</result>
+        </action>
+        
+        <action name="login" class="com.mg.web.struts.action.user.Login" >
+            <interceptor-ref name="defaultMgWeb"/>
+            <result name="home" type="redirect">/${currentLanguage}/homePage</result>
+            <result name="success_admin" type="redirect">/admin/adminPage.action</result>
+            <result name="shopping" type="redirect">/${currentLanguage}/shoppingcart/address</result>   
+            <result name="error" type="tiles">/error.tiles</result>                  			 
+        </action>
+        
+        <action name="lostUserOrPwd" class="com.mg.web.struts.action.user.LostUserOrPwd" >
+            <param name="currentLanguage">{1}</param>
+        	<interceptor-ref name="i18nStack"/>
+            <result name="success" type="redirect">/${currentLanguage}/homePage</result>     
+            <result name="error" type="tiles">/error.tiles</result>       
+        </action>
+        
+        <action name="logout" class="com.mg.web.struts.action.user.Logout" >
+            <interceptor-ref name="i18nStack"/>
+			<interceptor-ref name="basicStack"/>
+			<result name="success" type="redirect">/${currentLanguage}/homePage</result>
+			<result name="error" type="tiles">/error.tiles</result>
+        </action>
+        
+        <action name="switchLang" class="com.mg.web.struts.action.user.SwitchLang" >
+            <interceptor-ref name="i18nStack"/>        	
+			<interceptor-ref name="basicStack"/>
+			<result name="success" type="redirect">${url}</result>
+			<result name="home" type="redirect">/${currentLanguage}/homePage</result>
+			<result name="error" type="tiles">/error.tiles</result>
+        </action>
+        
+        <action name="switchCurrency" class="com.mg.web.struts.action.user.SwitchCurrency" >
+            <interceptor-ref name="i18nStack"/>        	
+			<interceptor-ref name="basicStack"/>
+			<result name="success" type="redirect">${referer}</result>
+			<result name="homePage" type="redirect">/${currentLanguage}/homePage</result>
+			<result name="error" type="tiles">/error.tiles</result>
+        </action>
+        
+       <action name="registerUserShoppingCart" class="com.mg.web.struts.action.user.AddEditUser" method="save" >
+           <param name="site">SHOPPING</param>
+			<interceptor-ref name="defaultMgWeb"/>
+			<interceptor-ref name="token"/>
+			<result name="success" type="redirect">/${currentLanguage}/homePage</result>  
+			<result name="shopping" type="redirect">/${currentLanguage}/shoppingcart/address</result> 
+			<result name="error" type="tiles">/error.tiles</result>
+			<result name="invalid.token">/error.tiles</result>              
+        </action>
+        
+       <action name="registerUser" class="com.mg.web.struts.action.user.AddEditUser" method="save" >
+           <param name="site">WEB</param>
+			<interceptor-ref name="defaultMgWeb"/>
+			<interceptor-ref name="token"/>
+			<result name="success" type="redirect">/${currentLanguage}/homePage</result>  
+			<result name="error" type="tiles">/error.tiles</result>
+			<result name="invalid.token">/error.tiles</result>              
+        </action>
+        
+       <action name="saveUser" class="com.mg.web.struts.action.user.AddEditUser" method="save" >
+           	<interceptor-ref name="defaultMgWeb"/>
+			<interceptor-ref name="token"/>
+			<result name="success" type="redirect">/${currentLanguage}/homePage</result>  
+			<result name="shopping" type="redirectAction">/${currentLanguage}/shoppingcart/address</result>    
+			<result name="error" type="tiles">/error.tiles</result>
+			<result name="invalid.token">/error.tiles</result>           
+        </action> 
+        
+       <action name="validateEmail" class="com.mg.web.struts.action.ajax.validation.ValidationAjax" method="validateEmail" >
+			<result name="success" type="httpheader">
+			    <param name="status">200</param>
+			</result>
+			<result name="error" type="httpheader">
+			    <param name="status">400</param>
+			</result>
+		</action> 
+       
+        <action name="validateLogin" class="com.mg.web.struts.action.ajax.validation.ValidationAjax" method="validateLogin" >
+			<result name="success" type="httpheader">
+			    <param name="status">200</param>
+			</result>
+			<result name="error" type="httpheader">
+			    <param name="status">400</param>
+			</result>
+		</action>  
+        
+    </package>  
+    
+	<package name="struts-mgweb-ajax" namespace="/ajax" extends="json-default">
+        		
+	    <interceptors>
+	        <interceptor name="actionInterceptor"
+				class="com.mg.web.struts.interceptor.ActionInterceptor" />
+	    </interceptors>
+	    
+		<action name="componentImage" class="com.mg.web.struts.action.ajax.ImageAjax" method="loadImagePath">
+		    <interceptor-ref name="params">
+				<param name="excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+			</interceptor-ref>
+            <interceptor-ref name="servletConfig"/>
+            <interceptor-ref name="prepare"/>
+            <interceptor-ref name="chain"/>
+		    <interceptor-ref name="staticParams"/>
+            <interceptor-ref name="actionMappingParams"/>
+            <interceptor-ref name="params">
+				<param name="excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+			</interceptor-ref>
+		    <interceptor-ref name="actionInterceptor" />
+			<result type="json" name="success" />
+		</action>	
+		
+		<action name="countryList" class="com.mg.web.struts.action.ajax.AdminPageAjax" method="countryList">
+			<result type="json" name="success" />
+		</action>	        
+		
+		<action name="provinceList" class="com.mg.web.struts.action.ajax.AdminPageAjax" method="provinceList">
+			<result type="json" name="success" />
+		</action>	
+		
+		<action name="validation" class="com.mg.web.struts.action.shopping.ShoppingCartValidate">
+		    <interceptor-ref name="staticParams"/>
+            <interceptor-ref name="actionMappingParams"/>
+            <interceptor-ref name="params"/>
+		    <interceptor-ref name="actionInterceptor" />
+			<result type="json" name="success" />
+		</action>	
+		
+		<action name="validatePassword" class="com.mg.web.struts.action.ajax.validation.ValidationAjax" method="validatePassword" >
+		    <interceptor-ref name="staticParams"/>
+            <interceptor-ref name="actionMappingParams"/>
+            <interceptor-ref name="params"/>
+		    <interceptor-ref name="actionInterceptor" />
+			<result type="json" name="success" />
+		</action>  
+		
+		<action name="shareImage" class="com.mg.web.struts.action.ajax.SocialImageAjax" method="saveSocialImage">
+		    <interceptor-ref name="staticParams"/>
+            <interceptor-ref name="actionMappingParams"/>
+            <interceptor-ref name="params">
+				<param name="excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+			</interceptor-ref>
+		    <interceptor-ref name="actionInterceptor" />
+			<result type="json" name="success" />
+		</action>	
+		
+		<action name="auditAjax" class="com.mg.web.struts.action.ajax.AuditActionAjax" >
+		    <interceptor-ref name="staticParams"/>
+            <interceptor-ref name="actionMappingParams"/>
+            <interceptor-ref name="params">
+				<param name="excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+			</interceptor-ref>
+		    <interceptor-ref name="actionInterceptor" />
+			<result type="json" name="success" />
+		</action>
+		
+		<action name="addAjax" class="com.mg.web.struts.action.ajax.ShoppingCartAjax" method="addProduct" >
+        	<interceptor-ref name="servletConfig" />
+        	<interceptor-ref name="staticParams"/>
+            <interceptor-ref name="actionMappingParams"/>
+            <interceptor-ref name="params">
+				<param name="excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+			</interceptor-ref>
+		    <interceptor-ref name="actionInterceptor" />
+			<result type="json" name="success" />
+        </action>
+		
+	</package> 
+    
+	<package name="struts-mgweb-product" namespace="/product" extends="struts-mgweb-default"> 
+        
+        <action name="ourProduct" class="com.mg.web.struts.action.product.OurProduct" >
+        	<interceptor-ref name="i18nStack"/>
+			<interceptor-ref name="basicStack"/>
+			<result name="success" type="tiles">/ourProduct.tiles</result>   
+			<result name="error" type="tiles">/error.tiles</result>
+        </action>
+        
+                 
+    </package>   
+	
+		<package name="wildcard" namespace="/" extends="struts-mgweb-default">
+		
+		<action name="*" class="com.mg.web.struts.action.BasicAction">
+			<interceptor-ref name="defaultMgWeb"/>
+			<result type="tiles">/{1}.tiles</result>
+			<result name="error" type="tiles">/errorUrl.tiles</result> 
+		</action>
+
+	</package>
+
+</struts>
