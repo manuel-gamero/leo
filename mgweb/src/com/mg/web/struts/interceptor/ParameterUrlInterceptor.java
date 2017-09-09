@@ -1,11 +1,10 @@
 package com.mg.web.struts.interceptor;
 
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.struts2.dispatcher.Parameter;
 
+import com.mg.web.struts.action.shopping.payment.rbc.ShoppingCartPayment;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
 //import com.loyauty.service.core.dto.UserSessionDTO;
@@ -22,12 +21,14 @@ public class ParameterUrlInterceptor implements Interceptor{
 	@Override
 	public String intercept(ActionInvocation actionInvocation) throws Exception {
 		Map<String, Parameter> parameters =  actionInvocation.getInvocationContext().getParameters();
-		Set<String> keySet = new HashSet<String>(parameters.keySet()) ; 
+		/*Set<String> keySet = new HashSet<String>(parameters.keySet()) ; 
 		for (String key : keySet) {
 			if(key.contains("-")){
 				parameters.put(key.replace("-", ""), parameters.get(key)) ;
 			}
-		}
+		}*/
+		((ShoppingCartPayment)actionInvocation.getAction()).setCoderetour(parameters.get("code-retour").getValue());
+		((ShoppingCartPayment)actionInvocation.getAction()).setTextelibre(parameters.get("texte-libre").getValue());
 		
 		return actionInvocation.invoke();		
 	}
