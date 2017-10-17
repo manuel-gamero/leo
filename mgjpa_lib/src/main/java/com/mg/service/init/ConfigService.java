@@ -205,4 +205,12 @@ public interface ConfigService extends Service{
 	String getFilterRequestExt();
 
 	String getFilterRequestForward();
+
+	String getInstagramClientID();
+
+	String getInstagramAccessToken();
+
+	String getInstagramClientSecret();
+
+	String getInstagramUserId();
 }

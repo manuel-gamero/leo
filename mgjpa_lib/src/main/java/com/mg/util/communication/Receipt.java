@@ -44,7 +44,7 @@ import com.mg.util.translation.TranslationUtils;
 
 public class Receipt {
 
-	private static final Logger log = Logger.getLogger(Mail.class);
+	private static final Logger log = Logger.getLogger(Receipt.class);
 	public static final BigDecimal ZERO = new BigDecimal(0.00).setScale(2, RoundingMode.CEILING);
 	private static ConfigService configService;
 	static {

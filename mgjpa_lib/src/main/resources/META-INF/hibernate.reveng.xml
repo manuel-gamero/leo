@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-schema="bolsos" match-name="mg_collection"/>
+  <table-filter match-schema="bolsos" match-name="mg_custom_component"/>
+  <table-filter match-schema="bolsos" match-name="mg_custom_component_collection"/>
+  <table-filter match-schema="bolsos" match-name="mg_custom_component_image"/>
+  <table-filter match-schema="bolsos" match-name="mg_image"/>
+  <table-filter match-schema="bolsos" match-name="mg_product"/>
+  <table-filter match-schema="bolsos" match-name="mg_product_image"/>
+  <table-filter match-schema="bolsos" match-name="mg_translation"/>
+  <table-filter match-schema="bolsos" match-name="mg_translation_entry"/>
+  <table-filter match-schema="bolsos" match-name="mg_user_address"/>
+  <table-filter match-schema="bolsos" match-name="mg_users"/>
+  <table-filter match-schema="bolsos" match-name="mg_product_tag"/>
+  <table-filter match-schema="bolsos" match-name="mg_custom_component_text"/>
+  <table-filter match-schema="bolsos" match-name="mg_item"/>
+  <table-filter match-schema="bolsos" match-name="mg_product_tag"/>
+  <table-filter match-schema="bolsos" match-name="mg_item_component"/>
+  <table-filter match-schema="bolsos" match-name="mg_taxes"/>
+  <table-filter match-schema="bolsos" match-name="mg_method_shipping"/>
+  <table-filter match-schema="bolsos" match-name="mg_shopping_cart"/>
+  <table-filter match-schema="bolsos" match-name="mg_shopping_cart_item"/>
+  <table-filter match-schema="bolsos" match-name="mg_logs"/>
+  <table-filter match-schema="bolsos" match-name="mg_price"/>
+  <table-filter match-schema="bolsos" match-name="mg_price_entry"/>
+  <table-filter match-schema="bolsos" match-name="mg_audit"/>
+  <table-filter match-schema="bolsos" match-name="mg_transaction"/>
+  <table-filter match-schema="bolsos" match-name="mg_coupons_type"/>
+  <table-filter match-schema="bolsos" match-name="mg_coupons"/>
+  <table-filter match-schema="bolsos" match-name="mg_coupons_user"/>
+  <table-filter match-schema="bolsos" match-name="mg_audit_hist"/>
+  <table-filter match-schema="bolsos" match-name="mg_device"/>
+  <table-filter match-schema="bolsos" match-name="mg_device_user"/>
+  <table-filter match-schema="bolsos" match-name="mg_device_product"/>
+  <table-filter match-schema="bolsos" match-name="mg_device_collection"/>
+  <table-filter match-schema="bolsos" match-name="mg_device_component"/>
+  <table-filter match-schema="bolsos" match-name="mg_device_product_hist"/>
+  <table-filter match-schema="bolsos" match-name="mg_device_collection_hist"/>
+  <table-filter match-schema="bolsos" match-name="mg_device_component_hist"/>
+  <table-filter match-schema="bolsos" match-name="mg_device_url"/>
+  <table-filter match-schema="bolsos" match-name="mg_device_session"/>
+  <table-filter match-schema="bolsos" match-name="mg_user_actio_param"/>
+  <table-filter match-schema="bolsos" match-name="mg_paypal"/>
+</hibernate-reverse-engineering>

@@ -110,6 +110,12 @@ public class ConfigServiceImpl extends ServiceImpl implements ConfigService{
 	private static final String CURRENCY_CHOICE = "mg.commerce.allow.currency.choice";
 	private static final String ALLOW_MULTYCURRENCY = "mg.commerce.allow.multy.currency";
 	
+	//Socia Media
+	private static final String INSTAGRAM_CLIENTID = "mg.socialmedia.instagram.clientid";
+	private static final String INSTAGRAM_ACCESSTOKEN = "mg.socialmedia.instagram.accesstoken";
+	private static final String INSTAGRAM_CLIENTSECRET = "mg.socialmedia.instagram.clientsecret";
+	private static final String INSTAGRAM_USERID = "mg.socialmedia.instagram.userid";
+	
 	//Monitoring 
 	private static final String MONITORING_URLS 	= "mg.monitoring.urls"; 
 	private static final String SITEMAP_URL 		= "mg.sitemap.url";
@@ -560,5 +566,23 @@ public class ConfigServiceImpl extends ServiceImpl implements ConfigService{
 		return getGeneralProps().getPropertyAsBoolean(ALLOW_MULTYCURRENCY);
 	}
 	
-
+	@Override
+	public String getInstagramClientID() {
+		return getProperty(INSTAGRAM_CLIENTID);
+	}
+	
+	@Override
+	public String getInstagramAccessToken() {
+		return getProperty(INSTAGRAM_ACCESSTOKEN);
+	}
+	
+	@Override
+	public String getInstagramClientSecret() {
+		return getProperty(INSTAGRAM_CLIENTSECRET);
+	}
+	
+	@Override
+	public String getInstagramUserId() {
+		return getProperty(INSTAGRAM_USERID);
+	}
 }
