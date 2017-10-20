@@ -48,7 +48,7 @@ public final class LocaleUtils {
 		}		
 		
 		if( getSessionCurrency(request) == null){
-			if(request.getLocale() != null){
+			if(request.getLocale() != null && request.getLocale().getCountry().length() == 2){
 				setSessionCurrency(request, Currency.getInstance(request.getLocale()));
 			}
 			else{
