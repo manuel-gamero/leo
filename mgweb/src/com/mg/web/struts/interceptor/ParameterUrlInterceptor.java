@@ -27,8 +27,10 @@ public class ParameterUrlInterceptor implements Interceptor{
 				parameters.put(key.replace("-", ""), parameters.get(key)) ;
 			}
 		}*/
-		((ShoppingCartPayment)actionInvocation.getAction()).setCoderetour(parameters.get("code-retour").getValue());
-		((ShoppingCartPayment)actionInvocation.getAction()).setTextelibre(parameters.get("texte-libre").getValue());
+		if(actionInvocation.getAction() instanceof ShoppingCartPayment){
+			((ShoppingCartPayment)actionInvocation.getAction()).setCoderetour(parameters.get("code-retour").getValue());
+			((ShoppingCartPayment)actionInvocation.getAction()).setTextelibre(parameters.get("texte-libre").getValue());
+		}
 		
 		return actionInvocation.invoke();		
 	}
