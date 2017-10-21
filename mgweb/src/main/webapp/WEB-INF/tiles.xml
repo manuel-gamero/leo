@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    
+    
+    <!-- Tiles linked to an Action-->
+    
+    <definition name="/error.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../application/error.jsp" />
+	</definition> 
+	
+    <definition name="/errorUrl.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../application/errorUrl.jsp" />
+	</definition>
+    
+    <!-- Web -->
+    <definition name="/contact.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../home/contact.jsp" />
+	</definition>
+    
+    <definition name="/faq.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../home/faq.jsp" />
+	</definition>
+	
+	<definition name="/termConditions.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../home/termConditions.jsp" />
+	</definition>
+	
+    <definition name="/company.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../home/company.jsp" />
+	</definition>
+	
+	<definition name="/homePage.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../home/homePage.jsp" />
+		<put-list-attribute name="cssList">
+				<add-attribute type="string" value="carousel.css" />
+				<add-attribute type="string" value="ladda-themeless.min.css" />
+		</put-list-attribute>
+		<put-list-attribute name="scriptList">
+				<add-attribute type="string" value="respond.min.js" />
+				<add-attribute type="string" value="waypoints.min.js" />
+				<add-attribute type="string" value="modernizr.js" />
+				<add-attribute type="string" value="jquery.cookie.js" />
+				<add-attribute type="string" value="owl.carousel.min.js" />
+				<add-attribute type="string" value="front.js" />
+				<add-attribute type="string" value="fingerprint2.min.js" />
+				<add-attribute type="string" value="spin.min.js" />
+				<add-attribute type="string" value="ladda.min.js" />
+				<add-attribute type="string" value="masonry.pkgd.min.js" />
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="/signInPop.tiles" extends="popFormLayout">
+		<put-attribute name="body" type="template" value="../pops/signInPopa.jsp" />
+		<put-list-attribute name="scriptList">
+				<add-attribute type="string" value="validator.js" />
+		</put-list-attribute>
+	</definition> 
+	
+	<definition name="/lostUserOrPwdPop.tiles" extends="popFormLayout">
+		<put-attribute name="body" type="template" value="../pops/lostUserOrPwdPop.jsp" />
+	</definition> 
+	
+	<definition name="/createAccount.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../user/createAccount.jsp" />
+		<!-- <put-list-attribute name="scriptList">
+				<add-attribute type="string" value="validator.js" />
+		</put-list-attribute> -->
+	</definition>
+	 
+	<definition name="/account.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../user/account.jsp" />
+	</definition>
+	
+	<definition name="/modifyAccount.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../user/modifyAccount.jsp" />
+		<!-- <put-list-attribute name="scriptList">
+				<add-attribute type="string" value="validator.js" />
+		</put-list-attribute> -->
+	</definition> 
+	
+	<definition name="/collections.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../product/collections.jsp" />
+	</definition>
+	
+	<definition name="/ourProduct.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../product/ourProduct.jsp" />
+		<put-list-attribute name="cssList">
+				<add-attribute type="string" value="ladda-themeless.min.css" />
+		</put-list-attribute>
+		<put-list-attribute name="scriptList">
+				<add-attribute type="string" value="spin.min.js" />
+				<add-attribute type="string" value="ladda.min.js" />
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="/product.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../product/product.jsp" />
+		<put-list-attribute name="scriptList">
+			<add-attribute type="string" value="owl.carousel.min.js" />
+			<add-attribute type="string" value="waypoints.min.js" />
+			<add-attribute type="string" value="jquery.cookie.js" />
+			<add-attribute type="string" value="front.js" />
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="/shoppingCart.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../shopping/shoppingCart.jsp" />
+		<put-list-attribute name="scriptList">
+				<add-attribute type="string" value="bootstrap-table.min.js" />
+		</put-list-attribute>
+		<put-list-attribute name="cssList">
+				<add-attribute type="string" value="bootstrap-table.min.css" />
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="/shoppingCartAuthorization.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../shopping/shoppingCartAuthorization.jsp" />
+		<!-- <put-list-attribute name="scriptList">
+				<add-attribute type="string" value="validator.js" />
+		</put-list-attribute> -->
+	</definition>
+	
+	<definition name="/shoppingCartAddress.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../shopping/shoppingCartAddress.jsp" />
+		<!-- <put-list-attribute name="scriptList">
+				<add-attribute type="string" value="validator.js" />
+		</put-list-attribute> -->
+	</definition>
+	
+	<definition name="/shoppingCartShippingMethod.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../shopping/shoppingCartShippingMethod.jsp" />
+		<!-- <put-list-attribute name="scriptList">
+				<add-attribute type="string" value="validator.js" />
+		</put-list-attribute> -->
+	</definition>
+	
+	<definition name="/shoppingCartPaymentMethod.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../shopping/shoppingCartPaymentMethod.jsp" />
+		<!-- <put-list-attribute name="scriptList">
+				<add-attribute type="string" value="validator.js" />
+		</put-list-attribute> -->
+	</definition>
+	
+	<definition name="/shoppingCartSummary.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../shopping/shoppingCartSummary.jsp" />
+	</definition>
+	
+	<definition name="/shoppingCartDetail.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../shopping/shoppingCartDetail.jsp" />
+	</definition>
+	
+	<definition name="/addEditUserAddressPop.tiles" extends="popFormLayout">
+		<put-attribute name="body" type="template" value="../pops/addEditUserAddressPop.jsp" />
+		<put-list-attribute name="cssList">
+				<add-attribute type="string" value="style.default.css" />
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="/shoppingCartUser.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../user/shoppingCartUser.jsp" />
+		<put-list-attribute name="scriptList">
+				<add-attribute type="string" value="bootstrap-table.min.js" />
+		</put-list-attribute>
+		<put-list-attribute name="cssList">
+				<add-attribute type="string" value="bootstrap-table.min.css" />
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="/shoppingCartPaymentOK.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../shopping/shoppingCartPaymentOK.jsp" />
+	</definition>
+	
+	<definition name="/shoppingCartPaymentError.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../shopping/shoppingCartPaymentError.jsp" />
+	</definition>
+	<!-- Web -->
+	
+	
+	<!--En el namespace en el fichero de struts puse namespace="/user" 
+		Hay que poner ../user/login.jsp porque me encunetro 
+		en mgweb\WEB-INF\jsp\layouts -->
+	<definition name="/logina.tiles" extends="baseLayout">		
+		<put-attribute name="body" type="template" value="../user/login.jsp" />
+	</definition>
+	
+	<!-- Admin -->
+	
+	 <definition name="/errorAdmin.tiles" extends="baseAdminLayout">
+		<put-attribute name="body" type="template" value="../application/errorAdmin.jsp" />
+	</definition> 
+	
+	<definition name="/adminPage.tiles" extends="baseAdminLayout">
+		<put-attribute name="body" type="template" value="../home/adminPage.jsp" />
+	</definition>
+	
+	<definition name="/addEditUser.tiles" extends="baseAdminLayout">
+		<put-attribute name="body" type="template" value="../user/addEditUser.jsp" />
+	</definition> 
+	
+	<definition name="/userList.tiles" extends="baseAdminLayout">
+		<put-attribute name="body" type="template" value="../user/userList.jsp" />
+	</definition> 
+	
+	<definition name="/logon.tiles" extends="baseAdminLayout">
+		<put-attribute name="body" type="template" value="../user/logon.jsp" />
+	</definition>
+	
+	<definition name="/addEditCustomComponent.tiles" extends="baseAdminLayout">
+		<put-attribute name="body" type="template" value="../collection/addEditCustomComponent.jsp" />
+	</definition> 
+	
+	<definition name="/CustomComponentList.tiles" extends="baseAdminLayout">
+		<put-attribute name="body" type="template" value="../collection/CustomComponentList.jsp" />
+	</definition>
+	
+	<definition name="/CollectionList.tiles" extends="baseAdminLayout">
+		<put-attribute name="body" type="template" value="../collection/CollectionList.jsp" />
+	</definition>
+	
+	<definition name="/ourCollections.tiles" extends="baseLayout">
+		<put-attribute name="body" type="template" value="../collection/ourCollections.jsp" />
+	</definition>
+	
+	<definition name="/addEditCollection.tiles" extends="baseAdminLayout">
+		<put-attribute name="body" type="template" value="../collection/addEditCollection.jsp" />
+		<put-list-attribute name="scriptList">
+				<add-attribute type="string" value="fileuploader.js" />
+				<add-attribute type="string" value="bootstrap-dialog.js" />
+				<add-attribute type="string" value="bootstrap-modalmanager.js" />
+				<add-attribute type="string" value="bootstrap-modal.js" />
+				<add-attribute type="string" value="tinymce.min.js" />
+		</put-list-attribute>
+		<put-list-attribute name="cssList">
+				<add-attribute type="string" value="fileuploader.css" />
+				<add-attribute type="string" value="bootstrap-dialog.css" />
+				<add-attribute type="string" value="bootstrap-modal.css" />
+		</put-list-attribute>
+	</definition> 
+	
+	<definition name="/viewImage.tiles" extends="baseAdminLayout">
+		<put-attribute name="body" type="template" value="../image/addEditImage.jsp" />
+	</definition> 
+	
+	<definition name="/productList.tiles" extends="baseAdminLayout">
+		<put-attribute name="body" type="template" value="../product/productList.jsp" />
+		<put-list-attribute name="scriptList">
+				<add-attribute type="string" value="bootstrap-table.min.js" />
+		</put-list-attribute>
+		<put-list-attribute name="cssList">
+				<add-attribute type="string" value="bootstrap-table.min.css" />
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="/addEditProduct.tiles" extends="baseAdminLayout">
+		<put-attribute name="body" type="template" value="../product/addEditProduct.jsp" />
+		<put-list-attribute name="scriptList">
+				<add-attribute type="string" value="fileuploader.js" />
+				<add-attribute type="string" value="jquery-ui.js" />
+				<add-attribute type="string" value="jquery.dd.js" />
+		</put-list-attribute>
+		<put-list-attribute name="cssList">
+				<add-attribute type="string" value="fileuploader.css" />
+				<add-attribute type="string" value="jquery-ui.css" />
+				<add-attribute type="string" value="jquery-ui.theme.css" />
+				<add-attribute type="string" value="jquery-ui.structure.css" />
+				<add-attribute type="string" value="style.default.css" />
+				<add-attribute type="string" value="dd.css" />
+		</put-list-attribute>
+	</definition> 
+	
+	<definition name="/addEditCccTranslacion.tiles" extends="popAdminFormLayout">
+		<put-attribute name="body" type="template" value="../pops/addEditCustomComponentCollectionPop.jsp" />
+	</definition>
+	
+	<definition name="/addEditTranslation.tiles" extends="popAdminFormLayout">
+		<put-attribute name="body" type="template" value="../pops/addEditTranslationPop.jsp" />
+		<put-list-attribute name="scriptList">
+				<add-attribute type="string" value="tinymce.min.js" />
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="/methodShippingList.tiles" extends="baseAdminLayout">
+		<put-attribute name="body" type="template" value="../shopping/methodShippingList.jsp" />
+	</definition>
+	
+	<definition name="/addEditMethodShipping.tiles" extends="baseAdminLayout">
+		<put-attribute name="body" type="template" value="../shopping/addEditMethodShipping.jsp" />
+	</definition>
+	
+	<definition name="/taxesList.tiles" extends="baseAdminLayout">
+		<put-attribute name="body" type="template" value="../shopping/taxesList.jsp" />
+	</definition>
+	
+	<definition name="/addEditTaxes.tiles" extends="baseAdminLayout">
+		<put-attribute name="body" type="template" value="../shopping/addEditTaxes.jsp" />
+	</definition>
+	
+	<definition name="/addEditShoppingCart.tiles" extends="baseAdminLayout">
+		<put-attribute name="body" type="template" value="../shopping/addEditShoppingCart.jsp" />
+	</definition>
+	
+	<definition name="/shoppingCartList.tiles" extends="baseAdminLayout">
+		<put-attribute name="body" type="template" value="../shopping/shoppingCartList.jsp" />
+		<put-list-attribute name="scriptList">
+				<add-attribute type="string" value="bootstrap-table.min.js" />
+		</put-list-attribute>
+		<put-list-attribute name="cssList">
+				<add-attribute type="string" value="bootstrap-table.min.css" />
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="/copounManagerList.tiles" extends="baseAdminListLayout">
+		<put-attribute name="body" type="template" value="../coupon/CopounManagerList.jsp" />
+	</definition>
+	
+	<definition name="/addEditCouponManager.tiles" extends="baseAdminLayout">
+		<put-attribute name="body" type="template" value="../coupon/addEditCouponManager.jsp" />
+		<put-list-attribute name="scriptList">
+				<add-attribute type="string" value="tinymce.min.js" />
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="/copounList.tiles" extends="baseAdminListLayout">
+		<put-attribute name="body" type="template" value="../coupon/CopounList.jsp" />
+	</definition>
+	
+	<definition name="/auditList.tiles" extends="baseAdminListLayout">
+		<put-attribute name="body" type="template" value="../application/auditList.jsp" />
+		<put-list-attribute name="cssList">
+			<add-attribute type="string" value="bootstrap-table.min.css" />
+			<add-attribute type="string" value="bootstrap-datetimepicker.min.css" />
+		</put-list-attribute>
+		<put-list-attribute name="scriptList">
+			<add-attribute type="string" value="bootstrap-table.min.js" />
+			<add-attribute type="string" value="moment.min.js" />
+			<add-attribute type="string" value="bootstrap-datetimepicker.min.js" />
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="/dataminingList.tiles" extends="baseAdminListLayout">
+		<put-attribute name="body" type="template" value="../application/dataminingList.jsp" />
+		<put-list-attribute name="cssList">
+			<add-attribute type="string" value="bootstrap-table.min.css" />
+			<add-attribute type="string" value="bootstrap-datetimepicker.min.css" />
+		</put-list-attribute>
+		<put-list-attribute name="scriptList">
+			<add-attribute type="string" value="bootstrap-table.min.js" />
+			<add-attribute type="string" value="moment.min.js" />
+			<add-attribute type="string" value="bootstrap-datetimepicker.min.js" />
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="/logList.tiles" extends="baseAdminListLayout">
+		<put-attribute name="body" type="template" value="../application/logList.jsp" />
+		<put-list-attribute name="cssList">
+			<add-attribute type="string" value="bootstrap-table.min.css" />
+			<add-attribute type="string" value="bootstrap-datetimepicker.min.css" />
+		</put-list-attribute>
+		<put-list-attribute name="scriptList">
+			<add-attribute type="string" value="bootstrap-table.min.js" />
+			<add-attribute type="string" value="moment.min.js" />
+			<add-attribute type="string" value="bootstrap-datetimepicker.min.js" />
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="/translationList.tiles" extends="baseAdminListLayout">
+		<put-attribute name="body" type="template" value="../application/translationList.jsp" />
+		<put-list-attribute name="cssList">
+			<add-attribute type="string" value="bootstrap-table.min.css" />
+		</put-list-attribute>
+		<put-list-attribute name="scriptList">
+			<add-attribute type="string" value="bootstrap-table.min.js" />
+			<add-attribute type="string" value="moment.min.js" />
+		</put-list-attribute>
+	</definition>
+	
+	
+	<!-- Admin -->	
+	
+	<!-- POPS : jsp fragments called by boostrap -->
+	
+	<!-- Generics templates -->
+	<definition name="baseLayout" template="/WEB-INF/jsp/layouts/baseLayout.jsp">
+		<!-- header -->
+		<put-attribute name="title" type="template" value="baseHeaderTitle.jsp" />
+		<put-attribute name="keywords" type="template" value="baseHeaderKeywords.jsp" />
+		<put-attribute name="description" type="template" value="baseHeaderDescription.jsp" />
+		<put-attribute name="facebook" type="template" value="baseHeaderFacebook.jsp" />
+		<!-- header -->
+		<!-- body -->
+		<put-attribute name="menu" type="template" value="menu.jsp" />
+		<put-attribute name="search" type="template" value="search.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" type="template" value="footer.jsp" />
+		<!-- body -->
+		<!-- header custom css and js-->
+		<put-list-attribute name="scriptList"></put-list-attribute>
+		<put-list-attribute name="cssList"></put-list-attribute>
+		<!-- header custom css and js-->
+	</definition>
+	
+	<definition name="baseErrorLayout" template="/WEB-INF/jsp/layouts/baseErrorLayout.jsp">
+		<put-attribute name="body" value="" />
+	</definition>
+	
+	
+	<definition name="baseAdminLayout" template="/WEB-INF/jsp/layouts/baseAdminLayout.jsp">
+		<!-- header -->
+		<put-attribute name="title" type="template" value="baseHeaderTitle.jsp" />
+		<put-attribute name="keywords" type="template" value="baseHeaderKeywords.jsp" />
+		<put-attribute name="description" type="template" value="baseHeaderDescription.jsp" />
+		<!-- header -->
+		<!-- body -->
+		<put-attribute name="menu" type="template" value="menuAdmin.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" type="template" value="footerAdmin.jsp" />
+		<!-- body -->
+		<!-- header custom css and js-->
+		<put-list-attribute name="scriptList"></put-list-attribute>
+		<put-list-attribute name="cssList"></put-list-attribute>
+		<!-- header custom css and js-->
+	</definition>
+	
+	<definition name="baseAdminListLayout" extends="baseAdminLayout">
+		<!-- header custom css and js-->
+		<put-list-attribute name="scriptList">
+			<add-attribute type="string" value="bootstrap-table.min.js" />
+		</put-list-attribute>
+		<put-list-attribute name="cssList">
+			<add-attribute type="string" value="bootstrap-table.min.css" />
+		</put-list-attribute>
+		<!-- header custom css and js-->
+	</definition>
+	
+	<definition name="popLayout" template="/WEB-INF/jsp/layouts/popLayout.jsp">
+		<!-- body -->
+		<put-attribute name="body" value="" />
+		<!-- body -->
+		<!-- header custom css and js-->
+		<put-list-attribute name="scriptList"></put-list-attribute>
+		<put-list-attribute name="cssList"></put-list-attribute>
+		<!-- header custom css and js-->
+	</definition>
+	
+	<definition name="popFormLayout" extends="popLayout" >
+		<!-- header custom css and js-->
+		<put-list-attribute name="scriptList">			
+			<add-attribute type="string" value="jquery-1.10.1.min.js" />		
+			<add-attribute type="string" value="bootstrap.js" />
+			
+		</put-list-attribute>
+		<put-list-attribute name="cssList">
+			<add-attribute type="string" value="bootstrap.min.css" />
+			<add-attribute type="string" value="bootstrap-theme.min.css" />
+		</put-list-attribute>
+		<!-- header custom css and js-->
+	</definition>
+	
+	<definition name="popAdminFormLayout" template="/WEB-INF/jsp/layouts/popAdminLayout.jsp" >
+		<!-- body -->
+		<put-attribute name="body" value="" />
+		<!-- body -->
+		<!-- header custom css and js-->
+		<put-list-attribute name="scriptList">
+		</put-list-attribute>
+		<put-list-attribute name="cssList">
+		</put-list-attribute>
+		<!-- header custom css and js-->
+	</definition>
+	
+	
+	<!-- Generics templates -->
+	
+</tiles-definitions>
