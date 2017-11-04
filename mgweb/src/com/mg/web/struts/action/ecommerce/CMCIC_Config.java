@@ -28,7 +28,7 @@ final static String CMCIC_URLKO = "http://latelierdeleo.no-ip.org/shoppingCartPa
 
 class CMCIC_Config
 {
-	private static final Logger log = Logger.getLogger(ExceptionHandler.class);
+	private static final Logger log = Logger.getLogger(CMCIC_Config.class);
 	private static ConfigService configService;
 	static {
 		try {
