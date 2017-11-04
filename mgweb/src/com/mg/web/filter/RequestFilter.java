@@ -32,18 +32,22 @@ public class RequestFilter implements Filter {
 		
 		String path = ((HttpServletRequest) req).getRequestURI();
 		ConfigService service;
+		log.debug ("RequestFilter path: " + path);
 		try {
 			service = ServiceLocator.getService(ConfigServiceImpl.class);
 			if( !path.contains(".") ){
+				log.debug ("RequestFilter no ext");
 				chain.doFilter(req, resp);
 			}
 			else{
 				String ext = path.substring(path.lastIndexOf(".") + 1, path.length());
 				if( service.getFilterRequestExt().contains(ext) ){
+					log.debug ("RequestFilter ext: " + ext);
 						chain.doFilter(req, resp);
 				}
 				else{
 					//((HttpServletResponse)resp).setStatus(HttpServletResponse.SC_NOT_FOUND);
+					log.debug ("RequestFilter ERROR!!! ");
 					req.getRequestDispatcher("/errorUrl.action").forward(req, resp);
 				}
 			}

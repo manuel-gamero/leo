@@ -1,10 +1,10 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
+<div class="dark-mask"></div>
 <div id="content">
 
 	<div class="container">
-		<div class="col-md-12">
 			<!-- Carousel================================================== -->
-			<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			<%-- <div id="myCarousel" class="carousel slide" data-ride="carousel">
 				<!-- Indicators -->
 				<ol class="carousel-indicators">
 					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -56,9 +56,9 @@
 							<h1>
 								<s:text name="bolsos.home.carrusel.slide6.title" />
 							</h1>
-							<%-- <p class="carousel-slide-desc">
+							<p class="carousel-slide-desc">
 								<s:text name="bolsos.home.carrusel.slide3.text" />
-							</p> --%>
+							</p>
 							<p>
 								<a class="btn btn-lg btn-primary" href='<s:text name="url.company"/>' role="button"> <s:text
 										name="bolsos.home.carrusel.slide1.button" />
@@ -75,10 +75,20 @@
 					class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only"><s:text
 							name="bolsos.home.carrusel.next" /></span>
 				</a>
-			</div>
+			</div> --%>
 			<!-- /.carousel -->
 			<!-- /#main-slider -->
-		</div>
+			<div id="instagram" class="center-block">
+				<div class='row'>
+					<s:iterator value="instagramFeed" status="status" var="item">
+						<div class='col-md-4 col-xs-4 col-sm-4'>
+							<a href='<s:property value="link" />'>
+								<img src='<s:property value="image" />'/>
+							</a>
+						</div>
+					</s:iterator>
+				</div>
+			</div>
 	</div>
 
 	<!-- *** ADVANTAGES HOMEPAGE ***
@@ -180,7 +190,8 @@
 	<section class="bar background-white no-mb">
 		<div class="row portfolio no-space container-portafolio" data-animate="fadeInUp">
 
-			<div class="col-sm-6 col-md-3">
+			<div class="grid-sizer"></div>
+			<div class="grid-item">
 				<s:include value="../template/presentationProductTemplate.jsp">
 					<s:param name="imagename" value="'product/173/cosmetic_bag_rifle_red_2.jpg'" />
 					<s:param name="imagealt" value="'cosmetic bag harmony navy'" />
@@ -193,6 +204,22 @@
 						<s:text name='url.collection.harmony' />
 					</s:param>
 				</s:include>
+			</div>
+			<div class="grid-item">
+				<s:include value="../template/presentationProductTemplate.jsp">
+					<s:param name="imagename" value="'product/135/large_tote_bag_sunny_dance_product.jpg'" />
+					<s:param name="imagealt" value="'tote bag sunny dance anchors'" />
+					<s:param name="imageurl" value="'135/tote-bag-anchors-navy--gold'" />
+					<s:param name="id" value="'135'" />
+					<s:param name="poptitle">
+						<s:text name="bolsos.collections.C0011.title"/>
+					</s:param>
+					<s:param name="popurl">
+						<s:text name='url.collection.sunnydance' />
+					</s:param>
+				</s:include>
+			</div>
+			<div class="grid-item">
 				<!-- /.box-image -->
 				<s:include value="../template/presentationProductTemplate.jsp">
 					<s:param name="imagename" value="'product/149/lr_housse_ordi_jaune_1.jpg'" />
@@ -205,6 +232,8 @@
 					<s:param name="popurl" value="''">
 					</s:param>
 				</s:include>
+			</div>
+			<div class="grid-item">
 				<!-- /.box-image -->
 				<s:include value="../template/presentationProductTemplate.jsp">
 					<s:param name="imagename" value="'product/171/cosmetic_bag_rifle_pink_3.jpg'" />
@@ -219,22 +248,8 @@
 					</s:param>
 				</s:include>
 				<!-- /.box-image -->
-
 			</div>
-
-			<div class="col-sm-6 col-md-3">
-				<s:include value="../template/presentationProductTemplate.jsp">
-					<s:param name="imagename" value="'product/135/large_tote_bag_sunny_dance_product.jpg'" />
-					<s:param name="imagealt" value="'tote bag sunny dance anchors'" />
-					<s:param name="imageurl" value="'135/tote-bag-anchors-navy--gold'" />
-					<s:param name="id" value="'135'" />
-					<s:param name="poptitle">
-						<s:text name="bolsos.collections.C0011.title"/>
-					</s:param>
-					<s:param name="popurl">
-						<s:text name='url.collection.sunnydance' />
-					</s:param>
-				</s:include>
+			<div class="grid-item">
 				<!-- /.box-image -->
 				<s:include value="../template/presentationProductTemplate.jsp">
 					<s:param name="imagename" value="'product/133/medium_pouch_open_sea_2.jpg'" />
@@ -250,7 +265,7 @@
 				<!-- /.box-image -->
 			</div>
 
-			<div class="col-sm-6 col-md-3">
+			<div class="grid-item">
 				<!-- /.box-image -->
 				<s:include value="../template/presentationProductTemplate.jsp">
 					<s:param name="imagename" value="'product/165/medium_pouch_pleat_green_hearts_2.jpg'" />
@@ -264,6 +279,8 @@
 						<s:text name='url.collection.sunnydance' />
 					</s:param>
 				</s:include>
+			</div>
+			<div class="grid-item">
 				<!-- /.box-image -->
 				<s:include value="../template/presentationProductTemplate.jsp">
 					<s:param name="imagename" value="'product/176/pencil_case_rifle_red_1.jpg'" />
@@ -277,6 +294,8 @@
 						<s:text name='url.collection.harmony' />
 					</s:param>
 				</s:include>
+			</div>
+			<div class="grid-item">
 				<!-- /.box-image -->
 				<s:include value="../template/presentationProductTemplate.jsp">
 					<s:param name="imagename" value="'product/160/medium_pouch_pink_triangles_1.jpg'" />
@@ -293,7 +312,7 @@
 				<!-- /.box-image -->
 			</div>
 
-			<div class="col-sm-6 col-md-3">
+			<div class="grid-item">
 				<!-- /.box-image -->
 				<s:include value="../template/presentationProductTemplate.jsp">
 					<s:param name="imagename" value="'product/155/lr_housse_tablette_taupe_4.jpg'" />
@@ -306,6 +325,8 @@
 					<s:param name="popurl" value="''">
 					</s:param>
 				</s:include>
+			</div>
+			<div class="grid-item">
 				<!-- /.box-image -->
 				<s:include value="../template/presentationProductTemplate.jsp">
 					<s:param name="imagename" value="'product/131/tote_bag_into_the_wild_product.jpg'" />
@@ -489,10 +510,48 @@
 
 <script type="text/javascript">
 
+function checkPosition()
+{
+    if($(window).width() <= 375) 
+    {
+    	$('#instagram img:gt(5)').css("display", "none");
+    }
+    else if($(window).width() > 375 && $(window).width() <= 534)
+    {
+    	$('#instagram img:gt(8)').css("display", "none");
+    }
+    else if($(window).width() > 534 && $(window).width() <= 640)
+    {
+    	$('#instagram img:gt(7)').css("display", "none");
+    }
+    else if($(window).width() > 640 && $(window).width() <= 990)
+    {
+    	$('#instagram img:gt(8)').css("display", "none");
+    }
+    else if($(window).width() > 990 && $(window).width() <= 1200)
+    {
+    	$('#instagram img:gt(11)').css("display", "none");
+    }
+    else if($(window).width() > 1200){
+    	$('#instagram img:gt(9)').css("display", "none");	
+	}
+}
+
 jQuery(document).ready(function () {
+	
+	console.log('bind event');
+	$(document).load($(window).bind("resize", checkPosition));
 	
 	$('.audit').waypoint(function(direction) {
 		var msg = $(this).attr('id') + ' direction: ' + direction;
+		if($(this).attr('id') == 'video_fragment'){
+			console.log('masonry event');
+			$('.container-portafolio').masonry({
+			  itemSelector: '.grid-item',
+			  percentPosition: true,
+			  columnWidth: '.grid-sizer'
+			});
+		}
 		$.getJSON("/ajax/auditAjax.action", { audit: msg });
 	},
 	{
@@ -541,6 +600,43 @@ jQuery(document).ready(function () {
 			}, 2000);
 		});
 	});
+	
+	checkPosition();
+	
+	
+/*	
+	$.getJSON('/ajax/userFeedMedia.action', {resolution : $(window).width()}, function(e) {
+		var ref;
+		var img;
+		var col;
+		var row = "<div class='row'></div>";
+		$('#instagram').append( row );
+		for ( var i = 0; i < e.listImage.length; i++) {
+	          //img = "<img src='" + e.listImage[i].image + "' style='display: unset;'>";
+	          img = "<img src='" + e.listImage[i].image + "' >";
+	          ref = "<a href='" + e.listImage[i].link + "'>" + img + "</a>";
+	          col = "<div class='col-md-4 col-xs-4 col-sm-4'>" + ref + "</div>";
+	          $('#instagram .row').append( col );
+	      }	
+		checkPosition();
+		$('.container-portafolio').masonry({
+			  itemSelector: '.grid-item',
+			  percentPosition: true,
+			  columnWidth: '.grid-sizer'
+			});
+	});
+	*/
+	// init Masonry
+	
+	// layout Masonry after each image loads
+	//$grid.imagesLoaded().progress( function() {
+	//  $grid.masonry();
+	//});  
 
+	// bind event listener
+	//$grid.on( 'layoutComplete', function() {
+	//	$grid.masonry();
+	//});
+	
 });
 </script>

@@ -117,6 +117,11 @@ public class OurProduct extends BasicAction implements Preparable {
 			}
 			else if( nameUrlCollection != null){
 				collectionId = ServiceLocator.getService(CacheServiceImpl.class).getUrlcache().get(nameUrlCollection);
+				
+				//Redirect to error page if collection no found
+				if(collectionId == null){
+					return ERRORPAGE;
+				}
 			}
 			
 			//Try to get the list from the cache

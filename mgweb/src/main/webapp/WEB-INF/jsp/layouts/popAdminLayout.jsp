@@ -3,8 +3,8 @@
 
 <jsp:include page="applicationVariablesFragment.jsp"></jsp:include>
 
-<link rel="stylesheet" type="text/css" href="../${css}/bootstrap.css" media="screen"/>
-<link rel="stylesheet" type="text/css" href="../${css}/bootstrap-theme.css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="../${css}/bootstrap.min.css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="../${css}/bootstrap-theme.min.css" media="screen"/>
 	
 <script type="text/javascript" src="../${scripts}/jquery-1.10.1.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="../${scripts}/bootstrap.js"></script>

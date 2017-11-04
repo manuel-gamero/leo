@@ -55,6 +55,14 @@
 				<s:else>
 					<li class="yamm-fw menu-top"><span><s:property value="currentCurrencyCode"/></span></li>
 				</s:else>
+				<li class="hidden-xs">
+					<a href='<s:text name="url.shoppingcart"/>' > 
+						<i class="glyphicon glyphicon-shopping-cart"></i>
+						<span class="hidden-xs shoppingCartItems">
+							(${shoppingCartCount})
+						</span>
+					</a>
+				</li>
 			</ul>
 			
 		</div>
@@ -125,13 +133,15 @@
 
 <div class="navbar navbar-default yamm" role="navigation" id="navbar">
 	<div class="container">
-		<div class="navbar-header">
-
-			<a class="navbar-brand home" href='<s:text name="url.home"/>' data-animate-hover="bounce"> <img src="${images}/logo_small.jpg"
-				alt="L'atelier de LEO logo" class="hidden-xs logo-icon"> <img src="${images}/logo_small.jpg"
-				alt="L'atelier de LEO logo" class="visible-xs logo-icon"> <span class="sr-only"><s:text
-						name="bolsos.mainmenu.label.leohome" /></span>
+		<div>
+			<a class="home" href='<s:text name="url.home"/>' data-animate-hover="bounce"> 
+				<img src="${images}/atelier-Leo-logo-small-black.png"	alt="L'atelier de LEO logo" class="img-responsive center-block logo"> 
+				<span class="sr-only">
+					<s:text	name="bolsos.mainmenu.label.leohome" />
+				</span>
 			</a>
+		</div>
+		<div class="navbar-header">
 			<div class="navbar-buttons">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
 					<span class="sr-only"><s:text name="bolsos.mainmenu.label.toggle.navigation" /></span> <i
@@ -146,24 +156,13 @@
 						(${shoppingCartCount}) <s:text name="bolsos.mainmenu.label.items" />
 					</span>
 				</a>
-				<a class="share-page-movil share-email navbar-share-movil navbar-toggle" data-animate-hover="pulse" href="mailto:?subject=<s:text name='bolsos.share.email.subject'/> &amp;body=<s:text name='bolsos.share.email.body'/><s:text name='url.web'/><s:url/>"
-				   title='<s:text name="bolsos.share.email.title"/>'>
-				  <i class="fa fa-envelope ico-email-share-movil"></i>
-				</a>
-				<a id="sharePage" class="share-page-movil share-fb navbar-share-movil navbar-toggle" title='<s:text name="bolsos.share.fb.title"/>' href="<s:url/>" data-animate-hover="pulse">
-						<i class="fa fa-facebook text-fb-share-movil"></i>
-				</a>
-				<!-- PayPal Logo -->
-					<a href="https://www.paypal.com/webapps/mpp/paypal-popup" class="navbar-share-movil paypal-logo" onclick="javascript:window.open('https://www.paypal.com/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;">
-					<img src="https://www.paypalobjects.com/webstatic/mktg/logo/bdg_now_accepting_pp_2line_w.png" class="paypal-banner" border="0" alt="Now Accepting PayPal"></a>
-				<!-- PayPal Logo -->
 			</div>
 		</div>
 		<!--/.navbar-header -->
 
-		<div class="navbar-collapse collapse" id="navigation">
+		<div class="navbar-collapse collapse navbar-center	" id="navigation">
 
-			<ul class="nav navbar-nav navbar-left">
+			<ul class="nav navbar-nav">
 				<li class="dropdown yamm-fw"><a href='<s:text name="url.home"/>' class="dropdown-toggle" data-hover="dropdown"
 					data-delay="200"> <s:text name="bolsos.mainmenu.label.home" />
 				</a>
@@ -181,7 +180,7 @@
 							<div class="yamm-content">
 								<div class="row">
 									<s:iterator value="collectionDTOList" status="status" var="collection">
-										<div class="col-sm-2">
+										<div class="col-sm-3 col-md-2">
 											<div class="banner">
 												<a href='<s:text name="url.ourproduct.collections"/>/<s:property value="url" />'> <img
 													src="${collectionpath}<s:property value="image.name" />" class="img img-responsive collection-imag"
@@ -208,11 +207,11 @@
 					data-hover="dropdown" data-delay="200"> 
 						<s:text name="bolsos.home.menu.custom" /> 
 						<b class="caret"></b></a>
-					<ul class="dropdown-menu menu-type">
+					<ul class="dropdown-menu">
 						<li>
 							<div class="yamm-content">
 								<div class="row">
-									<div class="col-sm-2">
+									<div class="col-sm-3 col-md-2">
 										<div class="banner">
 											<a href='<s:text name="url.ourproduct.type.bag.custom"/>'> 
 												<img
@@ -228,7 +227,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-sm-2">
+									<div class="col-sm-3 col-md-2">
 										<div class="banner">
 											<a href='<s:text name="url.ourproduct.type.large_pouch.custom"/>'> 
 												<img
@@ -260,7 +259,7 @@
 											</div>
 										</div>
 									</div> --%>
-									<div class="col-sm-2">
+									<div class="col-sm-3 col-md-2">
 										<div class="banner">
 											<a href='<s:text name="url.ourproduct.type.medium_pouch.custom"/>'> 
 												<img
@@ -276,7 +275,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-sm-2">
+									<div class="col-sm-3 col-md-2">
 										<div class="banner">
 											<a href='<s:text name="url.ourproduct.type.girl_purse.custom"/>'> 
 												<img
@@ -302,11 +301,11 @@
 				<!-- Start product section -->
 				<li class="dropdown yamm-fw"><a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
 					data-delay="200"> <s:text name="bolsos.home.menu.products" /> <b class="caret"></b></a>
-					<ul class="dropdown-menu menu-type">
+					<ul class="dropdown-menu">
 						<li>
 							<div class="yamm-content">
 								<div class="row">
-									<div class="col-sm-2">
+									<div class="col-sm-3 col-md-2">
 										<div class="banner">
 											<a href='<s:text name="url.ourproduct.type.bag"/>'> <img src="${images}/large-tote-bag-sunny-dance-front.png"
 												class="img img-responsive type-imag center-block" alt='<s:text name="bolsos.home.menu.products.bag"/>' />
@@ -319,7 +318,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-sm-2">
+									<div class="col-sm-3 col-md-2">
 										<div class="banner">
 											<a href='<s:text name="url.ourproduct.type.large_pouch"/>'> <img src="${images}/large-pouch-into-the-wild-detail-1.png"
 												class="img img-responsive type-imag center-block" alt='<s:text name="bolsos.home.menu.products.pouche"/>' />
@@ -345,7 +344,7 @@
 											</div>
 										</div>
 									</div> --%>
-									<div class="col-sm-2">
+									<div class="col-sm-3 col-md-2">
 										<div class="banner">
 											<a href='<s:text name="url.ourproduct.type.medium_pouch"/>'> 
 												<img
@@ -361,7 +360,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-sm-2">
+									<div class="col-sm-3 col-md-2">
 										<div class="banner">
 											<a href='<s:text name="url.ourproduct.type.tablet_pouch"/>'> 
 												<img
@@ -377,7 +376,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-sm-2">
+									<div class="col-sm-3 col-md-2">
 										<div class="banner">
 											<a href='<s:text name="url.ourproduct.type.laptop_pouch"/>'> 
 												<img
@@ -439,39 +438,6 @@
 
 		</div>
 		<!--/.nav-collapse -->
-
-		<div class="navbar-buttons">
-			<div class="navbar-collapse collapse right navbar-share" >
-				<a href="<s:url/>" title='<s:text name="bolsos.share.fb.title"/>' class="share-page share-fb" data-animate-hover="pulse">
-						<i class="fa fa-facebook text-fb-share"></i>
-				</a>
-				<a class="share-page share-email" data-animate-hover="pulse" href="mailto:?subject=<s:text name='bolsos.share.email.subject'/> &amp;body=<s:text name='bolsos.share.email.body'/><s:text name='url.web'/><s:url/>"
-				   title="<s:text name="bolsos.share.email.title"/>">
-				  <i class="fa fa-envelope ico-email-share"></i>
-				</a>
-			</div>
-			<div class="navbar-collapse collapse right" id="basket-overview">
-				<a href='<s:text name="url.shoppingcart"/>' class="btn btn-primary navbar-btn"> 
-					<i class="glyphicon glyphicon-shopping-cart"></i>
-					<span class="hidden-xs shoppingCartItems">
-						(${shoppingCartCount}) <s:text name="bolsos.mainmenu.label.items" />
-					</span>
-				</a>
-			</div>
-			<!-- PayPal Logo -->
-			<div class="navbar-collapse collapse right">
-				<a href="https://www.paypal.com/webapps/mpp/paypal-popup" onclick="javascript:window.open('https://www.paypal.com/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;">
-				<img src="https://www.paypalobjects.com/webstatic/mktg/logo/bdg_now_accepting_pp_2line_w.png" class="paypal-banner" border="0" alt="Now Accepting PayPal"></a>
-			</div>
-			<!-- PayPal Logo -->
-			<!--/.nav-collapse -->
-
-			<%-- <div class="navbar-collapse collapse right" id="search-not-mobile">
-				<button type="button" class="btn navbar-btn btn-primary" data-toggle="collapse" data-target="#search">
-					<span class="sr-only"><s:text name="bolsos.mainmenu.label.toggle.search" /></span> <i class="fa fa-search"></i>
-				</button>
-			</div> --%>
-		</div>
 
 		<div class="collapse clearfix" id="search">
 

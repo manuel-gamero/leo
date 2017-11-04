@@ -58,6 +58,7 @@ public class BasicAction extends ActionSupport implements ServletRequestAware,
 	protected static final String FREE = "free";
 	protected static final String SUMMARY = "summary";
 	protected static final String ERRORFREE = "errorFree";
+	protected static final String ERRORPAGE = "errorpage";
 	protected static final String TITLE_PAGE = "bolsos.pages.title";
 	protected static final String TITLE_PAGE_PARAM = "bolsos.pages.title.param";
 	protected static final String DESCR_PAGE_PARAM = "bolsos.pages.description.param";

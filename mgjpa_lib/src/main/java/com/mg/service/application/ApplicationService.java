@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.mg.exception.ServiceException;
 import com.mg.model.Audit;
+import com.mg.model.Jobs;
 import com.mg.model.Logs;
 import com.mg.service.Service;
 
@@ -18,5 +19,7 @@ public interface ApplicationService extends Service {
 	List<Audit> getAuditByDates(Date startDate, Date endDate)throws ServiceException;
 	
 	List<Logs> getLogsByDates(Date startDate, Date endDate)throws ServiceException;
+
+	List<Jobs> getJobs() throws ServiceException;
 	
 }

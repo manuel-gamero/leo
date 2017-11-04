@@ -197,7 +197,6 @@ $(document).ready(function() {
   
   $('[id^=translationCCC]').click(function() {
 		var id = $(this).attr('id').split('_')[1];
-		console.log('Translation: ' + id);
 		$.get('aeCccTranslation.action?id=' + id, function(data) {
 		      $(data).modal();
 		  });
@@ -280,9 +279,7 @@ $(document).ready(function() {
 						   '<a id="deleterow_' + counter + '" class="btn btn-default" role="button">Delete</a></div></td>';
 		
 		var row = ccid + cccode + ccname + cccreationDate + '<td></td>' + cctypeCode + cccid + ccctypeCode + image + ccccreationDate + cccvalue + buttonDelete;
-		
-		console.log('Row: '  + row);
-		console.log('counter: '  + counter);
+
 		$("tbody#ccListData").append('<tr id="ttr_' + counter +'">' + row + '</tr>');
 		
 		$("#counterList").val( parseInt(counter) + 1);
@@ -306,7 +303,6 @@ $(document).ready(function() {
 		
 		$('[id^=deleterow]').click(function() {
 			var id = $(this).attr('id').split('_')[1];
-			console.log('Delete: ' + id);
 			$('#ttr_' + id).remove();
 		});
 	});
@@ -326,22 +322,16 @@ $(document).ready(function() {
 	
 	$('[id^=deleteCCC]').click(function() {
 		var id = $(this).attr('id').split('_')[1];
-		console.log('Delete: ' + id);
-		
 		$.getJSON('ajax/deleteCCC.action', {
 			id : id
 		      }, function(jsonResponse) {
-		    	console.log('Remove row: ' + id); 
 				$('#tr_' + id).remove();
 		});
 	});
 	
 	$('[id^=chageCCC]').click(function() {
 		var id = $(this).attr('id').split('_')[1];
-		console.log('Change: ' + id);
-		var status = $('#status_' + id).text();
-		console.log('Status: ' + status);
-		
+		var status = $('#status_' + id).text();		
 		$.getJSON('ajax/changeStatusCCC.action', {
 			id : id, code : status
 		      }, function(jsonResponse) {

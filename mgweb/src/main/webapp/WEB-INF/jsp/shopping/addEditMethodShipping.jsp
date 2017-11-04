@@ -168,7 +168,6 @@ $(document).ready(function () {
 			}
 			row = cid + ccost + ccurrency ;
 			$("tbody#currencyBody").append('<tr>' + row + '</tr>');
-			console.log('Row: '  + row);
 		});
 		
 		$("#counterCurrency").val( parseInt(counterCurrency) + 1);
@@ -176,10 +175,7 @@ $(document).ready(function () {
 	
 	$('[id^=deletePE]').click(function() {
 		var id = $(this).attr('id').split('_')[1];
-		console.log('Delete: ' + id);
-		
 		$.getJSON('/ajax/deletePriceEntry.action', {id : id}, function(a) {
-	    	console.log('Remove row: ' + id); 
 			$('#pe_tr_' + id).remove();
 		});
 	});

@@ -36,7 +36,6 @@ $('.modalImage').on('click', function(e) {
 	var link = $(this).attr('data-link');
 	if( title != null ){
 		if ( $('#subtitle').length ){
-			console.log("1");
 			if(link != ''){
 				$('#subtitle').text(title);
 				$('#link').attr("href", link);

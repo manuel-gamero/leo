@@ -43,4 +43,5 @@
   <table-filter match-schema="bolsos" match-name="mg_device_session"/>
   <table-filter match-schema="bolsos" match-name="mg_user_actio_param"/>
   <table-filter match-schema="bolsos" match-name="mg_paypal"/>
+  <table-filter match-schema="bolsos" match-name="mg_jobs"/>
 </hibernate-reverse-engineering>

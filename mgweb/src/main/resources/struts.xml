@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+ <!-- 
+	<package name="user" extends="ssl-default" namespace="/User">
+        <interceptors>
+        <interceptor-stack name="secureStack">
+        <interceptor-ref name="secure">
+            <param name="useAnnotations">false</param>
+         </interceptor-ref>
+         <interceptor-ref name="defaultStack"/>
+        </interceptor-stack>
+        </interceptors>
+		
+		<action name="Login" class="com.mg.web.struts.action.user.Login">
+			<result>../WEB-INF/jsp/user/login.jsp</result>
+		</action>
+		<action name="Welcome" class="com.mg.web.struts.action.user.WelcomeUserAction">
+			<result name="SUCCESS">../WEB-INF/jsp/user/welcome_user.jsp</result>
+		</action>
+
+    </package>
+	 -->
+	<constant name="struts.custom.i18n.resources" value="i18n-global-messages" />
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />    
+    <constant name="struts.ui.theme" value="simple" />
+    <constant name="struts.multipart.maxSize" value="10000000" />
+    
+    <constant name="struts.enable.SlashesInActionNames" value="true"/>
+	<constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
+	
+	<constant name="struts.action.excludePattern" value="/images/.*,/js/.*,/css/.*,/fonts/.*"/>
+	<constant name="struts.action.extension" value=",action"/>
+	<!-- <constant name="struts.patternMatcher" value="regex" />
+	<constant name="struts.action.excludePattern" value=".*/images/.*" /> -->
+
+    <include file="struts-mgweb-default.xml"/>
+    <include file="struts-mgweb-support.xml"/>
+    <include file="struts-mgweb-admin.xml"/>
+	 
+</struts>

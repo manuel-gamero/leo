@@ -17,15 +17,15 @@
 	<tiles:insertAttribute name="description" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
 	<meta name="robots" content="index,follow" />
-	<%-- <link rel="stylesheet" type="text/css" href="../${css}/bootstrap.css" media="screen"/>
-	<link rel="stylesheet" type="text/css" href="../${css}/bootstrap-theme.css" media="screen"/>
+	<%-- <link rel="stylesheet" type="text/css" href="../${css}/bootstrap.min.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="../${css}/bootstrap-theme.min.css" media="screen"/>
 	<link rel="stylesheet" type="text/css" href="../${css}/elastic.css" media="screen"/>
 	<link rel="stylesheet" type="text/css" href="../${css}/colpick.css" media="screen"/>
 	<link rel="stylesheet" type="text/css" href="../${css}/mg.css" media="screen"/>
 	<link rel="stylesheet" type="text/css" href="../${css}/elastic.print.css" media="screen"/>
  
- 	<link rel="stylesheet" type="text/css" href="../${css}/bootstrap.css" media="screen"/>
-	<link rel="stylesheet" type="text/css" href="../${css}/bootstrap-theme.css" media="screen"/>
+ 	<link rel="stylesheet" type="text/css" href="../${css}/bootstrap.min.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="../${css}/bootstrap-theme.min.css" media="screen"/>
 	<link rel="stylesheet" type="text/css" href="../${css}/mg.css" media="screen"/>
 	--%>
 	<link rel="stylesheet" type="text/css" href="${css}/bootstrap.min.css" media="screen"/>

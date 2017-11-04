@@ -629,9 +629,7 @@ $("#containment-wrapper").mousemove(function(e){
 			}
 			//Add click event
 			$('[id^=deleterow]').click(function() {
-				console.log('Delete: 2');
 				var id = $(this).attr('id').split('_')[1];
-				console.log('Delete: ' + id);
 				$('#ttr_' + id).remove();
 			});
 		});
@@ -649,9 +647,7 @@ $("#containment-wrapper").mousemove(function(e){
 		
 		//Add click event
 		$('[id^=deleterow]').click(function() {
-			console.log('Delete: 2');
 			var id = $(this).attr('id').split('_')[1];
-			console.log('Delete: ' + id);
 			$('#ttr_' + id).remove();
 		});
 	}
@@ -719,7 +715,6 @@ $("#containment-wrapper").mousemove(function(e){
 			}
 			row = cid + ccost + ccurrency ;
 			$("tbody#currencyBody").append('<tr>' + row + '</tr>');
-			console.log('Row: '  + row);
 		});
 		
 		$("#counterCurrency").val( parseInt(counterCurrency) + 1);
@@ -727,44 +722,33 @@ $("#containment-wrapper").mousemove(function(e){
 	
   $('[id^=deleteCCI]').click(function() {
 		var id = $(this).attr('id').split('_')[1];
-		console.log('Delete: ' + id);
-		
 		$.getJSON('ajax/deleteCCI.action', {
 			id : id
 		      }, function(jsonResponse) {
-		    	console.log('Remove row: ' + id); 
 				$('#tr_' + id).remove();
 		});
 	});
 
   $('[id^=deletePE]').click(function() {
 		var id = $(this).attr('id').split('_')[1];
-		console.log('Delete: ' + id);
-		
 		$.getJSON('ajax/deletePriceEntry.action', {id : id, productId: productId}, function(a) {
-	    	console.log('Remove row: ' + id); 
 			$('#pe_tr_' + id).remove();
 		});
 	});
   
   $('[id^=savePE]').click(function() {
 		var id = $(this).attr('id').split('_')[1];
-		console.log('Save: ' + id);
 		var newPrice = $('#discount_' + id).val();
 		var productId = $('#productId').val();
 		
 		$.getJSON('ajax/savePriceEntry.action', {id : id, newPrice: newPrice, productId: productId}, function(a) {
-	    	console.log('Save row: ' + id); 
 	    	alert("New price save it.");
 		});
 	});
   
   $('[id^=deletePI]').click(function() {
 		var id = $(this).attr('id').split('_')[1];
-		console.log('Delete: ' + id);
-		
 		$.getJSON('ajax/deleteProductImage.action', {imageId : id}, function(a) {
-	    	console.log('Remove row: ' + id); 
 			$('#pi_tr_' + id).remove();
 		});
 	});
@@ -772,10 +756,7 @@ $("#containment-wrapper").mousemove(function(e){
 
   $('[id^=chageCCI]').click(function() {
 		var id = $(this).attr('id').split('_')[1];
-		console.log('Change: ' + id);
 		var status = $('#status_' + id).text();
-		console.log('Status: ' + status);
-		
 		$.getJSON('ajax/changeStatusCCI.action', {
 			id : id, code : status
 		      }, function(jsonResponse) {

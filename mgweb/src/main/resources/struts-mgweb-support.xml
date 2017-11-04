@@ -92,6 +92,7 @@
         	<interceptor-ref name="defaultMgWeb"/>
 			<result name="success" type="tiles">/ourProduct.tiles</result>  
 			<result name="error" type="tiles">/error.tiles</result> 
+			<result name="errorpage" type="redirectAction">errorPage</result>
         </action>
         
 		 <action name="/*/collections/produits/*" class="com.mg.web.struts.action.product.OurProduct" >

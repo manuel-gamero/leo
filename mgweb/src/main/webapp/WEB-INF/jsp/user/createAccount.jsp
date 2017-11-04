@@ -218,7 +218,6 @@ $(document).ready(function () {
 		    	  options += '<option value="' + a.list[i].key + '">'
                   + a.list[i].value + '</option>';
 		      }
-		      console.log("options : " + options);
 		      $("select#province").html(options);
 		  });
 		 

@@ -7,6 +7,12 @@
 		<listener-class>com.mg.web.listener.application.InitializeContextListener</listener-class>
 	</listener>
 	
+	<!-- Quartz scheduler Listener -->
+	<listener>
+	  <listener-class>
+            com.mg.web.listener.schedule.QuartzSchedulerListener
+          </listener-class>
+	</listener>
 
 	<!-- Character Encoding Filter -->
 	<filter>
@@ -133,12 +139,6 @@
 		<error-code>500</error-code>
 		<location>/error.action</location>
 	</error-page>
-
-
-
-	<!-- <servlet> <servlet-name>servletCreateUser</servlet-name> <servlet-class>com.mg.web.servlet.ServletCreateUser</servlet-class> 
-		</servlet> <servlet-mapping> <servlet-name>servletCreateUser</servlet-name> 
-		<url-pattern>/servletCreateUser</url-pattern> </servlet-mapping> -->
 
 	<resource-ref>
 		<description>DB postgres</description>

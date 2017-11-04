@@ -78,7 +78,6 @@ $(document).ready(function() {
   
   $('[id^=translationT]').click(function() {
 		var id = $(this).attr('id').split('_')[1];
-		console.log('Translation: ' + id);
 		$.get('aeTranslation.action?id=' + id, function(data) {
 		      $(data).modal();
 		  });

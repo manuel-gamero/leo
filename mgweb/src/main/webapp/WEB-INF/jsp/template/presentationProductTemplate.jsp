@@ -7,7 +7,7 @@
 			class="img-responsive">
 	</div>
 	<div class="bg"></div>
-	<div class="name">
+	<div class="name hidden-sm">
 		<a href="${images}/${param.imagename}"
 			class="modalImage btn btn-lg btn-template-transparent-primary btn-circle"
 			title='${param.poptitle}' 

@@ -178,7 +178,6 @@ $(document).ready(
 
 		$('[id^=edit]').click( function() {
 			var id = $(this).attr('id').split('_')[1];
-			console.log('shippingSelect: ' + id);
 			$.get('/aeUserAddress.action?id=' + id + '&type=SHIPPING', function(data) {
 				$(data).modal().on('hide.bs.modal', function (e) {
 					$("#popupModal").remove();

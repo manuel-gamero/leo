@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.imageio.ImageIO;
 import javax.persistence.EntityManager;
@@ -60,6 +62,7 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 	private final static String IMAGEN_LARGE = "large" + SLAGE;
 	private final static String IMAGEN_THUMB = "thumbnail" + SLAGE;
 	private final static boolean NORMALIZE_IMAGE_NAME = true;
+	private static Map<String, Image> imageMap = new ConcurrentHashMap<String, Image>();
 	
 	protected DaoManager daoManager;
 
@@ -236,19 +239,23 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 	}
 	
 	private Image createImage(File file, String fileName, String normalizedName) throws IOException{
-		Image image = new Image();
-		image.setId(0);
-		image.setName(normalizedName);
-		image.setSize(FileUtils.getFileSize(file));
-		Dimension dim = FileUtils.getImageDimension(file);
-		image.setHeight(dim.height);
-		image.setWidth(dim.width);
-		image.setResolution(resolutionDesicion(FileUtils.getImageResolution(file)));
-		image.setScore(mathematicalFormula(image));
-		image.setRealName(fileName);
-		//Variables Initialization 
-		boolean isLarge = dim.getWidth() >= BackEndConstants.PRODUCT_DEFAUTL_THUMBNAIL_WIDTH * BackEndConstants.LARGE_TRANSFERT_COEFICIENT;
-		image.setLarge(isLarge);
+		Image image = imageMap.get(fileName);
+		if( image == null){
+			image = new Image();
+			image.setId(0);
+			image.setName(normalizedName);
+			image.setSize(FileUtils.getFileSize(file));
+			Dimension dim = FileUtils.getImageDimension(file);
+			image.setHeight(dim.height);
+			image.setWidth(dim.width);
+			image.setResolution(resolutionDesicion(FileUtils.getImageResolution(file)));
+			image.setScore(mathematicalFormula(image));
+			image.setRealName(fileName);
+			//Variables Initialization 
+			boolean isLarge = dim.getWidth() >= BackEndConstants.PRODUCT_DEFAUTL_THUMBNAIL_WIDTH * BackEndConstants.LARGE_TRANSFERT_COEFICIENT;
+			image.setLarge(isLarge);
+			imageMap.put(fileName, image);
+		}
 		return(image);
 	}
 	

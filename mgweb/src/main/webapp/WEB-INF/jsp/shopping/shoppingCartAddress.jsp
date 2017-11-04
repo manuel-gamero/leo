@@ -149,7 +149,6 @@ $(document).ready(function () {
 	
 	$('[id^=eUserAddressShipping]').click(function() {
 		var id = $('#shippingSelect').val();
-		console.log('shippingSelect: ' + id);
 		$.get('/aeUserAddress.action?id=' + id + '&type=SHIPPING', function(data) {
 			$(data).modal().on('hide.bs.modal', function (e) {
 				$("#popupModal").remove();

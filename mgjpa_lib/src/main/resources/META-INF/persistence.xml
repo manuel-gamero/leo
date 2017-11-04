@@ -44,6 +44,7 @@
 	  	<class>com.mg.model.DeviceSession</class>
 	  	<class>com.mg.model.DeviceUserActionParam</class>
 	  	<class>com.mg.model.Paypal</class>
+	  	<class>com.mg.model.Jobs</class>
 	  	
 	    <properties>
 			<property name="hibernate.connection.datasource" value="java:comp/env/jdbc/postgresDS"/>

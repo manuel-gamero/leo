@@ -31,7 +31,7 @@
 					</div>
 					<div class="col-md-5">
 						<p class="text-center">
-							<img src="${images}/BTS-LEO_low-1101.jpg" class="img-thumbnail  img-responsive" alt="">
+							<img src="${images}/atelier-Leo-a-propos-workshop.jpg" class="img-thumbnail  img-responsive" alt="">
 						</p>
 					</div>
 				</div>
@@ -98,7 +98,7 @@
 				<div class="row">
 					<div class="col-md-5">
 						<p class="text-center">
-							<img src="${images}/Geismar_low-1218.jpg" class="img-thumbnail  img-responsive" alt="">
+							<img src="${images}/atelier-Leo-a-propos-raphaele.jpg" class="img-thumbnail  img-responsive" alt="">
 						</p>
 					</div>
 
