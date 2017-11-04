@@ -260,7 +260,7 @@
 		<put-list-attribute name="scriptList">
 				<add-attribute type="string" value="fileuploader.js" />
 				<add-attribute type="string" value="jquery-ui.js" />
-				<add-attribute type="string" value="jquery.dd.js" />
+				<add-attribute type="string" value="jquery.dd.min.js" />
 		</put-list-attribute>
 		<put-list-attribute name="cssList">
 				<add-attribute type="string" value="fileuploader.css" />

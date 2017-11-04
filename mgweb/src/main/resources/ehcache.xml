@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd"
+         updateCheck="true" monitoring="autodetect"
+         dynamicConfig="true" >
+    
+    <diskStore path="java.io.tmpdir"/>    
+    
+    <!--
+    Mandatory Default Cache configuration. These settings will be applied to caches
+    created programmtically using CacheManager.add(String cacheName).
+
+    The defaultCache has an implicit name "default" which is a reserved cache name.
+    -->
+    <!-- <defaultCache
+			     maxElementsInMemory="1000"
+			     eternal="false"
+			     timeToIdleSeconds="900"
+			     timeToLiveSeconds="3600"
+			     overflowToDisk="true"
+			     maxElementsOnDisk="1000000"
+			     diskPersistent="false"
+			     diskExpiryThreadIntervalSeconds="120"
+			     memoryStoreEvictionPolicy="LRU"			     
+    />
+     -->
+    <defaultCache
+		maxElementsInMemory="1000"
+		eternal="true"
+		overflowToDisk="true"
+		maxElementsOnDisk="1000"
+		diskPersistent="false"
+		diskExpiryThreadIntervalSeconds="120"
+		memoryStoreEvictionPolicy="LRU"			     
+	/>
+    
+    <cache name="translationCache"
+           maxElementsInMemory="1000"
+		   maxElementsOnDisk="10000"
+           eternal="true"
+		   overflowToDisk="false"
+		   diskPersistent="true"
+           memoryStoreEvictionPolicy="LFU"
+    />
+    
+    
+    <!-- Product DTO cache 
+    <cache name="productDTOCache"
+           maxElementsInMemory="1000"
+		   maxElementsOnDisk="10000"
+           eternal="false"
+           timeToIdleSeconds="300"
+		   timeToLiveSeconds="600"
+		   overflowToDisk="false"
+		   diskPersistent="true"
+           memoryStoreEvictionPolicy="LFU"
+    />
+    -->
+     <cache name="productDTOCache"
+           maxElementsInMemory="1000"
+		   maxElementsOnDisk="10000"
+           eternal="true"
+		   overflowToDisk="false"
+		   diskPersistent="true"
+           memoryStoreEvictionPolicy="LFU"
+    />
+     
+        <!-- Search Result cache -->
+    <cache name="searchResultDTOCache"
+           maxElementsInMemory="10000"
+		   maxElementsOnDisk="10000"
+           eternal="false"
+           timeToIdleSeconds="900"
+		   timeToLiveSeconds="3600"
+		   overflowToDisk="false"
+		   diskPersistent="true"
+           memoryStoreEvictionPolicy="LFU"
+    />
+
+	<cache name="collectionCache"
+           maxElementsInMemory="100"
+		   maxElementsOnDisk="1000"
+           eternal="true"
+		   overflowToDisk="false"
+		   diskPersistent="true"
+           memoryStoreEvictionPolicy="LFU"
+    />
+</ehcache>

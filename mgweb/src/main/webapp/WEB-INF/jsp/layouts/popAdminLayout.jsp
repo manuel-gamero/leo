@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="../${css}/bootstrap-theme.min.css" media="screen"/>
 	
 <script type="text/javascript" src="../${scripts}/jquery-1.10.1.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="../${scripts}/bootstrap.js"></script>
+<script type="text/javascript" src="../${scripts}/bootstrap.min.js"></script>
 	
 <!-- Add specific css files -->
 <tiles:importAttribute name="cssList" scope="request"/>
