@@ -231,7 +231,7 @@
 				<add-attribute type="string" value="fileuploader.js" />
 				<add-attribute type="string" value="bootstrap-dialog.js" />
 				<add-attribute type="string" value="bootstrap-modalmanager.js" />
-				<add-attribute type="string" value="bootstrap-modal.js" />
+				<add-attribute type="string" value="bootstrap-modal.min.js" />
 				<add-attribute type="string" value="tinymce.min.js" />
 		</put-list-attribute>
 		<put-list-attribute name="cssList">
