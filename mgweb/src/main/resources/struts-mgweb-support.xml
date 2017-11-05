@@ -101,6 +101,7 @@
         	<interceptor-ref name="defaultMgWeb"/>
 			<result name="success" type="tiles">/ourProduct.tiles</result>  
 			<result name="error" type="tiles">/error.tiles</result> 
+			<result name="errorpage" type="redirectAction">errorPage</result>
         </action>
         
 		<action name="/*/type/products/custom/*" class="com.mg.web.struts.action.product.OurProduct" >
@@ -110,6 +111,7 @@
         	<interceptor-ref name="defaultMgWeb"/>
 			<result name="success" type="tiles">/ourProduct.tiles</result>  
 			<result name="error" type="tiles">/error.tiles</result> 
+			<result name="errorpage" type="redirectAction">errorPage</result>
         </action>
         
 		<action name="/*/type/produits/personnalise/*" class="com.mg.web.struts.action.product.OurProduct" >
@@ -119,16 +121,8 @@
         	<interceptor-ref name="defaultMgWeb"/>
 			<result name="success" type="tiles">/ourProduct.tiles</result>  
 			<result name="error" type="tiles">/error.tiles</result> 
+			<result name="errorpage" type="redirectAction">errorPage</result>
         </action>
-        
-        <!-- <action name="/*/type/products/*" class="com.mg.web.struts.action.product.OurProduct" >
-		    <param name="currentLanguage">{1}</param>
-		    <param name="nameUrlType">{2}</param>
-		    <param name="customProduct">true</param>
-        	<interceptor-ref name="defaultMgWeb"/>
-			<result name="success" type="tiles">/ourProduct.tiles</result>  
-			<result name="error" type="tiles">/error.tiles</result> 
-        </action> -->
         
         <action name="/*/type/products/*" class="com.mg.web.struts.action.product.OurProduct" >
 		    <param name="currentLanguage">{1}</param>
@@ -136,17 +130,9 @@
 		    <param name="customProduct">false</param>
         	<interceptor-ref name="defaultMgWeb"/>
 			<result name="success" type="tiles">/ourProduct.tiles</result>  
-			<result name="error" type="tiles">/error.tiles</result> 
+			<result name="error" type="tiles">/error.tiles</result>
+			<result name="errorpage" type="redirectAction">errorPage</result>
         </action>
-        
-		<!-- <action name="/*/type/produits/*" class="com.mg.web.struts.action.product.OurProduct" >
-		    <param name="currentLanguage">{1}</param>
-		    <param name="nameUrlType">{2}</param>
-		    <param name="customProduct">true</param>
-        	<interceptor-ref name="defaultMgWeb"/>
-			<result name="success" type="tiles">/ourProduct.tiles</result>  
-			<result name="error" type="tiles">/error.tiles</result> 
-        </action> -->
         
         <action name="/*/type/produits/*" class="com.mg.web.struts.action.product.OurProduct" >
 		    <param name="currentLanguage">{1}</param>
@@ -154,7 +140,8 @@
 		    <param name="customProduct">false</param>
         	<interceptor-ref name="defaultMgWeb"/>
 			<result name="success" type="tiles">/ourProduct.tiles</result>  
-			<result name="error" type="tiles">/error.tiles</result> 
+			<result name="error" type="tiles">/error.tiles</result>
+			<result name="errorpage" type="redirectAction">errorPage</result>
         </action>
         
 		<action name="/*/product/*/*" class="com.mg.web.struts.action.product.Product" >
@@ -164,6 +151,7 @@
 		    <interceptor-ref name="defaultMgWeb"/>
 			<result name="success" type="tiles">/product.tiles</result>   
 			<result name="error" type="tiles">/error.tiles</result>
+			<result name="errorpage" type="redirectAction">errorPage</result>
         </action>
         
 		<action name="/*/produit/*/*" class="com.mg.web.struts.action.product.Product" >
@@ -173,6 +161,7 @@
 		    <interceptor-ref name="defaultMgWeb"/>
 			<result name="success" type="tiles">/product.tiles</result>   
 			<result name="error" type="tiles">/error.tiles</result>
+			<result name="errorpage" type="redirectAction">errorPage</result>
         </action>
         
 		<action name="/*/shoppingcart" class="com.mg.web.struts.action.shopping.ShoppingCart" method="showShoppingCart" >

@@ -1,12 +1,7 @@
 package com.mg.dao.impl;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import com.mg.model.Jobs;
-import com.mg.model.Logs;
 
 public class JobsDAO extends GenericDaoImpl<Jobs> {
 	

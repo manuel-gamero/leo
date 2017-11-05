@@ -51,25 +51,31 @@ public class Product extends BasicAction implements Preparable {
 			if(id != null){
 				log.debug("Getting productDTO");
 				productDTO = DTOFactory.getProductDTO(id, getCurrentLanguage(),getCurrentCurrencyCode(), true);
-				List<ItemViewDTO> listItem = null;
-				if ( productDTO.getCustomProduct()){
-					log.debug("Getting list product suggestion for custom product");
-					listItem = DTOFactory.getItemViewDTOForItemList( ServiceLocator.getService(ProductServiceImpl.class).getListItemByProduct(id), getCurrentLanguage(), getCurrentCurrencyCode(), 3 );
-				}
-				else{
-					log.debug("Getting list similar product for final product");
-					listItem = DTOFactory.getItemViewDTOForProductList( ServiceLocator.getService(ProductServiceImpl.class).getProductByCollection( productDTO.getCollection().getId(), false), id, getCurrentLanguage(), getCurrentCurrencyCode(), 3 );
-				}
-				setItemList( listItem );
-				/*if(listItem.size()>=4){
-					setItemList( listItem.subList(1, 4));
-				}
-				else{
+				if( productDTO != null ){
+					List<ItemViewDTO> listItem = null;
+					if ( productDTO.getCustomProduct()){
+						log.debug("Getting list product suggestion for custom product");
+						listItem = DTOFactory.getItemViewDTOForItemList( ServiceLocator.getService(ProductServiceImpl.class).getListItemByProduct(id), getCurrentLanguage(), getCurrentCurrencyCode(), 3 );
+					}
+					else{
+						log.debug("Getting list similar product for final product");
+						listItem = DTOFactory.getItemViewDTOForProductList( ServiceLocator.getService(ProductServiceImpl.class).getProductByCollection( productDTO.getCollection().getId(), false), id, getCurrentLanguage(), getCurrentCurrencyCode(), 3 );
+					}
 					setItemList( listItem );
-				}*/
-				log.debug("Getting Extra-price");
-				String extraPrice = ServiceLocator.getService(ConfigServiceImpl.class).getPriceExtraText(getCurrentCurrencyCode());
-				setExtraPrice(CurrencyUtils.displayPriceLocale(extraPrice, getCurrentLanguage(), getCurrentCurrencyCode()) );
+					/*if(listItem.size()>=4){
+						setItemList( listItem.subList(1, 4));
+					}
+					else{
+						setItemList( listItem );
+					}*/
+					log.debug("Getting Extra-price");
+					String extraPrice = ServiceLocator.getService(ConfigServiceImpl.class).getPriceExtraText(getCurrentCurrencyCode());
+					setExtraPrice(CurrencyUtils.displayPriceLocale(extraPrice, getCurrentLanguage(), getCurrentCurrencyCode()) );
+				}
+				else{
+					log.warn("Product id " + id + " does not exist.");
+					return ERRORPAGE;
+				}
 			}
 			else{
 				log.error("Product ID : " + id + " DOESN´T exist ");
@@ -109,7 +115,6 @@ public class Product extends BasicAction implements Preparable {
 	}
 
 	public ProductDTO getProductDTO() {
-		//return productDTO;
 		try {
 			return DTOFactory.getProductDTO(id, getCurrentLanguage(),getCurrentCurrencyCode(), true);
 		} catch (Exception e) {
@@ -117,10 +122,6 @@ public class Product extends BasicAction implements Preparable {
 			return null;
 		}
 	}
-
-	//public void setProductDTO(ProductDTO productDTO) {
-	//	this.productDTO = productDTO;
-	//}
 
 	public Integer getId() {
 		return id;

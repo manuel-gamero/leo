@@ -222,7 +222,7 @@ public class BasicAction extends ActionSupport implements ServletRequestAware,
 		}
 	}
 
-	public void managerException(Exception e, Class c, String var) {
+	public void managerException(Exception e, Class<?> c, String var) {
 		try {
 			ExceptionHandler.handleException(e, c, null, var);
 		} catch (Exception ex) {
@@ -230,7 +230,7 @@ public class BasicAction extends ActionSupport implements ServletRequestAware,
 		}
 	}
 
-	public void managerException(Exception e, Class c, String desc, String var) {
+	public void managerException(Exception e, Class<?> c, String desc, String var) {
 		try {
 			ExceptionHandler.handleException(e, c, desc, var);
 		} catch (Exception ex) {

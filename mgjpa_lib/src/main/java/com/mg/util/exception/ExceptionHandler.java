@@ -48,7 +48,7 @@ public class ExceptionHandler {
    }
    
    /** handle exception and send the message to the defaultDebuggersEmail */
-   public static void handleException(Exception e,Class c, String desc, String var)
+   public static void handleException(Exception e,Class<?> c, String desc, String var)
    {
 	  if(traceError) 
 		  log.error(e.getMessage() + "VAR: " + var);

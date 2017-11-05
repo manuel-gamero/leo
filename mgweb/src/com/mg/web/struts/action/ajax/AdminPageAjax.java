@@ -23,7 +23,7 @@ import com.mg.web.struts.action.BasicListActionSupport;
 
 
 
-public class AdminPageAjax<T> extends BasicListActionSupport {
+public class AdminPageAjax<T> extends BasicListActionSupport<T> {
 	
 	private static final long serialVersionUID = 1L;
 

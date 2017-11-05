@@ -159,45 +159,50 @@ public final class DTOFactory {
 		ProductDTO productDTO = (ProductDTO) ServiceLocator.getService(CacheServiceImpl.class).getDefaultCache().fetch(key);
 		if( productDTO == null ){
 			productDTO = DTOFactory.getProductDTO(ServiceLocator.getService(ProductServiceImpl.class).getProduct(id, true), lang ,country , large);
-			ServiceLocator.getService(CacheServiceImpl.class).getDefaultCache().store(key, productDTO);
+			if( productDTO != null ){
+				ServiceLocator.getService(CacheServiceImpl.class).getDefaultCache().store(key, productDTO);
+			}
 		}
 		return productDTO;
 	}
 	public static ProductDTO getProductDTO(Product product, String lang, String currencyCode, boolean large) throws CurrencyNoExistException, ServiceException, ServiceLocatorException{
-		ProductDTO productViewDTO = new ProductDTO();
-		productViewDTO.setCost(product.getCost());
-		productViewDTO.setDepth(product.getDepth());
-		productViewDTO.setDescription(TranslationUtils.getTranslation(product.getTranslationByDescriptionTransId(), lang ));
-		productViewDTO.setHeight(product.getHeight());
-		productViewDTO.setId(product.getId());
-		productViewDTO.setImage(product.getImage());
-		productViewDTO.setMsrp(CurrencyUtils.displayPriceLocale(product.getPrice(), lang, currencyCode));
-		productViewDTO.setOldPrice(CurrencyUtils.displayPriceWithoutDiscountLocale(product.getPrice(), lang, currencyCode));
-		productViewDTO.setHasDiscount(CurrencyUtils.hasDiscount(product.getPrice(), currencyCode));
-		productViewDTO.setName(TranslationUtils.getTranslation(product.getTranslationByNameTransId(), lang ));
-		productViewDTO.setStatusCode(product.getStatusCode());
-		productViewDTO.setTypeCode(product.getTypeCode());
-		productViewDTO.setWeight(product.getWeight());
-		productViewDTO.setWidth(product.getWidth());
-		productViewDTO.setCollection( getCollectionDTO(product.getCollection(), lang) );
-		productViewDTO.setCustomProduct(product.getCustomProduct());
-		productViewDTO.setCustomText(product.getCustomText());
-		productViewDTO.setNewProduct(product.getNewProduct());
-		if(large){
-			List<CustomComponentDTO> customComponentList = getCustomCompoentSet(product.getImage().getCustomComponentImagesForImageId(), lang);
-			java.util.Collections.sort( customComponentList, CustomComponentDTO.CUSTOM_COMPONENT_COMPARATOR_CODE);
-			productViewDTO.setCustomComponentDTOSet(customComponentList);
-			productViewDTO.setCustomComponentText( getCustomComponentTextDTO( product.getImage().getCustomComponentTexts().iterator().next() ));
-			productViewDTO.getCollection().setCustomComponentCollections( product.getCollection().getCustomComponentCollections() );
-			productViewDTO.setDescriptionList(getDescriptionList(product.getImage().getCustomComponentImagesForImageId(), lang));
-			productViewDTO.setProductImagesSetDTO(getProductImagesSet( product.getProductImages() ));
-			java.util.Collections.sort( productViewDTO.getProductImagesSetDTO(), ProductImageDTO.IMAGE_ORDER_WITDH);
-			if(!product.getCustomProduct() && product.getCollection().getStatusCode().equals(CollectionStatus.ACTIVE)){
-				productViewDTO.setUrlCustomProduct( getUrlCustomProduct(product, lang) );
+		if(product != null){
+			ProductDTO productViewDTO = new ProductDTO();
+			productViewDTO.setCost(product.getCost());
+			productViewDTO.setDepth(product.getDepth());
+			productViewDTO.setDescription(TranslationUtils.getTranslation(product.getTranslationByDescriptionTransId(), lang ));
+			productViewDTO.setHeight(product.getHeight());
+			productViewDTO.setId(product.getId());
+			productViewDTO.setImage(product.getImage());
+			productViewDTO.setMsrp(CurrencyUtils.displayPriceLocale(product.getPrice(), lang, currencyCode));
+			productViewDTO.setOldPrice(CurrencyUtils.displayPriceWithoutDiscountLocale(product.getPrice(), lang, currencyCode));
+			productViewDTO.setHasDiscount(CurrencyUtils.hasDiscount(product.getPrice(), currencyCode));
+			productViewDTO.setName(TranslationUtils.getTranslation(product.getTranslationByNameTransId(), lang ));
+			productViewDTO.setStatusCode(product.getStatusCode());
+			productViewDTO.setTypeCode(product.getTypeCode());
+			productViewDTO.setWeight(product.getWeight());
+			productViewDTO.setWidth(product.getWidth());
+			productViewDTO.setCollection( getCollectionDTO(product.getCollection(), lang) );
+			productViewDTO.setCustomProduct(product.getCustomProduct());
+			productViewDTO.setCustomText(product.getCustomText());
+			productViewDTO.setNewProduct(product.getNewProduct());
+			if(large){
+				List<CustomComponentDTO> customComponentList = getCustomCompoentSet(product.getImage().getCustomComponentImagesForImageId(), lang);
+				java.util.Collections.sort( customComponentList, CustomComponentDTO.CUSTOM_COMPONENT_COMPARATOR_CODE);
+				productViewDTO.setCustomComponentDTOSet(customComponentList);
+				productViewDTO.setCustomComponentText( getCustomComponentTextDTO( product.getImage().getCustomComponentTexts().iterator().next() ));
+				productViewDTO.getCollection().setCustomComponentCollections( product.getCollection().getCustomComponentCollections() );
+				productViewDTO.setDescriptionList(getDescriptionList(product.getImage().getCustomComponentImagesForImageId(), lang));
+				productViewDTO.setProductImagesSetDTO(getProductImagesSet( product.getProductImages() ));
+				java.util.Collections.sort( productViewDTO.getProductImagesSetDTO(), ProductImageDTO.IMAGE_ORDER_WITDH);
+				if(!product.getCustomProduct() && product.getCollection().getStatusCode().equals(CollectionStatus.ACTIVE)){
+					productViewDTO.setUrlCustomProduct( getUrlCustomProduct(product, lang) );
+				}
 			}
+			productViewDTO.setUrl( productViewDTO.getId() + "/" + StringUtils.generateUrl( productViewDTO.getName() ) );
+			return productViewDTO;
 		}
-		productViewDTO.setUrl( productViewDTO.getId() + "/" + StringUtils.generateUrl( productViewDTO.getName() ) );
-		return productViewDTO;
+		return null;
 	}
 
 	private static CustomComponentTextDTO getCustomComponentTextDTO(

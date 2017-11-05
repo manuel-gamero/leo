@@ -120,6 +120,7 @@ public class OurProduct extends BasicAction implements Preparable {
 				
 				//Redirect to error page if collection no found
 				if(collectionId == null){
+					log.warn("Collection " + nameUrlCollection + " does not exist.");
 					return ERRORPAGE;
 				}
 			}

@@ -28,13 +28,13 @@ final public class CMCIC_Hmac {
      *-----------------------------------------------------------------------*/
 	public CMCIC_Hmac(CMCIC_Tpe oTpe) {
 		
-		this._sUsableKey = this._getUsableKey(oTpe);
+		this._sUsableKey = CMCIC_Hmac._getUsableKey(oTpe);
 	}
 	
     /*-----------------------------------------------------------------------*
      * return the key
      *-----------------------------------------------------------------------*/
-	private String _getUsableKey(CMCIC_Tpe oTpe) {
+	private static String _getUsableKey(CMCIC_Tpe oTpe) {
 		
 		String hexStrKey  = oTpe.getCle().substring(0, 38);
 		String hexFinal   = "" + oTpe.getCle().substring(38, 40) + "00";

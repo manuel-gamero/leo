@@ -34,8 +34,6 @@ import javax.media.jai.JAI;
 import javax.media.jai.PlanarImage;
 import javax.swing.ImageIcon;
 
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import com.sun.media.jai.codec.JPEGEncodeParam;
 
 public class ImageTransformer
@@ -140,15 +138,18 @@ public class ImageTransformer
         FileOutputStream out = new FileOutputStream(resizedFile);
  
         // Encodes image as a JPEG data stream
-        JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+        /*JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
  
         com.sun.image.codec.jpeg.JPEGEncodeParam param = encoder.getDefaultJPEGEncodeParam(bufferedImage);
  
         param.setQuality(quality, true);
  
         encoder.setJPEGEncodeParam(param);
-        encoder.encode(bufferedImage);
+        encoder.encode(bufferedImage);*/
+        
+        ImageIO.write(bufferedImage, "png", out);
         out.close();
+        
     }
  
 

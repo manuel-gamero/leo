@@ -11,7 +11,6 @@ import com.mg.service.dto.InstagramDTO;
 import com.mg.service.socialmedia.InstagramServiceImpl;
 import com.mg.web.RequestAtributeConstants;
 import com.mg.web.struts.action.BasicAction;
-import com.opensymphony.xwork2.Preparable;
 
 /**
  * The main landing page action on the site.

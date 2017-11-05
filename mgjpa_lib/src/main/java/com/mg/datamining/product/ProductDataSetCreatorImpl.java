@@ -14,7 +14,6 @@ import com.mg.model.DeviceProduct;
 import com.mg.model.Product;
 import com.mg.service.ServiceLocator;
 import com.mg.service.device.DeviceServiceImpl;
-import com.mg.service.product.ProductServiceImpl;
 
 public class ProductDataSetCreatorImpl implements DataSetCreator<Product,Attribute> {
 
@@ -26,11 +25,11 @@ public class ProductDataSetCreatorImpl implements DataSetCreator<Product,Attribu
 	private List<DataItem<Product,Attribute>> getProductMagnitudeVectors() throws ServiceException, ServiceLocatorException {
 		List<DataItem<Product,Attribute>> result = new ArrayList<DataItem<Product,Attribute>>();
 		List<DeviceProduct> dpList = ServiceLocator.getService(DeviceServiceImpl.class).getDeviceProductGroupByProduc();
-		List<Product> productList = ServiceLocator.getService(ProductServiceImpl.class).getAllProduct();
+		//List<Product> productList = ServiceLocator.getService(ProductServiceImpl.class).getAllProduct();
 		ProductAnalyzer productAnalyzer = new ProductAnalyzerImpl();
-		for (Product product : productList) {
-			GenericMagnitudeVector<Attribute> pmv = productAnalyzer.createMagnitudeVector(product.getId());
-			result.add( new DataItemImpl<Product, Attribute>(product, pmv) );
+		for (DeviceProduct item : dpList) {
+			GenericMagnitudeVector<Attribute> pmv = productAnalyzer.createMagnitudeVector(item);
+			result.add( new DataItemImpl<Product, Attribute>(item.getProduct(), pmv) );
 		}
 		return result;
 	}

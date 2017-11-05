@@ -17,8 +17,7 @@ import com.mg.service.device.DeviceServiceImpl;
 public class ProductAnalyzerImpl implements ProductAnalyzer{
 
 	@Override
-	public GenericMagnitudeVector<Attribute> createMagnitudeVector(
-			Integer productId) throws ServiceException, ServiceLocatorException {
+	public GenericMagnitudeVector<Attribute> createMagnitudeVector(Integer productId) throws ServiceException, ServiceLocatorException {
 		List<GenericMagnitude<Attribute>> productMagnitudes = new ArrayList<GenericMagnitude<Attribute>>();
 		List<DeviceProduct> dpList = ServiceLocator.getService(DeviceServiceImpl.class).getDeviceProduct(productId);
 		for (DeviceProduct item : dpList) {
@@ -28,6 +27,18 @@ public class ProductAnalyzerImpl implements ProductAnalyzer{
 			productMagnitudes.add(new GenericMagnitudeImpl<Attribute>(Attribute.SELLCOUNTER, item.getSellCount()));
 			productMagnitudes.add(new GenericMagnitudeImpl<Attribute>(Attribute.SHARECOUNTER, item.getShareCount()));
 		}
+		GenericMagnitudeVector<Attribute> gmv = new GenericMagnitudeVectorImpl<Attribute>(productMagnitudes);
+		return gmv;
+	}
+	
+	@Override
+	public GenericMagnitudeVector<Attribute> createMagnitudeVector(DeviceProduct deviceProduct) throws ServiceException, ServiceLocatorException {
+		List<GenericMagnitude<Attribute>> productMagnitudes = new ArrayList<GenericMagnitude<Attribute>>();
+		productMagnitudes.add(new GenericMagnitudeImpl<Attribute>(Attribute.VIEWCOUNTER, deviceProduct.getCount()));
+		productMagnitudes.add(new GenericMagnitudeImpl<Attribute>(Attribute.ADDCOUNTER, deviceProduct.getAddCount()));
+		productMagnitudes.add(new GenericMagnitudeImpl<Attribute>(Attribute.REMOVECOUNTER, deviceProduct.getRemoveCount()));
+		productMagnitudes.add(new GenericMagnitudeImpl<Attribute>(Attribute.SELLCOUNTER, deviceProduct.getSellCount()));
+		productMagnitudes.add(new GenericMagnitudeImpl<Attribute>(Attribute.SHARECOUNTER, deviceProduct.getShareCount()));
 		GenericMagnitudeVector<Attribute> gmv = new GenericMagnitudeVectorImpl<Attribute>(productMagnitudes);
 		return gmv;
 	}

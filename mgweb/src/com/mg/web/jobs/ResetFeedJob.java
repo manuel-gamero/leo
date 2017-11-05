@@ -16,11 +16,12 @@ public class ResetFeedJob implements Job {
 	private static final Logger log = Logger.getLogger(ResetFeedJob.class);
 	
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		log.debug("Calling ResetFeedJob" );
+		log.debug("Calling ResetFeedJob." );
 		try {
 			JobDataMap data = context.getMergedJobDataMap();
 			
 			ServiceLocator.getService(InstagramServiceImpl.class).resetFeed();
+			log.info("ResetFeedJob executed." );
 		} catch (ServiceLocatorException e) {
 			ExceptionHandler.handleException(e, null, null);
 		}

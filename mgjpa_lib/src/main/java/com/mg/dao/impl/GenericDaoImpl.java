@@ -95,7 +95,7 @@ abstract class GenericDaoImpl<T extends BasicModel> implements GenericDao<T>, Se
 			result = (T) query.getSingleResult();
 
 		} catch (NoResultException e) {
-			log.error("No result found for named query: " + namedQuery, e);
+			log.warn("No result found for named query: " + namedQuery, e);
 		} catch (Exception e) {
 			System.out.println("Error while running query: " + e.getMessage());
 			log.error(e.getMessage(), e);

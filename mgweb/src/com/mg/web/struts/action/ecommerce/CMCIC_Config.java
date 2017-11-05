@@ -6,7 +6,6 @@ import com.mg.exception.ServiceLocatorException;
 import com.mg.service.ServiceLocator;
 import com.mg.service.init.ConfigService;
 import com.mg.service.init.ConfigServiceImpl;
-import com.mg.util.exception.ExceptionHandler;
 
 
 /***************************************************************************************
