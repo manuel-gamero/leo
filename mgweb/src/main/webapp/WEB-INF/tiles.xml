@@ -319,13 +319,26 @@
 	
 	<definition name="/addEditCouponManager.tiles" extends="baseAdminLayout">
 		<put-attribute name="body" type="template" value="../coupon/addEditCouponManager.jsp" />
+		<put-list-attribute name="cssList">
+			<add-attribute type="string" value="bootstrap-datetimepicker.min.css" />
+		</put-list-attribute>
 		<put-list-attribute name="scriptList">
-				<add-attribute type="string" value="tinymce.min.js" />
+			<add-attribute type="string" value="tinymce.min.js" />
+			<add-attribute type="string" value="moment.min.js" />
+			<add-attribute type="string" value="bootstrap-datetimepicker.min.js" />
 		</put-list-attribute>
 	</definition>
 	
 	<definition name="/copounList.tiles" extends="baseAdminListLayout">
 		<put-attribute name="body" type="template" value="../coupon/CopounList.jsp" />
+	</definition>
+	
+	<definition name="/jobList.tiles" extends="baseAdminListLayout">
+		<put-attribute name="body" type="template" value="../job/jobList.jsp" />
+	</definition>
+	
+	<definition name="/addEditJob.tiles" extends="baseAdminListLayout">
+		<put-attribute name="body" type="template" value="../job/addEditJob.jsp" />
 	</definition>
 	
 	<definition name="/auditList.tiles" extends="baseAdminListLayout">

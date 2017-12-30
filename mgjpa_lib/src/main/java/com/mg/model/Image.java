@@ -51,12 +51,8 @@ public class Image implements java.io.Serializable, BasicModel {
 	 */
 	private String realName;
 	private Date creationDate;
-	private Set<Product> products = new HashSet<Product>(0);
-	private Set<CustomComponentCollection> customComponentCollections = new HashSet<CustomComponentCollection>(0);
 	private Set<CustomComponentText> customComponentTexts = new HashSet<CustomComponentText>(0);
-	private Set<CustomComponentImage> customComponentImagesForImageMaskId = new HashSet<CustomComponentImage>(0);
 	private Set<CustomComponentImage> customComponentImagesForImageId = new HashSet<CustomComponentImage>(0);
-	private Set<ProductImage> productImages = new HashSet<ProductImage>(0);
 
 	public Image() {
 	}
@@ -77,9 +73,6 @@ public class Image implements java.io.Serializable, BasicModel {
 			Integer height, Integer width, boolean large, Date uploadDate,
 			int resolution, int score, String realName, Date creationDate,
 			Set<CustomComponentText> customComponentTexts,
-			Set<Product> products,
-			Set<CustomComponentCollection> customComponentCollections,
-			Set<CustomComponentImage> customComponentImagesForImageMaskId,
 			Set<CustomComponentImage> customComponentImagesForImageId) {
 		this.id = id;
 		this.name = name;
@@ -94,9 +87,6 @@ public class Image implements java.io.Serializable, BasicModel {
 		this.realName = realName;
 		this.creationDate = creationDate;
 		this.customComponentTexts = customComponentTexts;
-		this.products = products;
-		this.customComponentCollections = customComponentCollections;
-		this.customComponentImagesForImageMaskId = customComponentImagesForImageMaskId;
 		this.customComponentImagesForImageId = customComponentImagesForImageId;
 	}
 
@@ -229,16 +219,7 @@ public class Image implements java.io.Serializable, BasicModel {
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "image")
-	public Set<Product> getProducts() {
-		return this.products;
-	}
-
-	public void setProducts(Set<Product> products) {
-		this.products = products;
-	}
-
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "imageByImageId", cascade = CascadeType.ALL)
 	public Set<CustomComponentImage> getCustomComponentImagesForImageId() {
 		return this.customComponentImagesForImageId;
@@ -249,16 +230,6 @@ public class Image implements java.io.Serializable, BasicModel {
 		this.customComponentImagesForImageId = customComponentImagesForImageId;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "image")
-	public Set<CustomComponentCollection> getCustomComponentCollections() {
-		return this.customComponentCollections;
-	}
-
-	public void setCustomComponentCollections(
-			Set<CustomComponentCollection> customComponentCollections) {
-		this.customComponentCollections = customComponentCollections;
-	}
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "image", cascade = CascadeType.ALL)
 	public Set<CustomComponentText> getCustomComponentTexts() {
 		return this.customComponentTexts;
@@ -267,24 +238,5 @@ public class Image implements java.io.Serializable, BasicModel {
 	public void setCustomComponentTexts(
 			Set<CustomComponentText> customComponentTexts) {
 		this.customComponentTexts = customComponentTexts;
-	}
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "imageByImageMaskId")
-	public Set<CustomComponentImage> getCustomComponentImagesForImageMaskId() {
-		return this.customComponentImagesForImageMaskId;
-	}
-
-	public void setCustomComponentImagesForImageMaskId(
-			Set<CustomComponentImage> customComponentImagesForImageMaskId) {
-		this.customComponentImagesForImageMaskId = customComponentImagesForImageMaskId;
-	}
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "image")
-	public Set<ProductImage> getProductImages() {
-		return this.productImages;
-	}
-
-	public void setProductImages(Set<ProductImage> productImages) {
-		this.productImages = productImages;
 	}
 }

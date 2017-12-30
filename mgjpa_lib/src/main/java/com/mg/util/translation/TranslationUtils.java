@@ -186,6 +186,17 @@ public class TranslationUtils {
 
 	}
 	
+	public static Translation updateTranslation(EntityManager em, Translation oldTranslation, Translations newTranslations){
+		Translation translation = null;
+		if (oldTranslation != null	&& oldTranslation.getId() > 0) {
+			translation = DaoFactory.getDAO(TranslationDAO.class, em).find(oldTranslation.getId());
+			updateTranslations(translation, newTranslations);
+		} else {
+			translation = TranslationUtils.createTranslation(newTranslations);
+		}
+		return translation;
+	}
+	
 	public static String getCleanDescription(Translation translation, String lang){
 		String description = "";
 		String descriptionTotal = (TranslationUtils.getTranslation( translation, lang ));

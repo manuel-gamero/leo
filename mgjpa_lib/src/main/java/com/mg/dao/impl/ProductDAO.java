@@ -65,6 +65,7 @@ public class ProductDAO extends GenericDaoImpl<Product> {
 							" from Product p " +
 							" where p.collection.id = :collectionId " +
 							" and p.statusCode = 'ACTIVE' " +
+							" and p.customProduct = true " +
 							" and p.typeCode = :type", parameters);
 	}
 	

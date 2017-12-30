@@ -4,6 +4,7 @@
 <s:set var="collectionpath"  	value="@com.mg.web.WebConstants@COLLECTION_BASE_URL" />
 <s:set var="productpath"  		value="@com.mg.web.WebConstants@PRODUCT_BASE_URL" />
 <s:set var="tmppath"  			value="@com.mg.web.WebConstants@TMP_BASE_URL" />
+<s:set var="promotionpath"  	value="@com.mg.web.WebConstants@PROMOTION_BASE_URL" />
 <s:set var="media"  			value="@com.mg.web.WebConstants@MEDIA_BASE_URL" />
 <s:set var="scripts"  			value="@com.mg.web.WebConstants@SCRIPTS_BASE_URL" />
 <s:set var="css"  				value="@com.mg.web.WebConstants@CSS_BASE_URL" />

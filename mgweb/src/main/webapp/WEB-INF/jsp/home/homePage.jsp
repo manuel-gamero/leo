@@ -3,92 +3,17 @@
 <div id="content">
 
 	<div class="container">
-			<!-- Carousel================================================== -->
-			<%-- <div id="myCarousel" class="carousel slide" data-ride="carousel">
-				<!-- Indicators -->
-				<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#myCarousel" data-slide-to="1"></li>
-					<li data-target="#myCarousel" data-slide-to="2"></li>
-				</ol>
-				<div class="carousel-inner" role="listbox">
-					<div class="item active">
-						<img src="${images}/Harmony-rifle-paper-leo.jpg" alt="First slide">
-
-						<div class="carousel-caption">
-							<h1>
-								<s:text name="bolsos.home.carrusel.slide4.title" />
-							</h1>
-							<p class="carousel-slide-desc">
-								<s:text name="bolsos.home.carrusel.slide4.text" />
-							</p>
-							<p>
-								<a class="btn btn-lg btn-primary" href='<s:text name="url.collection.harmony"/>' role="button"><s:text
-										name="bolsos.home.carrusel.slide1.button" /></a>
-							</p>
-						</div>
-
+		<div id="instagram" class="center-block">
+			<div class='row'>
+				<s:iterator value="instagramFeed" status="status" var="item">
+					<div class='col-md-4 col-xs-4 col-sm-4'>
+						<a href='<s:property value="link" />'>
+							<img src='<s:property value="image" />'/>
+						</a>
 					</div>
-					<div class="item">
-						<img src="${images}/sunny-dance-atelier-leo.jpg" alt="Second slide">
-
-						<div class="carousel-caption">
-							<h1 class="carousel-slide-desc">
-								<s:text name="bolsos.home.carrusel.slide5.title" />
-							</h1>
-							<h1 class="carousel-slide-title">
-								<s:text name="bolsos.home.carrusel.slide5.title" />
-							</h1>
-							<p class="carousel-slide-desc">
-								<s:text name="bolsos.home.carrusel.slide5.text" />
-							</p>
-							<p>
-								<a class="btn btn-lg btn-primary" href='<s:text name="url.collection.sunnydance"/>' role="button"><s:text
-										name="bolsos.home.carrusel.slide1.button" /></a>
-							</p>
-						</div>
-
-					</div>
-					<div class="item">
-						<img src="${images}/welcome-atelier-leo.jpg" alt="Third slide">
-
-						<div class="carousel-caption">
-							<h1>
-								<s:text name="bolsos.home.carrusel.slide6.title" />
-							</h1>
-							<p class="carousel-slide-desc">
-								<s:text name="bolsos.home.carrusel.slide3.text" />
-							</p>
-							<p>
-								<a class="btn btn-lg btn-primary" href='<s:text name="url.company"/>' role="button"> <s:text
-										name="bolsos.home.carrusel.slide1.button" />
-								</a>
-							</p>
-						</div>
-
-					</div>
-				</div>
-				<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"> <span
-					class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only"><s:text
-							name="bolsos.home.carrusel.previous" /></span>
-				</a> <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"> <span
-					class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only"><s:text
-							name="bolsos.home.carrusel.next" /></span>
-				</a>
-			</div> --%>
-			<!-- /.carousel -->
-			<!-- /#main-slider -->
-			<div id="instagram" class="center-block">
-				<div class='row'>
-					<s:iterator value="instagramFeed" status="status" var="item">
-						<div class='col-md-4 col-xs-4 col-sm-4'>
-							<a href='<s:property value="link" />'>
-								<img src='<s:property value="image" />'/>
-							</a>
-						</div>
-					</s:iterator>
-				</div>
+				</s:iterator>
 			</div>
+		</div>
 	</div>
 
 	<!-- *** ADVANTAGES HOMEPAGE ***
@@ -508,6 +433,31 @@
 </div>
 <!-- /#content -->
 
+<!-- Promotion popup Start -->
+<s:if test="%{promotion}">
+	<div class="modal fade" id="promotionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span>
+						<span class="sr-only">Close</span>
+					</button>
+					<s:if test="%{promotionUrl != ''}">
+						<a href="<s:property value="promotionUrl" />">
+							<img src="${promotionpath}/<s:property value="promotionImage" />" alt='<s:property value="couponTextName"/>' class="modal-content-image" style="width: 100%;" >
+						</a>
+					</s:if>
+					<s:else>
+						<img src="${promotionpath}/<s:property value="promotionImage" />" alt='<s:property value="couponTextName"/>' class="modal-content-image" style="width: 100%;" >
+					</s:else>
+				</div>
+			</div>
+		</div>
+	</div>
+</s:if>
+<!-- Promotion popup End -->
+
 <script type="text/javascript">
 
 function checkPosition()
@@ -602,6 +552,16 @@ jQuery(document).ready(function () {
 	});
 	
 	checkPosition();
+	
+	<s:if test="%{promotion}">
+		 setTimeout(function(){
+			var visited = $.cookie('visited');
+			if (visited != 'true') {
+				$('#promotionModal').modal('show');
+				$.cookie('visited', 'true', { expires: 1 }); //Expirder in 1 day
+		    } 		
+		   },5000); // 5000 to load it after 5 seconds from page load  
+	</s:if>
 	
 	
 /*	

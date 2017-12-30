@@ -1,6 +1,5 @@
 package com.mg.service.product;
 
-import java.io.File;
 import java.util.List;
 
 import com.mg.exception.ServiceException;
@@ -10,6 +9,7 @@ import com.mg.model.CustomComponentCollection;
 import com.mg.model.CustomComponentImage;
 import com.mg.service.Service;
 import com.mg.service.dto.CustomComponentCollectionDTO;
+import com.mg.service.dto.ImageDTO;
 import com.mg.util.translation.Translations;
 
 
@@ -46,8 +46,7 @@ public interface CollectionService extends Service {
 	 * @throws ServiceException
 	 */
 	int saveCollection(final Collection collection, final List<CustomComponentCollectionDTO> customComponentCollections, 
-			  final File file, final String fileContentType, final String fileFileName, 
-			  final Translations translationsName, final Translations translationsDesc) throws ServiceException;
+			  final ImageDTO imageDTO, final Translations translationsName, final Translations translationsDesc) throws ServiceException;
 	
 	/**
 	 * @return Get the list of all collections

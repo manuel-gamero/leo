@@ -213,4 +213,6 @@ public interface ConfigService extends Service{
 	String getInstagramClientSecret();
 
 	String getInstagramUserId();
+
+	String getWebImagePromotionLocation();
 }

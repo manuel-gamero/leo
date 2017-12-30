@@ -13,7 +13,9 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
+import com.mg.coupon.PromotionManager;
 import com.mg.enums.CouponStatus;
+import com.mg.enums.Language;
 import com.mg.exception.CacheException;
 import com.mg.exception.ServiceException;
 import com.mg.exception.ServiceLocatorException;
@@ -358,17 +360,33 @@ public class BasicAction extends ActionSupport implements ServletRequestAware,
 	}
 	
 	public Coupons getCoupon(){
-		return (Coupons) request.getSession().getAttribute(WebConstants.SHOPPING_CART_COUPON);
+		Coupons coupons = (Coupons)request.getSession().getAttribute(WebConstants.SHOPPING_CART_COUPON);
+		if( coupons == null ){
+			coupons = PromotionManager.getPromotion();
+		}
+		return coupons;
 	}
 	
-	protected void applyCoupon(){
+	protected void applyCoupon() throws ServiceException, ServiceLocatorException{
 		Coupons coupon = getCoupon();
 		ShoppingCart  shoppingCart = getShoppingCart();
 		List<Item> itemList = getShoppingCartItems();
-		if(coupon != null && shoppingCart != null && itemList != null){
+		if(coupon != null && shoppingCart != null && itemList != null && !coupon.getCouponsType().getPromotion()){
 			couponText = coupon.getCouponsType().getTypeCode().getCoupon().apply(coupon, shoppingCart, itemList, getCurrentCurrencyCode());
 			if(couponText.contains("error")){
 				request.getSession().removeAttribute(WebConstants.SHOPPING_CART_COUPON);
+			}
+		}
+		else{ //Promotion case
+			Coupons promotion = PromotionManager.getPromotion();
+			if( promotion != null ){ //There is a promotion
+				couponText = promotion.getCouponsType().getTypeCode().getCoupon().apply(promotion, shoppingCart, itemList, getCurrentCurrencyCode());
+				if(couponText.contains("error")){
+					request.getSession().removeAttribute(WebConstants.SHOPPING_CART_COUPON);
+				}
+				else{ //insert the promotion in the session
+					request.getSession().setAttribute(WebConstants.SHOPPING_CART_COUPON , promotion);
+				}
 			}
 		}
 	}
@@ -457,7 +475,7 @@ public class BasicAction extends ActionSupport implements ServletRequestAware,
 	public void inactiveCoupon(Users users) throws ServiceException, ServiceLocatorException {
 		Coupons coupon = ServiceLocator.getService(CouponServiceImpl.class).getCouponToUser(users.getLogin());
 		if ( coupon != null){
-			if ( coupon.getCouponsUsers().size() == coupon.getCouponsType().getMultiTime()){
+			if ( coupon.getCouponsUsers().size() == coupon.getCouponsType().getMultiTime() && !coupon.getCouponsType().getPromotion()){
 				coupon.setStatusCode(CouponStatus.INACTIVE);
 				coupon.setInactiveDate(new Date());
 			}
@@ -467,5 +485,20 @@ public class BasicAction extends ActionSupport implements ServletRequestAware,
 			ServiceLocator.getService(CouponServiceImpl.class).updateCoupons(coupon);
 			request.getSession().removeAttribute(WebConstants.SHOPPING_CART_COUPON);
 		}
+	}
+
+	public boolean isPromotion() {
+		return PromotionManager.isPromotion();
+	}
+
+	public String getPromotionImage(){
+		if( Language.FRENCH.getCode().equals(getCurrentLanguage()) ){
+			return PromotionManager.getPromotion().getCouponsType().getImageFr().getName();
+		}
+		return PromotionManager.getPromotion().getCouponsType().getImageEn().getName();
+	}
+	
+	public String getPromotionUrl(){
+		return TranslationUtils.getTranslation(PromotionManager.getPromotion().getCouponsType().getTranslationByUrlTransId(), getCurrentLanguage());
 	}
 }

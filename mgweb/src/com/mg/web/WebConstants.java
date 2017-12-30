@@ -146,6 +146,7 @@ public final class WebConstants {
 	public final static String IMAGES_BASE_URL 				= configService.getWebImagesLocation();
 	public final static String MEDIA_BASE_URL 				= configService.getWebMediaLocation();
 	public final static String COLLECTION_BASE_URL 			= configService.getWebImageCollectionLocation();
+	public final static String PROMOTION_BASE_URL 			= configService.getWebImagePromotionLocation();
 	public final static String PRODUCT_BASE_URL 			= configService.getWebImageProdcutLocation();
 	public final static String TMP_BASE_URL					= configService.getWebImageTmp();
 	

@@ -27,5 +27,4 @@ public class CouponsTypeDAO extends GenericDaoImpl<CouponsType> {
 							" from CouponsType c " +
 							" where c.typeCode = :typeCode", parameters);
 	}
-
 }

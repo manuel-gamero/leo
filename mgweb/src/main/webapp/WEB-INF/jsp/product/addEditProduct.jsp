@@ -192,7 +192,13 @@
 							placeholder="Weight" type="text"/>
 					</div>
 					
-					<s:file name="file" label="Select a File to upload" size="40"  />
+					<div class="form-group">
+						<label for="customLink" class="col-sm-2 control-label">Custom link</label>
+						<s:textfield id="customLink" name="productCustom" class="form-control"
+							placeholder="Custom Link" type="text"/>
+					</div>
+					
+					<s:file name="imageDTO.file" label="Select a File to upload" size="40"  />
 					</td>
 					<td>
 					<div class="form-group">
@@ -419,7 +425,7 @@ $(document).ready(function() {
 		}
 		cccvalue= '<td>' +  option + '</td>';
 		cciimageid = '<td> <s:textfield  id="customComponentImageList[' + counter + '].image.id" name="customComponentImageList[' + counter + '].image.id" value="' + imageId + '" /></td>';
-		cciimagemaskid = '<td> <s:file  id="customComponentImageList[' + counter + '].file" name="customComponentImageList[' + counter + '].file" /></td>';
+		cciimagemaskid = '<td> <s:file  id="customComponentImageList[' + counter + '].imageDTO.file" name="customComponentImageList[' + counter + '].imageDTO.file" /></td>';
 		ccicreationdate = '<td> <s:textfield  id="customComponentImageList[' + counter + '].creationDate" name="customComponentImageList[' + counter + '].creationDate"  /></td>';
 		var buttonDelete = '<td style="text-align: center;"> <div class="form-group"> ' +
 		'<a id="deleterow_' + counter + '" class="btn btn-default" role="button">Delete</a></div></td>';
@@ -534,6 +540,8 @@ $("#containment-wrapper").mousemove(function(e){
 
   });
   
+  console.log('+++ +++ +++ +++ 1');
+  
   	var obj = $(this);
  	// var components = obj.find(o.swatchClass);
   	var listComponents = $("img[id*='imag_']");
@@ -609,6 +617,8 @@ $("#containment-wrapper").mousemove(function(e){
 
 	});
   
+  console.log('+++ +++ +++ +++ 2');
+  
  $("#addCCI").click(function(){
 	console.log('$("#collection").val() :' + $("#collection").val());
 	if($("#customComponent").val() == "--Select--"){
@@ -653,6 +663,8 @@ $("#containment-wrapper").mousemove(function(e){
 	}
  });
 
+ console.log('+++ +++ +++ +++ 3');
+ 
   $("#collection").change(function(){
 	 console.log('$("#collection").val() :' + $("#collection").val());
 	 var oDropdown = $("#customComponent").msDropdown().data("dd");
@@ -691,6 +703,7 @@ $("#containment-wrapper").mousemove(function(e){
 	  });
 	});
   
+  console.log('+++ +++ +++ +++ 4');
 	
 	$("a#addCurrency").click(function() {
 		var counterCurrency = $("#counterCurrency").val();
@@ -753,7 +766,8 @@ $("#containment-wrapper").mousemove(function(e){
 		});
 	});
   
-
+  console.log('+++ +++ +++ +++ 5');
+  
   $('[id^=chageCCI]').click(function() {
 		var id = $(this).attr('id').split('_')[1];
 		var status = $('#status_' + id).text();
@@ -769,6 +783,61 @@ $("#containment-wrapper").mousemove(function(e){
 		    	
 		});
 	});
+  
+  console.log('+++ +++ +++ +++ 6');
+/* $("#customLink").autocomplete({
+      source: function( request, response ) {
+          $.getJSON( "/ajax/search", {term: $("#productCustom").val()}, response );
+      },
+      minLength: 2,
+     select: function( event, ui ) {
+        log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+      }
+  });
+  */
+  /*
+	$("#customLink").autocomplete({
+	    source : function(request, response) {
+	        $.ajax({
+	            url : "/ajax/search",
+	            type : "POST",
+	            data : {
+	                term : $("#productCustom").val()
+	            },
+	            dataType : "json",
+	            success : function(serverJsonResponse) {
+	                response(serverJsonResponse.jasonList);
+	            }
+	        });
+	    },
+	      minLength: 2,
+	      select: function( event, ui ) {
+	        log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+	      }
+	});*/
+
+      $("#customLink").autocomplete({
+          source : function(request, response) {
+              $.ajax({
+                  url : "/admin/ajax/search",
+                  type : "POST",
+                  data : {
+                      term : $("#customLink").val()
+                  },
+                  dataType : "json",
+                  success : function(serverJsonResponse) {
+                	console.log('+++ +++ +++ +++ 6.1');
+                    response( $.map( serverJsonResponse.list, function( item ) {
+                    	return {
+                        	label: item.value,
+                            value: item.key
+                  	}
+                    }));
+                  }
+              });
+          }
+      });
+      console.log('+++ +++ +++ +++ 7');
 
 });
 

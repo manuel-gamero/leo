@@ -1,6 +1,5 @@
 package com.mg.web.struts.action.product;
 
-import java.io.File;
 import java.util.List;
 import java.util.Set;
 
@@ -13,6 +12,7 @@ import com.mg.model.PriceEntry;
 import com.mg.model.Product;
 import com.mg.service.ServiceLocator;
 import com.mg.service.dto.CustomComponentImageDTO;
+import com.mg.service.dto.ImageDTO;
 import com.mg.service.product.CollectionServiceImpl;
 import com.mg.service.product.ProductServiceImpl;
 import com.mg.util.translation.Translations;
@@ -31,11 +31,12 @@ public class AddEditProduct extends BasicTranslationAction implements Preparable
 	private Integer id;
 	private List<CustomComponentImageDTO> customComponentImageList;
 	private Set<PriceEntry> priceEntrySet;
-	private File file;
 	private String fileContentType;
 	private String fileFileName;
 	private CustomComponentText customText;
 	private String status;
+	private ImageDTO imageDTO;
+	private String productCustom;
 
 	private List<Collection> collectionList;
 
@@ -50,7 +51,7 @@ public class AddEditProduct extends BasicTranslationAction implements Preparable
 			error = getText("bolsos.product.error.collection");
 			addActionError(error);
 		}
-		if( product.getId() != 0 && product.getCustomProduct() && file != null && product.getImage().getCustomComponentImagesForImageId() != null  ){
+		if( product.getId() != 0 && product.getCustomProduct() && imageDTO != null && imageDTO.getFile() != null && product.getImage().getCustomComponentImagesForImageId() != null  ){
 			error = "NO it´s possible change image for a custom product";
 			addActionError(error);
 		}
@@ -102,7 +103,7 @@ public class AddEditProduct extends BasicTranslationAction implements Preparable
 		try {
 			Translations translationsName = new Translations.StringTranslationBuilder().engString(nameEn).frString(nameFr).build();
 			Translations translationsDesc = new Translations.StringTranslationBuilder().engString(descEn).frString(descFr).build();
-			ServiceLocator.getService(ProductServiceImpl.class).saveProduct(customComponentImageList, product, file, fileContentType, fileFileName, translationsName, translationsDesc, customText, priceEntrySet);
+			ServiceLocator.getService(ProductServiceImpl.class).saveProduct(customComponentImageList, product, imageDTO, translationsName, translationsDesc, customText, priceEntrySet);
 		} catch (Exception e) {
 			managerException(e);
 			return ERROR;
@@ -154,15 +155,7 @@ public class AddEditProduct extends BasicTranslationAction implements Preparable
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-
-	public File getFile() {
-		return file;
-	}
-
-	public void setFile(File file) {
-		this.file = file;
-	}
-
+	
 	public String getFileContentType() {
 		return fileContentType;
 	}
@@ -210,6 +203,22 @@ public class AddEditProduct extends BasicTranslationAction implements Preparable
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public ImageDTO getImageDTO() {
+		return imageDTO;
+	}
+
+	public void setImageDTO(ImageDTO imageDTO) {
+		this.imageDTO = imageDTO;
+	}
+
+	public String getProductCustom() {
+		return productCustom;
+	}
+
+	public void setProductCustom(String productCustom) {
+		this.productCustom = productCustom;
 	}
 
 }

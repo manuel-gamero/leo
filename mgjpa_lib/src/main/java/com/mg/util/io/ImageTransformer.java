@@ -34,6 +34,7 @@ import javax.media.jai.JAI;
 import javax.media.jai.PlanarImage;
 import javax.swing.ImageIcon;
 
+import com.mg.exception.ExtensionNotSupportedException;
 import com.sun.media.jai.codec.JPEGEncodeParam;
 
 public class ImageTransformer
@@ -83,24 +84,19 @@ public class ImageTransformer
         return JAI.create("scale",img,ws,hs,0.0F,0.0F, new InterpolationNearest());
     }
 
-    public static void scaleAndSaveImage(String sourceFile, int width, int height, String destinationFile){
+    public static void scaleAndSaveImage(String sourceFile, int width, int height, String destinationFile) throws IOException, ExtensionNotSupportedException{
 
         //PlanarImage planarImage = loadImage(sourceFile);
         //saveImage(scaleImage(planarImage, new Integer(width), new Integer(height), false), destinationFile);
     	
     	File sFile = new File(sourceFile);
     	File dFile = new File(destinationFile);
-        
-    	try {
-			resizeAndSave(sFile, dFile, width, height, 0.8f);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
+		resizeAndSave(sFile, dFile, width, height, 0.8f);
     }
     
     // Pure Java Method
-	public static void resizeAndSave(File originalFile, File resizedFile, int newWidth, int newHeight, float quality) throws IOException {
+	public static void resizeAndSave(File originalFile, File resizedFile, int newWidth, int newHeight, float quality) throws IOException, ExtensionNotSupportedException {
 		 
         if (quality < 0 || quality > 1) {
             throw new IllegalArgumentException("Quality has to be between 0 and 1");
@@ -147,9 +143,13 @@ public class ImageTransformer
         encoder.setJPEGEncodeParam(param);
         encoder.encode(bufferedImage);*/
         
-        ImageIO.write(bufferedImage, "png", out);
+        String ext = resizedFile.getName().split("\\.")[1];
+        if( ext.length() != 3 ){
+        	out.close();
+        	throw new ExtensionNotSupportedException(originalFile.getName() + " contains not supported extension.");
+        }
+        ImageIO.write(bufferedImage, ext, out);
         out.close();
-        
     }
  
 
@@ -206,7 +206,15 @@ public class ImageTransformer
 
     public static void main(String args[])
     {
-    	scaleAndSaveImage("c:/test/100Bullets.jpg", 156, 180, "c:/test/thumb/100Bullets.jpg");
+    	try {
+			scaleAndSaveImage("c:/test/100Bullets.jpg", 156, 180, "c:/test/thumb/100Bullets.jpg");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExtensionNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
       /*  PlanarImage img = null;
         ImageTransformer it = new ImageTransformer();

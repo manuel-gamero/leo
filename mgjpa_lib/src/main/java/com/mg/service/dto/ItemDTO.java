@@ -14,6 +14,16 @@ public class ItemDTO extends BasicDTO {
 	private String key;
 	private String value;
 	
+	public ItemDTO(){
+		super();
+	}
+	
+	public ItemDTO(String key, String value){
+		super();
+		this.key=key;
+		this.value=value;
+	}
+	
 	public String getKey() {
 		return key;
 	}

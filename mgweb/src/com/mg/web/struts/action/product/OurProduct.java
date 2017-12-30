@@ -48,12 +48,24 @@ public class OurProduct extends BasicAction implements Preparable {
 	
 	private static final Comparator<ProductDTO> PRODUCT_COMPARATOR_PRICE = new Comparator<ProductDTO>() {
 		public int compare(ProductDTO item1, ProductDTO item2) {
+			if(item1.getNewProduct() && !item2.getNewProduct()){
+				return -1;
+			}
+			else if(!item1.getNewProduct() && item2.getNewProduct()){
+				return 1;
+			}
 			return item2.getMsrp().compareTo(item1.getMsrp());
 		}
 	};
 	
 	private static final Comparator<ProductDTO> PRODUCT_COMPARATOR_NAME = new Comparator<ProductDTO>() {
 		public int compare(ProductDTO item1, ProductDTO item2) {
+			if(item1.getNewProduct() && !item2.getNewProduct()){
+				return -1;
+			}
+			else if(!item1.getNewProduct() && item2.getNewProduct()){
+				return 1;
+			}
 			return item1.getName().compareTo(item2.getName());
 		}
 	};
@@ -101,6 +113,14 @@ public class OurProduct extends BasicAction implements Preparable {
 			type = ProductType.SNACK_BAG;
 		else if(nameUrlType2.equals("sac-a-collation"))
 			type = ProductType.SNACK_BAG;
+		else if(nameUrlType2.equals("baskets"))
+			type = ProductType.BASKETS;
+		else if(nameUrlType2.equals("paniers"))
+			type = ProductType.BASKETS;
+		else if(nameUrlType2.equals("pouches"))
+			type = ProductType.POUCHES;
+		else if(nameUrlType2.equals("pochettes"))
+			type = ProductType.POUCHES;
 
 		return type;
 	}

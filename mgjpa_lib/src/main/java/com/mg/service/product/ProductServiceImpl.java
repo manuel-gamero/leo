@@ -1,6 +1,5 @@
 package com.mg.service.product;
 
-import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,6 +40,7 @@ import com.mg.service.ServiceLocator;
 import com.mg.service.cache.CacheServiceImpl;
 import com.mg.service.dto.CustomComponentImageDTO;
 import com.mg.service.dto.DTOFactory;
+import com.mg.service.dto.ImageDTO;
 import com.mg.service.image.ImageServiceImpl;
 import com.mg.service.init.ConfigServiceImpl;
 import com.mg.util.currency.CurrencyUtils;
@@ -55,8 +55,7 @@ import com.mg.util.translation.Translations;
 @Transactional
 public class ProductServiceImpl extends ServiceImpl implements ProductService {
 
-	private static final Logger log = Logger
-			.getLogger(ProductServiceImpl.class);
+	private static final Logger log = Logger.getLogger(ProductServiceImpl.class);
 	private static final Comparator<Object[]> ITEM_COMPARATOR_COUNT = new Comparator<Object[]>() {
 		public int compare(Object[] item1, Object[] item2) {
 			return ((Long)item2[2]).compareTo((Long)item1[2]);
@@ -158,8 +157,7 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 
 	@Override
 	public int saveProduct(final List<CustomComponentImageDTO> customComponentImageList,
-						   final Product product, final File file, final String fileContentType,
-						   final String fileFileName, final Translations translationsName,
+						   final Product product, final ImageDTO imageDTO, final Translations translationsName,
 						   final Translations translationsDesc, 
 						   final CustomComponentText customText,
 						   final Set<PriceEntry> priceEntrySet) throws ServiceException {
@@ -172,7 +170,7 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 					int id;
 					try {
 						String path = ServiceLocator.getService(ConfigServiceImpl.class).getWebImageProdcutLocation();
-						Image image = ServiceLocator.getService(ImageServiceImpl.class).getImageForObject(em, file, fileFileName, ImageType.PRODUCT, getImagenId (product));
+						Image image = ServiceLocator.getService(ImageServiceImpl.class).getImageForObject(em, imageDTO, ImageType.PRODUCT, getImagenId (product));
 						//If there is id product then I set the path to image
 						if(product.getId() > 0){
 							image.setRealName(path + product.getId() + "/");
@@ -183,8 +181,8 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 								if (item != null) {
 									CustomComponentImage customComponentImage = DTOFactory
 										.createCustomComponentImage(item);
-									if (item.getFileFileName() != null) {
-										Image imageMask = ServiceLocator.getService(ImageServiceImpl.class).getImageForObject(em, item.getFile(),item.getFileFileName(), ImageType.MASK, null );
+									if (item.getImageDTO() != null && item.getImageDTO().getFileFileName() != null) {
+										Image imageMask = ServiceLocator.getService(ImageServiceImpl.class).getImageForObject(em, item.getImageDTO(), ImageType.MASK, null );
 										customComponentImage.setImageByImageMaskId(imageMask);
 										item.setImage(imageMask);
 									}
@@ -201,7 +199,7 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 						//Allow to change image just a product NO custom
 						//To change image in real product I change just the name of the image
 						//later the system will save in disk the new image
-						if( product.getId() != 0 && !product.getCustomProduct() && file != null){
+						if( product.getId() != 0 && !product.getCustomProduct() && imageDTO != null && imageDTO.getFile() != null){
 							Image imageProduct = DaoFactory.getDAO(ImageDAO.class, em).find(product.getImage().getId());
 							if(imageProduct != null){
 								imageProduct.setName(image.getName());
@@ -251,15 +249,15 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 						}
 						
 						//In case to save a product I have to save the right path for the image to do that I need the product´s id
-						if(file != null){
-							ServiceLocator.getService(ImageServiceImpl.class).saveImage(file, path, image.getName());
+						if(imageDTO != null && imageDTO.getFile() != null){
+							ServiceLocator.getService(ImageServiceImpl.class).saveImage(imageDTO.getFile(), path, image.getName());
 						}
 						if (id != 0) {
 							if (customComponentImageList != null) {
 								for (CustomComponentImageDTO item : customComponentImageList) {
-									if (item != null && item.getFile() != null) {
+									if (item != null && item.getImageDTO() != null && item.getImageDTO().getFile() != null) {
 										ServiceLocator.getService(
-												ImageServiceImpl.class).saveImage(item.getFile(), path,	getName(product,item.getImage().getName()));
+												ImageServiceImpl.class).saveImage(item.getImageDTO().getFile(), path,	getName(product,item.getImage().getName()));
 									}
 								}
 							}
@@ -471,7 +469,7 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 	}
 
 	@Override
-	public int saveProductImage(final File file, final String fileName, final Integer id)
+	public int saveProductImage(final ImageDTO imageDTO, final Integer id)
 			throws ServiceException {
 		ProductImage productImage;
 		try {
@@ -483,7 +481,7 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 						//Get product object from cache
 						Product product = DaoFactory.getDAO(ProductDAO.class, em).findProductById(id);
 						//Create Image object
-						Image image = ServiceLocator.getService(ImageServiceImpl.class).getImageForObject(em, file, fileName, ImageType.PRODGROUP, null);
+						Image image = ServiceLocator.getService(ImageServiceImpl.class).getImageForObject(em, imageDTO, ImageType.PRODGROUP, null);
 						//Set the same path for the images group than the product image
 						image.setRealName(product.getImage().getRealName());
 						//Create productImage object
@@ -505,7 +503,7 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 			String path = ServiceLocator.getService(ConfigServiceImpl.class).getWebImageProdcutLocation();
 			path = path + id + "/";
 			//Save image in disk
-			ServiceLocator.getService(ImageServiceImpl.class).saveImage(file, path, productImage.getImage().getName());
+			ServiceLocator.getService(ImageServiceImpl.class).saveImage(imageDTO.getFile(), path, productImage.getImage().getName());
 			//Invalidate cache for this product object
 			ServiceLocator.getService(CacheServiceImpl.class).getProductCache().remove(Product.class + "_" + id);
 			ServiceLocator.getService(CacheServiceImpl.class).removeProductDTO(id);

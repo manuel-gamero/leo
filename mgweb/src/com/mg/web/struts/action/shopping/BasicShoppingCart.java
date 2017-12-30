@@ -276,7 +276,9 @@ public class BasicShoppingCart extends BasicAction {
 	public void registeCouponToUser(Users users, Coupons coupon) throws ServiceException, ServiceLocatorException {
 		if(coupon != null ){
 			Set<CouponsUser> couponsUserSet = new HashSet<CouponsUser>();
-			coupon.setStatusCode(CouponStatus.SEND);
+			if( !coupon.getCouponsType().getPromotion()){ //if it is not a promotion, we follow the normal status chain.
+				coupon.setStatusCode(CouponStatus.SEND);
+			}
 			CouponsUser couponsUser = new CouponsUser();
 			couponsUser.setCoupons(coupon);
 			couponsUser.setUsers(users);

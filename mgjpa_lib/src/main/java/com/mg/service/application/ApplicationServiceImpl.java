@@ -88,5 +88,24 @@ public class ApplicationServiceImpl extends ServiceImpl implements ApplicationSe
 		}
 		return list;
 	}
+	
+	public Date updateJobRunDate(final String jobName)throws ServiceException {
+		final Date now = new Date();
+		try {			
+			daoManager.setCommitTransaction(true);
+			daoManager.executeAndHandle(new DaoCommand() {
+				@Override
+				public Object execute(EntityManager em) throws DaoException {	
+					Jobs jobs = DaoFactory.getDAO(JobsDAO.class, em).findByName(jobName);
+					jobs.setUpdateDate(now);
+					DaoFactory.getDAO(JobsDAO.class, em).update(jobs);
+					return null;			
+				}
+			}) ;
+		}catch (DaoException de) {
+			throw (new ServiceException(de));
+		}
+		return now;
+	}
 
 }

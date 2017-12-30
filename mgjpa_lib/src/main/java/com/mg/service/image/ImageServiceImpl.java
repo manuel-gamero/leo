@@ -46,6 +46,7 @@ import com.mg.model.Product;
 import com.mg.service.ServiceImpl;
 import com.mg.service.ServiceLocator;
 import com.mg.service.cache.CacheServiceImpl;
+import com.mg.service.dto.ImageDTO;
 import com.mg.service.init.ConfigServiceImpl;
 import com.mg.util.CommonUtils;
 import com.mg.util.constant.BackEndConstants;
@@ -110,9 +111,8 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 			
 		} catch (Exception  e) {
 			e.printStackTrace();
-			new ServiceException(e);
+			throw new ServiceException(e);
 		}
-		return false;
 	}
 	
 	/**
@@ -140,9 +140,9 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 			isLarge = dim.getWidth() >= BackEndConstants.PRODUCT_DEFAUTL_THUMBNAIL_WIDTH * BackEndConstants.LARGE_TRANSFERT_COEFICIENT;
 			
 			if( isLarge ){
-				saveFile(file, largDestPath);
+				saveFile(file, destPath);
 			}
-			return saveThumbFile(file, new File(destPath), (int)dim.getWidth(), (int)dim.getHeight()) &&
+			return saveThumbFile(file, new File(largDestPath), (int)dim.getWidth(), (int)dim.getHeight()) &&
 					saveThumbFile(file, new File(ThumbProductPath), BackEndConstants.WIDTH_IMG_SEARCH_PAGE, miniProductheight);
 		} catch (Exception e) {
 			throw new ServiceException(e) ;
@@ -212,7 +212,7 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 	}
 
 	@Override
-	public Image getImage(File file, String fileName) throws ServiceException {
+	public Image getImage(File file, String fileName,ImageType imageType) throws ServiceException {
 		Image image = null;
 		int i;
 		if(file != null){
@@ -227,7 +227,7 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 					normalizedName= fileName;
 				}
 				if (i==1 || i==2) {
-					image = createImage(file, fileName, normalizedName);
+					image = createImage(file, fileName, imageType, normalizedName);
 				}else{
 					throw new ServiceException("Image Format not supported " + file.getName() );
 				}		
@@ -238,8 +238,8 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 		return image;
 	}
 	
-	private Image createImage(File file, String fileName, String normalizedName) throws IOException{
-		Image image = imageMap.get(fileName);
+	private Image createImage(File file, String fileName, ImageType imageType, String normalizedName) throws IOException{
+		Image image = imageMap.get(fileName + "_" + imageType.name());
 		if( image == null){
 			image = new Image();
 			image.setId(0);
@@ -251,10 +251,11 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 			image.setResolution(resolutionDesicion(FileUtils.getImageResolution(file)));
 			image.setScore(mathematicalFormula(image));
 			image.setRealName(fileName);
+			image.setTypeCode(imageType);
 			//Variables Initialization 
 			boolean isLarge = dim.getWidth() >= BackEndConstants.PRODUCT_DEFAUTL_THUMBNAIL_WIDTH * BackEndConstants.LARGE_TRANSFERT_COEFICIENT;
 			image.setLarge(isLarge);
-			imageMap.put(fileName, image);
+			imageMap.put(fileName + "_" + imageType.name(), image);
 		}
 		return(image);
 	}
@@ -570,23 +571,16 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 	 * In other case create a new Image object.
 	 */
 	@Override
-	public Image getImageForObject(EntityManager em, File file, String fileFileName,
+	public Image getImageForObject(EntityManager em, ImageDTO imageDTO,
 			ImageType imageType, Integer imageId) throws ServiceException {
 		Image image = null;
-		if(fileFileName!=null){
-			try {
-				image = getImage( file, fileFileName);
-			} catch (Exception e) {
-				log.error(e.getMessage(), e);
-				throw new ServiceException(e);
-			}
-			image.setTypeCode(imageType);
+		if(imageDTO!= null && imageDTO.getFileFileName()!=null){
+			image = getImage( imageDTO.getFile(), imageDTO.getFileFileName(), imageType);
 		}
 		else{
 			image = DaoFactory.getDAO(ImageDAO.class, em).find(imageId);
 		}
 		image.setUploadDate(new Date());
-		
 		return image;
 	}
 

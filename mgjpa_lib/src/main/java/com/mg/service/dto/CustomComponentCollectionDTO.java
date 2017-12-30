@@ -1,6 +1,5 @@
 package com.mg.service.dto;
 
-import java.io.File;
 import java.util.Date;
 
 import com.mg.enums.ComponentAttributeType;
@@ -18,9 +17,7 @@ public class CustomComponentCollectionDTO extends BasicDTO {
 	private String value;
 	private Date creationDate;
 	private Image image;
-	private File file;
-	private String fileContentType;
-	private String fileFileName;
+	private ImageDTO imageDTO;
 	private int customComponentImageId;
 	private String name;
 	private String description;
@@ -99,30 +96,6 @@ public class CustomComponentCollectionDTO extends BasicDTO {
 		this.image = image;
 	}
 
-	public File getFile() {
-		return file;
-	}
-
-	public void setFile(File file) {
-		this.file = file;
-	}
-
-	public String getFileContentType() {
-		return fileContentType;
-	}
-
-	public void setFileContentType(String fileContentType) {
-		this.fileContentType = fileContentType;
-	}
-
-	public String getFileFileName() {
-		return fileFileName;
-	}
-
-	public void setFileFileName(String fileFileName) {
-		this.fileFileName = fileFileName;
-	}
-
 	public int getCustomComponentImageId() {
 		return customComponentImageId;
 	}
@@ -145,6 +118,14 @@ public class CustomComponentCollectionDTO extends BasicDTO {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public ImageDTO getImageDTO() {
+		return imageDTO;
+	}
+
+	public void setImageDTO(ImageDTO imageDTO) {
+		this.imageDTO = imageDTO;
 	}
 
 

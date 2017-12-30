@@ -16,7 +16,9 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import com.mg.enums.CollectionStatus;
+import com.mg.enums.ImageType;
 import com.mg.enums.Language;
+import com.mg.enums.ProductStatus;
 import com.mg.exception.CacheException;
 import com.mg.exception.CurrencyNoExistException;
 import com.mg.exception.ServiceException;
@@ -120,8 +122,8 @@ public final class DTOFactory {
 				if(item!=null){
 					CustomComponentCollection customComponentCollection = DTOFactory.createCustomComponentCollection(item);
 					customComponentCollection.setCollection(collection);
-					if(item.getFileFileName() != null){
-						Image image = imagenService.getImage(item.getFile(),item.getFileFileName());
+					if(item.getImageDTO() != null && item.getImageDTO().getFileFileName() != null){
+						Image image = imagenService.getImage(item.getImageDTO().getFile(),item.getImageDTO().getFileFileName(), ImageType.COLLECTION);
 						customComponentCollection.setImage(image);
 						item.setImage(image);
 					}
@@ -145,7 +147,10 @@ public final class DTOFactory {
 				}
 			}
 			catch(CurrencyNoExistException ce){
-				ExceptionHandler.handleExceptionBySupport(ce);
+				if( product.getStatusCode().equals(ProductStatus.ACTIVE) && 
+					product.getCollection().getStatusCode().equals(ProductStatus.ACTIVE) ){
+					ExceptionHandler.handleExceptionBySupport(ce);
+				}
 			}
 			catch(Exception e){
 				ExceptionHandler.handleException(e, null, null);
@@ -443,6 +448,8 @@ public final class DTOFactory {
 		dto.setSubTotal( CurrencyUtils.displayPriceLocale(shoppingCart.getTotal(), lang, dto.getCurrency()) );
 		dto.setTrackNumber(shoppingCart.getTrackNumber());
 		dto.setUsers(shoppingCart.getUsers().getLogin());
+		dto.setUserName(shoppingCart.getUsers().getFirstName() + " " + shoppingCart.getUsers().getLastName());
+		dto.setUserPhone(shoppingCart.getUsers().getPhone());
 		dto.setExtras( CurrencyUtils.displayPriceLocale(shoppingCart.getExtras(), lang, dto.getCurrency()) );
 		dto.setStatusLocalization(shoppingCart.getStatusCode().getLocalizationKey());
 		if(detail){

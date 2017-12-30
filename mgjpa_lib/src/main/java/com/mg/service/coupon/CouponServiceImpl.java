@@ -11,11 +11,17 @@ import com.mg.dao.core.DaoCommand;
 import com.mg.dao.core.DaoFactory;
 import com.mg.dao.impl.CouponsDAO;
 import com.mg.dao.impl.CouponsTypeDAO;
+import com.mg.enums.ImageType;
 import com.mg.exception.DaoException;
 import com.mg.exception.ServiceException;
 import com.mg.model.Coupons;
 import com.mg.model.CouponsType;
+import com.mg.model.Image;
 import com.mg.service.ServiceImpl;
+import com.mg.service.ServiceLocator;
+import com.mg.service.dto.ImageDTO;
+import com.mg.service.image.ImageServiceImpl;
+import com.mg.service.init.ConfigServiceImpl;
 import com.mg.util.translation.TranslationUtils;
 import com.mg.util.translation.Translations;
 
@@ -68,24 +74,51 @@ public class CouponServiceImpl extends ServiceImpl implements CouponService {
 	}
 
 	@Override
-	public int saveCouponsType(final CouponsType couponsType, final Translations translationsName, final Translations translationsDesc) throws ServiceException {
+	public int saveCouponsType(final CouponsType couponsType, final ImageDTO imageEnDTO, final ImageDTO imageFrDTO, 
+							   final Translations translationsName, final Translations translationsDesc, final Translations translationsUrl) throws ServiceException {
 		int id = 0;
 		try {
 			daoManager.setCommitTransaction(true);
 			id = (Integer)daoManager.executeAndHandle(new DaoCommand() {	
 				@Override
 				public Object execute(EntityManager em) throws DaoException {	
-					int id;
-					couponsType.setCreationDate(new Date());
-					TranslationUtils.updateBaicTranslaction(em, couponsType, translationsName, translationsDesc);
-					if(couponsType.getId() == 0){
-						DaoFactory.getDAO(CouponsTypeDAO.class, em).save(couponsType);
-						id = couponsType.getId();
+					int id = 0;
+					try{
+						String path = ServiceLocator.getService(ConfigServiceImpl.class).getWebImagePromotionLocation();
+						Image imageEn = ServiceLocator.getService(ImageServiceImpl.class).getImageForObject(em, imageEnDTO, ImageType.PROMOTION, (couponsType.getImageEn() != null) ? couponsType.getImageEn().getId() : null);
+						imageEn.setRealName(path);
+						couponsType.setImageEn(imageEn);
+						
+						Image imageFr = ServiceLocator.getService(ImageServiceImpl.class).getImageForObject(em, imageFrDTO, ImageType.PROMOTION, (couponsType.getImageFr() != null) ? couponsType.getImageFr().getId() : null);
+						imageFr.setRealName(path);
+						couponsType.setImageFr(imageFr);
+						
+						couponsType.setCreationDate(new Date());
+						
+						TranslationUtils.updateBaicTranslaction(em, couponsType, translationsName, translationsDesc);
+						couponsType.setTranslationByUrlTransId( TranslationUtils.updateTranslation(em, couponsType.getTranslationByUrlTransId(), translationsUrl) );
+						
+						if(couponsType.getId() == 0){
+							DaoFactory.getDAO(CouponsTypeDAO.class, em).save(couponsType);
+							id = couponsType.getId();
+						}
+						else{
+							id = DaoFactory.getDAO(CouponsTypeDAO.class, em).update(couponsType).getId();
+						}
+						
+						if(id != 0){
+							//Save Collection image after save collection in database in case the any error.
+							if(imageEnDTO != null && imageEnDTO.getFile() != null){
+								ServiceLocator.getService(ImageServiceImpl.class).saveImage(imageEnDTO.getFile(), path, imageEn.getName());
+							}
+							if(imageFrDTO != null && imageFrDTO.getFile() != null){
+								ServiceLocator.getService(ImageServiceImpl.class).saveImage(imageFrDTO.getFile(), path, imageFr.getName());
+							}
+						}
 					}
-					else{
-						id = DaoFactory.getDAO(CouponsTypeDAO.class, em).update(couponsType).getId();
+					catch (Exception e) {
+						throw new DaoException(e);
 					}
-					
 					return(id);
 				}
 			});
@@ -126,6 +159,42 @@ public class CouponServiceImpl extends ServiceImpl implements CouponService {
 			throw (new ServiceException(e));
 		}
 		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Coupons> getCouponPromotion(final Date nowDate) throws ServiceException {
+		List<Coupons> list = null;
+		try {			
+			daoManager.setCommitTransaction(true);
+			list = (List<Coupons>) daoManager.executeAndHandle(new DaoCommand() {
+				@Override
+				public Object execute(EntityManager em) throws DaoException {	
+					return DaoFactory.getDAO(CouponsDAO.class, em).getCouponPromotion(nowDate);			
+				}
+			}) ;
+		}catch (DaoException de) {
+			throw (new ServiceException(de));
+		}
+		return list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Coupons> getAllCouponPromotion() throws ServiceException {
+		List<Coupons> list = null;
+		try {			
+			daoManager.setCommitTransaction(true);
+			list = (List<Coupons>) daoManager.executeAndHandle(new DaoCommand() {
+				@Override
+				public Object execute(EntityManager em) throws DaoException {	
+					return DaoFactory.getDAO(CouponsDAO.class, em).getAllCouponPromotion();			
+				}
+			}) ;
+		}catch (DaoException de) {
+			throw (new ServiceException(de));
+		}
+		return list;
 	}
 	
 	@SuppressWarnings("unchecked")

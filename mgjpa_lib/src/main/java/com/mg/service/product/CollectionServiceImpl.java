@@ -1,6 +1,5 @@
 package com.mg.service.product;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -36,6 +35,7 @@ import com.mg.service.ServiceLocator;
 import com.mg.service.cache.CacheServiceImpl;
 import com.mg.service.dto.CustomComponentCollectionDTO;
 import com.mg.service.dto.DTOFactory;
+import com.mg.service.dto.ImageDTO;
 import com.mg.service.image.ImageService;
 import com.mg.service.image.ImageServiceImpl;
 import com.mg.service.init.ConfigServiceImpl;
@@ -186,8 +186,7 @@ public class CollectionServiceImpl extends ServiceImpl implements CollectionServ
 	
 	@Override
 	public int saveCollection(final Collection collection, final List<CustomComponentCollectionDTO> customComponentCollections, 
-							  final File file, final String fileContentType, final String fileFileName, 
-							  final Translations translationsName, final Translations translationsDesc)
+							  final ImageDTO imageDTO, final Translations translationsName, final Translations translationsDesc)
 			throws ServiceException {
 		int id = 0;
 		try {
@@ -198,7 +197,7 @@ public class CollectionServiceImpl extends ServiceImpl implements CollectionServ
 					int id = 0;
 					try{
 						String path = ServiceLocator.getService(ConfigServiceImpl.class).getWebImageCollectionLocation();
-						Image image = ServiceLocator.getService(ImageServiceImpl.class).getImageForObject(em, file, fileFileName, ImageType.COLLECTION, getCollectionImageId ( collection ));
+						Image image = ServiceLocator.getService(ImageServiceImpl.class).getImageForObject(em, imageDTO, ImageType.COLLECTION, getCollectionImageId ( collection ));
 						image.setRealName(path);
 						if(customComponentCollections != null){		
 							collection.setCustomComponentCollections(getCustomComponentCollections(em, customComponentCollections));		
@@ -209,16 +208,16 @@ public class CollectionServiceImpl extends ServiceImpl implements CollectionServ
 						
 						if(id != 0){
 							//Save Collection image after save collection in database in case the any error.
-							if(file != null){
+							if(imageDTO != null && imageDTO.getFile() != null){
 								ServiceLocator.getService(ImageServiceImpl.class)
-										.saveImage(file, path, image.getName());
+										.saveImage(imageDTO.getFile(), path, image.getName());
 							}
 							
 							//Save CustomComponentCollections images
 							if(customComponentCollections != null){
 								for (CustomComponentCollectionDTO item : customComponentCollections) {
-									if( item != null && item.getFile() != null){
-										ServiceLocator.getService(ImageServiceImpl.class).saveImage(item.getFile(), path, item.getImage().getName());
+									if( item != null && item.getImageDTO() != null && item.getImageDTO().getFile() != null){
+										ServiceLocator.getService(ImageServiceImpl.class).saveImage(item.getImageDTO().getFile(), path, item.getImage().getName());
 									}
 								}
 							}
@@ -255,7 +254,7 @@ public class CollectionServiceImpl extends ServiceImpl implements CollectionServ
 							if(item.getId() == 0){
 								try {
 									
-									CustomComponentCollection ccc =  DaoFactory.getDAO(CustomComponentCollectionDAO.class, em).findTranslateForCustomCompoentCollection(item.getFileFileName());
+									CustomComponentCollection ccc =  DaoFactory.getDAO(CustomComponentCollectionDAO.class, em).findTranslateForCustomCompoentCollection(item.getImageDTO().getFileFileName());
 									if(ccc != null){
 										customComponentCollection.setTranslationByNameTransId(ccc.getTranslationByNameTransId());
 										customComponentCollection.setTranslationByDescriptionTransId(ccc.getTranslationByDescriptionTransId());
@@ -264,18 +263,18 @@ public class CollectionServiceImpl extends ServiceImpl implements CollectionServ
 									log.error(e.getMessage(), e);
 								}
 							}
-							if(item.getFileFileName() != null){
-								Image duplicate = DaoFactory.getDAO(ImageDAO.class, em).findEntity(item.getFileFileName(), ImageType.COLLECTION);
+							if(item.getImageDTO() != null && item.getImageDTO().getFileFileName() != null){
+								Image duplicate = DaoFactory.getDAO(ImageDAO.class, em).findEntity(item.getImageDTO().getFileFileName(), ImageType.COLLECTION);
 								Image image;
 								if(duplicate == null){
-									image = imagenService.getImageForObject(em, item.getFile(),item.getFileFileName(), ImageType.COLLECTION, null);
+									image = imagenService.getImageForObject(em, item.getImageDTO(), ImageType.COLLECTION, null);
 									image.setRealName(path);
 								}
 								else {
 									image = duplicate;
-									item.setFile(null);
-									item.setFileFileName(null);
-									item.setFileContentType(null);
+									item.getImageDTO().setFile(null);
+									item.getImageDTO().setFileFileName(null);
+									item.getImageDTO().setFileContentType(null);
 								}
 								customComponentCollection.setImage(image);
 								item.setImage(image);

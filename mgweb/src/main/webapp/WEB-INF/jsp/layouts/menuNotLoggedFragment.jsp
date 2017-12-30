@@ -9,7 +9,7 @@
 			</span> --%>
 			<s:if test="%{couponTextName != ''}">
 				<p class="coupon-info">
-					<i class="fa fa-gift"></i> <s:text name="couponTextName" />
+					<i class="fa fa-gift"></i> <s:property value="couponTextName"/>
 				</p>
 			</s:if>
 		</div>
@@ -307,12 +307,15 @@
 								<div class="row">
 									<div class="col-sm-3 col-md-2">
 										<div class="banner">
-											<a href='<s:text name="url.ourproduct.type.bag"/>'> <img src="${images}/large-tote-bag-sunny-dance-front.png"
-												class="img img-responsive type-imag center-block" alt='<s:text name="bolsos.home.menu.products.bag"/>' />
+											<a href='<s:text name="url.ourproduct.type.pouches"/>'> 
+												<img
+												src="${images}/Travel-pouch.png" class="img img-responsive type-imag center-block"
+												alt='<s:text name="enum.user.type.pouches"/>' />
 											</a>
 											<div class="name text-center">
 												<h4>
-													<a href='<s:text name="url.ourproduct.type.bag"/>'> <s:text name="bolsos.home.menu.products.bag" />
+													<a href='<s:text name="url.ourproduct.type.pouches"/>'>
+													<s:text name="enum.user.type.pouches"/>
 													</a>
 												</h4>
 											</div>
@@ -320,110 +323,20 @@
 									</div>
 									<div class="col-sm-3 col-md-2">
 										<div class="banner">
-											<a href='<s:text name="url.ourproduct.type.large_pouch"/>'> <img src="${images}/large-pouch-into-the-wild-detail-1.png"
-												class="img img-responsive type-imag center-block" alt='<s:text name="bolsos.home.menu.products.pouche"/>' />
+											<a href='<s:text name="url.ourproduct.type.baskets"/>'> 
+												<img
+												src="${images}/Basket-pot-holder.png" class="img img-responsive type-imag center-block"
+												alt='<s:text name="enum.user.type.baskets"/>' />
 											</a>
 											<div class="name text-center">
 												<h4>
-													<a href='<s:text name="url.ourproduct.type.large_pouch"/>'> <s:text name="bolsos.home.menu.products.pouche" />
+													<a href='<s:text name="url.ourproduct.type.baskets"/>'> 
+													<s:text name="enum.user.type.baskets"/>
 													</a>
 												</h4>
 											</div>
 										</div>
 									</div>
-									<%-- <div class="col-sm-2">
-										<div class="banner">
-											<a href='<s:text name="url.ourproduct.type.wallet"/>'> <img src="${images}/wallet-open-sea-front.png"
-												class="img img-responsive type-imag center-block" alt='<s:text name="bolsos.home.menu.products.wallet"/>' />
-											</a>
-											<div class="name text-center">
-												<h4>
-													<a href='<s:text name="url.ourproduct.type.wallet"/>'> <s:text name="bolsos.home.menu.products.wallet" />
-													</a>
-												</h4>
-											</div>
-										</div>
-									</div> --%>
-									<div class="col-sm-3 col-md-2">
-										<div class="banner">
-											<a href='<s:text name="url.ourproduct.type.medium_pouch"/>'> 
-												<img
-												src="${images}/Medium-pouch-open-sea-front.png" class="img img-responsive type-imag center-block"
-												alt='<s:text name="enum.user.type.medium_pouch"/>' />
-											</a>
-											<div class="name text-center">
-												<h4>
-													<a href='<s:text name="url.ourproduct.type.medium_pouch"/>'> 
-													<s:text name="enum.user.type.medium_pouch"/>
-													</a>
-												</h4>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-3 col-md-2">
-										<div class="banner">
-											<a href='<s:text name="url.ourproduct.type.tablet_pouch"/>'> 
-												<img
-												src="${images}/tablet-sleeve.png" class="img img-responsive type-imag center-block"
-												alt='<s:text name="enum.user.type.tablet_pouch.title"/>' />
-											</a>
-											<div class="name text-center">
-												<h4>
-													<a href='<s:text name="url.ourproduct.type.tablet_pouch"/>'> 
-													<s:text name="enum.user.type.tablet_pouch.title"/>
-													</a>
-												</h4>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-3 col-md-2">
-										<div class="banner">
-											<a href='<s:text name="url.ourproduct.type.laptop_pouch"/>'> 
-												<img
-												src="${images}/laptop-sleeve.png" class="img img-responsive type-imag center-block"
-												alt='<s:text name="enum.user.type.laptop_pouch.title"/>' />
-											</a>
-											<div class="name text-center">
-												<h4>
-													<a href='<s:text name="url.ourproduct.type.laptop_pouch"/>'> 
-													<s:text name="enum.user.type.laptop_pouch.title"/>
-													</a>
-												</h4>
-											</div>
-										</div>
-									</div>
-									<%-- <div class="col-sm-2">
-										<div class="banner">
-											<a href='<s:text name="url.ourproduct.type.snack_bag"/>'> 
-												<img
-												src="${images}/<s:text name='enum.user.type.snack_bag.image'/>" class="img img-responsive type-imag center-block"
-												alt='<s:text name="enum.user.type.snack_bag.title"/>' />
-											</a>
-											<div class="name text-center">
-												<h4>
-													<a href='<s:text name="url.ourproduct.type.snack_bag"/>'> 
-													<s:text name="enum.user.type.snack_bag.title"/>
-													</a>
-												</h4>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-2">
-										<div class="banner">
-											<a href='<s:text name="url.ourproduct.type.girl_purse"/>'> 
-												<img
-												src="${images}/<s:text name='enum.user.type.girl_purse.image'/>" class="img img-responsive type-imag-custom center-block"
-												alt='<s:text name="enum.user.type.girl_purse.title"/>' />
-											</a>
-											<div class="name text-center">
-												<h4>
-													<a href='<s:text name="url.ourproduct.type.girl_purse"/>'> 
-													<s:text name="enum.user.type.girl_purse.title"/>
-													</a>
-												</h4>
-											</div>
-										</div>
-									</div> --%>
 								</div>
 							</div> <!-- /.yamm-content -->
 						</li>

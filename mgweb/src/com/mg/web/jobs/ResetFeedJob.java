@@ -1,13 +1,15 @@
 package com.mg.web.jobs;
 
+import java.util.Date;
+
 import org.apache.log4j.Logger;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import com.mg.exception.ServiceLocatorException;
 import com.mg.service.ServiceLocator;
+import com.mg.service.application.ApplicationServiceImpl;
 import com.mg.service.socialmedia.InstagramServiceImpl;
 import com.mg.util.exception.ExceptionHandler;
 
@@ -21,8 +23,9 @@ public class ResetFeedJob implements Job {
 			JobDataMap data = context.getMergedJobDataMap();
 			
 			ServiceLocator.getService(InstagramServiceImpl.class).resetFeed();
-			log.info("ResetFeedJob executed." );
-		} catch (ServiceLocatorException e) {
+			Date dateLastRun = ServiceLocator.getService(ApplicationServiceImpl.class).updateJobRunDate("ResetFeedJob");
+			log.info("ResetFeedJob executed at " + dateLastRun + "." );
+		} catch (Exception e) {
 			ExceptionHandler.handleException(e, null, null);
 		}
 	}

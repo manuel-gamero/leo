@@ -14,6 +14,8 @@ public class ShoppingCartDTO extends BasicDTO{
 	private static final long serialVersionUID = 8168541433819670846L;
 	private int id;
 	private String users;
+	private String userName;
+	private String userPhone;
 	private MethodShipping methodShipping;
 	private String transaction;
 	private ShoppingCartStatus statusCode;
@@ -230,6 +232,22 @@ public class ShoppingCartDTO extends BasicDTO{
 
 	public void setStatusLocalization(String statusLocalization) {
 		this.statusLocalization = statusLocalization;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserPhone() {
+		return userPhone;
+	}
+
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
 	}
 
 	

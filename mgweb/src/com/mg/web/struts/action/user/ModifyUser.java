@@ -71,7 +71,7 @@ public class ModifyUser extends BasicAction implements ModelDriven<UserDTO>, Pre
 	}
 	
 	private String getRedirectAction() {
-		if(Language.FRENCH.equals(getCurrentLanguage())){
+		if(Language.FRENCH.getCode().equals(getCurrentLanguage())){
 			setUrlRedirect("fr/utilisateur/compte");
 		}
 		else{

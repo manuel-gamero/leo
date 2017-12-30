@@ -1,6 +1,5 @@
 package com.mg.web.struts.action.collection;
 
-import java.io.File;
 import java.util.List;
 
 import com.mg.exception.ServiceException;
@@ -8,6 +7,7 @@ import com.mg.model.Collection;
 import com.mg.model.CustomComponentCollection;
 import com.mg.service.ServiceLocator;
 import com.mg.service.dto.CustomComponentCollectionDTO;
+import com.mg.service.dto.ImageDTO;
 import com.mg.service.product.CollectionServiceImpl;
 import com.mg.util.translation.Translations;
 import com.mg.web.struts.action.BasicTranslationAction;
@@ -19,9 +19,9 @@ public class AddEditCollection extends BasicTranslationAction implements  Prepar
 	private Collection collection;
 	private Integer id;
 	private List<CustomComponentCollectionDTO> customComponentCollections;
-	private File file;
 	private String fileContentType;
 	private String fileFileName;
+	private ImageDTO imageDTO;
 	private String status;
 	
 	@Override
@@ -58,7 +58,7 @@ public class AddEditCollection extends BasicTranslationAction implements  Prepar
 			if(customComponentCollections != null){
 				while ( i!= customComponentCollections.size() && !error ) {
 					if(customComponentCollections.get(i)!= null){
-						if(customComponentCollections.get(i).getFileFileName() == null || customComponentCollections.get(i).getFileFileName().trim().equals("")){
+						if(customComponentCollections.get(i).getImageDTO() != null && customComponentCollections.get(i).getImageDTO().getFileFileName() == null || customComponentCollections.get(i).getImageDTO().getFileFileName().trim().equals("")){
 							error = true;
 							addFieldError("collection.image","A custom component collections have not image");
 						}
@@ -76,7 +76,7 @@ public class AddEditCollection extends BasicTranslationAction implements  Prepar
 		try {
 			Translations translationsName = new Translations.StringTranslationBuilder().engString(nameEn).frString(nameFr).build();
 			Translations translationsDesc = new Translations.StringTranslationBuilder().engString(descEn).frString(descFr).build();
-			ServiceLocator.getService(CollectionServiceImpl.class).saveCollection(collection, customComponentCollections, file, fileContentType, fileFileName, translationsName, translationsDesc);
+			ServiceLocator.getService(CollectionServiceImpl.class).saveCollection(collection, customComponentCollections, imageDTO, translationsName, translationsDesc);
 		} catch (Exception e) {
 			managerException(e);
 			return ERROR;
@@ -128,14 +128,6 @@ public class AddEditCollection extends BasicTranslationAction implements  Prepar
 		this.customComponentCollections = customComponentCollections;
 	}
 
-	public File getFile() {
-		return file;
-	}
-
-	public void setFile(File file) {
-		this.file = file;
-	}
-
 	public String getFileContentType() {
 		return fileContentType;
 	}
@@ -158,6 +150,14 @@ public class AddEditCollection extends BasicTranslationAction implements  Prepar
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public ImageDTO getImageDTO() {
+		return imageDTO;
+	}
+
+	public void setImageDTO(ImageDTO imageDTO) {
+		this.imageDTO = imageDTO;
 	}
 
 }

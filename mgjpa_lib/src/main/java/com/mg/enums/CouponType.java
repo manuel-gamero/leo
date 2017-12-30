@@ -9,6 +9,7 @@ import com.mg.coupon.type.CouponDiscountTotal25;
 import com.mg.coupon.type.CouponDiscountTotal30;
 import com.mg.coupon.type.CouponDiscountTotal50;
 import com.mg.coupon.type.CouponFree;
+import com.mg.coupon.type.PromotionBanner;
 
 /**
  * 
@@ -63,6 +64,12 @@ public enum CouponType implements BasicEnum{
 		@Override
 		public Coupon getCoupon() {
 			return new Coupon1MediumTaxFree();
+		}
+	},
+	BANNER("BANNER"){
+		@Override
+		public Coupon getCoupon() {
+			return new PromotionBanner();
 		}
 	}
 	;

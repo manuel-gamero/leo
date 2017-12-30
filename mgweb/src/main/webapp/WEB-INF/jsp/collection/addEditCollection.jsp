@@ -37,7 +37,7 @@
 						class="form-control" />
 				</div>
 				
-				<s:file name="file" label="Select a File to upload" size="40"  />
+				<s:file name="imageDTO.file" label="Select a File to upload" size="40"  />
 				<div class="form-group">
 					<div class="image" style="margin-left:10px;width:200px;">
 						 <s:if test="%{collection.image!=null}">
@@ -266,7 +266,7 @@ $(document).ready(function() {
 			cccvalue = '<td bgcolor="#' + value +'"> <s:textfield  id="ccc_' + counter + '_value" name="customComponentCollections[' + counter + '].value" value="' + value + '" /></td>';
 		}
 		if(typeCode == 'PATH'){
-			cccvalue = '<td> <s:file  id="ccc_' + counter + '_file" name="customComponentCollections[' + counter + '].file" /></td>';
+			cccvalue = '<td> <s:file  id="ccc_' + counter + '_file" name="customComponentCollections[' + counter + '].imageDTO.file" /></td>';
 		}
 		if(typeCode == 'FONT'){
 			value = $("#font option:selected" ).text();

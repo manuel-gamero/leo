@@ -1,5 +1,6 @@
 package com.mg.dao.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,4 +51,30 @@ public class CouponsDAO extends GenericDaoImpl<Coupons> {
 							" and c.statusCode = 'SEND' ", parameters);
 	}
 	
+	public List<Coupons> getCouponPromotion(Date nowDate){
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("nowDate", nowDate);
+		
+		return findResults(" select distinct c " +
+						   " from Coupons c " +
+						   " left join fetch c.couponsType ct " +
+						   " where ct.promotionStart <= :nowDate " +
+						   " and ct.promotionEnd >= :nowDate " +
+						   " and ct.promotion = 'true' " +
+						   " and c.statusCode = 'ACTIVE' " +
+						   " order by c.creationDate desc", parameters);
+	}
+	
+	public List<Coupons> getAllCouponPromotion(){
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("nowDate", new Date());
+		
+		return findResults(" select distinct c " +
+						   " from Coupons c " +
+						   " left join fetch c.couponsType ct " +
+						   " where ct.promotion = 'true' " +
+						   " and c.statusCode = 'ACTIVE' " +
+						   " and ct.promotionEnd >= :nowDate " +
+						   " order by c.creationDate desc", parameters);
+	}
 }

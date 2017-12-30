@@ -42,7 +42,13 @@ public class CouponsType implements java.io.Serializable, BasicModel, IBasicTran
 	private Integer multiTime;
 	private Integer multiUser;
 	private Date creationDate;
+	private Boolean promotion;
+	private Date promotionStart;
+	private Date promotionEnd;
 	private Set<Coupons> couponses = new HashSet<Coupons>(0);
+	private Image imageEn;
+	private Image imageFr;
+	private Translation translationByUrlTransId;
 
 	public CouponsType() {
 	}
@@ -160,6 +166,65 @@ public class CouponsType implements java.io.Serializable, BasicModel, IBasicTran
 
 	public void setCouponses(Set<Coupons> couponses) {
 		this.couponses = couponses;
+	}
+
+	@Column(name = "promotion")
+	public Boolean getPromotion() {
+		return promotion;
+	}
+
+	public void setPromotion(Boolean promotion) {
+		this.promotion = promotion;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "promotion_start", length = 29)
+	public Date getPromotionStart() {
+		return promotionStart;
+	}
+
+	public void setPromotionStart(Date promotionStart) {
+		this.promotionStart = promotionStart;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "promotion_end", length = 29)
+	public Date getPromotionEnd() {
+		return promotionEnd;
+	}
+
+	public void setPromotionEnd(Date promotionEnd) {
+		this.promotionEnd = promotionEnd;
+	}
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "image_en_id")
+	public Image getImageEn() {
+		return this.imageEn;
+	}
+
+	public void setImageEn(Image imageEn) {
+		this.imageEn = imageEn;
+	}
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "image_fr_id")
+	public Image getImageFr() {
+		return this.imageFr;
+	}
+
+	public void setImageFr(Image imageFr) {
+		this.imageFr = imageFr;
+	}
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name = "url_trans_id")
+	public Translation getTranslationByUrlTransId() {
+		return this.translationByUrlTransId;
+	}
+
+	public void setTranslationByUrlTransId(Translation translationByUrlTransId) {
+		this.translationByUrlTransId = translationByUrlTransId;
 	}
 
 }

@@ -54,8 +54,8 @@
                     <li><a href="dataminingList.action">Data Mining</a></li>
                     <li><a href="auditList.action">Audit</a></li>
                     <li><a href="logList.action">Logs</a></li>
+                    <li><a href="jobsList.action">Jobs</a></li>
                     <li><a href="translationList.action">Translations</a></li>
-                    <li><a href="couponManagerList.action">Manager Coupon Type</a></li>
                   </ul>
                 </li>
                 <s:if test="#isLogin">	

@@ -13,6 +13,7 @@ import com.mg.model.Image;
 import com.mg.model.Item;
 import com.mg.model.Product;
 import com.mg.service.Service;
+import com.mg.service.dto.ImageDTO;
 import com.mg.util.io.ImageInfo;
 
 /**
@@ -61,7 +62,7 @@ public interface ImageService extends Service{
 	 * @param fileName 
 	 * @return Image well fill with the right information.
 	 */
-	Image getImage(File file, String fileName) throws ServiceException;
+	Image getImage(File file, String fileName, ImageType imageType) throws ServiceException;
 	
 	Image getImage(int id) throws ServiceException;
 	
@@ -81,7 +82,7 @@ public interface ImageService extends Service{
 	 */
 	void generatePNGImage( Item item, boolean socialImage ) throws ServiceException;
 	
-	Image getImageForObject(EntityManager em, File file, String fileFileName, ImageType imageType, Integer imageId) throws ServiceException;
+	Image getImageForObject(EntityManager em, ImageDTO image, ImageType imageType, Integer imageId) throws ServiceException;
 	
 	/**
 	 * delete the file from disk

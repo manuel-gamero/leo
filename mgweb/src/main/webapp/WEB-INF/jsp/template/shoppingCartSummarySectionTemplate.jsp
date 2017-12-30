@@ -27,7 +27,14 @@
 				</tr>
 				<s:if test="#thereIsCoupon">
 					<tr class="hover-coupon">
-						<td><s:text name="bolsos.template.shoppingcart.summary.table.column.coupon"/></td>
+						<s:if test="%{promotion}">
+							<s:if test="%{totalDiscountCouponShoppingCart != '0.00'}">
+								<td><s:text name="bolsos.template.shoppingcart.summary.table.column.promotion"/></td>
+							</s:if>
+						</s:if>
+						<s:else>
+							<td><s:text name="bolsos.template.shoppingcart.summary.table.column.coupon"/></td>
+						</s:else>
 						<th><s:property value="totalDiscountCouponShoppingCart" /></th>
 					</tr>
 				</s:if>
@@ -40,17 +47,17 @@
 	</div>
 </div>
 
-<script type="text/javascript">
-
-$(".hover-coupon").popover({
-	title: "<s:property value='couponTextName'/>",
-	html: true,
-	delay: { "show": 100, "hide": 100 },
-	trigger: 'hover',
-	placement: 'auto',
-	content: function () {
-		return "${couponTextDescription}";
-	}
-});
-
-</script>
+<s:if test="%{couponTextDescription != ''}">
+	<script type="text/javascript">
+		$(".hover-coupon").popover({
+			title: "<s:property value='couponTextName'/>",
+			html: true,
+			delay: { "show": 100, "hide": 100 },
+			trigger: 'hover',
+			placement: 'auto',
+			content: function () {
+				return "${couponTextDescription}";
+			}
+		});
+	</script>
+</s:if>

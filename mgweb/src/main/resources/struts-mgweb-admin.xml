@@ -215,7 +215,8 @@
         </action> 
         
         <action name="resetCacheProduct" class="com.mg.web.struts.action.tools.ResetCacheProduct" >
-			<interceptor-ref name="defaultMgWebAuthAdmin"/>  
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
             <result name="success" type="tiles">/adminPage.tiles</result>
             <result name="error" type="tiles">/errorAdmin.tiles</result>                 
         </action> 
@@ -305,6 +306,27 @@
             <result name="error" type="tiles">/errorAdmin.tiles</result>                  
         </action>
         
+        <action name="jobsList" class="com.mg.web.struts.action.job.JobList" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="tiles">/jobList.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action>
+        
+        <action name="aeEntity" class="com.mg.web.struts.action.job.JobList" method="displayEntity">
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="input" type="tiles">/addEditJob.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action>
+        
+        <action name="saveJob" class="com.mg.web.struts.action.job.JobList" method="saveJob">
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="tiles">/jobList.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action>
+        
         <action name="auditList" class="com.mg.web.struts.action.application.AuditList" >
 			<interceptor-ref name="defaultMgWebAuthAdmin"/>
 			<result name="authentification" type="redirect">/admin/logon.action</result>  
@@ -391,6 +413,14 @@
 		
 		<action name="deletePriceEntry" class="com.mg.web.struts.action.ajax.PriceAjax" method="deletePriceEntry">
 			<result type="json" name="success" />
+		</action>
+		
+		<action name="search" class="com.mg.web.struts.action.ajax.AutocompleteAjax" method="search">
+			 <result type="json" name="success">
+                <param name="excludeNullProperties">true</param>
+                <param name="encoding">UTF-8</param>
+                <param name="noCache">true</param>
+             </result>
 		</action>
 		
 		<action name="savePriceEntry" class="com.mg.web.struts.action.ajax.PriceAjax" method="savePriceEntry">

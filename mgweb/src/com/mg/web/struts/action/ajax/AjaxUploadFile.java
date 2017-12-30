@@ -20,6 +20,7 @@ import com.mg.exception.ServiceException;
 import com.mg.exception.ServiceLocatorException;
 import com.mg.model.Image;
 import com.mg.service.ServiceLocator;
+import com.mg.service.dto.ImageDTO;
 import com.mg.service.image.ImageService;
 import com.mg.service.image.ImageServiceImpl;
 import com.mg.service.init.ConfigServiceImpl;
@@ -48,8 +49,7 @@ public class AjaxUploadFile extends BasicAction implements ServletResponseAware 
 	private String qqfileContentType;
 	private String qqfileFileName;
 	
-	private File localFile;
-	private String localFilename;
+	private ImageDTO imageDTO;
 	private Dimension dim;
 
 	private HttpServletResponse servletResponse;
@@ -71,13 +71,13 @@ public class AjaxUploadFile extends BasicAction implements ServletResponseAware 
     		fileType();
 			ImageService imageService = ServiceLocator.getService(ImageServiceImpl.class);
 			realPath = request.getSession().getServletContext().getRealPath("/");
-			if( localFile == null){					 
+			if( imageDTO != null && imageDTO.getFile() == null){					 
 				 writer.print("{success:'', msg: '" + getText("mg.error.common.required") + "'}" );						
-			} else if(!imageService.isJPEGImage(localFile) && !imageService.isPNGImage(localFile)) {		
+			} else if(!imageService.isJPEGImage(imageDTO.getFile()) && !imageService.isPNGImage(imageDTO.getFile())) {		
 				 writer.print("{success:'', msg: '" + getText("mg.error.common.content.type_jpg") + "'}" );	
 			} else {
 				if (dim == null)  {
-					dim = getDimension(localFile.getAbsolutePath());
+					dim = getDimension(imageDTO.getFile().getAbsolutePath());
 				}
 				String path = ServiceLocator.getService(ConfigServiceImpl.class).getWebImageProdcutLocation() + productId+ "/";
 				if( imageId != null ){ //Add a customComponentImage to product					
@@ -87,15 +87,15 @@ public class AjaxUploadFile extends BasicAction implements ServletResponseAware 
 					//Remove old image mask from disk
 					boolean result = ServiceLocator.getService(ImageServiceImpl.class).deleteImage(image);
 					if(result){
-						imageService.saveImage(localFile, path, image.getName());
+						imageService.saveImage(imageDTO.getFile(), path, image.getName());
 					}
 					writer.print("{success: true, name: '" + image.getName() + "', path: '" + 
 							path +"'}");
 				}
 				else{ //Add new Image to product to show in frontend in addEditProduct.jsp for the main product image
-					Integer id = ServiceLocator.getService(ProductServiceImpl.class).saveProductImage(localFile, localFilename, productId);
+					Integer id = ServiceLocator.getService(ProductServiceImpl.class).saveProductImage(imageDTO, productId);
 					if ( id != null ){
-						writer.print("{success: true, name: '" + localFilename + "', path: '" + 
+						writer.print("{success: true, name: '" + imageDTO.getFileFileName() + "', path: '" + 
 								path +"', id: " + id + "}");
 					}
 				}
@@ -128,11 +128,12 @@ public class AjaxUploadFile extends BasicAction implements ServletResponseAware 
         FileOutputStream fos = null;        
         // firefox and other
         
-        if (qqfile == null) {        	
-        	localFilename = request.getParameter("qqfile");         	
-			localFile = new File(localFilename);						 
+        if (qqfile == null) {      
+        	imageDTO = new ImageDTO();
+        	imageDTO.setFileFileName(request.getParameter("qqfile"));         	
+			imageDTO.setFile(new File(request.getParameter("qqfile")));						 
 			is = request.getInputStream();	           
-	        fos = new FileOutputStream( localFile );
+	        fos = new FileOutputStream( imageDTO.getFile() );
 	        IOUtils.copy(is, fos);
 	        
 	        if(fos != null )
@@ -140,8 +141,8 @@ public class AjaxUploadFile extends BasicAction implements ServletResponseAware 
 	        if(is != null)
 	        	is.close();
         } else {	// IE 7, 8        	
-        	localFilename = qqfileFileName;
-        	localFile = qqfile;        
+        	imageDTO.setFileFileName(qqfileFileName);
+        	imageDTO.setFile(qqfile);        
         }        
     }
     
@@ -209,22 +210,6 @@ public class AjaxUploadFile extends BasicAction implements ServletResponseAware 
 		this.qqfileFileName = qqfileFileName;
 	}
 
-	public File getLocalFile() {
-		return localFile;
-	}
-
-	public void setLocalFile(File localFile) {
-		this.localFile = localFile;
-	}
-
-	public String getLocalFilename() {
-		return localFilename;
-	}
-
-	public void setLocalFilename(String localFilename) {
-		this.localFilename = localFilename;
-	}
-
 	public Dimension getDim() {
 		return dim;
 	}
@@ -247,6 +232,14 @@ public class AjaxUploadFile extends BasicAction implements ServletResponseAware 
 
 	public void setCustomComponentImageId(Integer customComponentImageId) {
 		this.customComponentImageId = customComponentImageId;
+	}
+
+	public ImageDTO getImageDTO() {
+		return imageDTO;
+	}
+
+	public void setImageDTO(ImageDTO imageDTO) {
+		this.imageDTO = imageDTO;
 	}
 	
 

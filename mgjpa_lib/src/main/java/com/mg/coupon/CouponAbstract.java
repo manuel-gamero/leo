@@ -32,6 +32,10 @@ public abstract class CouponAbstract implements Coupon{
 			}
 			return "bolsos.coupon.error.inactive";
 		}
+		else if( coupon.getStatusCode().equals(CouponStatus.ACTIVE) && coupon.getCouponsType().getPromotion() ){
+			applyCoupon(shoppingCart, itemList, country);
+			return "bolsos.coupon.apply";
+		}
 		return "bolsos.coupon.error.noexist";
 	}
 	

@@ -1,6 +1,5 @@
 package com.mg.service.product;
 
-import java.io.File;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
@@ -15,6 +14,7 @@ import com.mg.model.Product;
 import com.mg.model.ProductImage;
 import com.mg.service.Service;
 import com.mg.service.dto.CustomComponentImageDTO;
+import com.mg.service.dto.ImageDTO;
 import com.mg.util.translation.Translations;
 
 /**
@@ -42,8 +42,7 @@ public interface ProductService extends Service {
 	Product getProduct(Integer id, boolean useCache) throws ServiceException;
 
 	public int saveProduct(final List<CustomComponentImageDTO> customComponentImageList,
-			   final Product product, final File file, final String fileContentType,
-			   final String fileFileName, final Translations translationsName,
+			   final Product product, final ImageDTO imageDTO, final Translations translationsName,
 			   final Translations translationsDesc, 
 			   final CustomComponentText customText,
 			   final Set<PriceEntry> priceEntrySet) throws ServiceException;
@@ -64,7 +63,7 @@ public interface ProductService extends Service {
 	
 	public List<Product> getAllProductForAdmin() throws ServiceException;
 	
-	public int saveProductImage(File file, String fileName, Integer id) throws ServiceException;
+	public int saveProductImage(ImageDTO imageDTO, Integer id) throws ServiceException;
 	
 	public void deleteProductImage(ProductImage entity) throws ServiceException;
 	

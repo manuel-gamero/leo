@@ -4,6 +4,7 @@ import java.beans.PropertyDescriptor;
 import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -20,6 +21,8 @@ import javax.persistence.Id;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.log4j.Logger;
+
+import com.mg.annotation.FieldView;
 
 public class ReflectionUtils {
 
@@ -93,6 +96,39 @@ public class ReflectionUtils {
 		return l;
 	}
 
+	public static List<Field> getFieldsView (Class<?> clazz){
+		List<Field> fieldList = new ArrayList<Field>();
+		Field[] fields = clazz.getFields();
+		for (Field field : fields) {
+			if(field.isAnnotationPresent(FieldView.class)){
+				FieldView fielViewAnnotation = field.getAnnotation(FieldView.class);
+				fieldList.add(fielViewAnnotation.order(), field);
+			}
+		}
+		
+		return fieldList;
+	}
+	
+	public static List<Field> getFieldsViewModifible (Class<?> clazz){
+		List<Field> fieldList = new ArrayList<Field>();
+		Field[] fields = clazz.getFields();
+		for (Field field : fields) {
+			if(field.isAnnotationPresent(FieldView.class)){
+				FieldView fielViewAnnotation = field.getAnnotation(FieldView.class);
+				if(fielViewAnnotation.modifiable()){
+					fieldList.add(fielViewAnnotation.order(), field);
+				}
+			}
+		}
+		
+		return fieldList;
+	}
+	
+	public static Object getValueField(Object object, String fieldName) throws NoSuchFieldException, SecurityException{
+		PropertyDescriptor methodRead = getProperty(fieldName,object.getClass());
+		return invokeRead(methodRead, object);
+	}
+	
 	private static boolean excludedType(Class<?> returnType) {
 		return Class.class.isAssignableFrom(returnType);
 	}

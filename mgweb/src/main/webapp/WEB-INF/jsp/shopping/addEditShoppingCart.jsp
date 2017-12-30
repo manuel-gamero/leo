@@ -55,6 +55,11 @@
 					<s:textfield id="taxes" name="taxes" class="form-control" disabled="true"/>
 				</div>
 				<div class="form-group">
+					<label for="contactInfo" class="col-sm-1 control-label">Contact info</label>
+					<s:textfield id="userName" name="userName" class="form-control" disabled="true"/>
+					<s:textfield id="userPhone" name="userPhone" class="form-control" disabled="true"/>
+				</div>
+				<div class="form-group">
 					<label for="shippingAddress" class="col-sm-1 control-label">Shipping Address</label>
 					<s:textfield id="shippingAddress" name="shippingAddressId" class="form-control" disabled="true"/>
 				</div>

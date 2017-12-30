@@ -55,6 +55,7 @@ public class ConfigServiceImpl extends ServiceImpl implements ConfigService{
 	private static final String WEB_RESOURCE_URL_SCRIPTS_KEY 			= "mg.config.web.resource.url.scripts";
 	private static final String WEB_RESOURCE_URL_IMAGE_PRODUCT_KEY 		= "mg.config.web.resource.path.product";
 	private static final String WEB_RESOURCE_URL_IMAGE_COLLECTION_KEY 	= "mg.config.web.resource.path.collection";
+	private static final String WEB_RESOURCE_URL_IMAGE_PROMOTION_KEY 	= "mg.config.web.resource.path.promotion";
 	private static final String WEB_RESOURCE_URL_IMAGE_TMP_KEY 			= "mg.config.web.resource.path.tmp";
 	private static final String WEB_RESOURCE_URL_IMAGE_SOCIAL_KEY 		= "mg.config.web.resource.path.social";
 	private static final String WEB_RESOURCE_UTL_ALLOW 					= "mg.config.web.resource.url.allows";
@@ -221,6 +222,11 @@ public class ConfigServiceImpl extends ServiceImpl implements ConfigService{
 	@Override
 	public String getWebImageCollectionLocation() {
 		return getProperty(WEB_RESOURCE_URL_IMAGE_COLLECTION_KEY);
+	}
+	
+	@Override
+	public String getWebImagePromotionLocation() {
+		return getProperty(WEB_RESOURCE_URL_IMAGE_PROMOTION_KEY);
 	}
 	
 	@Override

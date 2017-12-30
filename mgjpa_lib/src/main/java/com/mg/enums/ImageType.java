@@ -13,7 +13,8 @@ public enum ImageType implements BasicEnum{
 	NEGATIVE("NEGATIVE"),
 	COLLECTION("COLLECTION"),
 	MASK("MASK"),
-	PRODGROUP("PROD_GROUP")
+	PRODGROUP("PROD_GROUP"),
+	PROMOTION("PROMOTION")
 	;
 	
 	

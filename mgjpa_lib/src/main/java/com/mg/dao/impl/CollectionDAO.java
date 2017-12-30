@@ -72,6 +72,7 @@ public class CollectionDAO extends GenericDaoImpl<Collection> {
 							" left join fetch ccc.image ccci" +
 							" left join fetch c.image ci " +
 							" where c.id = :id " +
+							" and ccc.statusCode = 'ACTIVE' " +
 							" order by cc.code asc", parameters);
 	}
 
