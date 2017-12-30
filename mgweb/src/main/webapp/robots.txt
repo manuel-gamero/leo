@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /fr/panier/
+Disallow: /en/shoppingcart/
+Disallow: /fr/panier
+Disallow: /en/shoppingcart
+Disallow: /add
+Disallow: /add_*
