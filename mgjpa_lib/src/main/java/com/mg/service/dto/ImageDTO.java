@@ -26,5 +26,4 @@ public class ImageDTO {
 	public void setFileFileName(String fileFileName) {
 		this.fileFileName = fileFileName;
 	}
-
 }
