@@ -13,6 +13,8 @@ import com.mg.exception.ServiceLocatorException;
 import com.mg.service.ServiceLocator;
 import com.mg.service.init.ConfigService;
 import com.mg.service.init.ConfigServiceImpl;
+import com.mg.service.product.ProductManager;
+import com.mg.service.search.SearchServiceImpl;
 
 /**
  * Initializing project's configuration.
@@ -34,7 +36,13 @@ public class InitializeContextListener implements ServletContextListener{
 			ConfigService configService = ServiceLocator.getService(ConfigServiceImpl.class);
 			configService.initialize();
 			
-			PromotionManager.init();
+			log.info("Initialize PromotionManager.");
+			PromotionManager.initialize();
+			log.info("Initialize ProductManager for product sale list.");
+			ProductManager.initialize();
+			log.info("Reseting lucene indexing.");
+			ServiceLocator.getService(SearchServiceImpl.class).restart();
+			
 		} catch (InitializationException ie) {
 			log.error(A_PROBLEM_ACCESSING, ie);
 			// The application shouldn't continue if something goes wrong

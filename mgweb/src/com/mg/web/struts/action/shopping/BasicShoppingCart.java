@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
+import com.mg.coupon.CouponAbstract;
 import com.mg.enums.CouponStatus;
 import com.mg.enums.CouponType;
 import com.mg.enums.PaymentMethodType;
@@ -87,12 +88,29 @@ public class BasicShoppingCart extends BasicAction {
 	
 	public BigDecimal getTotal(){
 		try{
-			BigDecimal total = getSubTotal()
-					.add(getShippingPrice())
-					.add(getTaxes())
-					.add(getExtraTextPrice())
-					.subtract(
-							getDiscount(getTotalDiscountCoupon()));
+			if(getSubTotal() == null){
+				log.warn("getTotal is NULL");
+				calculeSubTotal();
+			}
+			
+			BigDecimal total = getSubTotal();			
+			
+			if(getShippingPrice() != null){
+				total = total.add(getShippingPrice());
+			}
+			
+			if(getTaxes() != null){
+				total = total.add(getTaxes());
+			}
+			
+			if(getExtraTextPrice() != null){
+				total = total.add(getExtraTextPrice());
+			}
+			
+			if(getTotalDiscountCoupon() != null){
+				total = total.subtract(getDiscount(getTotalDiscountCoupon()));
+			}
+			
 			if ( total.floatValue() < 0 ){
 				return ZERO;
 			}
@@ -180,7 +198,13 @@ public class BasicShoppingCart extends BasicAction {
 				partialTotal = partialTotal.add( CurrencyUtils.priceToLocale(item.getProduct().getPrice(), getCurrentCurrencyCode()) ).subtract( getDiscount(item.getDiscountPrice()) );
 			}
 		}
-		shoppingCart.setTotal( partialTotal.subtract( getDiscount(shoppingCart.getDiscountTotal()) ));
+		log.debug("Calculating partialTotal = " + partialTotal);
+		log.debug("Calculating discount = " + getDiscount(shoppingCart.getDiscountTotal()));
+		
+		BigDecimal total = partialTotal.subtract( getDiscount(shoppingCart.getDiscountTotal()) );
+		log.debug("Setting total = " + total);
+		
+		shoppingCart.setTotal(total);
 }
 	
 	private BigDecimal getDiscount(BigDecimal item){
@@ -220,7 +244,12 @@ public class BasicShoppingCart extends BasicAction {
 		//shoppingCart.setMethodShipping(methodShipping);
 		shoppingCart.setShippingFees( getShippingPrice() );
 		//shoppingCart.setTotal(getTotal(itemList));
-		shoppingCart.setTotal( getSubTotal() );
+		if(getSubTotal() != null){
+			shoppingCart.setTotal( getSubTotal() );
+		}
+		else{
+			log.warn("Current shoppingCart total: " + shoppingCart.getTotal() + " TRYING TO SET NULL.");
+		}
 		shoppingCart.setExtras( getExtraTextPrice() );
 		shoppingCart.setShoppingCartItems(CreateShoppingCartItemList(getShoppingCartItems(), shoppingCart));
 		shoppingCart.setCreationDate(new Date());
@@ -324,5 +353,21 @@ public class BasicShoppingCart extends BasicAction {
 			managerException(e);
 			return false;
 		}
+	}
+	
+	protected void resetCoupon() throws CurrencyNoExistException {
+		CouponAbstract.cleanDiscount(getShoppingCart(), getShoppingCartItems());
+		calculeSubTotal();
+		setTotalShoppingCart();
+	}
+	
+	protected void calculateShopingCart() throws CurrencyNoExistException, ServiceException, ServiceLocatorException{
+		resetCoupon();
+		//Apply coupon
+		applyCoupon();
+		//Calculate and set the partial total for lines
+		calculeSubTotal();
+		//Calculate and set the total shopping cart
+		setTotalShoppingCart();
 	}
 }

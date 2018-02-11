@@ -137,6 +137,19 @@
             <result name="error" type="tiles">/errorAdmin.tiles</result>                 
         </action> 
         
+        <action name="aeProductOrder" class="com.mg.web.struts.action.product.AddEditProductOrder">
+		    <param name="currentLanguage">en</param>
+			<interceptor-ref name="defaultMgWeb" />
+			<result name="success" type="tiles">/addEditProductOrder.tiles</result>
+		</action>
+		
+		<action name="saveProductOrder" class="com.mg.web.struts.action.product.AddEditProductOrder" method="save" >
+		    <param name="currentLanguage">en</param>
+			<interceptor-ref name="defaultMgWeb" />
+            <result name="success" type="redirect">/admin/aeProductOrder.action</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                
+        </action> 
+        
         <action name="saveProduct" class="com.mg.web.struts.action.product.AddEditProduct" method="save" >
 			<!-- <interceptor-ref name="defaultStack">
 				<param name="fileUpload.maximumSize">10485760</param>
@@ -404,15 +417,43 @@
 		</action>	
 		
 		<action name="addProductPrice" class="com.mg.web.struts.action.ajax.PriceAjax" method="addProductPrice">
-			<result type="json" name="success" />
+			<result type="json" name="success">
+                <param name="excludeNullProperties">true</param>
+                <param name="encoding">UTF-8</param>
+                <param name="noCache">true</param>
+             </result>
 		</action>	
 		
 		<action name="addMethodShippingPrice" class="com.mg.web.struts.action.ajax.PriceAjax" method="addMethodShippingPrice">
-			<result type="json" name="success" />
+			<result type="json" name="success">
+                <param name="excludeNullProperties">true</param>
+                <param name="encoding">UTF-8</param>
+                <param name="noCache">true</param>
+             </result>
 		</action>	
 		
 		<action name="deletePriceEntry" class="com.mg.web.struts.action.ajax.PriceAjax" method="deletePriceEntry">
-			<result type="json" name="success" />
+			<result type="json" name="success">
+                <param name="excludeNullProperties">true</param>
+                <param name="encoding">UTF-8</param>
+                <param name="noCache">true</param>
+             </result>
+		</action>
+		
+		<action name="deleteProductOrder" class="com.mg.web.struts.action.ajax.PriceAjax" method="deleteProductOrder">
+			<result type="json" name="success">
+                <param name="excludeNullProperties">true</param>
+                <param name="encoding">UTF-8</param>
+                <param name="noCache">true</param>
+             </result>
+		</action>
+		
+		<action name="publishProductOrderList" class="com.mg.web.struts.action.ajax.PriceAjax" method="publishProductOrderList">
+			<result type="json" name="success">
+                <param name="excludeNullProperties">true</param>
+                <param name="encoding">UTF-8</param>
+                <param name="noCache">true</param>
+             </result>
 		</action>
 		
 		<action name="search" class="com.mg.web.struts.action.ajax.AutocompleteAjax" method="search">

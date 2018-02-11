@@ -169,6 +169,8 @@ a.share-email:focus {
 .advertising-title { color: #4fbfa8;}
 div.container-portafolio { margin-left: 0px; margin-right: 0px; }
 i.zoom-icon { font-size: 18px }
+.ribbon.new-product-home { padding-left: 85px; }
+.ribbon.sale-product-home { padding-left: 85px; }
 
 .modal-content-image {
   height: 80%

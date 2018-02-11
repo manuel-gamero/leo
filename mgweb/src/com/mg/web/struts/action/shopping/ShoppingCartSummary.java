@@ -67,9 +67,7 @@ public class ShoppingCartSummary extends BasicShoppingCart implements Preparable
 				shoppingCart.setShippingFees( getShippingPrice() );
 				shoppingCart.setTaxes( getTaxes() );
 				request.getSession().setAttribute(WebConstants.SHOPPING_CART, shoppingCart);
-				setTotalShoppingCart();
-				//Apply coupon
-				applyCoupon();
+				calculateShopingCart();
 			}
 		}
 		catch(Exception e){

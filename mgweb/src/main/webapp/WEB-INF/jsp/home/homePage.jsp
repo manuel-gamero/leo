@@ -113,159 +113,107 @@
 	</div>
 
 	<section class="bar background-white no-mb">
-		<div class="row portfolio no-space container-portafolio" data-animate="fadeInUp">
-
+		<div class="row portfolio no-space container-portafolio" data-animate="fadeInUp"> 
 			<div class="grid-sizer"></div>
-			<div class="grid-item">
-				<s:include value="../template/presentationProductTemplate.jsp">
-					<s:param name="imagename" value="'product/173/cosmetic_bag_rifle_red_2.jpg'" />
-					<s:param name="imagealt" value="'cosmetic bag harmony navy'" />
-					<s:param name="imageurl" value="'173/harmony-pouch-navy'" />
-					<s:param name="id" value="'173'" />
-					<s:param name="poptitle">
-						<s:text name='bolsos.home.carrusel.slide4.title' />
-					</s:param>
-					<s:param name="popurl">
-						<s:text name='url.collection.harmony' />
-					</s:param>
-				</s:include>
-			</div>
-			<div class="grid-item">
-				<s:include value="../template/presentationProductTemplate.jsp">
-					<s:param name="imagename" value="'product/135/large_tote_bag_sunny_dance_product.jpg'" />
-					<s:param name="imagealt" value="'tote bag sunny dance anchors'" />
-					<s:param name="imageurl" value="'135/tote-bag-anchors-navy--gold'" />
-					<s:param name="id" value="'135'" />
-					<s:param name="poptitle">
-						<s:text name="bolsos.collections.C0011.title"/>
-					</s:param>
-					<s:param name="popurl">
-						<s:text name='url.collection.sunnydance' />
-					</s:param>
-				</s:include>
-			</div>
-			<div class="grid-item">
-				<!-- /.box-image -->
-				<s:include value="../template/presentationProductTemplate.jsp">
-					<s:param name="imagename" value="'product/149/lr_housse_ordi_jaune_1.jpg'" />
-					<s:param name="imagealt" value="'housse ordi jaune'" />
-					<s:param name="imageurl" value="'149/laptop-sleeve-yellow'" />
-					<s:param name="id" value="'149'" />
-					<s:param name="poptitle">
-						<s:text name="%{getTranslaction(979)}"/>
-					</s:param>
-					<s:param name="popurl" value="''">
-					</s:param>
-				</s:include>
-			</div>
-			<div class="grid-item">
-				<!-- /.box-image -->
-				<s:include value="../template/presentationProductTemplate.jsp">
-					<s:param name="imagename" value="'product/171/cosmetic_bag_rifle_pink_3.jpg'" />
-					<s:param name="imagealt" value="'cosmetic bag harmony peach'" />
-					<s:param name="imageurl" value="'171/harmony-pouch-peach'" />
-					<s:param name="id" value="'171'" />
-					<s:param name="poptitle">
-						<s:text name='bolsos.home.carrusel.slide4.title' />
-					</s:param>
-					<s:param name="popurl">
-						<s:text name='url.collection.harmony' />
-					</s:param>
-				</s:include>
-				<!-- /.box-image -->
-			</div>
-			<div class="grid-item">
-				<!-- /.box-image -->
-				<s:include value="../template/presentationProductTemplate.jsp">
-					<s:param name="imagename" value="'product/133/medium_pouch_open_sea_2.jpg'" />
-					<s:param name="imagealt" value="'medium pouch open sea'" />
-					<s:param name="imageurl" value="'133/medium-pouch-open-sea-navy'" />
-					<s:param name="id" value="'133'" />
-					<s:param name="poptitle">
-						<s:text name="%{getTranslaction(785)}"/>
-					</s:param>
-					<s:param name="popurl" value="''">
-					</s:param>
-				</s:include>
-				<!-- /.box-image -->
-			</div>
-
-			<div class="grid-item">
-				<!-- /.box-image -->
-				<s:include value="../template/presentationProductTemplate.jsp">
-					<s:param name="imagename" value="'product/165/medium_pouch_pleat_green_hearts_2.jpg'" />
-					<s:param name="imagealt" value="'cosmetic bag green hearts'" />
-					<s:param name="imageurl" value="'165/green-hearts-cosmetic-pouch-sunny-dance'" />
-					<s:param name="id" value="'165'" />
-					<s:param name="poptitle">
-						<s:text name="bolsos.collections.C0011.title"/>
-					</s:param>
-					<s:param name="popurl">
-						<s:text name='url.collection.sunnydance' />
-					</s:param>
-				</s:include>
-			</div>
-			<div class="grid-item">
-				<!-- /.box-image -->
-				<s:include value="../template/presentationProductTemplate.jsp">
-					<s:param name="imagename" value="'product/176/pencil_case_rifle_red_1.jpg'" />
-					<s:param name="imagealt" value="'pencil case harmony navy'" />
-					<s:param name="imageurl" value="'176/hamony-pencil-case-navy'" />
-					<s:param name="id" value="'176'" />
-					<s:param name="poptitle">
-						<s:text name='bolsos.home.carrusel.slide4.title' />
-					</s:param>
-					<s:param name="popurl">
-						<s:text name='url.collection.harmony' />
-					</s:param>
-				</s:include>
-			</div>
-			<div class="grid-item">
-				<!-- /.box-image -->
-				<s:include value="../template/presentationProductTemplate.jsp">
-					<s:param name="imagename" value="'product/160/medium_pouch_pink_triangles_1.jpg'" />
-					<s:param name="imagealt" value="'medium pouch sunny dance pink'" />
-					<s:param name="imageurl" value="'160/pink-triangles-pouch-sunny-dance'" />
-					<s:param name="id" value="'160'" />
-					<s:param name="poptitle">
-						<s:text name="bolsos.collections.C0011.title"/>
-					</s:param>
-					<s:param name="popurl">
-						<s:text name='url.collection.sunnydance' />
-					</s:param>
-				</s:include>
-				<!-- /.box-image -->
-			</div>
-
-			<div class="grid-item">
-				<!-- /.box-image -->
-				<s:include value="../template/presentationProductTemplate.jsp">
-					<s:param name="imagename" value="'product/155/lr_housse_tablette_taupe_4.jpg'" />
-					<s:param name="imagealt" value="'housse tablette taupe'" />
-					<s:param name="imageurl" value="'155/tablet-sleeve-taupe-grey'" />
-					<s:param name="id" value="'155'" />
-					<s:param name="poptitle">
-						<s:text name="%{getTranslaction(983)}"/>
-					</s:param>
-					<s:param name="popurl" value="''">
-					</s:param>
-				</s:include>
-			</div>
-			<div class="grid-item">
-				<!-- /.box-image -->
-				<s:include value="../template/presentationProductTemplate.jsp">
-					<s:param name="imagename" value="'product/131/tote_bag_into_the_wild_product.jpg'" />
-					<s:param name="imagealt" value="'tote bag into the wild product'" />
-					<s:param name="imageurl" value="'131/tote-bag-zebras-pink'" />
-					<s:param name="id" value="'131'" />
-					<s:param name="poptitle">
-						<s:text name="%{getTranslaction(781)}"/>
-					</s:param>
-					<s:param name="popurl" value="''"/>
-				</s:include>
-				<!-- /.box-image -->
-			</div>
-			
+			<s:if test="%{productSaleList != null && productSaleList.size > 0}">
+				<s:iterator value="productSaleList" status="status" var="item">
+				<div class="grid-item">
+					<s:include value="../template/presentationProductTemplate.jsp">
+						<s:param name="imagename"> 
+							product/<s:property value="id" />/<s:property value="image.name" />
+						</s:param>
+						<s:param name="imagealt">
+							<s:property value="name" />
+						</s:param>
+						<s:param name="imageurl">
+							<s:property value="url" />
+						</s:param>
+						<s:param name="id">
+							<s:property value="id" />
+						</s:param>
+						<s:param name="poptitle">
+							<s:property value="collection.name" />
+						</s:param>
+						<s:param name="popurl">
+							<s:text name="url.ourproduct.collections"/>/<s:property value="collection.url" />
+						</s:param>
+						<s:param name="paramnew">
+							<s:property value="newProduct" />
+						</s:param>
+						<s:param name="paramsale">
+							<s:property value="hasDiscount" />
+						</s:param>
+					</s:include>
+				</div>
+				</s:iterator>
+			</s:if>
+			<s:else>
+				<div class="grid-item">
+					<s:include value="../template/presentationProductTemplate.jsp">
+						<s:param name="imagename" value="'Basket-Heritage-Large.jpg'" />
+						<s:param name="imagealt" value="'Basket Heritage Large'" />
+						<s:param name="imageurl" value="'185/heritage-large-basket-pink'" />
+						<s:param name="id" value="'185'" />
+						<s:param name="poptitle">
+							<s:text name="%{getTranslaction(1214)}"/>
+						</s:param>
+						<s:param name="popurl" value="''">
+						</s:param>
+					</s:include>
+				</div>
+				<div class="grid-item">
+					<s:include value="../template/presentationProductTemplate.jsp">
+						<s:param name="imagename" value="'Travel-pouch-Heritage.jpg'" />
+						<s:param name="imagealt" value="'Travel pouch Heritage'" />
+						<s:param name="imageurl" value="'175/natural-cork-travel-pouch'" />
+						<s:param name="id" value="'175'" />
+						<s:param name="poptitle">
+							<s:text name="%{getTranslaction(1112)}"/>
+						</s:param>
+						<s:param name="popurl" value="''">
+						</s:param>
+					</s:include>
+				</div>
+				<div class="grid-item">
+					<s:include value="../template/presentationProductTemplate.jsp">
+						<s:param name="imagename" value="'Basket-Heritage-Medium.jpg'" />
+						<s:param name="imagealt" value="'Basket Heritage Medium'" />
+						<s:param name="imageurl" value="'186/heritage-medium-basket-beige'" />
+						<s:param name="id" value="'186'" />
+						<s:param name="poptitle">
+							<s:text name="%{getTranslaction(1216)}"/>
+						</s:param>
+						<s:param name="popurl" value="''">
+						</s:param>
+					</s:include>
+				</div>
+				<div class="grid-item">
+					<s:include value="../template/presentationProductTemplate.jsp">
+						<s:param name="imagename" value="'Basket-Heritage-Small.jpg'" />
+						<s:param name="imagealt" value="'Basket Heritage Small" />
+						<s:param name="imageurl" value="'190/heritage-small-basket-stars'" />
+						<s:param name="id" value="'190'" />
+						<s:param name="poptitle">
+							<s:text name="%{getTranslaction(1218)}"/>
+						</s:param>
+						<s:param name="popurl" value="''">
+						</s:param>
+					</s:include>
+				</div>
+				<div class="grid-item">
+					<s:include value="../template/presentationProductTemplate.jsp">
+						<s:param name="imagename" value="'Basket-Heritage-pink-vinyl.jpg'" />
+						<s:param name="imagealt" value="'Basket Heritage pink vinyl" />
+						<s:param name="imageurl" value="'201/medium-basket-heritage-pink'" />
+						<s:param name="id" value="'201'" />
+						<s:param name="poptitle">
+							<s:text name="%{getTranslaction(1234)}"/>
+						</s:param>
+						<s:param name="popurl" value="''">
+						</s:param>
+					</s:include>
+				</div>
+			</s:else>
 		</div>
 	</section>
 	<!-- Start modal to display the image -->

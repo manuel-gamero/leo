@@ -230,7 +230,7 @@ public class ShoppingCart implements java.io.Serializable, BasicModel {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "purchase_date", nullable = false, length = 29)
+	@Column(name = "purchase_date", nullable = true, length = 29)
 	public Date getPurchaseDate() {
 		return this.purchaseDate;
 	}

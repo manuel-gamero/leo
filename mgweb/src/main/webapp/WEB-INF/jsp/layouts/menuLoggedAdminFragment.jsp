@@ -25,6 +25,7 @@
                     <li><a href="collectionList.action">Collection</a></li>
                     <li class="divider"></li>
                     <li><a href="productList.action">Product</a></li>
+                    <li><a href="aeProductOrder.action">Product Order</a></li>
                   </ul>
                 </li>
                 <li class="dropdown">

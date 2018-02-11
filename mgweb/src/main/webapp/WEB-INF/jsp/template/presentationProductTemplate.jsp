@@ -1,11 +1,31 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 
+<s:set var="paramnew">
+   ${param.paramnew}
+</s:set>
+<s:set var="paramsale">
+   ${param.paramsale}
+</s:set>
+
 <div class="box-image">
 
 	<div class="image">
 		<img src="${images}/${param.imagename}" alt="${param.imagealt}"
 			class="img-responsive">
+		
 	</div>
+	<s:if test="#paramsale">
+		<div class="ribbon sale">
+			<div class="theribbon  text-center"><s:text name="bolsos.common.text.sale"/></div>
+			<div class="ribbon-background"></div>
+		</div>
+	</s:if>
+	<s:if test="#paramnew">
+		<div class="ribbon new">
+			<div class="theribbon text-center"><s:text name="bolsos.common.text.new"/></div>
+			<div class="ribbon-background"></div>
+		</div>
+	</s:if>
 	<div class="bg"></div>
 	<div class="name hidden-sm">
 		<a href="${images}/${param.imagename}"

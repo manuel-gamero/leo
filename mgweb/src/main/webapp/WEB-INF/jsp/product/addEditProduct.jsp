@@ -194,7 +194,7 @@
 					
 					<div class="form-group">
 						<label for="customLink" class="col-sm-2 control-label">Custom link</label>
-						<s:textfield id="customLink" name="productCustom" class="form-control"
+						<s:textfield id="customLink" name="product.customLink" class="form-control"
 							placeholder="Custom Link" type="text"/>
 					</div>
 					
@@ -540,8 +540,6 @@ $("#containment-wrapper").mousemove(function(e){
 
   });
   
-  console.log('+++ +++ +++ +++ 1');
-  
   	var obj = $(this);
  	// var components = obj.find(o.swatchClass);
   	var listComponents = $("img[id*='imag_']");
@@ -617,8 +615,6 @@ $("#containment-wrapper").mousemove(function(e){
 
 	});
   
-  console.log('+++ +++ +++ +++ 2');
-  
  $("#addCCI").click(function(){
 	console.log('$("#collection").val() :' + $("#collection").val());
 	if($("#customComponent").val() == "--Select--"){
@@ -662,8 +658,6 @@ $("#containment-wrapper").mousemove(function(e){
 		});
 	}
  });
-
- console.log('+++ +++ +++ +++ 3');
  
   $("#collection").change(function(){
 	 console.log('$("#collection").val() :' + $("#collection").val());
@@ -702,8 +696,6 @@ $("#containment-wrapper").mousemove(function(e){
 	      oDropdown.refresh();
 	  });
 	});
-  
-  console.log('+++ +++ +++ +++ 4');
 	
 	$("a#addCurrency").click(function() {
 		var counterCurrency = $("#counterCurrency").val();
@@ -766,8 +758,6 @@ $("#containment-wrapper").mousemove(function(e){
 		});
 	});
   
-  console.log('+++ +++ +++ +++ 5');
-  
   $('[id^=chageCCI]').click(function() {
 		var id = $(this).attr('id').split('_')[1];
 		var status = $('#status_' + id).text();
@@ -784,7 +774,6 @@ $("#containment-wrapper").mousemove(function(e){
 		});
 	});
   
-  console.log('+++ +++ +++ +++ 6');
 /* $("#customLink").autocomplete({
       source: function( request, response ) {
           $.getJSON( "/ajax/search", {term: $("#productCustom").val()}, response );
@@ -826,7 +815,6 @@ $("#containment-wrapper").mousemove(function(e){
                   },
                   dataType : "json",
                   success : function(serverJsonResponse) {
-                	console.log('+++ +++ +++ +++ 6.1');
                     response( $.map( serverJsonResponse.list, function( item ) {
                     	return {
                         	label: item.value,
@@ -837,7 +825,6 @@ $("#containment-wrapper").mousemove(function(e){
               });
           }
       });
-      console.log('+++ +++ +++ +++ 7');
 
 });
 

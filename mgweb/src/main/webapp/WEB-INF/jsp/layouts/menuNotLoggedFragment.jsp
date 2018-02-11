@@ -343,6 +343,9 @@
 					</ul>
 				</li>
 				<!-- End product section -->
+				<li class="dropdown yamm-fw"><a href='<s:text name="url.sales"/>' class="dropdown-toggle" data-hover="dropdown"
+					data-delay="200"> <s:text name="bolsos.home.menu.sales" />
+				</a></li>
 				<li class="dropdown yamm-fw"><a href='<s:text name="url.contact"/>' class="dropdown-toggle" data-hover="dropdown"
 					data-delay="200"> <s:text name="bolsos.home.menu.contact" />
 				</a></li>

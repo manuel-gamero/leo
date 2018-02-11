@@ -631,27 +631,5 @@ public class CollectionServiceImpl extends ServiceImpl implements CollectionServ
 			throw new ServiceException(de);
 		}	
 	}
-
-	@Override
-	public CustomComponentImage getCustomComponentImage(final Integer id)
-			throws ServiceException {
-		CustomComponentImage result;
-		try {
-			result = (CustomComponentImage) ServiceLocator.getService(CacheServiceImpl.class).getDefaultCache().fetch(CustomComponentImage.class + "_" + id);
-			if( result == null ){
-				daoManager.setCommitTransaction(true);
-				result = (CustomComponentImage) daoManager.executeAndHandle(new DaoCommand() {
-					@Override
-					public Object execute(EntityManager em) throws DaoException {
-						return DaoFactory.getDAO(CustomComponentImageDAO.class, em).find(id);
-					}
-				});
-				ServiceLocator.getService(CacheServiceImpl.class).getDefaultCache().store(CustomComponentImage.class + "_" + id, result);
-			}
-		} catch (Exception e) {
-			throw (new ServiceException(e));
-		}
-		return result;
-	}
 	
 }

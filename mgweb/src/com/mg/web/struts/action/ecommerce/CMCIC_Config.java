@@ -14,17 +14,6 @@ import com.mg.service.init.ConfigServiceImpl;
 * You may for instance put this file in another directory and/or change its name       *
 ***************************************************************************************/
 
-/*class CMCIC_Config
-{
-final static String CMCIC_CLE = "EC9B0440125A8F24B1106D858D7A71B84B66B0PA";
-final static String CMCIC_TPE = "0002083";
-final static String CMCIC_VERSION = "3.0";
-final static String CMCIC_SERVEUR = "https://paiement.e-i.com/desjardins/test/" ;//"https://paiement.e-i.com/desjardins/test/paiement.cgi" ; //"https://paiement.creditmutuel.fr/test/";
-final static String CMCIC_CODESOCIETE = "testatelie";
-final static String CMCIC_URLOK = "http://latelierdeleo.no-ip.org/shoppingCartPaymentOk.action";
-final static String CMCIC_URLKO = "http://latelierdeleo.no-ip.org/shoppingCartPaymentReturn.action";
-}*/
-
 class CMCIC_Config
 {
 	private static final Logger log = Logger.getLogger(CMCIC_Config.class);

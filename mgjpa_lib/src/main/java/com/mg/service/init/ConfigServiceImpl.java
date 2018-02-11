@@ -61,6 +61,7 @@ public class ConfigServiceImpl extends ServiceImpl implements ConfigService{
 	private static final String WEB_RESOURCE_UTL_ALLOW 					= "mg.config.web.resource.url.allows";
 	private static final String WEB_RESOURCE_AUDIR_FILTER				= "mg.config.web.resource.audit.filter";
 	private static final String WEB_RESOURCES_SSL						= "mg.config.web.resource.ssl";
+	private static final String LUCENE_INDEX_PATH						= "mg.lucene.index.path";
 	
 	private static final String ROOT_PATH = "mg.root.path";
 	private static final String URL_SERVER = "mg.url.server";
@@ -340,6 +341,11 @@ public class ConfigServiceImpl extends ServiceImpl implements ConfigService{
 	@Override
 	public String getRootPathWeb() {
 		return getProperty(ROOT_PATH);
+	}
+	
+	@Override
+	public String getLuceneIndexPath() {
+		return getProperty(LUCENE_INDEX_PATH);
 	}
 	
 	@Override

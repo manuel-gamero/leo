@@ -5,13 +5,16 @@ import java.util.List;
 import java.util.Set;
 
 import com.mg.enums.ProductType;
+import com.mg.exception.CacheException;
 import com.mg.exception.ServiceException;
+import com.mg.exception.ServiceLocatorException;
 import com.mg.model.CustomComponentText;
 import com.mg.model.Item;
 import com.mg.model.Price;
 import com.mg.model.PriceEntry;
 import com.mg.model.Product;
 import com.mg.model.ProductImage;
+import com.mg.model.ProductOrder;
 import com.mg.service.Service;
 import com.mg.service.dto.CustomComponentImageDTO;
 import com.mg.service.dto.ImageDTO;
@@ -38,6 +41,8 @@ public interface ProductService extends Service {
 	 * @throws ServiceException
 	 */
 	List<Product> getAllProduct() throws ServiceException;
+	
+	List<ProductOrder> getAllProductOrder() throws ServiceException;
 
 	Product getProduct(Integer id, boolean useCache) throws ServiceException;
 
@@ -86,4 +91,11 @@ public interface ProductService extends Service {
 	 * @throws ServiceException
 	 */
 	void saveNewPrice(final Integer id, final BigDecimal newPrice) throws ServiceException;
+
+	int saveProductOrder(ProductOrder productOrder) throws ServiceException;
+
+	void deleteProductOrder(ProductOrder productOrder) throws ServiceException;
+
+	List<Product> getAllSaleProduct(String currencyCode)
+			throws ServiceException, CacheException, ServiceLocatorException;
 }

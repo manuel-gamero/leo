@@ -272,6 +272,19 @@
 		</put-list-attribute>
 	</definition> 
 	
+	<definition name="/addEditProductOrder.tiles" extends="baseAdminLayout">
+		<put-attribute name="body" type="template" value="../product/addEditProductOrder.jsp" />
+		<put-list-attribute name="scriptList">
+				<add-attribute type="string" value="jquery-ui.js" />
+		</put-list-attribute>
+		<put-list-attribute name="cssList">
+				<add-attribute type="string" value="jquery-ui.css" />
+				<add-attribute type="string" value="jquery-ui.theme.css" />
+				<add-attribute type="string" value="jquery-ui.structure.css" />
+				<add-attribute type="string" value="style.default.css" />
+		</put-list-attribute>
+	</definition>
+	
 	<definition name="/addEditCccTranslacion.tiles" extends="popAdminFormLayout">
 		<put-attribute name="body" type="template" value="../pops/addEditCustomComponentCollectionPop.jsp" />
 	</definition>

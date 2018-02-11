@@ -17,6 +17,7 @@ import com.mg.model.CustomComponentCollection;
 import com.mg.model.CustomComponentImage;
 import com.mg.service.ServiceLocator;
 import com.mg.service.dto.ItemDTO;
+import com.mg.service.image.ImageServiceImpl;
 import com.mg.service.product.CollectionServiceImpl;
 import com.mg.web.struts.action.BasicListActionSupport;
 
@@ -204,7 +205,7 @@ public class AdminPageAjax<T> extends BasicListActionSupport<T> {
 	public String changeStatusCCI(){
 		try {
 			CollectionStatus statusCode = null;
-			CustomComponentImage customComponentImage = ServiceLocator.getService(CollectionServiceImpl.class).getCustomComponentImage(id);
+			CustomComponentImage customComponentImage = ServiceLocator.getService(ImageServiceImpl.class).getCustomComponentImage(id);
 			if(code.equals("ACTIVE")){
 				statusCode = CollectionStatus.INACTIVE;
 			}

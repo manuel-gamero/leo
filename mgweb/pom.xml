@@ -13,11 +13,9 @@
 	<name>mgweb Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
-
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
-			<version>1.8.0</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-digester</groupId>
@@ -65,9 +63,8 @@
 			<version>2.3.23</version>
 		</dependency>
 		<dependency>
-			<groupId>javassist</groupId>
+			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
-			<version>3.11.0.GA</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.persistence</groupId>

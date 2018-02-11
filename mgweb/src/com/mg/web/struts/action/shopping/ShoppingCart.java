@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.mg.annotation.Action;
-import com.mg.coupon.CouponAbstract;
 import com.mg.exception.CurrencyNoExistException;
 import com.mg.model.Item;
 import com.mg.model.Product;
@@ -25,9 +24,8 @@ public class ShoppingCart extends BasicShoppingCart implements Preparable {
 	private Product product;
 	private List<String> customComponentCollection;
 	private Item item;
-	//private List<ItemShoppingCartDTO> shoppingCartList;
 	private int id;
-	private int index;
+	private Integer index;
 	
 	@Override
 	public void prepare() {
@@ -60,7 +58,12 @@ public class ShoppingCart extends BasicShoppingCart implements Preparable {
 				ServiceLocator.getService(ImageServiceImpl.class).generatePNGImage( item, false);
 			}
 			List<Item> itemList = getShoppingCartItems();
-			itemList.add(item);
+			if(index == null){//That means a new product
+				itemList.add(item);
+			}
+			else{ //Modify a custom product
+				itemList.set(index, item); 
+			}
 			request.getSession().setAttribute(WebConstants.SHOPPING_CART_ITEMS, itemList);
 			log.debug("Item's number in shoppingCart: " + itemList.size());
 			return SUCCESS;
@@ -78,16 +81,8 @@ public class ShoppingCart extends BasicShoppingCart implements Preparable {
 				addActionError((String)ActionContext.getContext().getSession().get(WebConstants.ERRORACTION));
 				ActionContext.getContext().getSession().remove(WebConstants.ERRORACTION);
 			}
-			resetCoupon();
-			//Apply coupon
-			applyCoupon();
-			//Calculate and set the partial total for lines
-			calculeSubTotal();
-			//Calculate and set the total shopping cart
-			setTotalShoppingCart();
-			//if(getShoppingCartItems() != null){
-			//	shoppingCartList = DTOFactory.getItemShoppingCartDTOList(getShoppingCartItems(), getCurrentLanguage(), getCurrentCountry());
-			//}
+			calculateShopingCart();
+
 			//If the process is already done, then go directly to summary
 			if( getShoppingCart().getMethodShipping() != null &&
 			   getShoppingCart().getMethodShipping() != null ){
@@ -105,16 +100,10 @@ public class ShoppingCart extends BasicShoppingCart implements Preparable {
 		}
 	}
 
-	private void resetCoupon() throws CurrencyNoExistException {
-		CouponAbstract.cleanDiscount(getShoppingCart(), getShoppingCartItems());
-		calculeSubTotal();
-		setTotalShoppingCart();
-	}
-
 	@Action(value="product = #shoppingCartList[index].product.id customComponentCollection = #shoppingCartList[index].nameImage ")
 	public String remove(){
 		List<Item> itemList = getShoppingCartItems();
-		itemList.remove(index);
+		itemList.remove(index.intValue());
 		return SUCCESS;
 	}
 	public Product getProduct() {
@@ -157,10 +146,6 @@ public class ShoppingCart extends BasicShoppingCart implements Preparable {
 		return null;
 	}
 
-	//public void setShoppingCartList(List<ItemShoppingCartDTO> shoppingCartList) {
-	//	this.shoppingCartList = shoppingCartList;
-	//}
-
 	public int getId() {
 		return id;
 	}
@@ -169,11 +154,11 @@ public class ShoppingCart extends BasicShoppingCart implements Preparable {
 		this.id = id;
 	}
 	
-	public int getIndex() {
+	public Integer getIndex() {
 		return index;
 	}
 
-	public void setIndex(int index) {
+	public void setIndex(Integer index) {
 		this.index = index;
 	}
 

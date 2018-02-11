@@ -13,7 +13,7 @@ public class PromotionManager {
 	
 	private static List<Coupons> promotions;
 	
-	public static void init() throws ServiceException, ServiceLocatorException{
+	public static void initialize() throws ServiceException, ServiceLocatorException{
 		if( getPromotions() == null){
 			setPromotion( ServiceLocator.getService(CouponServiceImpl.class).getAllCouponPromotion());
 		}

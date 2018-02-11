@@ -215,4 +215,6 @@ public interface ConfigService extends Service{
 	String getInstagramUserId();
 
 	String getWebImagePromotionLocation();
+
+	String getLuceneIndexPath();
 }

@@ -1,15 +1,20 @@
 package com.mg.web.struts.action.product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import com.mg.annotation.Action;
 import com.mg.exception.CurrencyNoExistException;
+import com.mg.exception.ServiceException;
+import com.mg.exception.ServiceLocatorException;
+import com.mg.model.CustomComponentImage;
 import com.mg.service.ServiceLocator;
 import com.mg.service.dto.DTOFactory;
 import com.mg.service.dto.ItemViewDTO;
 import com.mg.service.dto.ProductDTO;
+import com.mg.service.image.ImageServiceImpl;
 import com.mg.service.init.ConfigServiceImpl;
 import com.mg.service.product.ProductServiceImpl;
 import com.mg.util.currency.CurrencyUtils;
@@ -27,6 +32,7 @@ public class Product extends BasicAction implements Preparable {
 	private Integer id;
 	private String extraPrice;
 	private String nameUrlProduct;
+	private String custom;
 	
 	@Override
 	public void prepare() {
@@ -155,5 +161,49 @@ public class Product extends BasicAction implements Preparable {
 		this.nameUrlProduct = nameUrlProduct;
 	}
 
+	public String getCustom() {
+		return custom;
+	}
+
+	public void setCustom(String custom) {
+		this.custom = custom;
+	}
+
+	/**
+	 * @return The list all the custom component images with its product and custom collection.
+	 * 
+	 * This method will be called for the frontend and use it for set all the component for the product.
+	 * In a custom product there are many component that form the product image.
+	 * 
+	 * The custom property will have the following pattern: productId_CCIId1_CCIId2_...
+	 * 
+	 * And the list that I will produce will have the following pattern:
+	 * 
+	 * productId1_CCId1_CCIId1_CCId1, productId2_CCId2_CCIId2_CCId2, ...
+	 * @throws ServiceLocatorException 
+	 * @throws ServiceException 
+	 * @throws NumberFormatException 
+	 */
+	public List<String> getCustomComponentForProduct() throws NumberFormatException, ServiceException, ServiceLocatorException{
+		List<String> listCustomComponents = new ArrayList<String>();
+		if(custom != null && custom.length()>0){
+			int i = 0;
+			String components[] = custom.split("_");
+			String productId = components[0];
+			for (i = 1; i < components.length; i++) {
+				String component = getComponent(productId, components[i]);
+				component = "'" + component + "'";
+				listCustomComponents.add(component);
+			}
+		}
+		return listCustomComponents;
+	}
+
+	private String getComponent(String productId, String cciid) throws NumberFormatException, ServiceException, ServiceLocatorException {
+		CustomComponentImage cci = ServiceLocator.getService(ImageServiceImpl.class).getCustomComponentImage(Integer.valueOf(cciid));
+		String id = productId + "_" + cci.getCustomComponentCollection().getCustomComponent().getId();
+		id = id + "_" + cci.getId() + "_" + cci.getCustomComponentCollection().getCustomComponent().getId();
+		return id;
+	}
 
 }

@@ -8,8 +8,10 @@ import com.mg.exception.CacheException;
 import com.mg.exception.ServiceLocatorException;
 import com.mg.model.MethodShipping;
 import com.mg.model.Product;
+import com.mg.model.ProductOrder;
 import com.mg.service.ServiceLocator;
 import com.mg.service.cache.CacheServiceImpl;
+import com.mg.service.product.ProductManager;
 import com.mg.service.product.ProductServiceImpl;
 import com.mg.service.shopping.ShoppingServiceImpl;
 import com.mg.util.currency.CurrencyUtils;
@@ -72,6 +74,31 @@ public class PriceAjax extends BasicListActionSupport<String> {
 		return  SUCCESS;
 	}
 	
+	public String deleteProductOrder(){
+		try {
+			if(id != null && id > 0){
+				ProductOrder productOrder = new ProductOrder();
+				productOrder.setId(id);
+				ServiceLocator.getService(ProductServiceImpl.class).deleteProductOrder(productOrder);
+			}
+		}
+		catch (Exception e) {
+			managerException(e);	
+		}
+		return  SUCCESS;
+	}
+	
+	public String publishProductOrderList(){
+		try {
+			ProductManager.reset();
+		}
+		catch (Exception e) {
+			managerException(e);	
+		}
+		return  SUCCESS;
+	}
+	
+	
 	public String savePriceEntry(){
 		try {
 			if(id != null && id > 0){
@@ -85,6 +112,14 @@ public class PriceAjax extends BasicListActionSupport<String> {
 		return  SUCCESS;
 	}
 
+	/**
+	 * @throws CacheException
+	 * @throws ServiceLocatorException
+	 * 
+	 * This method is going to remove the product in all the caches the is is.
+	 * Because once that we change something in relation with the price. This 
+	 * product is no longer good.
+	 */
 	private void removeProductFromCache() throws CacheException, ServiceLocatorException{
 		if( productId != null && productId > 0){
 			ServiceLocator.getService(CacheServiceImpl.class).getProductCache().remove(Product.class + "_" + productId);

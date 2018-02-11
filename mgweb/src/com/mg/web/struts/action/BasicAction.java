@@ -30,8 +30,10 @@ import com.mg.service.cache.CacheServiceImpl;
 import com.mg.service.coupon.CouponServiceImpl;
 import com.mg.service.dto.CollectionDTO;
 import com.mg.service.dto.DTOFactory;
+import com.mg.service.dto.ProductDTO;
 import com.mg.service.dto.UserSessionDTO;
 import com.mg.service.product.CollectionServiceImpl;
+import com.mg.service.product.ProductManager;
 import com.mg.util.communication.Receipt;
 import com.mg.util.exception.ExceptionHandler;
 import com.mg.util.translation.TranslationUtils;
@@ -501,4 +503,9 @@ public class BasicAction extends ActionSupport implements ServletRequestAware,
 	public String getPromotionUrl(){
 		return TranslationUtils.getTranslation(PromotionManager.getPromotion().getCouponsType().getTranslationByUrlTransId(), getCurrentLanguage());
 	}
+	
+	public List<ProductDTO> getProductSaleList(){
+		return DTOFactory.getProductDTOList(ProductManager.getProdcutSaleList(), getCurrentLanguage(), getCurrentCurrencyCode(), false);
+	}
 }
+

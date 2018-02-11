@@ -22,11 +22,14 @@ import com.mg.dao.impl.PriceDAO;
 import com.mg.dao.impl.PriceEntryDAO;
 import com.mg.dao.impl.ProductDAO;
 import com.mg.dao.impl.ProductImageDAO;
+import com.mg.dao.impl.ProductOrderDAO;
 import com.mg.enums.CollectionStatus;
 import com.mg.enums.ImageType;
 import com.mg.enums.ProductType;
+import com.mg.exception.CacheException;
 import com.mg.exception.DaoException;
 import com.mg.exception.ServiceException;
+import com.mg.exception.ServiceLocatorException;
 import com.mg.model.CustomComponentImage;
 import com.mg.model.CustomComponentText;
 import com.mg.model.Image;
@@ -35,6 +38,7 @@ import com.mg.model.Price;
 import com.mg.model.PriceEntry;
 import com.mg.model.Product;
 import com.mg.model.ProductImage;
+import com.mg.model.ProductOrder;
 import com.mg.service.ServiceImpl;
 import com.mg.service.ServiceLocator;
 import com.mg.service.cache.CacheServiceImpl;
@@ -78,6 +82,46 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 								throws DaoException {
 							return DaoFactory.getDAO(ProductDAO.class, em)
 									.getAll();
+						}
+					});
+		} catch (DaoException de) {
+			throw (new ServiceException(de));
+		}
+		return list;
+	}
+	
+	@Override
+	public List<Product> getAllSaleProduct(String currencyCode) throws ServiceException, CacheException, ServiceLocatorException {
+		List<Product> list = new ArrayList<Product>();
+		List<String> keys = ServiceLocator.getService(CacheServiceImpl.class).getProductCache().getKeys();
+		for (String item : keys) {
+			com.mg.model.Product product = ServiceLocator.getService(CacheServiceImpl.class).getProductCache().fetch(item);
+			if( isSale(product, currencyCode) && !product.getCustomProduct() ){
+				list.add(product);
+			}		
+		}
+		return list;
+	}
+	
+	private boolean isSale(Product product, String currencyCode) {
+		if( CurrencyUtils.hasDiscount(product.getPrice(), currencyCode) ){
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<ProductOrder> getAllProductOrder() throws ServiceException {
+		List<ProductOrder> list = null;
+		try {
+			daoManager.setCommitTransaction(true);
+			list = (List<ProductOrder>) daoManager
+					.executeAndHandle(new DaoCommand() {
+						@Override
+						public Object execute(EntityManager em)
+								throws DaoException {
+							return DaoFactory.getDAO(ProductOrderDAO.class, em).findAll();
 						}
 					});
 		} catch (DaoException de) {
@@ -374,6 +418,26 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 		}
 		return id;
 	}
+	
+	@Override
+	public int saveProductOrder(final ProductOrder productOrder)
+			throws ServiceException {
+		int id = 0;
+		try {
+			daoManager.setCommitTransaction(true);
+			id = (Integer)daoManager.executeAndHandle(new DaoCommand() {	
+				@Override
+				public Object execute(EntityManager em) throws DaoException {	
+					productOrder.setCreationDate(new Date());
+					DaoFactory.getDAO(ProductOrderDAO.class, em).save(productOrder);
+					return(productOrder.getId());
+				}
+			});
+		} catch (DaoException de) {
+			throw new ServiceException(de);
+		}
+		return id;
+	}
 
 	@Override
 	public void deletePrice(final Price price)
@@ -385,6 +449,24 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 				public Object execute(EntityManager em) throws DaoException {				
 					DaoFactory.getDAO(PriceDAO.class, em).delete(price);
 					return(price);
+				}
+			});
+		} catch (DaoException de) {
+			throw new ServiceException(de);
+		}	
+		
+	}
+	
+	@Override
+	public void deleteProductOrder(final ProductOrder productOrder)
+			throws ServiceException {
+		try {
+			daoManager.setCommitTransaction(true);
+			daoManager.executeAndHandle(new DaoCommand() {	
+				@Override
+				public Object execute(EntityManager em) throws DaoException {				
+					DaoFactory.getDAO(ProductOrderDAO.class, em).delete(productOrder);
+					return(productOrder);
 				}
 			});
 		} catch (DaoException de) {

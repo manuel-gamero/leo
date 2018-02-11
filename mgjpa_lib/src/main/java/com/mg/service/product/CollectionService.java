@@ -86,8 +86,6 @@ public interface CollectionService extends Service {
 	
 	public CustomComponentCollection getTranslationForCustomComponentCollection(final String imageName)	throws ServiceException;
 	
-	CustomComponentImage getCustomComponentImage (final Integer id) throws ServiceException ;
-	
 	public List<Collection> getAllCollectionEntities() throws ServiceException ;
 	
 	public List<Collection> getAllActiveCollectionEntities() throws ServiceException ;

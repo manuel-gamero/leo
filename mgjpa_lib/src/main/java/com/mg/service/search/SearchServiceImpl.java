@@ -2,14 +2,24 @@ package com.mg.service.search;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 
-import org.apache.log4j.Logger;
+import javax.persistence.EntityManager;
 
+import org.apache.log4j.Logger;
+import org.apache.lucene.search.Query;
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.Search;
+import org.hibernate.search.query.dsl.QueryBuilder;
+
+import com.mg.dao.core.DaoCommand;
+import com.mg.exception.DaoException;
 import com.mg.exception.InitializationException;
 import com.mg.exception.ServiceException;
 import com.mg.exception.ServiceLocatorException;
+import com.mg.model.Product;
 import com.mg.service.ServiceImpl;
 import com.mg.service.ServiceLocator;
 import com.mg.service.init.ConfigService;
@@ -19,6 +29,8 @@ import com.mg.service.search.autocompleter.core.AutocompleterConfigurator;
 import com.mg.service.search.autocompleter.core.AutocompleterElement;
 import com.mg.service.search.autocompleter.core.AutocompleterUnit;
 import com.mg.service.search.autocompleter.task.SearchAutocompleterTask;
+import com.mg.service.search.lucene.FullTextEntityQuery.Mode;
+import com.mg.service.search.lucene.ProductFullTextEntityQuery;
 
 /**
  * Provides all search related logic in the system.
@@ -32,25 +44,13 @@ public class SearchServiceImpl extends ServiceImpl implements SearchService {
 	
 	// Java timers work with milliseconds
 	private static final long TIME_UNIT_ONE_SECOND = 1000;
-	private static final long TIME_UNIT_ONE_MINUTE = 60 * TIME_UNIT_ONE_SECOND;
+	private static final long TIME_UNIT_ONE_MINUTE = 60 * TIME_UNIT_ONE_SECOND;	
+	private static final String TITLE_EDGE_NGRAM_INDEX = "edgeNGramTitle";
+	 private static final String TITLE_NGRAM_INDEX = "nGramTitle";
 	
-	private static final SearchService INSTANCE = new SearchServiceImpl();
-	
-	/**
-	 * A singleton search service
-	 * 
-	 * @return
-	 */
-	public static SearchService getInstance() {
-		return INSTANCE;
+	public SearchServiceImpl() {
+		super();
 	}
-	
-	private SearchServiceImpl() {
-		if (INSTANCE != null) {
-			throw new IllegalStateException(this.getClass()	+ " instance is already created");
-		}
-	}
-	
 
 	private Autocompleter<Long, AutocompleterUnit> seriesSearchAutocompleter;
 	
@@ -161,6 +161,79 @@ public class SearchServiceImpl extends ServiceImpl implements SearchService {
 	public Map<Long, String> getAllSeriesMap() throws ServiceException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void restart() throws ServiceException {
+		try {
+			daoManager.setCommitTransaction(true);
+			daoManager.executeAndHandle(new DaoCommand() {
+				@Override
+				public Object execute(EntityManager em) throws DaoException {
+					try {
+						FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
+						fullTextEntityManager.createIndexer().startAndWait();
+						return null;
+					} catch (Exception e) {
+						e.printStackTrace();
+						throw new DaoException(e);
+					}
+				}
+			});
+		} catch (DaoException de) {
+			throw new ServiceException(de);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Product> searchProduct(final String searchText) throws ServiceException {
+		List<Product> list = null;
+		try {
+			daoManager.setCommitTransaction(true);
+			list = (List<Product>) daoManager
+					.executeAndHandle(new DaoCommand() {
+						@Override
+						public Object execute(EntityManager em)	throws DaoException {
+							FullTextEntityManager fullTextEntityManager =
+								    org.hibernate.search.jpa.Search.getFullTextEntityManager(em);
+
+								// create native Lucene query unsing the query DSL
+								// alternatively you can write the Lucene query using the Lucene query parser
+								// or the Lucene programmatic API. The Hibernate Search DSL is recommended though
+								QueryBuilder qb = (QueryBuilder) fullTextEntityManager.getSearchFactory()
+								    .buildQueryBuilder().forEntity(Product.class).get();
+								/*org.apache.lucene.search.Query luceneQuery = ((org.hibernate.search.query.dsl.QueryBuilder) qb)
+								  .keyword()
+								  .onFields("translationByNameTransId.translationEntries.text")
+								  .matching(query)
+								  .createQuery();*/
+								Query luceneQuery = qb.phrase().withSlop(2).onField(TITLE_NGRAM_INDEX)
+										   .andField(TITLE_EDGE_NGRAM_INDEX).boostedTo(5)
+										   .sentence(searchText.toLowerCase()).createQuery();
+
+								// wrap Lucene query in a javax.persistence.Query
+								javax.persistence.Query jpaQuery =
+								    fullTextEntityManager.createFullTextQuery(luceneQuery, Product.class);
+
+								// execute search
+								List<Product> result = jpaQuery.getResultList();
+								
+								ProductFullTextEntityQuery q = new ProductFullTextEntityQuery();
+								List<String> fields = new ArrayList<String>();
+								fields.add("translationByNameTransId.translationEntries.text");
+								q.setFields(fields);
+								q.setMode(Mode.SIMPLE_STARTS_WITH);
+								q.setMaxResults(25);
+								q.setSearchText(searchText);
+								
+								return q.getItems(em);
+						}
+					});
+		} catch (DaoException de) {
+			throw (new ServiceException(de));
+		}
+		return list;
 	}
 	
 }

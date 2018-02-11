@@ -20,6 +20,7 @@ import com.mg.service.dto.ProductDTO;
 import com.mg.service.init.ConfigServiceImpl;
 import com.mg.service.product.CollectionServiceImpl;
 import com.mg.service.product.ProductServiceImpl;
+import com.mg.util.currency.CurrencyUtils;
 import com.mg.util.text.StringUtils;
 import com.mg.util.translation.TranslationUtils;
 import com.mg.web.RequestAtributeConstants;
@@ -41,6 +42,7 @@ public class OurProduct extends BasicAction implements Preparable {
 	private String tag;
 	private String sortBy;
 	private String title;
+	private Boolean sale;
 	//private String description;
 	private String action;
 	private Collection collection;
@@ -154,7 +156,10 @@ public class OurProduct extends BasicAction implements Preparable {
 			//If there is not any list then get it
 			if(list == null){
 				List<Product> listProduct = null;
-				if(nameUrlType != null){
+				if(sale){
+					listProduct = ServiceLocator.getService(ProductServiceImpl.class).getAllSaleProduct(getCurrentCurrencyCode());
+				}
+				else if(nameUrlType != null){
 					log.debug("Type nameUrlType: " + nameUrlType);
 					listProduct = createProductList( ServiceLocator.getService(ProductServiceImpl.class).getProductByType(type, customProduct) );
 				}
@@ -189,7 +194,11 @@ public class OurProduct extends BasicAction implements Preparable {
 			}
 			log.debug("list.size: " + list.size());
 			
-			if(nameUrlType != null){
+			if(sale){
+				log.debug("Setting metainfo for sales page.");
+				setMetaInfoForSale();
+			}
+			else if(nameUrlType != null){
 				log.debug("Setting metainfo for type.");
 				setMetaInfoForType();
 			}
@@ -216,6 +225,18 @@ public class OurProduct extends BasicAction implements Preparable {
 		}
 		return (productByCollection);
 	}
+	
+	private void setMetaInfoForSale() throws ServiceLocatorException {
+		setPageTitleKey(TITLE_PAGE_PARAM);
+		setPageFbTitle(TITLE_PAGE_PARAM);
+		request.setAttribute(RequestAtributeConstants.PAGE_TITLE_PARAM_1, getText("bolsos.sales.title") );
+		request.setAttribute(RequestAtributeConstants.PAGE_FB_TITLE_PARAM_1, getText("bolsos.sales.title"));
+		setPageDescriptionKey(DESCR_PAGE_PARAM);
+		setPageFbDescription(DESCR_PAGE_PARAM);
+		request.setAttribute(RequestAtributeConstants.PAGE_DESCRIPTION_PARAM_1, getText("bolsos.sales.description") );
+		request.setAttribute(RequestAtributeConstants.PAGE_FB_DESCRIPTION_PARAM_1, getText("bolsos.sales.description") );
+	}
+
 
 	private void setMetaInfoForType() throws ServiceLocatorException {
 		setPageTitleKey(TITLE_PAGE_PARAM);
@@ -288,7 +309,10 @@ public class OurProduct extends BasicAction implements Preparable {
 
 	public String getTitle(){
 		if( title == null){
-			if(type != null){
+			if(sale){
+				title = getText("bolsos.sales.title");
+			}
+			else if(type != null){
 				title = getText(type.getLocalizationTitleKey());
 			}
 			else if(collectionId != null && list.size() > 0){
@@ -305,7 +329,10 @@ public class OurProduct extends BasicAction implements Preparable {
 
 	public String getDescription() {
 		String description = "";
-		if(type != null){
+		if(sale){
+			description = getText("bolsos.sales.description");
+		}
+		else if(type != null){
 			description = getText(type.getLocalizationDescriptionKey());
 		}
 		else if(collectionId != null ){
@@ -367,6 +394,14 @@ public class OurProduct extends BasicAction implements Preparable {
 
 	public void setCustomProduct(Boolean customProduct) {
 		this.customProduct = customProduct;
+	}
+
+	public Boolean getSale() {
+		return sale;
+	}
+
+	public void setSale(Boolean sale) {
+		this.sale = sale;
 	}
 
 

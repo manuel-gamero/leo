@@ -1,86 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="mgPostgress" transaction-type="RESOURCE_LOCAL">
-	    <provider>org.hibernate.ejb.HibernatePersistence</provider>
-      	<non-jta-data-source>java:comp/env/jdbc/postgresDS</non-jta-data-source>
-	    <class>com.mg.model.Users</class>
-	    <class>com.mg.model.UserAddress</class>
-	    <class>com.mg.model.Translation</class>
-	    <class>com.mg.model.TranslationEntry</class>
-	    <class>com.mg.model.Image</class>
-	    <class>com.mg.model.Product</class>
-	    <class>com.mg.model.ProductImage</class>
-	    <class>com.mg.model.Collection</class>
-	    <class>com.mg.model.CustomComponent</class>
-	    <class>com.mg.model.CustomComponentCollection</class>
-	    <class>com.mg.model.CustomComponentImage</class>
-	    <class>com.mg.model.CustomComponentText</class>
-	    <class>com.mg.model.ProductTag</class>
-	    <class>com.mg.model.ShoppingCart</class>
-	    <class>com.mg.model.ShoppingCartItem</class>
-	    <class>com.mg.model.Taxes</class>
-	    <class>com.mg.model.Item</class>
-	    <class>com.mg.model.ItemComponent</class>
-	    <class>com.mg.model.MethodShipping</class>
-	    <class>com.mg.model.Logs</class>
-	    <class>com.mg.model.BasicAudit</class>
-	    <class>com.mg.model.Audit</class>
-	    <class>com.mg.model.Price</class>
-	    <class>com.mg.model.PriceEntry</class>
-	  	<class>com.mg.model.Transaction</class>
-	  	<class>com.mg.model.Coupons</class>
-	  	<class>com.mg.model.CouponsType</class>
-	  	<class>com.mg.model.CouponsUser</class>
-	  	<class>com.mg.model.AuditHist</class>
-	  	<class>com.mg.model.Device</class>
-	  	<class>com.mg.model.DeviceCollection</class>
-	  	<class>com.mg.model.DeviceCollectionHist</class>
-	  	<class>com.mg.model.DeviceComponent</class>
-	  	<class>com.mg.model.DeviceComponentHist</class>
-	  	<class>com.mg.model.DeviceProduct</class>
-	  	<class>com.mg.model.DeviceProductHist</class>
-	  	<class>com.mg.model.DeviceUrl</class>
-	  	<class>com.mg.model.DeviceUser</class>
-	  	<class>com.mg.model.DeviceSession</class>
-	  	<class>com.mg.model.DeviceUserActionParam</class>
-	  	<class>com.mg.model.Paypal</class>
-	  	<class>com.mg.model.Jobs</class>
-	  	
-	    <properties>
-			<property name="hibernate.connection.datasource" value="java:comp/env/jdbc/postgresDS"/>
-			<property name="hibernate.id.new_generator_mappings" value ="false"/>
-			 
-			
-			<property name="hibernate.temp.use_jdbc_metadata_defaults" value=" false"/>
-			<property name="hibernate.archive.autodetection" value="class"/>
-			<property name="hibernate.show_sql" value="false"/>
-			<property name="hibernate.format_sql" value="false"/>
+		<!-- 40 down vote accepted The class org.hibernate.ejb.HibernatePersistence 
+			does not exist in the hibernate-release-5.2.11.Final.zip bundle file -->
+		<!-- https://stackoverflow.com/questions/39410183/hibernate-5-2-2-no-persistence-provider-for-entitymanager -->
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<non-jta-data-source>java:comp/env/jdbc/postgresDS</non-jta-data-source>
+		<class>com.mg.model.Users</class>
+		<class>com.mg.model.UserAddress</class>
+		<class>com.mg.model.Translation</class>
+		<class>com.mg.model.TranslationEntry</class>
+		<class>com.mg.model.Image</class>
+		<class>com.mg.model.Product</class>
+		<class>com.mg.model.ProductImage</class>
+		<class>com.mg.model.Collection</class>
+		<class>com.mg.model.CustomComponent</class>
+		<class>com.mg.model.CustomComponentCollection</class>
+		<class>com.mg.model.CustomComponentImage</class>
+		<class>com.mg.model.CustomComponentText</class>
+		<class>com.mg.model.ProductTag</class>
+		<class>com.mg.model.ProductOrder</class>
+		<class>com.mg.model.ShoppingCart</class>
+		<class>com.mg.model.ShoppingCartItem</class>
+		<class>com.mg.model.Taxes</class>
+		<class>com.mg.model.Item</class>
+		<class>com.mg.model.ItemComponent</class>
+		<class>com.mg.model.MethodShipping</class>
+		<class>com.mg.model.Logs</class>
+		<class>com.mg.model.BasicAudit</class>
+		<class>com.mg.model.Audit</class>
+		<class>com.mg.model.Price</class>
+		<class>com.mg.model.PriceEntry</class>
+		<class>com.mg.model.Transaction</class>
+		<class>com.mg.model.Coupons</class>
+		<class>com.mg.model.CouponsType</class>
+		<class>com.mg.model.CouponsUser</class>
+		<class>com.mg.model.AuditHist</class>
+		<class>com.mg.model.Device</class>
+		<class>com.mg.model.DeviceCollection</class>
+		<class>com.mg.model.DeviceCollectionHist</class>
+		<class>com.mg.model.DeviceComponent</class>
+		<class>com.mg.model.DeviceComponentHist</class>
+		<class>com.mg.model.DeviceProduct</class>
+		<class>com.mg.model.DeviceProductHist</class>
+		<class>com.mg.model.DeviceUrl</class>
+		<class>com.mg.model.DeviceUser</class>
+		<class>com.mg.model.DeviceSession</class>
+		<class>com.mg.model.DeviceUserActionParam</class>
+		<class>com.mg.model.Paypal</class>
+		<class>com.mg.model.Jobs</class>
+
+		<properties>
+			<property name="hibernate.connection.datasource" value="java:comp/env/jdbc/postgresDS" />
+			<property name="hibernate.id.new_generator_mappings" value="false" />
+
+
+			<property name="hibernate.temp.use_jdbc_metadata_defaults"
+				value=" false" />
+			<property name="hibernate.archive.autodetection" value="class" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.format_sql" value="false" />
 			<!-- <property name="hibernate.hbm2ddl.auto" value="validate"/> -->
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
-			<property name="connection.autocommit" value="false"/> 
+			<property name="connection.autocommit" value="false" />
 			<property name="hibernate.connection.shutdown" value="true" />
 			<property name="javax.persistence.validation.mode" value="none" />
-			<property name="hibernate.connection.release_mode" value="after_transaction"/>
-			
+			<property name="hibernate.connection.release_mode" value="after_transaction" />
+
 			<property name="hibernate.default_batch_fetch_size" value="50" />
- 			<property name="hibernate.jdbc.batch_size" value="50" />
- 			
- 			<!-- Index lucene properties
- 			<property name="hibernate.search.default.directory_provider" value="filesystem"/>
- 			<property name="hibernate.search.default.indexBase" value="c:/"/>
- 			<property name="hibernate.search.Rules.directory_provider" value="local-heap"/>
- 			<property name="hibernate.search.Actions.directory_provider" value="com.mg.service.search.lucen.FSDirectoryProviderCustom"/>
- 			 -->
-		</properties>
-	  </persistence-unit>
-  
-<!--  	<persistence-unit name="MgJPA_lib">
-		<properties>
-			<property name="hibernate.connection.username" value="postgres"/>
-			<property name="hibernate.connection.password" value="shoppingcart"/>
-			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/shopping_cart"/>
-			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+			<property name="hibernate.jdbc.batch_size" value="50" />
+
+			<!-- Index lucene properties -->
+			<property name="hibernate.search.default.directory_provider" value="filesystem" />
+			 <!-- <property name="hibernate.search.default.indexBase" value="c:/index" /> --> 
+			<property name="hibernate.search.Rules.directory_provider" value="local-heap" />
+			<property name="hibernate.search.default.directory_provider"
+				value="com.mg.service.search.lucene.FSDirectoryProviderCustom" />
 		</properties>
 	</persistence-unit>
--->
+
+	<!-- <persistence-unit name="MgJPA_lib"> <properties> <property name="hibernate.connection.username" 
+		value="postgres"/> <property name="hibernate.connection.password" value="shoppingcart"/> 
+		<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/shopping_cart"/> 
+		<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/> 
+		</properties> </persistence-unit> -->
 </persistence>

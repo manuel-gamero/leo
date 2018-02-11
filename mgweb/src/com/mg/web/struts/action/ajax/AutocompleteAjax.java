@@ -1,12 +1,16 @@
 package com.mg.web.struts.action.ajax;
 
-import java.util.ArrayList;
-import com.mg.service.dto.ItemDTO;
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.mg.exception.ServiceException;
+import com.mg.exception.ServiceLocatorException;
+import com.mg.model.Product;
+import com.mg.service.ServiceLocator;
+import com.mg.service.dto.DTOFactory;
+import com.mg.service.dto.ItemDTO;
+import com.mg.service.search.SearchServiceImpl;
 import com.mg.web.struts.action.BasicListActionSupport;
 
 
@@ -22,12 +26,10 @@ public class AutocompleteAjax extends BasicListActionSupport<List<String>> {
 	}
 	
     
-	public String search(){
-		list = new ArrayList<ItemDTO>();
-		list.add(new ItemDTO("1", "sup1"));
-		list.add(new ItemDTO("2", "sup2"));
-		list.add(new ItemDTO("3", "sup3"));
-		list.add(new ItemDTO("4", "sup4"));
+	public String search() throws ServiceException, ServiceLocatorException{
+		List<Product> listProduct = ServiceLocator.getService(SearchServiceImpl.class).searchProduct(term);
+		list = DTOFactory.getItemDTO(listProduct, getCurrentLanguage());
+		log.debug("size : " + listProduct.size());
 		return SUCCESS;
 	}
 

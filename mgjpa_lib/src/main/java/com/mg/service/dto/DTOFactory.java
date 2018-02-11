@@ -242,7 +242,13 @@ public final class DTOFactory {
 	}
 
 	private static String getUrlCustomProduct(Product product, String lang) throws ServiceException, ServiceLocatorException {
-		Product customProduct = ServiceLocator.getService(ProductServiceImpl.class).getCustomProduct(product.getCollection().getId(), product.getTypeCode());
+		Product customProduct = null;
+		if(product.getCustomLink() != null && product.getCustomLink() > 0){
+			customProduct = ServiceLocator.getService(ProductServiceImpl.class).getProduct(product.getCustomLink(), true);
+		}
+		else{
+			customProduct = ServiceLocator.getService(ProductServiceImpl.class).getCustomProduct(product.getCollection().getId(), product.getTypeCode());
+		}
 		if(customProduct != null){
 			String customProductName = TranslationUtils.getTranslation(customProduct.getTranslationByNameTransId(), lang );
 			return customProduct.getId() + "/" + StringUtils.generateUrl( customProductName ) ;
@@ -632,6 +638,17 @@ public final class DTOFactory {
 		itemViewDTO.setOldPrice(productDTO.getOldPrice());
 		itemViewDTO.setHasDiscount(productDTO.isHasDiscount());
 		return itemViewDTO;
+	}
+
+	public static List<ItemDTO> getItemDTO(List<Product> listProduct, String lang) {
+		List<ItemDTO> listDTO = new ArrayList<ItemDTO>();
+		for (Product product : listProduct) {
+			ItemDTO item = new ItemDTO();
+			item.setKey( String.valueOf(product.getId()) );
+			item.setValue( TranslationUtils.getTranslation(product.getTranslationByNameTransId(), lang ));
+			listDTO.add(item);
+		}
+		return listDTO;
 	}
 	
 }

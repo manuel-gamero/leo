@@ -331,7 +331,8 @@
 											placeholder="%{getText('bolsos.common.title.product.size')}">
 											<option value="20">20</option>
 										</select>
-									</div class="section-text-item">
+									</div>
+									<div class="section-text-item">
 										<div class="product-text-color col-md-2"
 											style="background: #000000;"></div>
 										<div class="product-text-color col-md-2"
@@ -344,6 +345,7 @@
 											style="background: #ADD8E6;"></div>
 										<div class="product-text-color col-md-2"
 											style="background: #FFC0CB;"></div>
+									</div>
 									
 								</div>
 							</s:if>
@@ -480,9 +482,10 @@
 									</a>
 									<div class="text">
 										<h3>
-											<a href="<s:text name="url.product"/>/<s:property value="url"/>">
-												<s:property value="itemName" /></h3>
+											<a href='<s:text name="url.product"/>/<s:property value="url"/>' >
+												<s:property value="itemName" />
 											</a>
+										</h3>
 										<p class="price">
 											<s:if test="%{#item.hasDiscount}">
 												<del><s:property value="oldPrice" /></del>
@@ -578,6 +581,17 @@ function locateImage() {
     
 }
 
+function loadCustomImage() {
+	var cciList = <s:property value='customComponentForProduct'/>;
+	if(cciList.length  > 0){
+		for ( var i = 0; i < cciList.length; i++) {
+	          var cciItem = cciList[i];
+	          console.log('cciItem: ' + cciItem );
+	          $("#imag_" + cciItem).click();
+	      }
+	}
+}
+
 $(document).ready(function() {
 	console.log('Init events');
 	
@@ -590,7 +604,7 @@ $(document).ready(function() {
 	$("#submitButton").prop('disabled', true);
 	$("#shareFb").css("background-color", 'gainsboro');
 
-	$("#displayText").val("");
+	//$("#displayText").val("");
 
 	$('#tabProperties a').click(function(e) {
 		e.preventDefault();
@@ -722,6 +736,12 @@ $(document).ready(function() {
 			});
 		}
 	});
+	
+	loadCustomImage();
+	
+	if( $("#displayText").val() != "" ){
+		$("#displayText").change(); 
+	}
 });
 
 	

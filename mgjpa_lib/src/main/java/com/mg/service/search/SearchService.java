@@ -1,9 +1,11 @@
 package com.mg.service.search;
 
+import java.util.List;
 import java.util.Map;
 
 import com.mg.exception.InitializationException;
 import com.mg.exception.ServiceException;
+import com.mg.model.Product;
 import com.mg.service.Service;
 import com.mg.service.search.autocompleter.Autocompleter;
 import com.mg.service.search.autocompleter.core.AutocompleterUnit;
@@ -51,6 +53,15 @@ public interface SearchService extends Service{
 
 		
 
+	 /**
+	 * However, when introducing Hibernate Search in an existing application, 
+	 * you have to create an initial Lucene index for the data already present in your database.
+	 * 
+	 * This will rebuild your index to make sure your index and your database is in synch.
+	 */
+	void restart() throws ServiceException;
+	
+	List<Product> searchProduct( String query )throws ServiceException;
 	
 	
 	
