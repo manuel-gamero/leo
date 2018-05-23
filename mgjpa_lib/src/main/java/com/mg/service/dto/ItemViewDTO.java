@@ -13,6 +13,7 @@ public class ItemViewDTO extends BasicDTO {
 	
 	private String nameImage;
 	private String itemName;
+	private String itemCustomUrl;
 	private String price;
 	private String url;
 	private Boolean newProduct;
@@ -60,6 +61,12 @@ public class ItemViewDTO extends BasicDTO {
 	}
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	public String getItemCustomUrl() {
+		return itemCustomUrl;
+	}
+	public void setItemCustomUrl(String itemCustomUrl) {
+		this.itemCustomUrl = itemCustomUrl;
 	}
 
 }

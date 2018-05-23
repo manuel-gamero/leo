@@ -72,6 +72,7 @@ public class Receipt {
 	
 	public static final String orderSumaryConfirmation 	= "customer-order.html";
 	public static final String registerConfirmation 	= "customer-register.html";
+	public static final String passwordResetConfirmation 	= "password-reset.html";
 
 
 	public Receipt() {
@@ -141,14 +142,15 @@ public class Receipt {
 	}
 
 
-	public static boolean passwordRequest(Users user) {
+	public static boolean passwordRequest(Users user, String newPassword) {
+		
 		Language languageUser = Language.ENGLISH;
 		String templatePath = getTemplatePath(languageUser);
 
 		Hashtable<String,String> keyValue = new Hashtable<String,String>();
 		//keyValue.put("#FIRSTNAME#", user.getUserProfile().getRealName());
 		keyValue.put("#LOGIN#", user.getLogin());
-		keyValue.put("#PASSWORD#", user.getPassword());
+		keyValue.put("#PASSWORD#", newPassword);
 		
 		String subject = "Password Request";
 		if (languageUser.getValue() == LANGUAGE_FRENCH)
@@ -160,9 +162,8 @@ public class Receipt {
 
 		System.out.println(emailBody);
 		StringBuffer htmlStr = new StringBuffer(emailBody);
-
-		boolean success = Mail.send(user.getLogin(), subject, emailBody, htmlStr);
-
+		
+		boolean success = sendTemplateFilledToUser(user.getLogin(), user.getLang(), keyValue, subject, passwordRequestTemplate, null);
 		return (success);
 	}
 	
@@ -200,7 +201,7 @@ public class Receipt {
 			return englishTemplatePath;
 	}
 	
-	public static boolean sendTemplateFilledToUser(UserSessionDTO user, String language, Hashtable<String,String> keyValue, String subject , String fileTemplate, Map<String, String> inlineImages) {
+	public static boolean sendTemplateFilledToUser(String userMail, String language, Hashtable<String,String> keyValue, String subject , String fileTemplate, Map<String, String> inlineImages) {
 		Language languageUser = Language.getLanguageByCode(language);
 		String templatePath = getTemplatePath(languageUser);
 		
@@ -211,7 +212,7 @@ public class Receipt {
 		System.out.println(emailBody);
 		StringBuffer htmlStr = new StringBuffer(emailBody);
 
-		boolean success = Mail.sendHtml (user.getLogin(), subject, htmlStr.toString(), inlineImages);
+		boolean success = Mail.sendHtml (userMail, subject, htmlStr.toString(), inlineImages);
 
 		return (success);
 	}
@@ -249,7 +250,7 @@ public class Receipt {
 				subject =  "L'atelier de Leo - Order Summary Confirmation";
 			}
 
-			boolean success = sendTemplateFilledToUser(user, lang, keyValue, subject, orderSumaryConfirmation, null);
+			boolean success = sendTemplateFilledToUser(user.getLogin(), lang, keyValue, subject, orderSumaryConfirmation, null);
 
 			return (success);
 		} catch (Exception e) {
@@ -300,7 +301,7 @@ public class Receipt {
 			subject = "Welcome to L'atelier de Leo - Registration Confirmation";
 		}
 
-		boolean success = sendTemplateFilledToUser(user, lang, keyValue, subject, registerConfirmation, inlineImages);
+		boolean success = sendTemplateFilledToUser(user.getLogin(), lang, keyValue, subject, registerConfirmation, inlineImages);
 
 		return (success);
 	}
@@ -406,55 +407,6 @@ public class Receipt {
 		 shoppingCart.setTotal(new BigDecimal("10.00"));
 		 shoppingCart.setTaxes(new BigDecimal("10.00"));
 		 shoppingCart.setShippingFees(new BigDecimal("10.00"));
-		 
-		 //orderSummaryConfirmation(user,shoppingCart);
-		 
-		/* User user = new User();
-		 user.setLogin("manuel");
-		 user.setPassword("a123456");
-		 user.setEmail("manuel@gameaccess.ca");
-		 UserProfile userProfile =  new UserProfile();
-		 userProfile.setRealName("a a");
-		 userProfile.setPrimaryLanguage(Language.ENGLISH);
-		 user.setUserProfile(userProfile);
-		 
-		 Receipt.signUpMembership(user);*/
-		 
-		// theCustomer.selectFromID(1);
-		// sendReceipt(theCustomer, theSubscription);
-		// Mail.send("jerry@inteligan.com", "Registration Details:Page 1 Sign up
-		// Page 1 Validation Success : From Jerry", "Test");
-		// theCustomer.setFirstName("Clyde");
-		// theCustomer.setLastName("Jones");
 
-		/*
-		 * 
-		 */
-		// theCustomer.setEmail("sandeep.mys@gmail.com");
-		// theSubscription.setID(777);
-		// Receipt.cardDeclineNotification(theCustomer);
-		// Receipt theReceipt = new Receipt();
-		// theReceipt.sendReceipt(theCustomer, theSubscription);
-		// Mail.send("prince.nishchal@gmail.com", "Test Mail", new
-		// File(frenchTemplatePath+monthlyPurchaseReceipt));
-		// Mail.send("frank@GameJab", "Test Mail", new
-		// File(frenchTemplatePath+standardPurchaseReceipt));
-		// Mail.send("karl@GameJab", "Test Mail", new
-		// File(frenchTemplatePath+standardPurchaseReceipt));
-		// Mail.send("prince.nishchal@gmail.com", "Test Mail", new
-		// File(frenchTemplatePath+standardPurchaseReceipt));
-		// Mail.send("frank@GameJab", "Test - Free Trial Mail", new
-		// File(englishTemplatePath+standardPurchaseReceipt));
-		// Mail.send("karl@GameJab", "Test - Free Trial Mail", new
-		// File(englishTemplatePath+standardPurchaseReceipt));
-		// Mail.send("prince.nishchal@gmail.com", "Test - Free Trial Mail", new
-		// File(englishTemplatePath+standardPurchaseReceipt));
-		// Mail.send("frank@GameJab", "Test - Monthly Mail", new
-		// File(englishTemplatePath+monthlyPurchaseReceipt));
-		// Mail.send("karl@GameJab", "Test - Monthly Mail", new
-		// File(englishTemplatePath+monthlyPurchaseReceipt));
-		// Mail.send("prince.nishchal@gmail.com", "Test - Monthly Mail", new
-		// File(englishTemplatePath+monthlyPurchaseReceipt));
-		// 
 	}
 }

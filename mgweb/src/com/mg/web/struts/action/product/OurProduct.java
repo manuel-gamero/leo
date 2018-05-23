@@ -20,7 +20,6 @@ import com.mg.service.dto.ProductDTO;
 import com.mg.service.init.ConfigServiceImpl;
 import com.mg.service.product.CollectionServiceImpl;
 import com.mg.service.product.ProductServiceImpl;
-import com.mg.util.currency.CurrencyUtils;
 import com.mg.util.text.StringUtils;
 import com.mg.util.translation.TranslationUtils;
 import com.mg.web.RequestAtributeConstants;

@@ -7,6 +7,11 @@ import javax.persistence.Persistence;
 public class SqlEntityManagerThreadSafe {
 
     private static final EntityManagerFactory emf;
+    //This attribute is a thread level. The problem is when we have
+    //nested transaction, this class return all the time the same object
+    //for the same thread/transaction. We should think about a Tree object
+    //with another attribute that (level) that tell us in which transaction
+    //we are.
     private static final ThreadLocal<EntityManager> threadLocal;
 
     static {
@@ -39,6 +44,10 @@ public class SqlEntityManagerThreadSafe {
 
     public static void beginTransaction() {
         getEntityManager().getTransaction().begin();
+    }
+    
+    public static void isActive() {
+        getEntityManager().getTransaction().isActive();
     }
 
     public static void rollback() {

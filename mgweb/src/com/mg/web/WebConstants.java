@@ -128,7 +128,6 @@ public final class WebConstants {
 	}
 	
 	//mail constant support
-	public static final String MAIL_SUPPORTGAMEJAB_KEY 	    = "support";
 	public static final String MAIL_MEDIA_INQUIRY_KEY	    = "media";
 	public static final String MAIL_MARKETING_KEY		    = "marketing";
 	public static final String MAIL_OTHER_KEY			    = "other";

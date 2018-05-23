@@ -89,7 +89,7 @@
 		<action name="/*/collections/products/*" class="com.mg.web.struts.action.product.OurProduct" >
 		    <param name="currentLanguage">{1}</param>
 		    <param name="nameUrlCollection">{2}</param>
-		    <param name="customProduct">false</param>
+		    <param name="customProduct">true</param>
 		    <param name="sale">false</param>
         	<interceptor-ref name="defaultMgWeb"/>
 			<result name="success" type="tiles">/ourProduct.tiles</result>  
@@ -100,7 +100,7 @@
 		 <action name="/*/collections/produits/*" class="com.mg.web.struts.action.product.OurProduct" >
 		    <param name="currentLanguage">{1}</param>
 		    <param name="nameUrlCollection">{2}</param>
-		    <param name="customProduct">false</param>
+		    <param name="customProduct">true</param>
 		    <param name="sale">false</param>
         	<interceptor-ref name="defaultMgWeb"/>
 			<result name="success" type="tiles">/ourProduct.tiles</result>  
@@ -136,7 +136,7 @@
         	<interceptor-ref name="defaultMgWeb"/>
 			<result name="success" type="tiles">/ourProduct.tiles</result>  
 			<result name="error" type="tiles">/error.tiles</result> 
-			<result name="errorpage" type="redirectAction">errorPage</result>
+<!-- 			<result name="errorpage" type="redirectAction">errorPage</result> -->
         </action>
         
 		<action name="/*/type/produits/personnalise/*" class="com.mg.web.struts.action.product.OurProduct" >
@@ -180,6 +180,7 @@
 		    <interceptor-ref name="defaultMgWeb"/>
 			<result name="success" type="tiles">/product.tiles</result>   
 			<result name="error" type="tiles">/error.tiles</result>
+			<result name="errorUrl" type="tiles">/errorUrl.tiles</result>
 			<result name="errorpage" type="redirectAction">errorPage</result>
         </action>
         
@@ -192,13 +193,15 @@
 			<result name="errorpage" type="redirectAction">errorPage</result>
         </action>
         
-		<action name="/*/produit/*/*" class="com.mg.web.struts.action.product.Product" >
+		<action name="/*/produit/*/*/*" class="com.mg.web.struts.action.product.Product" >
 		    <param name="currentLanguage">{1}</param>
 			<param name="id">{2}</param>
 			<param name="nameUrlProduct">{3}</param>
+			<param name="custom">{4}</param>
 		    <interceptor-ref name="defaultMgWeb"/>
 			<result name="success" type="tiles">/product.tiles</result>   
 			<result name="error" type="tiles">/error.tiles</result>
+			<result name="errorUrl" type="tiles">/errorUrl.tiles</result>
 			<result name="errorpage" type="redirectAction">errorPage</result>
         </action>
         
@@ -550,14 +553,7 @@
             <result name="shopping" type="redirect">/${currentLanguage}/shoppingcart/address</result>   
             <result name="error" type="tiles">/error.tiles</result>                  			 
         </action>
-        
-        <action name="lostUserOrPwd" class="com.mg.web.struts.action.user.LostUserOrPwd" >
-            <param name="currentLanguage">{1}</param>
-        	<interceptor-ref name="i18nStack"/>
-            <result name="success" type="redirect">/${currentLanguage}/homePage</result>     
-            <result name="error" type="tiles">/error.tiles</result>       
-        </action>
-        
+                
         <action name="logout" class="com.mg.web.struts.action.user.Logout" >
             <interceptor-ref name="i18nStack"/>
 			<interceptor-ref name="basicStack"/>
@@ -705,6 +701,17 @@
 			</interceptor-ref>
 		    <interceptor-ref name="actionInterceptor" />
 			<result type="json" name="success" />
+        </action>
+		
+		<action name="lostUserOrPwd" class="com.mg.web.struts.action.ajax.LostUserOrPwdAjax" method="resetPassword" >  
+            <interceptor-ref name="staticParams"/>
+            <interceptor-ref name="actionMappingParams"/>
+            <interceptor-ref name="params">
+				<param name="excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+			</interceptor-ref>
+		    <interceptor-ref name="actionInterceptor" />
+			<result type="json" name="success" />
+			<result type="json" name="error" />   
         </action>
 		
 	</package> 

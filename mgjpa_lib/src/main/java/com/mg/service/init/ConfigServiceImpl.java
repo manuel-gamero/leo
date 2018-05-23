@@ -64,6 +64,7 @@ public class ConfigServiceImpl extends ServiceImpl implements ConfigService{
 	private static final String LUCENE_INDEX_PATH						= "mg.lucene.index.path";
 	
 	private static final String ROOT_PATH = "mg.root.path";
+	private static final String IMAGE_PATH = "mg.image.path";
 	private static final String URL_SERVER = "mg.url.server";
 	private static final String  JAVA_CACERT = "mg.java.cacert";
 	
@@ -341,6 +342,11 @@ public class ConfigServiceImpl extends ServiceImpl implements ConfigService{
 	@Override
 	public String getRootPathWeb() {
 		return getProperty(ROOT_PATH);
+	}
+	
+	@Override
+	public String getImagePath() {
+		return getProperty(IMAGE_PATH);
 	}
 	
 	@Override

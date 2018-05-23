@@ -12,8 +12,8 @@ public final class MessageKeyConstants {
 	private MessageKeyConstants() {};	
 
 	/*
-	 * Start of message Key which will be used by the base Action struts class GameJabAction to find out dynamically the right header information message key for each inherited Action.
-	 * This message key start will be follow by the complete name of each inherited action.(see GameJabAction class) 
+	 * Start of message Key which will be used by the base Action struts class Action to find out dynamically the right header information message key for each inherited Action.
+	 * This message key start will be follow by the complete name of each inherited action.(see Action class) 
 	 */
 	public static final String PAGE_HEADER_KEY = "basic.page.header";
 	/*

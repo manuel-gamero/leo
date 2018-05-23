@@ -14,7 +14,7 @@
 	
 <button id="btn" type="button" class="btn" >Launch modal</button>
 
-<div class="fixed column pa10" style="margin-top:5px;"><input type="submit" name="search_button" style="padding:5px 20px;font-size:12px;" id="search_button" value="<s:text name="gamejab.common.text.short.search"/>"/></div>
+<div class="fixed column pa10" style="margin-top:5px;"><input type="submit" name="search_button" style="padding:5px 20px;font-size:12px;" id="search_button" value="<s:text name="mg.common.text.short.search"/>"/></div>
 </div>
 </div>
 

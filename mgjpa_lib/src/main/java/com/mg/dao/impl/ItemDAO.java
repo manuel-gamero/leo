@@ -27,6 +27,11 @@ public class ItemDAO extends GenericDaoImpl<Item> {
 		return  findResults(" select i.product.id, i.nameImage, count(*) " +
 							  " from Item i " +
 							  " where i.product.id = :id " +
+							  " and i.id not in (select it from Item it " +
+							  " join it.itemComponents itic " +
+							  " join itic.customComponentCollection iticccc " +
+							  " where iticccc.statusCode = 'INACTIVE' " +
+							  " and it.product.id = :id) " +
 							  " group by i.product.id, i.nameImage ", parameters);
 	}
 

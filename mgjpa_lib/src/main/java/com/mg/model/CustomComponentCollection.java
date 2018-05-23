@@ -136,7 +136,7 @@ public class CustomComponentCollection implements java.io.Serializable, BasicMod
 		this.typeCode = typeCode;
 	}
 
-	@Column(name = "value", nullable = false, length = 120)
+	@Column(name = "value", length = 120)
 	public String getValue() {
 		return this.value;
 	}

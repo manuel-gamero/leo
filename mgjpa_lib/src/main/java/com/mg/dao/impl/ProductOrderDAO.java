@@ -2,7 +2,6 @@ package com.mg.dao.impl;
 
 import java.util.List;
 
-import com.mg.model.Product;
 import com.mg.model.ProductOrder;
 
 public class ProductOrderDAO extends GenericDaoImpl<ProductOrder> {

@@ -1,6 +1,5 @@
 package com.mg.web.struts.action.product;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.mg.exception.ServiceException;

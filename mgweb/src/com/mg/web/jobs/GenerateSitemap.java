@@ -26,7 +26,7 @@ public class GenerateSitemap {
 
 	private static Logger log = Logger.getLogger(GenerateSitemap.class);
 	private static File myDir;
-	private static String urlSitemap = "http://localhost";
+	private static String urlSitemap = "http://latelierdeleo.local.com";
 	private static ConfigService configService;
 	private static final String subject = "GenerateSitemap Error - " + ConnectionWebUtils.getHostName();
 

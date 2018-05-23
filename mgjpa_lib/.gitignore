@@ -1,0 +1,6 @@
+/target/
+/.settings/
+/.classpath
+/.project
+/ConfigurationBolsos.launch
+/hiberBolsos.launch

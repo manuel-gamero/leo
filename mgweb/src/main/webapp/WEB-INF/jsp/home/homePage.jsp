@@ -159,6 +159,8 @@
 						</s:param>
 						<s:param name="popurl" value="''">
 						</s:param>
+						<s:param name="paramnew">false</s:param>
+						<s:param name="paramsale">false</s:param>
 					</s:include>
 				</div>
 				<div class="grid-item">
@@ -172,6 +174,8 @@
 						</s:param>
 						<s:param name="popurl" value="''">
 						</s:param>
+						<s:param name="paramnew">false</s:param>
+						<s:param name="paramsale">false</s:param>
 					</s:include>
 				</div>
 				<div class="grid-item">
@@ -185,6 +189,8 @@
 						</s:param>
 						<s:param name="popurl" value="''">
 						</s:param>
+						<s:param name="paramnew">false</s:param>
+						<s:param name="paramsale">false</s:param>
 					</s:include>
 				</div>
 				<div class="grid-item">
@@ -198,6 +204,8 @@
 						</s:param>
 						<s:param name="popurl" value="''">
 						</s:param>
+						<s:param name="paramnew">false</s:param>
+						<s:param name="paramsale">false</s:param>
 					</s:include>
 				</div>
 				<div class="grid-item">
@@ -211,6 +219,8 @@
 						</s:param>
 						<s:param name="popurl" value="''">
 						</s:param>
+						<s:param name="paramnew">false</s:param>
+						<s:param name="paramsale">false</s:param>
 					</s:include>
 				</div>
 			</s:else>

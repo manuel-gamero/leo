@@ -68,10 +68,13 @@ public interface UserService extends Service {
 	
 	/**
 	 * Sends user's forgotten password.
+	 * @param user 
+	 * @param newPassword 
 	 * @param email
 	 * @return
+	 * @throws ServiceException 
 	 */
-	boolean sendUserPassword(String email);
+	boolean sendUserPassword(Users user, String newPassword) throws ServiceException;
 
 	/**
 	 * 
@@ -144,4 +147,6 @@ public interface UserService extends Service {
 	public List<UserAddress> getUserAddressList(int userId, UserAddressType type) throws ServiceException;
 	
 	public void deleteUserAddress(final UserAddress userAddress) throws ServiceException;
+
+	Users getUser(String userName) throws ServiceException;
 }

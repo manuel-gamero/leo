@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.mg.exception.ServiceException;
@@ -38,6 +39,7 @@ import com.mg.web.struts.action.BasicAction;
 public class AjaxUploadFile extends BasicAction implements ServletResponseAware {
 
     private static final long serialVersionUID = 6748857432950840322L; 
+    private static final Logger log = Logger.getLogger(AjaxUploadFile.class);
     
     private static String realPath;
    
@@ -63,6 +65,12 @@ public class AjaxUploadFile extends BasicAction implements ServletResponseAware 
     	super();
     }
     
+    /**
+     * This method is used by addeditproduct and addeditcollection.
+     * For custom component collection and for custom component images
+     * 
+     * @return
+     */
     public String uploadImage() {    	
     	PrintWriter writer = null;
     	
@@ -85,10 +93,11 @@ public class AjaxUploadFile extends BasicAction implements ServletResponseAware 
 					Image image = ServiceLocator.getService(ImageServiceImpl.class).getImage(imageId);
 					path = image.getRealName();
 					//Remove old image mask from disk
-					boolean result = ServiceLocator.getService(ImageServiceImpl.class).deleteImage(image);
-					if(result){
-						imageService.saveImage(imageDTO.getFile(), path, image.getName());
+					boolean deleteImage = ServiceLocator.getService(ImageServiceImpl.class).deleteImage(image);
+					if( !deleteImage ){
+						log.warn("Image: " + image.getRealName() + " has not been removed.");
 					}
+					imageService.saveImage(imageDTO.getFile(), path, image.getName(), true);
 					writer.print("{success: true, name: '" + image.getName() + "', path: '" + 
 							path +"'}");
 				}

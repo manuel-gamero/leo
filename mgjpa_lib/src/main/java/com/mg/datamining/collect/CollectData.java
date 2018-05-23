@@ -257,8 +257,8 @@ public class CollectData {
             
 		     
 		    PGPoolingDataSource ds = new PGPoolingDataSource();
-		    //ds.setServerName("192.168.1.75:5432/bolsosdb?searchpath=bolsos");
-		    ds.setUrl("jdbc:postgresql://192.168.1.75:5432/bolsosdb?searchpath=bolsos");
+		    //ds.setServerName("192.168.1.65:5432/bolsosdb?searchpath=bolsos");
+		    ds.setUrl("jdbc:postgresql://192.168.1.65:5432/bolsosdb?searchpath=bolsos");
 		    ds.setUser("raphaele");
 		    ds.setPassword("raphaele");
 		    ic.bind("java:/comp/env/jdbc/postgresDS", ds);

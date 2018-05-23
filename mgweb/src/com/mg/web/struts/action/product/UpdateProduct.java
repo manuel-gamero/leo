@@ -11,7 +11,7 @@ public class UpdateProduct extends Product{
 	private static final long serialVersionUID = 1L;
 	private static Logger log = Logger.getLogger(UpdateProduct.class);
 	private Item item;
-	private int index;
+	private Integer index;
 	
 	@Override
 	public void prepare() {
@@ -26,17 +26,17 @@ public class UpdateProduct extends Product{
 	@Override
 	public String execute(){
 		List<Item> itemList = getShoppingCartItems();
-		item = itemList.get(index);
+		item = itemList.get(index.intValue());
 		setId(item.getProduct().getId());
 		String customImage = item.getNameImage();
 		//Set custom with file name without ext.
 		setCustom(customImage.replace(".png", ""));
 		return super.execute();
 	}
-	public int getIndex() {
+	public Integer getIndex() {
 		return index;
 	}
-	public void setIndex(int index) {
+	public void setIndex(Integer index) {
 		this.index = index;
 	}
 
@@ -46,6 +46,10 @@ public class UpdateProduct extends Product{
 
 	public void setItem(Item item) {
 		this.item = item;
+	}
+	
+	public boolean getUpdate(){
+		return true;
 	}
 
 }

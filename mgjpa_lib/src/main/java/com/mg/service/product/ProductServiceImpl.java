@@ -90,17 +90,38 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 		return list;
 	}
 	
+	@SuppressWarnings({ "unchecked"})
 	@Override
-	public List<Product> getAllSaleProduct(String currencyCode) throws ServiceException, CacheException, ServiceLocatorException {
-		List<Product> list = new ArrayList<Product>();
-		List<String> keys = ServiceLocator.getService(CacheServiceImpl.class).getProductCache().getKeys();
+	public List<Product> getAllSaleProduct(final String currencyCode) throws ServiceException, CacheException, ServiceLocatorException {
+		List<Product> listSales = new ArrayList<Product>();
+		/*List<String> keys = ServiceLocator.getService(CacheServiceImpl.class).getProductCache().getKeys();
 		for (String item : keys) {
 			com.mg.model.Product product = ServiceLocator.getService(CacheServiceImpl.class).getProductCache().fetch(item);
-			if( isSale(product, currencyCode) && !product.getCustomProduct() ){
+			if( isSale(product, currencyCode) && !product.getCustomProduct() && product.getStatusCode().equals(ProductStatus.ACTIVE) ){
 				list.add(product);
 			}		
+		}*/
+		
+		try {
+			daoManager.setCommitTransaction(true);
+			List<Product> list = (List<Product>) daoManager
+					.executeAndHandle(new DaoCommand() {
+						@Override
+						public Object execute(EntityManager em)
+								throws DaoException {
+							return DaoFactory.getDAO(ProductDAO.class, em)
+									.getAllDiscount(currencyCode);
+						}
+					});
+			
+			for (Product product : list) {
+				listSales.add( ServiceLocator.getService(ProductServiceImpl.class).getProduct(product.getId(), true) );
+			}
+			
+		} catch (DaoException de) {
+			throw (new ServiceException(de));
 		}
-		return list;
+		return listSales;
 	}
 	
 	private boolean isSale(Product product, String currencyCode) {
@@ -228,6 +249,7 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 									if (item.getImageDTO() != null && item.getImageDTO().getFileFileName() != null) {
 										Image imageMask = ServiceLocator.getService(ImageServiceImpl.class).getImageForObject(em, item.getImageDTO(), ImageType.MASK, null );
 										customComponentImage.setImageByImageMaskId(imageMask);
+										//It is used at save disk level
 										item.setImage(imageMask);
 									}
 									//link the product image all the time
@@ -294,14 +316,13 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 						
 						//In case to save a product I have to save the right path for the image to do that I need the product´s id
 						if(imageDTO != null && imageDTO.getFile() != null){
-							ServiceLocator.getService(ImageServiceImpl.class).saveImage(imageDTO.getFile(), path, image.getName());
+							ServiceLocator.getService(ImageServiceImpl.class).saveImage(imageDTO.getFile(), path, image.getName(), false);
 						}
 						if (id != 0) {
 							if (customComponentImageList != null) {
 								for (CustomComponentImageDTO item : customComponentImageList) {
 									if (item != null && item.getImageDTO() != null && item.getImageDTO().getFile() != null) {
-										ServiceLocator.getService(
-												ImageServiceImpl.class).saveImage(item.getImageDTO().getFile(), path,	getName(product,item.getImage().getName()));
+										ServiceLocator.getService(ImageServiceImpl.class).saveImage(item.getImageDTO().getFile(), path, getName(product,item.getImage().getName()), true);
 									}
 								}
 							}
@@ -353,6 +374,7 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 		next.setWidth(customText.getWidth());	
 		next.setImageHeight(customText.getImageHeight());
 		next.setImageWidth(customText.getImageWidth());
+		next.setImage(customText.getImage());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -538,14 +560,16 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 	
 	private List<Item> getItemList(List<Object[]> list) {
 		List<Item> itemList = new ArrayList<Item>();
-		Collections.sort(list, ITEM_COMPARATOR_COUNT);
-		for (Object[] item : list) {
-			Item object = new Item();
-			Product product = new Product();
-			product.setId((Integer)item[0]);
-			object.setNameImage((String)item[1]);
-			object.setProduct(product);
-			itemList.add(object);
+		if( list != null && list.size() > 0){
+			Collections.sort(list, ITEM_COMPARATOR_COUNT);
+			for (Object[] item : list) {
+				Item object = new Item();
+				Product product = new Product();
+				product.setId((Integer)item[0]);
+				object.setNameImage((String)item[1]);
+				object.setProduct(product);
+				itemList.add(object);
+			}
 		}
 		return itemList;
 	}
@@ -560,7 +584,7 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 				@Override
 				public Object execute(EntityManager em) throws DaoException {
 					try {
-						//Get product object from cache
+						//Get product
 						Product product = DaoFactory.getDAO(ProductDAO.class, em).findProductById(id);
 						//Create Image object
 						Image image = ServiceLocator.getService(ImageServiceImpl.class).getImageForObject(em, imageDTO, ImageType.PRODGROUP, null);
@@ -585,7 +609,7 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 			String path = ServiceLocator.getService(ConfigServiceImpl.class).getWebImageProdcutLocation();
 			path = path + id + "/";
 			//Save image in disk
-			ServiceLocator.getService(ImageServiceImpl.class).saveImage(imageDTO.getFile(), path, productImage.getImage().getName());
+			ServiceLocator.getService(ImageServiceImpl.class).saveImage(imageDTO.getFile(), path, productImage.getImage().getName(), false);
 			//Invalidate cache for this product object
 			ServiceLocator.getService(CacheServiceImpl.class).getProductCache().remove(Product.class + "_" + id);
 			ServiceLocator.getService(CacheServiceImpl.class).removeProductDTO(id);

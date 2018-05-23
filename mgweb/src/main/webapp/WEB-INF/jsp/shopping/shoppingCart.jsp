@@ -94,14 +94,19 @@
 										<td><s:property value="product.msrp" /></td>
 										<td><s:property value="discount" /></td>
 										<td><s:property value="total" /></td>
-										<td><s:token /> <a
-											href="<s:url action="removeItem" namespace="/">
-													<s:param name="index">${status.index}</s:param>
-												  	<s:param name="struts.token.name" value="'token'"/>
-													<s:param name="token" value="#session['struts.tokens.token']"/>
-												</s:url>">
-												<i class="fa fa-trash-o"></i>
-										</a></td>
+										<td>
+											<s:token /> 
+											<a href="<s:url action="removeItem" namespace="/">
+														<s:param name="index">${status.index}</s:param>
+													  	<s:param name="struts.token.name" value="'token'"/>
+														<s:param name="token" value="#session['struts.tokens.token']"/>
+													</s:url>">
+													<i class="fa fa-trash-o"></i>
+											</a>
+											<a href="shoppingcart/updateItem/${status.index}">
+												<span class="glyphicon glyphicon-pencil"></span>
+											</a>
+										</td>
 									</tr>
 								</s:iterator>
 							</tbody>

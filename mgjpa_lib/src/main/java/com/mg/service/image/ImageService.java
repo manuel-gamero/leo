@@ -22,15 +22,29 @@ import com.mg.util.io.ImageInfo;
  *
  */
 public interface ImageService extends Service{
+	
 	/**
-	 * Save the file information in disk
+	 * Save the file information in disk.
+	 * 
+	 * There was two problems. The first is that for all the png images with transparent background were saved in larger folders 
+	 * even if they are not large . The second is that the images that were saved through saveThumbFile, they do not keep 
+	 * the transparent background.
+	 * So for the images the normal product and in general, I going to save the real image in its folder and the larger in larger folder
+	 * and thumbnail in the thumbnail folder. For all the images that have transparent background the real image will be saved in 
+	 * larger folder and the larger folder in its folder and thumbnail in the thumbnail folder.
+	 * 
+	 * Now that we have a large amount of images save like that it is more dificult to fix the issue, that is why
+	 * the logic that applies is above.
+	 * 
 	 * @param file
 	 * @param path
 	 * @param normalizedName
+	 * @param transparent
 	 * @return If the file was well saved
 	 * @throws ServiceException
 	 */
-	boolean saveImage(File file, String path, String normalizedName) throws ServiceException;
+	
+	boolean saveImage(File file, String path, String normalizedName, boolean transparent) throws ServiceException;
 
 			
 	/**

@@ -17,7 +17,7 @@ public class DaoFactory extends DaoManagerImpl {
 	
 	public static <T extends BasicDao> T getDAO(Class<T> clazz) {
 		// use conversation's entityManager by default
-		return DaoFactory.getDAO(clazz,SqlEntityManager.getEntityManager());
+		return DaoFactory.getDAO(clazz,SqlEntityManagerThreadSafe.getEntityManager());
 	}
 
 	public static <T extends BasicDao> T getDAO(Class<T> clazz,

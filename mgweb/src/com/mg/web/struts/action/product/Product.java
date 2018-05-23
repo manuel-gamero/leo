@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.mg.annotation.Action;
+import com.mg.enums.ProductStatus;
 import com.mg.exception.CurrencyNoExistException;
 import com.mg.exception.ServiceException;
 import com.mg.exception.ServiceLocatorException;
@@ -27,12 +28,12 @@ public class Product extends BasicAction implements Preparable {
 
 	private static Logger log = Logger.getLogger(Product.class);
 	private static final long serialVersionUID = 1155604242419622177L;
-	//private ProductDTO productDTO;
 	private List<ItemViewDTO> itemList;
 	private Integer id;
 	private String extraPrice;
 	private String nameUrlProduct;
 	private String custom;
+	private Integer index;
 	
 	@Override
 	public void prepare() {
@@ -50,10 +51,6 @@ public class Product extends BasicAction implements Preparable {
 		log.debug("Product debug execute id " + id);		
 		ProductDTO productDTO = null;
 		try {
-			
-			/*if( nameUrlProduct != null ){
-				id = ServiceLocator.getService(CacheServiceImpl.class).getUrlcache().get(nameUrlProduct);
-			}*/
 			if(id != null){
 				log.debug("Getting productDTO");
 				productDTO = DTOFactory.getProductDTO(id, getCurrentLanguage(),getCurrentCurrencyCode(), true);
@@ -68,12 +65,7 @@ public class Product extends BasicAction implements Preparable {
 						listItem = DTOFactory.getItemViewDTOForProductList( ServiceLocator.getService(ProductServiceImpl.class).getProductByCollection( productDTO.getCollection().getId(), false), id, getCurrentLanguage(), getCurrentCurrencyCode(), 3 );
 					}
 					setItemList( listItem );
-					/*if(listItem.size()>=4){
-						setItemList( listItem.subList(1, 4));
-					}
-					else{
-						setItemList( listItem );
-					}*/
+					
 					log.debug("Getting Extra-price");
 					String extraPrice = ServiceLocator.getService(ConfigServiceImpl.class).getPriceExtraText(getCurrentCurrencyCode());
 					setExtraPrice(CurrencyUtils.displayPriceLocale(extraPrice, getCurrentLanguage(), getCurrentCurrencyCode()) );
@@ -93,8 +85,16 @@ public class Product extends BasicAction implements Preparable {
 			setMetadataPage(productDTO);
 		}
 		catch(CurrencyNoExistException ce){
-			managerExceptionBySupport(ce);
-			return ERROR;
+			try {
+				com.mg.model.Product product = ServiceLocator.getService(ProductServiceImpl.class).getProduct(id, true);
+				if( product.getStatusCode().equals(ProductStatus.ACTIVE) && 
+					product.getCollection().getStatusCode().equals(ProductStatus.ACTIVE) ){
+						managerExceptionBySupport(ce);
+				}
+			} catch (Exception e) {
+				managerException(e, "productId: " + id);
+			}
+			return ERRORPAGE;
 		}
 		catch (Exception e) {
 			managerException(e, "productId: " + id);
@@ -206,4 +206,15 @@ public class Product extends BasicAction implements Preparable {
 		return id;
 	}
 
+	public Integer getIndex() {
+		return index;
+	}
+
+	public void setIndex(Integer index) {
+		this.index = index;
+	}
+
+	public boolean getUpdate(){
+		return false;
+	}
 }

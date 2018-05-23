@@ -104,7 +104,6 @@ public final class DTOFactory {
 		c.setId(item.getId());
 		c.setCreationDate(item.getCreationDate());
 		c.setCustomComponentCollection(item.getCustomComponentCollection());
-		c.setId(item.getId());
 		c.setImageByImageId(item.getImage());
 		c.setImageByImageMaskId(item.getImageByImageMaskId());
 		return c;
@@ -173,6 +172,7 @@ public final class DTOFactory {
 	public static ProductDTO getProductDTO(Product product, String lang, String currencyCode, boolean large) throws CurrencyNoExistException, ServiceException, ServiceLocatorException{
 		if(product != null){
 			ProductDTO productViewDTO = new ProductDTO();
+			productViewDTO.setCollection( getCollectionDTO(product.getCollection(), lang) );
 			productViewDTO.setCost(product.getCost());
 			productViewDTO.setDepth(product.getDepth());
 			productViewDTO.setDescription(TranslationUtils.getTranslation(product.getTranslationByDescriptionTransId(), lang ));
@@ -187,7 +187,6 @@ public final class DTOFactory {
 			productViewDTO.setTypeCode(product.getTypeCode());
 			productViewDTO.setWeight(product.getWeight());
 			productViewDTO.setWidth(product.getWidth());
-			productViewDTO.setCollection( getCollectionDTO(product.getCollection(), lang) );
 			productViewDTO.setCustomProduct(product.getCustomProduct());
 			productViewDTO.setCustomText(product.getCustomText());
 			productViewDTO.setNewProduct(product.getNewProduct());
@@ -596,6 +595,7 @@ public final class DTOFactory {
 		itemViewDTO.setId(productDTO.getId());
 		String pathImage = ServiceLocator.getService(ConfigServiceImpl.class).getWebImageTmp();
 		pathImage = pathImage + item.getNameImage();
+		itemViewDTO.setItemCustomUrl(item.getNameImage().replace(".png", ""));
 		itemViewDTO.setNameImage(pathImage);
 		itemViewDTO.setItemName(productDTO.getName());
 		itemViewDTO.setPrice(productDTO.getMsrp());

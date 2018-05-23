@@ -90,6 +90,7 @@
 	.navbar-center {padding-left: 5%;}
 }
 
+.modal-email-sent{ width:325px; height:195px; }
 
 .logo { padding-top: 20px; width: 110px; }
 .menu-navbar { z-index: 1; }

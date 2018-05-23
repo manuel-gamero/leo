@@ -217,4 +217,6 @@ public interface ConfigService extends Service{
 	String getWebImagePromotionLocation();
 
 	String getLuceneIndexPath();
+
+	String getImagePath();
 }

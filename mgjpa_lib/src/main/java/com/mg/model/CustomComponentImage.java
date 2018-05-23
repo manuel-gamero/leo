@@ -103,7 +103,7 @@ public class CustomComponentImage implements java.io.Serializable, BasicModel {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "image_mask_id", nullable = false)
+	@JoinColumn(name = "image_mask_id")
 	public Image getImageByImageMaskId() {
 		return this.imageByImageMaskId;
 	}

@@ -107,12 +107,11 @@ public class CouponServiceImpl extends ServiceImpl implements CouponService {
 						}
 						
 						if(id != 0){
-							//Save Collection image after save collection in database in case the any error.
 							if(imageEnDTO != null && imageEnDTO.getFile() != null){
-								ServiceLocator.getService(ImageServiceImpl.class).saveImage(imageEnDTO.getFile(), path, imageEn.getName());
+								ServiceLocator.getService(ImageServiceImpl.class).saveImage(imageEnDTO.getFile(), path, imageEn.getName(), false);
 							}
 							if(imageFrDTO != null && imageFrDTO.getFile() != null){
-								ServiceLocator.getService(ImageServiceImpl.class).saveImage(imageFrDTO.getFile(), path, imageFr.getName());
+								ServiceLocator.getService(ImageServiceImpl.class).saveImage(imageFrDTO.getFile(), path, imageFr.getName(), false);
 							}
 						}
 					}

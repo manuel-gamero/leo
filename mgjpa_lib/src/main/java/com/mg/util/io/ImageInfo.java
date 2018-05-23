@@ -259,8 +259,6 @@ public class ImageInfo {
 	private int physicalHeightDpi;
 	private int physicalWidthDpi;
 	
-	/* CODE ADDED FOR GAMEJAB*/
-	
 	public boolean isJPEG = false;
 	protected boolean isJPEG() {
 		return isJPEG;

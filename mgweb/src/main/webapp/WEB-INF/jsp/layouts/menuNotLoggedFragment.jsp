@@ -79,53 +79,83 @@
 				</div>
 				<div class="modal-body">
 					<s:form namespace="/user" action="loginWeb" id="modalForm" method="post" validate="true"
-						class="form-horizontal form-signin" data-toggle="validator" enctype="multipart/form-data">
-						<div class="form-group has-feedback">
-							<div class="input-group">
-								<span id="userico" aria-hidden="true" class="left-icon glyphicon glyphicon-user input-group-addon"></span>
-								<s:textfield id="username" name="username" type="text" placeholder="%{getText('bolsos.signin.login')}"
-									required="" autofocus="true" class="form-control user-field" data-remote="/user/validateLogin"
-									data-error="%{getText('bolsos.signin.error.label.user')}" aria-describedby="userico" cssStyle="width: 250px;" />
-							</div>
-							<span aria-hidden="true" class="glyphicon form-control-feedback"></span> <span class="sr-only" id="username">(success)</span>
-							<small class="help-block with-errors"></small>
-
+					class="form-horizontal form-signin" data-toggle="validator" enctype="multipart/form-data">
+					
+					<div class="form-group has-feedback">
+						<div class="input-group">
+							<span id="userico" aria-hidden="true" class="left-icon glyphicon glyphicon-user input-group-addon"></span>
+							<s:textfield id="username" name="username" type="text" placeholder="%{getText('bolsos.signin.login')}"
+								required="" autofocus="true" class="form-control user-field" data-remote="/user/validateLogin"
+								data-error="%{getText('bolsos.signin.error.label.user')}" aria-describedby="userico" cssStyle="width: 250px;" />
 						</div>
-						<div class="form-group has-feedback">
-							<div class="input-group">
-								<span id="userico" aria-hidden="true" class="left-icon glyphicon glyphicon-lock input-group-addon"></span>
-								<s:password id="password" name="password" type="password" placeholder="%{getText('bolsos.signin.password')}"
-									required="" data-error="%{getText('bolsos.signin.error.label.user')}" class="form-control"
-									cssStyle="width: 250px;" />
-							</div>
-							<span aria-hidden="true" class="glyphicon form-control-feedback"></span> <span class="sr-only" id="password">(success)</span>
-							<small id="msgError" class="help-block with-errors"></small>
+						<span aria-hidden="true" class="glyphicon form-control-feedback"></span> <span class="sr-only" id="username">(success)</span>
+						<small id="msgErrorUser" class="help-block with-errors"></small>
+				
+					</div>
+					<div class="form-group has-feedback">
+						<div class="input-group">
+							<span id="userico" aria-hidden="true" class="left-icon glyphicon glyphicon-lock input-group-addon"></span>
+							<s:password id="password" name="password" type="password" placeholder="%{getText('bolsos.signin.password')}"
+								required="" data-error="%{getText('bolsos.signin.error.label.user')}" class="form-control"
+								cssStyle="width: 250px;" />
 						</div>
-
-						<p class="text-center">
-							<button id="loginButton" type="button" class="btn btn-primary">
-								<i class="fa fa-sign-in"></i>
-								<s:text name="bolsos.signin.button.signin" />
-							</button>
-						</p>
-
-					</s:form>
-
-					<p class="text-center text-muted">
-						<s:text name="bolsos.signin.label.noregister" />
+						<span aria-hidden="true" class="glyphicon form-control-feedback"></span> <span class="sr-only" id="password">(success)</span>
+						<small id="msgErrorPassword" class="help-block with-errors"></small>
+					</div>
+				
+					<p class="text-center">
+						<button id="loginButton" type="button" class="btn btn-primary">
+							<i class="fa fa-sign-in"></i>
+							<s:text name="bolsos.signin.button.signin" />
+						</button>
 					</p>
-					<p class="text-center text-muted">
-						<a href='<s:text name="url.user.create"/>'> <strong><s:text name="bolsos.signin.label.register.part1" /></strong>
-						</a>
-						<s:text name="bolsos.signin.label.register.part2" />
-					</p>
-
+				
+				</s:form>
+				<p class="text-center text-muted">
+		      			<a  class="ladda-button" data-spinner-color="#38a7bb" data-style="expand-rught" id="lostPasswrd" href="#">
+		      				<s:text name="bolsos.common.text.long.lostUserOrPwd" />
+		      			</a>
+		       	</p>
+		       	
+				<!--Start Modal email sent-->
+				<div id="modalEmailSent" class="modal fade modal2" role="dialog">
+				  <div class="modal-dialog modal-sm">
+				
+				    <!-- Modal content-->
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal2">&times;</button>
+				        <h4 class="modal-title">L'Atelier de Leo.</h4>
+				      </div>
+				      <div class="modal-body">
+				        <p>An email have been sent to your email account.</p>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal2">Close</button>
+				      </div>
+				    </div>
+				
+				  </div>
+				</div>
+				<!--End Modal email sent-->
+				     	
+				<p class="text-center text-muted">
+					<s:text name="bolsos.signin.label.noregister" />
+				</p>
+				
+				<p class="text-center text-muted">
+					<a href='<s:text name="url.user.create"/>'> 
+						<strong>
+							<s:text name="bolsos.signin.label.register.part1" />
+						</strong>
+					</a>
+					<s:text name="bolsos.signin.label.register.part2" />
+				</p>
+				</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-</div>
 
 <!-- *** TOP BAR END *** -->
 <!-- *** NAVBAR ***
@@ -399,13 +429,39 @@ $(document).ready(function () {
 			password : $("#password").val()
 		}, function(a) {
 			if(a.resutl == "ERROR"){
-				var textError = $("#password").attr("data-error");
-				$("#msgError").text(textError);
+				var textError = $("#username").attr("data-error");
+				$("#msgErrorPassword").text(textError);
 			}
 			else{
 				$("#modalForm").submit();
 			}				
 		});
+	});
+	
+	$("button[data-dismiss=modal2]").click(function(){
+	    $('#modalEmailSent').modal('hide');
+	});
+	
+	$("#lostPasswrd").click(function() {
+		if($("#username").val() == ""){
+			var textError = $("#password").attr("data-error");
+			$("#msgErrorUser").text(textError);
+		}
+		else{
+			var l = Ladda.create(this);
+			l.start();
+			$.getJSON("/ajax/lostUserOrPwd", {
+				email : $("#username").val()
+			}, function(a) {
+				if(a.result != "success"){
+					$("#msgErrorUser").text(a.result);
+				}
+				else{
+					$("#modalEmailSent").modal('show');
+				}
+				l.stop();
+			});
+		}
 	});
 	
 	$(".share-fb").click(function(e){

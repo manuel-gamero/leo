@@ -4,14 +4,15 @@
 	<display-name>Bolsos</display-name>
 	<!-- Project Context Listener -->
 	<listener>
-		<listener-class>com.mg.web.listener.application.InitializeContextListener</listener-class>
+		<listener-class>com.mg.web.listener.application.InitializeContextListener
+		</listener-class>
 	</listener>
-	
+
 	<!-- Quartz scheduler Listener -->
 	<listener>
-	  <listener-class>
-            com.mg.web.listener.schedule.QuartzSchedulerListener
-          </listener-class>
+		<listener-class>
+			com.mg.web.listener.schedule.QuartzSchedulerListener
+		</listener-class>
 	</listener>
 
 	<!-- Character Encoding Filter -->
@@ -69,7 +70,7 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>ERROR</dispatcher>
 	</filter-mapping>
-	
+
 	<!-- Request Filter -->
 	<filter>
 		<filter-name>RequestFilter</filter-name>
@@ -116,12 +117,24 @@
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 
-	<!-- <security-constraint> <web-resource-collection> <web-resource-name>SecureConnection</web-resource-name> 
-		<url-pattern>/*</url-pattern> </web-resource-collection> <user-data-constraint> 
-		<transport-guarantee>CONFIDENTIAL</transport-guarantee> </user-data-constraint> 
-		</security-constraint> <security-constraint> <web-resource-collection> <web-resource-name>NonSecureConnectionOK</web-resource-name> 
-		<url-pattern>*.ico</url-pattern> </web-resource-collection> <user-data-constraint> 
-		<transport-guarantee>NONE</transport-guarantee> </user-data-constraint> </security-constraint> -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>SecureConnection</web-resource-name>
+			<url-pattern>/*</url-pattern>
+		</web-resource-collection>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>NonSecureConnectionOK</web-resource-name>
+			<url-pattern>*.ico</url-pattern>
+		</web-resource-collection>
+		<user-data-constraint>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
 	<!-- Welcome And Error Pages -->
 	<welcome-file-list>
 		<welcome-file>/WEB-INF/jsp/application/index.jsp</welcome-file>

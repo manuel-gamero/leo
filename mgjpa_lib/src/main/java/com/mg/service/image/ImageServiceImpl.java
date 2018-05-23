@@ -16,9 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.imageio.ImageIO;
 import javax.persistence.EntityManager;
@@ -63,7 +61,6 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 	private final static String IMAGEN_LARGE = "large" + SLAGE;
 	private final static String IMAGEN_THUMB = "thumbnail" + SLAGE;
 	private final static boolean NORMALIZE_IMAGE_NAME = true;
-	private static Map<String, Image> imageMap = new ConcurrentHashMap<String, Image>();
 	
 	protected DaoManager daoManager;
 
@@ -115,16 +112,8 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 		}
 	}
 	
-	/**
-	 * Save the file information in disk
-	 * @param file
-	 * @param path
-	 * @param normalizedName
-	 * @return If the file was well saved
-	 * @throws ServiceException
-	 */
 	@Override
-	public boolean saveImage(File file, String path, String normalizedName) throws ServiceException {
+	public boolean saveImage(File file, String path, String normalizedName, boolean transparent) throws ServiceException {
 			
 		try {
 
@@ -140,9 +129,9 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 			isLarge = dim.getWidth() >= BackEndConstants.PRODUCT_DEFAUTL_THUMBNAIL_WIDTH * BackEndConstants.LARGE_TRANSFERT_COEFICIENT;
 			
 			if( isLarge ){
-				saveFile(file, destPath);
+				saveFile(file, (transparent?largDestPath:destPath));
 			}
-			return saveThumbFile(file, new File(largDestPath), (int)dim.getWidth(), (int)dim.getHeight()) &&
+			return saveThumbFile(file, new File((!transparent?largDestPath:destPath)), (int)dim.getWidth(), (int)dim.getHeight()) &&
 					saveThumbFile(file, new File(ThumbProductPath), BackEndConstants.WIDTH_IMG_SEARCH_PAGE, miniProductheight);
 		} catch (Exception e) {
 			throw new ServiceException(e) ;
@@ -239,8 +228,8 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 	}
 	
 	private Image createImage(File file, String fileName, ImageType imageType, String normalizedName) throws IOException{
-		Image image = imageMap.get(fileName + "_" + imageType.name());
-		if( image == null){
+		Image image = DaoFactory.getDAO(ImageDAO.class).findEntity(fileName, imageType);
+		if( image == null || imageType.equals( ImageType.PRODUCT ) ){
 			image = new Image();
 			image.setId(0);
 			image.setName(normalizedName);
@@ -255,7 +244,6 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 			//Variables Initialization 
 			boolean isLarge = dim.getWidth() >= BackEndConstants.PRODUCT_DEFAUTL_THUMBNAIL_WIDTH * BackEndConstants.LARGE_TRANSFERT_COEFICIENT;
 			image.setLarge(isLarge);
-			imageMap.put(fileName + "_" + imageType.name(), image);
 		}
 		return(image);
 	}
@@ -569,6 +557,13 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 	 * @see com.mg.service.image.ImageService#getImageForObject(javax.persistence.EntityManager, java.io.File, java.lang.String, com.mg.enums.ImageType, int)
 	 * If fileFileName is null return Image for imageId from the database.
 	 * In other case create a new Image object.
+	 * 
+	 * This method is encharge to retrieve the image either from the database or from the
+	 * cache or create it. For the special cases that image type product, I can not use
+	 * neither cache or database, I need to create all the time the image object. The reaso
+	 * is because the object is already in the database and there is a problem when the system
+	 * tries to persist twice. Also we can not reuse product images for all the custom component
+	 * images associated to the image.
 	 */
 	@Override
 	public Image getImageForObject(EntityManager em, ImageDTO imageDTO,

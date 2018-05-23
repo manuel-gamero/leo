@@ -51,6 +51,7 @@ public class ProductDAO extends GenericDaoImpl<Product> {
 							" where p.id = :id " +
 							" and ima.typeCode = 'PRODUCT' " +
 							" and ccci.typeCode = 'COLLECTION' " +
+							" and coccc.statusCode = 'ACTIVE' " +
 							" and cci.customComponentCollection.id = coccc.id" +
 							" order by cc.id, coccc.id, cci.id ", parameters);
 	}
@@ -141,4 +142,19 @@ public class ProductDAO extends GenericDaoImpl<Product> {
 							" and p.customProduct = :customProduct ", parameters);
 	}
 
+	public List<Product> getAllDiscount(String currencyCode){
+		
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("currencyCode", currencyCode);
+		
+		return  findResults(" select distinct p " + 
+							" from Product p " +
+							" left join p.price ppr " +
+							" left join ppr.priceEntries pprpe" +
+							" left join p.collection c " + 
+							" where p.statusCode = 'ACTIVE' " +
+							" and c.statusCode = 'ACTIVE' " +
+							" and pprpe.discount is not null " +
+							" and pprpe.currency = :currencyCode ", parameters);
+	}
 }

@@ -161,6 +161,7 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
 		return result;
 	}
 	
+	@Override
 	public Users getUser(final String userName) throws ServiceException {
 		Users result;
 		try {
@@ -178,32 +179,16 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean sendUserPassword(final String email) {
-		final String requestFor = "You request for Losting Email";
+	public boolean sendUserPassword(final Users user, String newPassword) throws ServiceException {
 		try {
 			daoManager.setCommitTransaction(true);
-			final Users user = (Users) daoManager
-					.executeAndHandle(new DaoCommand() {
-						@Override
-						public Object execute(EntityManager em)
-								throws DaoException {
-							return DaoFactory.getDAO(UserDAO.class, em)
-									.findUserByName(email);
-						}
-					});
-
-			String login = user.getLogin();
-			String passwd = user.getPassword();
-			String body = "Login: " + login + "\nPass word: " + passwd;
-
-			Receipt.passwordRequest(user);
-
+			updateUser(user);			
+			Receipt.passwordRequest(user, newPassword);
 			if (log.isDebugEnabled()) {
 				log.debug(user.getPassword());
 			}
-		} catch (DaoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			throw (new ServiceException(e));
 		}
 		return false;
 	}

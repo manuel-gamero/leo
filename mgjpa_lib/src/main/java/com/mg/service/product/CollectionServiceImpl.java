@@ -210,14 +210,14 @@ public class CollectionServiceImpl extends ServiceImpl implements CollectionServ
 							//Save Collection image after save collection in database in case the any error.
 							if(imageDTO != null && imageDTO.getFile() != null){
 								ServiceLocator.getService(ImageServiceImpl.class)
-										.saveImage(imageDTO.getFile(), path, image.getName());
+										.saveImage(imageDTO.getFile(), path, image.getName(), false);
 							}
 							
 							//Save CustomComponentCollections images
 							if(customComponentCollections != null){
 								for (CustomComponentCollectionDTO item : customComponentCollections) {
 									if( item != null && item.getImageDTO() != null && item.getImageDTO().getFile() != null){
-										ServiceLocator.getService(ImageServiceImpl.class).saveImage(item.getImageDTO().getFile(), path, item.getImage().getName());
+										ServiceLocator.getService(ImageServiceImpl.class).saveImage(item.getImageDTO().getFile(), path, item.getImage().getName(), true);
 									}
 								}
 							}
