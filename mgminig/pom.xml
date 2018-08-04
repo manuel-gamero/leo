@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>mg</artifactId>
+		<groupId>com.mg</groupId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<artifactId>mgminig</artifactId>
+	<name>Data minig java library</name>
+	<description>Data minig - All the classes to do data minig</description>
+	<packaging>jar</packaging>
+
+	<scm>
+		<!-- <connection>https://review.gerrithub.io/manuel-gamero/leo</connection> -->
+		<!-- <connection>scm:git:git@review.gerrithub.io:manuel-gamero/leo.git</connection> -->
+		<!-- <connection>scm:git:ssh://git@review.gerrithub.io/manuel-gamero/leo</connection> -->
+		<connection>scm:git:ssh://git@review.gerrithub.io/manuel-gamero/leo.git</connection>
+		<developerConnection>scm:git:ssh://git@review.gerrithub.io/manuel-gamero/leo.git</developerConnection>
+		<url>https://review.gerrithub.io/manuel-gamero/leo</url>
+	</scm>
+
+	<licenses>
+		<license>
+			<name>GNU Lesser General Public License (LGPL), Version 3</name>
+			<url>http://www.gnu.org/licenses/lgpl.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<showDeprecation>true</showDeprecation>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+						</manifest>
+						<!-- <manifestEntries> <SCM-Revision>${buildNumber}</SCM-Revision> 
+							</manifestEntries> -->
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/nz.ac.waikato.cms.weka/weka-dev -->
+		<dependency>
+			<groupId>nz.ac.waikato.cms.weka</groupId>
+			<artifactId>weka-dev</artifactId>
+			<version>3.9.0</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.mg</groupId>
+			<artifactId>mgjpa_lib</artifactId>
+			<version>1.1-SNAPSHOT</version>
+			<type>jar</type>
+		</dependency>
+	</dependencies>
+
+</project>
