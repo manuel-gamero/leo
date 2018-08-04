@@ -116,7 +116,7 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
-
+<!-- 
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>SecureConnection</web-resource-name>
@@ -135,6 +135,7 @@
 			<transport-guarantee>NONE</transport-guarantee>
 		</user-data-constraint>
 	</security-constraint>
+ -->
 	<!-- Welcome And Error Pages -->
 	<welcome-file-list>
 		<welcome-file>/WEB-INF/jsp/application/index.jsp</welcome-file>

@@ -16,21 +16,16 @@ public class ProductDAO extends GenericDaoImpl<Product> {
 	
 	private static final String joinClause =" from Product p " +
 										" join fetch p.image ima " +
-										" join fetch ima.customComponentTexts cct " +
-										" left join fetch ima.customComponentImagesForImageId cci " +
-										" left join fetch cci.imageByImageMaskId ccim " +
-										" join fetch p.collection co " +
-										" join fetch co.customComponentCollections coccc " + 
-										" join fetch coccc.image ccci " +
-										" join fetch coccc.customComponent cc " +
+										" left join fetch ima.customComponentTexts cct " +
+										" join fetch p.collection co " + 
 										" left join fetch p.price ppr " +
 										" left join fetch ppr.priceEntries " + 
 										" left join fetch p.productImages pi " +
 										" left join fetch pi.image ";
 	private static final String sqlFindProduct = " select distinct p from Product p " +
-												 " join fetch p.image ima left join fetch ima.customComponentImagesForImageId cci " +
-												 " join fetch p.collection co join fetch co.customComponentCollections coccc " +
-												 " where p.statusCode = 'ACTIVE' and cci.customComponentCollection.id = coccc.id ";
+												 " join fetch p.image ima " +
+												 " join fetch p.collection co " +
+												 " where p.statusCode = 'ACTIVE' ";
 
 	public ProductDAO() {
 		super(Product.class);
@@ -49,11 +44,7 @@ public class ProductDAO extends GenericDaoImpl<Product> {
 
 		return  findOneResult("select p " + joinClause + 
 							" where p.id = :id " +
-							" and ima.typeCode = 'PRODUCT' " +
-							" and ccci.typeCode = 'COLLECTION' " +
-							" and coccc.statusCode = 'ACTIVE' " +
-							" and cci.customComponentCollection.id = coccc.id" +
-							" order by cc.id, coccc.id, cci.id ", parameters);
+							" and ima.typeCode = 'PRODUCT' ", parameters);
 	}
 	
 	public Product findCustomProductForProduct(int collectionId, ProductType type){
@@ -75,13 +66,8 @@ public class ProductDAO extends GenericDaoImpl<Product> {
 
 		return  findResults(" select distinct p " + joinClause + 
 							" where ima.typeCode = 'PRODUCT' " +
-							" and ccci.typeCode = 'COLLECTION' " +
 							" and co.statusCode = 'ACTIVE'" +
-							" and coccc.statusCode = 'ACTIVE'" +
-							" and cci.statusCode = 'ACTIVE'" +
-							" and p.statusCode = 'ACTIVE' " +
-							" and cci.customComponentCollection.id = coccc.id" +
-							" order by cc.id, coccc.id, cci.id  ");
+							" and p.statusCode = 'ACTIVE' " );
 	}
 	
 	@Fetch (FetchMode.SELECT)
@@ -132,12 +118,9 @@ public class ProductDAO extends GenericDaoImpl<Product> {
 		return  findResults(" select distinct p " +
 							" from Product p " +
 							" join fetch p.image ima " +
-							" left join fetch ima.customComponentImagesForImageId cci " +
 							" join fetch p.collection co " +
-							" join fetch co.customComponentCollections coccc " + 
 							" where co.statusCode = 'ACTIVE'" +
 							" and p.statusCode = 'ACTIVE' " +
-							" and cci.customComponentCollection.id = coccc.id" +
 							" and p.collection.id = :collectionId " +
 							" and p.customProduct = :customProduct ", parameters);
 	}
@@ -153,7 +136,7 @@ public class ProductDAO extends GenericDaoImpl<Product> {
 							" left join ppr.priceEntries pprpe" +
 							" left join p.collection c " + 
 							" where p.statusCode = 'ACTIVE' " +
-							" and c.statusCode = 'ACTIVE' " +
+							//" and c.statusCode = 'ACTIVE' " +
 							" and pprpe.discount is not null " +
 							" and pprpe.currency = :currencyCode ", parameters);
 	}

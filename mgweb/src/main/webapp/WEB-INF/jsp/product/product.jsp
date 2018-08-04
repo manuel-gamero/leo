@@ -35,7 +35,7 @@
 				<s:hidden name="id" />
 				<s:hidden id="color" name="item.color"/>
 				<s:hidden name="index"/>
-				<s:token></s:token>
+				
 
 				<div class="row" id="productMain">
 					<div class="col-sm-7">

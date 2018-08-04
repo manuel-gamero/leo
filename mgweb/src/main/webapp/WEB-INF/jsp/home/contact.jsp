@@ -146,7 +146,9 @@
 </div>
 <!-- /#content -->
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCzCQPqMbWWCBUexMkXH2Pp0ydD9bBqZlQ"></script>
+
+
 
 <script>
 	function initialize() {

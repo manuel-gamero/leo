@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -7,10 +8,23 @@
 	<packaging>pom</packaging>
 
 	<name>mg</name>
-	<url>http://maven.apache.org</url>
+	<url>http://latelierdeleo.com</url>
+
+	<organization>
+		<name>L'atelier de Leo</name>
+		<url>http://latelierdeleo.com</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<name>Manuel Gamero</name>
+			<email>manuel.gamero.parra@gmail.com</email>
+		</developer>
+	</developers>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
 	</properties>
 
 
@@ -32,5 +46,6 @@
 	<modules>
 		<module>/mgjpa_lib</module>
 		<module>/mgweb</module>
+		<module>/mgminig</module>
 	</modules>
 </project>

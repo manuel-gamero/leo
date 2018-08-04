@@ -352,9 +352,9 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 		return 0;
 	}
 	
-	protected String getName(Product product, String name) {
+	protected String getName(Product product, String name) throws ServiceException, CacheException, ServiceLocatorException {
 		String newName = name;
-		for (CustomComponentImage item : product.getImage().getCustomComponentImagesForImageId()) {
+		for (CustomComponentImage item : ServiceLocator.getService(ImageServiceImpl.class).getCustomComponentImages(product.getImage().getId())) {
 			if(item.getImageByImageMaskId().getName().equals(name)){
 				newName = product.getId() + "_" + item.getCustomComponentCollection().getId() + "_" + item.getImageByImageMaskId().getId() + ".png";
 				item.getImageByImageMaskId().setName(newName);

@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
@@ -31,6 +33,7 @@ import com.mg.dao.impl.CustomComponentImageDAO;
 import com.mg.dao.impl.ImageDAO;
 import com.mg.enums.ImageType;
 import com.mg.enums.ProductType;
+import com.mg.exception.CacheException;
 import com.mg.exception.DaoException;
 import com.mg.exception.ServiceException;
 import com.mg.exception.ServiceLocatorException;
@@ -310,9 +313,18 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 	@Override
 	public CustomComponentImage getCustomComponentImage(final int id)
 			throws ServiceException {
-		CustomComponentImage result;
+		CustomComponentImage result = null;
 		try {
-			result = (CustomComponentImage) ServiceLocator.getService(CacheServiceImpl.class).getDefaultCache().fetch(CustomComponentImage.class + "_" + id);
+			//result = (CustomComponentImage) ServiceLocator.getService(CacheServiceImpl.class).getDefaultCache().fetch(CustomComponentImage.class + "_" + id);
+			Map<Integer, Set<CustomComponentImage>> mapImages = (Map<Integer, Set<CustomComponentImage>>) ServiceLocator.getService(CacheServiceImpl.class).getDefaultCache().fetch(Hashtable.class + "_Product_Images");
+			for (Integer imageId : mapImages.keySet()) {
+				for (CustomComponentImage cci : mapImages.get( imageId )) {
+					if( cci.getId() == id ){
+						result = cci;
+						break;
+					}
+				}
+			}
 			if(result == null){
 				log.debug("CustomComponentImageId : " + id + " NOT found" );
 				daoManager.setCommitTransaction(true);
@@ -331,6 +343,14 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 			throw (new ServiceException(e));
 		}
 		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Set<CustomComponentImage> getCustomComponentImages(final int imageId)
+			throws ServiceException, CacheException, ServiceLocatorException {
+		Map<Integer, Set<CustomComponentImage>> mapImages = (Map<Integer, Set<CustomComponentImage>>) ServiceLocator.getService(CacheServiceImpl.class).getDefaultCache().fetch(Hashtable.class + "_Product_Images");
+		return mapImages.get(imageId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -606,12 +626,10 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 		String fileName = String.valueOf(product.getId());
 		if(product.getCustomProduct()){
 			Set<ItemComponent> itemComponents = new HashSet<ItemComponent>(0);
-			CustomComponentCollection customComponentCollectionItem;
 			for (String ids : customComponentCollection) {
 				if(ids != null && ids.length() > 0){
 					log.debug("ids: " + ids);
 					int customComponentImageId = Integer.valueOf(ids.split("_")[3]);
-					customComponentCollectionItem = getCustomComponentCollectionItem(customComponentImageId);
 					CustomComponentImage customComponentImage = ServiceLocator.getService(ImageServiceImpl.class).getCustomComponentImage(customComponentImageId);
 					fileName = fileName + "_" + customComponentImageId;
 					
@@ -619,7 +637,7 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 					//Relation between the user choise and part of the product
 					ItemComponent itemComponent = new ItemComponent();
 					itemComponent.setCustomComponentImage(customComponentImage);
-					itemComponent.setCustomComponentCollection(customComponentCollectionItem);
+					itemComponent.setCustomComponentCollection(customComponentImage.getCustomComponentCollection());
 					itemComponent.setItem(item);
 					itemComponent.setCreationDate(new Date());
 					
@@ -636,12 +654,5 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 		item.setProduct(product);
 		item.setCreationDate(new Date());
 	}
-	
-	private CustomComponentCollection getCustomComponentCollectionItem(
-			int customComponentImageId) throws ServiceException, ServiceLocatorException {
-		CustomComponentImage customImage = ServiceLocator.getService(ImageServiceImpl.class).getCustomComponentImage(customComponentImageId);
-		return customImage.getCustomComponentCollection();
-	}
-
 		
 }

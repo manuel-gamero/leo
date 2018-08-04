@@ -6,13 +6,13 @@
 		<version>1.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
+
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>mgjpa_lib</artifactId>
 	<version>1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>mgjpa_lib</name>
-	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -194,11 +194,15 @@
 			<version>3.9.0</version>
 		</dependency>
 
+		<!-- <dependency> <groupId>com.mg</groupId> <artifactId>mgminig</artifactId> 
+			<version>1.0-SNAPSHOT</version> <type>jar</type> </dependency> -->
+
 		<dependency>
 			<groupId>com.sachinhandiekar</groupId>
 			<artifactId>jInstagram</artifactId>
 			<version>1.2.2</version>
 		</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -219,34 +223,32 @@
 				<directory>${basedir}/src/main/resources</directory>
 			</resource>
 		</resources>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
 
-					<configuration>
-						<archive>
-							<manifest>
-								<addClasspath>true</addClasspath>
-							</manifest>
-							<!-- <manifestEntries> <SCM-Revision>${buildNumber}</SCM-Revision> 
-								</manifestEntries> -->
-						</archive>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+						</manifest>
+						<!-- <manifestEntries> <SCM-Revision>${buildNumber}</SCM-Revision> 
+							</manifestEntries> -->
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<!-- <version>3.0</version> -->
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 
-					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
-
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 
 

@@ -23,7 +23,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.mg.datamining.interfaces.IDevice;
+import com.mg.entities.IDevice;
 import com.mg.enums.UserActionType;
 
 /**

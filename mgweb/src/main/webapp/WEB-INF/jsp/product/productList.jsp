@@ -16,13 +16,17 @@
 						<tr>
 							<th data-field="id" data-sortable="true"><span style="width: 70px;" class="bold">id</span></th>
 							<th data-field="code" data-sortable="true"><span style="width: 70px;"
-								class="bold">code</span></th>
+								class="bold">Collection</span></th>
 							<th data-field="name"><span style="width: 70px;"
 								class="bold">name</span></th>
-							<th data-field="description"><span style="width: 70px;"
-								class="bold">description</span></th>
+							<th data-field="type"><span style="width: 70px;"
+								class="bold">type</span></th>
+							<th data-field="new"><span style="width: 70px;"
+								class="bold">new</span></th>
 							<th data-field="status"><span style="width: 70px;"
 								class="bold">Status</span></th>
+							<th data-field="status"><span style="width: 70px;"
+								class="bold">Custom</span></th>
 							<th data-field="creationdate" data-sortable="true"><span style="width: 20px;"
 								class="bold">creation date</span></th>
 							<th data-field="action"><span style="width: 70px;"
@@ -34,13 +38,15 @@
 							<s:iterator value="list" status="status">
 								<tr id="tr_<s:property value="id"/>">
 									<td style="text-align: center;"><s:property value="id" /></td>
-									<td style="text-align: center;"><s:property value="collection.code" /></td>
+									<td style="text-align: center;"><s:property value="collection.code" /> - <s:text name="%{getTranslaction(collection.translationByNameTransId.id,'en')}" /></td>
 									<td style="text-align: center;">
 										<p>En: <s:text name="%{getTranslaction(translationByNameTransId.id,'en')}" /></p>
 										<p>Fr: <s:text name="%{getTranslaction(translationByNameTransId.id,'fr')}" /></p>
 									</td>
-									<td style="text-align: center;"><s:property	value="description" /></td>
+									<td style="text-align: center;"><s:property	value="typeCode.code" /></td>
+									<td style="text-align: center;"><s:property	value="newProduct" /></td>
 									<td style="text-align: center;"><s:property value="statusCode" /></td>
+									<td style="text-align: center;"><s:property value="customProduct" /></td>
 									<td style="text-align: center;"><s:property
 											value="creationDate" /></td>
 									<td style="text-align: center;"><a id="edit"

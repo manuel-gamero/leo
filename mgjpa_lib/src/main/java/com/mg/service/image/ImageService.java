@@ -2,10 +2,12 @@ package com.mg.service.image;
 
 import java.io.File;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 
 import com.mg.enums.ImageType;
+import com.mg.exception.CacheException;
 import com.mg.exception.ServiceException;
 import com.mg.exception.ServiceLocatorException;
 import com.mg.model.CustomComponentImage;
@@ -115,4 +117,7 @@ public interface ImageService extends Service{
 	 * @throws ServiceLocatorException
 	 */
 	void getItemPNG( Item item, Product product, List<String> customComponentCollection ) throws ServiceException, ServiceLocatorException;
+
+
+	Set<CustomComponentImage> getCustomComponentImages(int imageId) throws ServiceException, CacheException, ServiceLocatorException;
 }

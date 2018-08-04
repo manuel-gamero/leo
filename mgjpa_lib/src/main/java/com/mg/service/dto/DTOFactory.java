@@ -43,6 +43,7 @@ import com.mg.service.cache.CacheServiceImpl;
 import com.mg.service.image.ImageService;
 import com.mg.service.image.ImageServiceImpl;
 import com.mg.service.init.ConfigServiceImpl;
+import com.mg.service.product.CollectionServiceImpl;
 import com.mg.service.product.ProductServiceImpl;
 import com.mg.util.currency.CurrencyUtils;
 import com.mg.util.exception.ExceptionHandler;
@@ -169,10 +170,12 @@ public final class DTOFactory {
 		}
 		return productDTO;
 	}
-	public static ProductDTO getProductDTO(Product product, String lang, String currencyCode, boolean large) throws CurrencyNoExistException, ServiceException, ServiceLocatorException{
+	public static ProductDTO getProductDTO(Product product, String lang, String currencyCode, boolean large) throws CurrencyNoExistException, ServiceException, ServiceLocatorException, CacheException{
 		if(product != null){
 			ProductDTO productViewDTO = new ProductDTO();
-			productViewDTO.setCollection( getCollectionDTO(product.getCollection(), lang) );
+			//productViewDTO.setCollection( getCollectionDTO(product.getCollection(), lang) );
+			Collection collection = ServiceLocator.getService(CollectionServiceImpl.class).getCollection(product.getCollection().getId(), true);
+			productViewDTO.setCollection( getCollectionDTO(collection , lang) );
 			productViewDTO.setCost(product.getCost());
 			productViewDTO.setDepth(product.getDepth());
 			productViewDTO.setDescription(TranslationUtils.getTranslation(product.getTranslationByDescriptionTransId(), lang ));
@@ -191,12 +194,14 @@ public final class DTOFactory {
 			productViewDTO.setCustomText(product.getCustomText());
 			productViewDTO.setNewProduct(product.getNewProduct());
 			if(large){
-				List<CustomComponentDTO> customComponentList = getCustomCompoentSet(product.getImage().getCustomComponentImagesForImageId(), lang);
+				List<CustomComponentDTO> customComponentList = getCustomCompoentSet(ServiceLocator.getService(ImageServiceImpl.class).getCustomComponentImages(product.getImage().getId()), collection, lang);
 				java.util.Collections.sort( customComponentList, CustomComponentDTO.CUSTOM_COMPONENT_COMPARATOR_CODE);
 				productViewDTO.setCustomComponentDTOSet(customComponentList);
-				productViewDTO.setCustomComponentText( getCustomComponentTextDTO( product.getImage().getCustomComponentTexts().iterator().next() ));
-				productViewDTO.getCollection().setCustomComponentCollections( product.getCollection().getCustomComponentCollections() );
-				productViewDTO.setDescriptionList(getDescriptionList(product.getImage().getCustomComponentImagesForImageId(), lang));
+				if(product.getImage().getCustomComponentTexts().iterator().hasNext()){
+					productViewDTO.setCustomComponentText( getCustomComponentTextDTO( product.getImage().getCustomComponentTexts().iterator().next() ));
+				}
+				//productViewDTO.getCollection().setCustomComponentCollections( product.getCollection().getCustomComponentCollections() );
+				productViewDTO.setDescriptionList(getDescriptionList(ServiceLocator.getService(ImageServiceImpl.class).getCustomComponentImages(product.getImage().getId()), lang));
 				productViewDTO.setProductImagesSetDTO(getProductImagesSet( product.getProductImages() ));
 				java.util.Collections.sort( productViewDTO.getProductImagesSetDTO(), ProductImageDTO.IMAGE_ORDER_WITDH);
 				if(!product.getCustomProduct() && product.getCollection().getStatusCode().equals(CollectionStatus.ACTIVE)){
@@ -280,20 +285,20 @@ public final class DTOFactory {
 	}
 
 	private static List<CustomComponentDTO> getCustomCompoentSet(
-			Set<CustomComponentImage> customoComponentImageSet, String lang) {
+			Set<CustomComponentImage> customoComponentImageSet, Collection collection, String lang) {
 		Map<CustomComponent, CustomComponentDTO> customComponentMap = new HashMap<CustomComponent, CustomComponentDTO>();
 		for (CustomComponentImage item : customoComponentImageSet){
 			if(!customComponentMap.containsKey(item.getCustomComponentCollection().getCustomComponent())){
 				CustomComponentDTO customComponent = new CustomComponentDTO();	
 				customComponent.setId(item.getCustomComponentCollection().getCustomComponent().getId());
-				CustomComponentCollectionDTO customComponentCollectionDTO = getCustomComponentCollectionDTO(item.getCustomComponentCollection(), lang);
+				CustomComponentCollectionDTO customComponentCollectionDTO = getCustomComponentCollectionDTO(item.getCustomComponentCollection(), collection, lang);
 				customComponentCollectionDTO.setCustomComponentImageId(item.getId());
 				customComponent.getCustomComponentCollections().add(customComponentCollectionDTO);
 				customComponent.setName(item.getCustomComponentCollection().getCustomComponent().getName());
 				customComponentMap.put(item.getCustomComponentCollection().getCustomComponent(), customComponent);
 			}
 			else{
-				CustomComponentCollectionDTO customComponentCollectionDTO = getCustomComponentCollectionDTO(item.getCustomComponentCollection(), lang);
+				CustomComponentCollectionDTO customComponentCollectionDTO = getCustomComponentCollectionDTO(item.getCustomComponentCollection(), collection, lang);
 				customComponentCollectionDTO.setCustomComponentImageId(item.getId());
 				customComponentMap.get(item.getCustomComponentCollection().getCustomComponent()).getCustomComponentCollections().add(customComponentCollectionDTO);
 			}
@@ -301,13 +306,13 @@ public final class DTOFactory {
 		return new ArrayList<CustomComponentDTO>(customComponentMap.values());
 	}
 	
-	public static CustomComponentCollectionDTO getCustomComponentCollectionDTO(CustomComponentCollection customComponentCollection, String lang){
+	public static CustomComponentCollectionDTO getCustomComponentCollectionDTO(CustomComponentCollection customComponentCollection, Collection collection, String lang){
 		CustomComponentCollectionDTO customComponentCollectionDTO = new CustomComponentCollectionDTO();
 		customComponentCollectionDTO.setCollection(customComponentCollection.getCollection());
 		customComponentCollectionDTO.setCreationDate(customComponentCollection.getCreationDate());
 		customComponentCollectionDTO.setCustomComponent(customComponentCollection.getCustomComponent());
 		customComponentCollectionDTO.setId(customComponentCollection.getId());
-		customComponentCollectionDTO.setImage(customComponentCollection.getImage());
+		customComponentCollectionDTO.setImage( getImage(customComponentCollection.getImage(), collection.getCustomComponentCollections()) );
 		customComponentCollectionDTO.setTypeCode(customComponentCollection.getTypeCode());
 		customComponentCollectionDTO.setValue(customComponentCollection.getValue());
 		customComponentCollectionDTO.setName(TranslationUtils.getTranslation(customComponentCollection.getTranslationByNameTransId(), lang ));
@@ -315,7 +320,16 @@ public final class DTOFactory {
 		return customComponentCollectionDTO;
 	}
 
-	public static ItemShoppingCartDTO getItemShoppingCartDTO(Item item, String lang) {
+	private static Image getImage(Image image, Set<CustomComponentCollection> customComponentCollections) {
+		for (CustomComponentCollection item : customComponentCollections) {
+			if( item.getImage().getId() == image.getId() ){
+				return item.getImage();
+			}
+		}
+		return null;
+	}
+
+	public static ItemShoppingCartDTO getItemShoppingCartDTO(Item item, String lang) throws ServiceException, ServiceLocatorException {
 		ItemShoppingCartDTO itemShoppingCartDTO = new ItemShoppingCartDTO();
 		itemShoppingCartDTO.setId(item.getId());
 		itemShoppingCartDTO.setFont(item.getFont());
@@ -332,19 +346,20 @@ public final class DTOFactory {
 			itemShoppingCartDTO.setNameImage(item.getNameImage());
 		}
 		if (item.getItemComponents() != null){
-			itemShoppingCartDTO.setItemComponentDTOs(getItemComponentDTO(item.getItemComponents(), lang));
+			itemShoppingCartDTO.setItemComponentDTOs(getItemComponentDTO(item, lang));
 		}
 		
 		return itemShoppingCartDTO;
 	}
 
 	private static Set<ItemComponentDTO> getItemComponentDTO(
-			Set<ItemComponent> itemComponents, String lang) {
+			Item item, String lang) throws ServiceException, ServiceLocatorException {
 		Set<ItemComponentDTO> set = new HashSet<ItemComponentDTO>();
-		for (ItemComponent itemComponent : itemComponents) {
+		for (ItemComponent itemComponent : item.getItemComponents()) {
 			if(itemComponent != null){
 				ItemComponentDTO itemComponentDTO = new ItemComponentDTO();
-				itemComponentDTO.setCustomComponentCollectionDTO(getCustomComponentCollectionDTO(itemComponent.getCustomComponentCollection(), lang));
+				Collection collection = ServiceLocator.getService(CollectionServiceImpl.class).getCollection(item.getProduct().getCollection().getId(), true);
+				itemComponentDTO.setCustomComponentCollectionDTO(getCustomComponentCollectionDTO(itemComponent.getCustomComponentCollection(),collection , lang));
 				itemComponentDTO.setCustomComponentImageDTO(getCustomComponentImageDTO(itemComponent.getCustomComponentImage()));
 				
 				set.add(itemComponentDTO);
@@ -562,6 +577,7 @@ public final class DTOFactory {
 		collectionDTO.setImage(collection.getImage());
 		collectionDTO.setStatusCode(collection.getStatusCode());
 		collectionDTO.setUrl( StringUtils.generateUrl( collectionDTO.getName() ) );
+		collectionDTO.setCustomComponentCollections(collection.getCustomComponentCollections());
 		return collectionDTO;
 	}
 	

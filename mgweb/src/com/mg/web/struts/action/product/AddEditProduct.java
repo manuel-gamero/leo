@@ -47,7 +47,7 @@ public class AddEditProduct extends BasicTranslationAction implements Preparable
 			error = getText("bolsos.product.error.image.name");
 			addActionError(error);
 		}
-		if( (customComponentImageList == null || customComponentImageList.size() == 0) && product.getId() == 0 ){
+		if( (customComponentImageList == null || customComponentImageList.size() == 0) && product!=null && product.getId() == 0 ){
 			error = getText("bolsos.product.error.collection");
 			addActionError(error);
 		}

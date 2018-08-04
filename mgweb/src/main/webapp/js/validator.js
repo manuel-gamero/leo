@@ -132,7 +132,7 @@
         	        //Pongo la condicion error.length > 0 para que solo salga los errores cuando los hay
         	  		//por condiciones que desconozco se hace la llamada ajax y siempre da error
         	  		//incluso aunque no se llegue a la accion lado struts2
-        	  		if(error.length > 0){
+        	  		if(error.length > 0 || jqXHR.status == "400"){
         	  			errors.push(getErrorMessage('remote') || error);
         	  		}
         	  	})

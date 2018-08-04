@@ -35,7 +35,10 @@
 								<tr id="tr_<s:property value="id"/>">
 									<td style="text-align: center;"><s:property value="id" /></td>
 									<td style="text-align: center;"><s:property value="code" /></td>
-									<td style="text-align: center;"><s:property value="name" /></td>
+									<td style="text-align: left;">
+										<p>En: <s:text name="%{getTranslaction(translationByNameTransId.id,'en')}" /></p>
+										<p>Fr: <s:text name="%{getTranslaction(translationByNameTransId.id,'fr')}" /></p>
+									</td>
 									<td style="text-align: center;"><s:property	value="description" /></td>
 									<td style="text-align: center;"><s:property value="statusCode" /></td>
 									<td style="text-align: center;"><s:property

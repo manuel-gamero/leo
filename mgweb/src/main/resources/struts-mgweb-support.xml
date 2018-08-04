@@ -237,12 +237,10 @@
         </action>
         
 		<action name="addShoppingCart" class="com.mg.web.struts.action.shopping.ShoppingCart" method="addProduct" >
-			<interceptor-ref name="defaultMgWeb"/>
-        	<interceptor-ref name="token"/>
+			<interceptor-ref name="defaultStack"/>
 			<result name="success" type="redirect">/${currentLanguage}/shoppingcart</result> 
 			<result name="error" type="tiles">/error.tiles</result>  
-			<result name="invalid.token">/error.tiles</result>
-        </action>
+		</action>
         
 		<action name="removeItem" class="com.mg.web.struts.action.shopping.ShoppingCart" method="remove" >
 		    <interceptor-ref name="defaultMgWeb"/>

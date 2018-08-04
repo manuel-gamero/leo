@@ -103,9 +103,11 @@
 													</s:url>">
 													<i class="fa fa-trash-o"></i>
 											</a>
-											<a href="shoppingcart/updateItem/${status.index}">
-												<span class="glyphicon glyphicon-pencil"></span>
-											</a>
+											<s:if test="%{product.customProduct}">
+												<a href="shoppingcart/updateItem/${status.index}">
+													<span class="glyphicon glyphicon-pencil"></span>
+												</a>
+											</s:if>
 										</td>
 									</tr>
 								</s:iterator>

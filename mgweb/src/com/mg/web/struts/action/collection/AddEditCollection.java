@@ -94,15 +94,6 @@ public class AddEditCollection extends BasicTranslationAction implements  Prepar
 		return SUCCESS;
 	}
 	
-	private CustomComponentCollection getCustomComponentCollection() {
-		for (CustomComponentCollection item : collection.getCustomComponentCollections()) {
-			if(item.getId() == id){
-				return(item);
-			}
-		}
-		return null;
-	}
-
 	public Integer getId() {
 		return id;
 	}

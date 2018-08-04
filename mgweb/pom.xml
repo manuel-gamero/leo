@@ -128,16 +128,19 @@
 			<artifactId>tiles-servlet</artifactId>
 			<version>3.0.7</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.apache.struts.xwork</groupId>
-			<artifactId>xwork-core</artifactId>
-			<version>2.3.20</version>
-		</dependency>
- 		-->
+		<!-- <dependency> <groupId>org.apache.struts.xwork</groupId> <artifactId>xwork-core</artifactId> 
+			<version>2.3.20</version> </dependency> -->
 		<dependency>
 			<groupId>com.mg</groupId>
 			<artifactId>mgjpa_lib</artifactId>
 			<version>1.1-SNAPSHOT</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mg</groupId>
+			<artifactId>mgminig</artifactId>
+			<version>1.0-SNAPSHOT</version>
 			<type>jar</type>
 		</dependency>
 
@@ -175,6 +178,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
+				<!-- <version>3.2.1</version> -->
 				<configuration>
 					<warName>${project.artifactId}-${project.version}</warName>
 					<archive>
@@ -226,8 +230,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 

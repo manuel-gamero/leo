@@ -2,11 +2,11 @@ package com.mg.service.cache;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
-
-import net.sf.ehcache.CacheManager;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 
@@ -26,6 +26,8 @@ import com.mg.service.init.ConfigServiceImpl;
 import com.mg.service.product.CollectionServiceImpl;
 import com.mg.service.product.ProductServiceImpl;
 import com.mg.util.text.StringUtils;
+
+import net.sf.ehcache.CacheManager;
 
 /**
  * A service class to manage the caching subsystem on the site.
@@ -194,10 +196,18 @@ public class CacheServiceImpl extends ServiceImpl implements CacheService {
 		try{
 			int count = 0;
 			List<CustomComponentImage> list = ServiceLocator.getService(ImageServiceImpl.class).getAllCustomComponentImage();
+			Map<Integer, Set<CustomComponentImage>> customComponentImageMap = new Hashtable<Integer, Set<CustomComponentImage>>(0);
 			for (CustomComponentImage item : list) {
-				defaultCache.store(CustomComponentImage.class + "_" + item.getId(), item);
+				//defaultCache.store(CustomComponentImage.class + "_" + item.getId(), item);
+				if( !customComponentImageMap.containsKey(item.getImageByImageId().getId()) ){
+					customComponentImageMap.put(item.getImageByImageId().getId(), new HashSet<CustomComponentImage>(0) );	
+				}
+				
+				customComponentImageMap.get(item.getImageByImageId().getId()).add( item );
 				count++;
 			}
+			
+			defaultCache.store(Hashtable.class + "_Product_Images", customComponentImageMap);
 			log.info( count + " elements stored in defaultCache");
 		} catch (Exception e) {
 			log.error(e.getCause());

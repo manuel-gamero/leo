@@ -112,7 +112,7 @@
 				
 				</s:form>
 				<p class="text-center text-muted">
-		      			<a  class="ladda-button" data-spinner-color="#38a7bb" data-style="expand-rught" id="lostPasswrd" href="#">
+		      			<a  class="ladda-button" data-spinner-color="#38a7bb" data-style="expand-right" id="lostPasswrd" href="#">
 		      				<s:text name="bolsos.common.text.long.lostUserOrPwd" />
 		      			</a>
 		       	</p>
