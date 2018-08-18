@@ -136,9 +136,66 @@
 					</div>
 					<!-- /.row -->
 					</s:form>
+				
+				
+				<h2 class="about-header">
+						<s:text name="bolsos.contact.magasins"/>
+				</h2>
+				
+				<div class="row">
+				<div class="col-md-2 col-xs-3 col-sm-3 hidden-xs hidden-sm">
+				</div>
+				<!-- /.item -->
+				<div class="col-md-2 col-xs-4 col-sm-3">
+					<div class="box-image">
+						<div class="image img-circle">
+							<a href='http://bloguelemoment.com/'>
+								<img src="${images}/blogue-le-moment_600x600.png" alt="Le Moment"
+									class="img-magasin" />
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- /.item -->
+				<div class="col-md-2 col-xs-4 col-sm-3">
+					<div class="box-image">
+						<div class="image">
+							<a href='https://signelocal.com/'>
+								<img src="${images}/signe-local_600x600.png" alt="Signé Local"
+									class="img-magasin" />
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- /.item -->
+				<div class="col-md-2 col-xs-4 col-sm-3">
+					<div class="box-image">
+						<div class="image">
+							<a href='https://www.boucleetpapier.com/'>
+								<img src="${images}/Boucle&Papier_600x600.png" alt="Boucle & Papier"
+									class="img-magasin" />
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- /.item -->
+				<div class="col-md-2 col-xs-4 col-sm-3 visibility-xs hidden-md hidden-lg">
+				</div>
+				<div class="col-md-2 col-xs-4 col-sm-3">
+					<div class="box-image">
+						<div class="image">
+							<a href='https://www.lepetitcocon.com/'>
+								<img src="${images}/LePetitCocon_600x600.png" alt="Le Petit Cocon"
+									class="img-magasin"/>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- /.item -->
 			</div>
-
-
+		</div>
+				
+			</div>
 		</div>
 		<!-- /.col-md-9 -->
 	</div>

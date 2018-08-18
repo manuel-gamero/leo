@@ -3,6 +3,8 @@ package com.mg.datamining.product;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.mg.datamining.clustering.DataItem;
 import com.mg.datamining.clustering.DataItemImpl;
 import com.mg.datamining.clustering.DataSetCreator;
@@ -17,6 +19,8 @@ import com.mg.service.device.DeviceServiceImpl;
 
 public class ProductDataSetCreatorImpl implements DataSetCreator<Product,Attribute> {
 
+	private static final Logger log = Logger.getLogger(ProductDataSetCreatorImpl.class);
+	
 	@Override
 	public List<DataItem<Product,Attribute>> createLearningData() throws Exception {
 		return getProductMagnitudeVectors();
@@ -27,9 +31,18 @@ public class ProductDataSetCreatorImpl implements DataSetCreator<Product,Attribu
 		List<DeviceProduct> dpList = ServiceLocator.getService(DeviceServiceImpl.class).getDeviceProductGroupByProduc();
 		//List<Product> productList = ServiceLocator.getService(ProductServiceImpl.class).getAllProduct();
 		ProductAnalyzer productAnalyzer = new ProductAnalyzerImpl();
-		for (DeviceProduct item : dpList) {
-			GenericMagnitudeVector<Attribute> pmv = productAnalyzer.createMagnitudeVector(item);
-			result.add( new DataItemImpl<Product, Attribute>(item.getProduct(), pmv) );
+		int i=0;
+		try{
+			for (DeviceProduct item : dpList) {
+				GenericMagnitudeVector<Attribute> pmv = productAnalyzer.createMagnitudeVector(item);
+				result.add( new DataItemImpl<Product, Attribute>(item.getProduct(), pmv) );
+				i++;
+			}
+		}
+		catch (Exception e) {
+			log.info(i);
+			log.debug(e.getCause());
+			return null;
 		}
 		return result;
 	}

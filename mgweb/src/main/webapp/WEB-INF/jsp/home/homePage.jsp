@@ -296,10 +296,84 @@
 
 
 	<!-- *** END COLLECTIONS *** -->
+	
+	<!--  *** START MAGASINS *** -->
 
+	<div  id='product_fragment' class="box text-center audit" data-animate="fadeInUp">
+		<div class="container">
+			<div class="col-md-12">
+				<h3 class="text-uppercase">
+					<s:text name="bolsos.home.magasins" />
+				</h3>
+
+				<p class="lead">
+					<s:text name="bolsos.home.products.banner.text" />
+				</p>
+			</div>
+		</div>
+	</div>
+
+<section class="bar background-white no-mb">
+		<div id="magasins" class="container magasins-section" data-animate="fadeInUpBig">
+			<div class="row">
+				<div class="col-md-2 col-xs-3 col-sm-3 hidden-xs hidden-sm">
+				</div>
+				<!-- /.item -->
+				<div class="col-md-2 col-xs-4 col-sm-3">
+					<div class="box-image">
+						<div class="image img-circle">
+							<a href='http://bloguelemoment.com/'>
+								<img src="${images}/blogue-le-moment_600x600.png" alt="Le Moment"
+									class="img-magasin" />
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- /.item -->
+				<div class="col-md-2 col-xs-4 col-sm-3">
+					<div class="box-image">
+						<div class="image">
+							<a href='https://signelocal.com/'>
+								<img src="${images}/signe-local_600x600.png" alt="Signé Local"
+									class="img-magasin" />
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- /.item -->
+				<div class="col-md-2 col-xs-4 col-sm-3">
+					<div class="box-image">
+						<div class="image">
+							<a href='https://www.boucleetpapier.com/'>
+								<img src="${images}/Boucle&Papier_600x600.png" alt="Boucle & Papier"
+									class="img-magasin" />
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- /.item -->
+				<div class="col-md-2 col-xs-4 col-sm-3 visibility-xs hidden-md hidden-lg">
+				</div>
+				<div class="col-md-2 col-xs-4 col-sm-3">
+					<div class="box-image">
+						<div class="image">
+							<a href='https://www.lepetitcocon.com/'>
+								<img src="${images}/LePetitCocon_600x600.png" alt="Le Petit Cocon"
+									class="img-magasin"/>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- /.item -->
+			</div>
+		</div>
+	</section>
+	
+	<!-- *** END MAGASINS *** -->
+	
 	<!-- *** GET INSPIRED ***
  _________________________________________________________ -->
-	<div id='instruction_fragment' class="container audit" data-animate="fadeInUpBig">
+<%-- 	<div id='instruction_fragment' class="container audit" data-animate="fadeInUpBig">
 		<div class="col-md-12">
 			<div class="box slideshow">
 				<h3><s:text name="bolsos.home.advertising4.title"></s:text></h3>
@@ -323,7 +397,7 @@
 				</div> -->
 			</div>
 		</div>
-	</div>
+	</div> --%>
 	<!-- *** GET INSPIRED END *** -->
 
 	<!-- *** BLOG HOMEPAGE ***

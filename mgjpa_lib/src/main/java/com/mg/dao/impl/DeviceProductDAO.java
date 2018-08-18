@@ -51,7 +51,7 @@ public class DeviceProductDAO extends GenericDaoImpl<DeviceProduct> {
 							  " sum(dp.removeCount) as removeCount " +
 							  " from DeviceProduct dp " +
 							  " where dp.product.id = :productId " +
-							  " group by dp.product.id  ", parameters);
+							  " group by dp.product.id ", parameters);
 	}
 	
 	public List<DeviceProduct> getDeviceProductGroupByProduct() {

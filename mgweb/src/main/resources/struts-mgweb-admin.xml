@@ -347,6 +347,13 @@
             <result name="error" type="tiles">/errorAdmin.tiles</result>                  
         </action>
         
+        <action name="dataminingList" class="com.mg.web.struts.action.BasicTilesAction" >
+			<interceptor-ref name="defaultMgWebAuthAdmin"/>
+			<result name="authentification" type="redirect">/admin/logon.action</result>  
+            <result name="success" type="tiles">/dataminingList.tiles</result>
+            <result name="error" type="tiles">/errorAdmin.tiles</result>                  
+        </action>
+        
         <action name="logList" class="com.mg.web.struts.action.application.LogList" >
 			<interceptor-ref name="defaultMgWebAuthAdmin"/>
 			<result name="authentification" type="redirect">/admin/logon.action</result>  

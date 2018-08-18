@@ -1,5 +1,6 @@
 package com.mg.service.device;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -22,6 +23,7 @@ import com.mg.model.Device;
 import com.mg.model.DeviceCollection;
 import com.mg.model.DeviceComponent;
 import com.mg.model.DeviceProduct;
+import com.mg.model.Product;
 import com.mg.service.ServiceImpl;
 
 public class DeviceServiceImpl extends ServiceImpl implements DeviceService {
@@ -88,10 +90,10 @@ public class DeviceServiceImpl extends ServiceImpl implements DeviceService {
 	}
 	
 	public DeviceProduct getDeviceProductGroupByProduc( final Integer productId ) throws ServiceException {
-		DeviceProduct result = null;
+		Object[] result = null;
 		try {
 			daoManager.setCommitTransaction(true);
-			result = (DeviceProduct) daoManager
+			result = (Object[]) daoManager
 					.executeAndHandle(new DaoCommand() {
 						@Override
 						public Object execute(EntityManager em)
@@ -102,15 +104,15 @@ public class DeviceServiceImpl extends ServiceImpl implements DeviceService {
 		} catch (DaoException de) {
 			throw (new ServiceException(de));
 		}
-		return result;
+		return getDeviceProduct( result );
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<DeviceProduct> getDeviceProductGroupByProduc() throws ServiceException {
-		List<DeviceProduct> result = null;
+		List<Object[]> result = null;
 		try {
 			daoManager.setCommitTransaction(true);
-			result = (List<DeviceProduct>) daoManager
+			result = (List<Object[]>) daoManager
 					.executeAndHandle(new DaoCommand() {
 						@Override
 						public Object execute(EntityManager em)
@@ -121,9 +123,30 @@ public class DeviceServiceImpl extends ServiceImpl implements DeviceService {
 		} catch (DaoException de) {
 			throw (new ServiceException(de));
 		}
-		return result;
+		return getDeviceProductList( result );
 	}
 	
+	private List<DeviceProduct> getDeviceProductList(List<Object[]> listObject) {
+		List<DeviceProduct> deviceProdcutLst = new ArrayList<DeviceProduct>();
+		for (Object[] item : listObject) {
+			deviceProdcutLst.add( getDeviceProduct( item ) );
+		}
+		return deviceProdcutLst;
+	}
+
+	private DeviceProduct getDeviceProduct(Object[] item) {
+		DeviceProduct deviceProduct = new DeviceProduct();
+		
+		deviceProduct.setProduct( new Product( (Integer)item[0] ) );
+		deviceProduct.setCount( ((Long)item[1]).intValue() );
+		deviceProduct.setShareCount( ((Long)item[2]).intValue() );
+		deviceProduct.setAddCount( ((Long)item[3]).intValue() );
+		deviceProduct.setSellCount( ((Long)item[4]).intValue() );
+		deviceProduct.setRemoveCount( ((Long)item[5]).intValue() );
+		
+		return deviceProduct;
+	}
+
 	public DeviceCollection getDeviceCollection(final Integer deviceId, final Integer collectionId) throws ServiceException {
 		DeviceCollection result = null;
 		try {

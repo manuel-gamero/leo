@@ -95,6 +95,10 @@ public class Product implements java.io.Serializable, BasicModel, ICurrency, IBa
 	public Product() {
 	}
 
+	public Product(Integer id) {
+		this.id = id;
+	}
+	
 	public Product(int id, ProductStatus statusCode, ProductType typeCode, Date creationDate) {
 		this.id = id;
 		this.statusCode = statusCode;
