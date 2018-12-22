@@ -38,6 +38,7 @@ public class DeviceDAO extends GenericDaoImpl<Device> {
 							  " left join fetch d.deviceComponents dcc " +
 							//  " left join fetch d.deviceComponentHists dph " +
 							  " left join fetch d.deviceUsers dus " +
+							  " left join fetch d.deviceSuggestions dss " +
 							//  " left join fetch d.deviceSessions ds " +
 							//  " left join fetch d.deviceUrls dur " +
 							  " where d.fingerprint = :fingerPrint ", parameters);

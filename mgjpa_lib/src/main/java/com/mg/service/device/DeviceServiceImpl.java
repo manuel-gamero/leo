@@ -17,14 +17,16 @@ import com.mg.dao.impl.DeviceDAO;
 import com.mg.dao.impl.DeviceProductDAO;
 import com.mg.exception.DaoException;
 import com.mg.exception.ServiceException;
+import com.mg.exception.ServiceLocatorException;
 import com.mg.model.Audit;
 import com.mg.model.AuditHist;
 import com.mg.model.Device;
 import com.mg.model.DeviceCollection;
 import com.mg.model.DeviceComponent;
 import com.mg.model.DeviceProduct;
-import com.mg.model.Product;
 import com.mg.service.ServiceImpl;
+import com.mg.service.ServiceLocator;
+import com.mg.service.product.ProductServiceImpl;
 
 public class DeviceServiceImpl extends ServiceImpl implements DeviceService {
 
@@ -101,10 +103,10 @@ public class DeviceServiceImpl extends ServiceImpl implements DeviceService {
 							return DaoFactory.getDAO(DeviceProductDAO.class, em).getDeviceProductGroupByProduct(productId);
 						}
 					});
-		} catch (DaoException de) {
+			return getDeviceProduct( result );
+		} catch (Exception de) {
 			throw (new ServiceException(de));
 		}
-		return getDeviceProduct( result );
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -120,24 +122,24 @@ public class DeviceServiceImpl extends ServiceImpl implements DeviceService {
 							return DaoFactory.getDAO(DeviceProductDAO.class, em).getDeviceProductGroupByProduct();
 						}
 					});
-		} catch (DaoException de) {
+			return getDeviceProductList( result );
+		} catch (Exception de) {
 			throw (new ServiceException(de));
 		}
-		return getDeviceProductList( result );
 	}
 	
-	private List<DeviceProduct> getDeviceProductList(List<Object[]> listObject) {
-		List<DeviceProduct> deviceProdcutLst = new ArrayList<DeviceProduct>();
+	private List<DeviceProduct> getDeviceProductList(List<Object[]> listObject) throws ServiceException, ServiceLocatorException {
+		List<DeviceProduct> deviceProductList = new ArrayList<DeviceProduct>();
 		for (Object[] item : listObject) {
-			deviceProdcutLst.add( getDeviceProduct( item ) );
+			deviceProductList.add( getDeviceProduct( item ) );
 		}
-		return deviceProdcutLst;
+		return deviceProductList;
 	}
 
-	private DeviceProduct getDeviceProduct(Object[] item) {
+	private DeviceProduct getDeviceProduct(Object[] item) throws ServiceException, ServiceLocatorException {
 		DeviceProduct deviceProduct = new DeviceProduct();
 		
-		deviceProduct.setProduct( new Product( (Integer)item[0] ) );
+		deviceProduct.setProduct( ServiceLocator.getService(ProductServiceImpl.class).getProduct( (Integer)item[0], true) );
 		deviceProduct.setCount( ((Long)item[1]).intValue() );
 		deviceProduct.setShareCount( ((Long)item[2]).intValue() );
 		deviceProduct.setAddCount( ((Long)item[3]).intValue() );

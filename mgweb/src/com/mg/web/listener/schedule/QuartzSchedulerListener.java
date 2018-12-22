@@ -26,6 +26,8 @@ public class QuartzSchedulerListener implements ServletContextListener {
 	private static final Logger log = Logger.getLogger(QuartzSchedulerListener.class);
 	private static final String TRIGER_SUBFIX = "Trigger";
 	private static final String PACKAGE_JOBS = "com.mg.web.jobs.";
+	public static final String VALUE_1 = "key1";
+	public static final String VALUE_2 = "key2";
 
 	@SuppressWarnings("unchecked")
 	public void contextInitialized(ServletContextEvent arg0) {
@@ -62,8 +64,8 @@ public class QuartzSchedulerListener implements ServletContextListener {
 
 	private JobDataMap getJobDataMap(Jobs job) {
 		JobDataMap dataMap = new JobDataMap();
-		dataMap.put("key1", job.getValue1());
-		dataMap.put("key2", job.getValue2());
+		dataMap.put( VALUE_1, job.getValue1() );
+		dataMap.put( VALUE_2, job.getValue2());
 		return dataMap;
 	}
 	

@@ -86,12 +86,22 @@ public class CouponServiceImpl extends ServiceImpl implements CouponService {
 					try{
 						String path = ServiceLocator.getService(ConfigServiceImpl.class).getWebImagePromotionLocation();
 						Image imageEn = ServiceLocator.getService(ImageServiceImpl.class).getImageForObject(em, imageEnDTO, ImageType.PROMOTION, (couponsType.getImageEn() != null) ? couponsType.getImageEn().getId() : null);
-						imageEn.setRealName(path);
-						couponsType.setImageEn(imageEn);
+						if(imageEn!=null){
+							imageEn.setRealName(path);
+							couponsType.setImageEn(imageEn);
+						}
+						else{
+							couponsType.setImageEn(null);
+						}
 						
 						Image imageFr = ServiceLocator.getService(ImageServiceImpl.class).getImageForObject(em, imageFrDTO, ImageType.PROMOTION, (couponsType.getImageFr() != null) ? couponsType.getImageFr().getId() : null);
-						imageFr.setRealName(path);
-						couponsType.setImageFr(imageFr);
+						if(imageFr!=null){
+							imageFr.setRealName(path);
+							couponsType.setImageFr(imageFr);
+						}
+						else{
+							couponsType.setImageFr(null);
+						}
 						
 						couponsType.setCreationDate(new Date());
 						

@@ -1,18 +1,23 @@
 package com.mg.web.struts.action.product;
 
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import com.mg.model.Collection;
 import com.mg.model.CustomComponentCollection;
+import com.mg.model.CustomComponentImage;
 import com.mg.model.CustomComponentText;
 import com.mg.model.PriceEntry;
 import com.mg.model.Product;
 import com.mg.service.ServiceLocator;
+import com.mg.service.cache.CacheServiceImpl;
 import com.mg.service.dto.CustomComponentImageDTO;
 import com.mg.service.dto.ImageDTO;
+import com.mg.service.image.ImageServiceImpl;
 import com.mg.service.product.CollectionServiceImpl;
 import com.mg.service.product.ProductServiceImpl;
 import com.mg.util.translation.Translations;
@@ -75,8 +80,7 @@ public class AddEditProduct extends BasicTranslationAction implements Preparable
 		try{
 			if (id != null) {
 				try{
-					product = ServiceLocator.getService(ProductServiceImpl.class)
-							.getProduct(id, false);
+					product = ServiceLocator.getService(ProductServiceImpl.class).getProductForAdmin(id);
 					setValueTranslation(product);
 					
 					if(product.getImage().getCustomComponentTexts().iterator().hasNext()){

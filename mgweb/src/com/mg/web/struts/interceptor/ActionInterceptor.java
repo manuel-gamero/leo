@@ -2,36 +2,27 @@ package com.mg.web.struts.interceptor;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.servlet.http.HttpSession;
-
-import ognl.OgnlException;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.apache.struts2.ServletActionContext;
 
 import com.mg.annotation.Action;
 import com.mg.exception.ServiceLocatorException;
 import com.mg.model.Audit;
 import com.mg.service.ServiceLocator;
-import com.mg.service.dto.UserSessionDTO;
 import com.mg.service.init.ConfigService;
 import com.mg.service.init.ConfigServiceImpl;
 import com.mg.util.exception.ExceptionHandler;
-import com.mg.web.WebConstants;
 import com.mg.web.struts.action.shopping.payment.paypal.ShoppingCartPaylPalCheckout;
 import com.mg.web.struts.action.shopping.payment.rbc.ShoppingCartPaymentSend;
+import com.mg.web.util.AuditUtil;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
+
+import ognl.OgnlException;
 
 /**
  * Intercepts the outermost component invocations during the struts2
@@ -127,106 +118,14 @@ public class ActionInterceptor implements Interceptor{
 	}
 
 	private void postCall( CallContext pContext ) {
-
 		if( pContext.hasAudit() ) {
 			persistAudit( pContext );
 		}
 
 	}
-
-	private String getUsername(ActionInvocation actionInvocation ) {
-		UserSessionDTO user =(UserSessionDTO) actionInvocation.getInvocationContext().getSession().get(WebConstants.USER);
-		return user == null ? null : user.getLogin();
-	}
-
+	
 	private Audit prepareAudit( ActionInvocation actionInvocation, String pELMessage ) throws OgnlException {
-
-		Audit audit = new Audit();
-
-		audit.setUsername( getUsername(actionInvocation) );
-
-		String remoteAddr = ServletActionContext.getRequest().getRemoteAddr();
-		audit.setLocation( remoteAddr );
-
-		HttpSession session = ServletActionContext.getRequest().getSession();
-		if( session != null ) {
-			//retrieve JSESSIONID
-			audit.setSessionGuid( session.getId() );
-		}
-
-		//String requestUUID = (String)Component.getInstance( "requestUUID" );
-		//audit.setRequestGuid( requestUUID );
-
-		audit.setCreationDate( new Date() );
-
-		audit.setActionUser( String.format( "%s.%s", actionInvocation.getProxy().getActionName(), actionInvocation.getProxy().getMethod() ) );
-		try {
-			audit.setServerName( InetAddress.getLocalHost().getHostName() );
-		} catch( UnknownHostException e ) {
-			audit.setServerName( null );
-		}
-
-		if( pELMessage != null && pELMessage.length() != 0 ) {
-			audit.setMessage( evaluateExpresionOGNL(actionInvocation, pELMessage) );
-		}
-		
-		String requestUserAgent = ServletActionContext.getRequest().getHeader("User-Agent");
-		audit.setBrowser( requestUserAgent );
-		
-		String url = ServletActionContext.getRequest().getHeader("referer");
-		audit.setUrl( url );
-		
-		return audit;
-	}
-
-	private String evaluateExpresionOGNL(ActionInvocation actionInvocation,
-			String pELMessage) throws OgnlException {		
-		String result = pELMessage;
-		Set<String> ognlExpresions = getOgnlExpresions( result );
-		for (String string : ognlExpresions) {
-			String ognlValue = actionInvocation.getStack().findString(string.replace("#", ""));
-			/*if(string.contains(".")){
-				OgnlContext ctx = new OgnlContext();
-				String expression = Ognl.parseExpression( expressionString );
-
-				Object expr = Ognl.parseExpression(expression);
-				Object value = Ognl.getValue(expr, ctx, actionInvocation.getStack().findString(string.replace("#", "")).getClass());
-				System.out.println("Value: " + value);
-				String valueExpresion =(String) Ognl.getValue(string, actionInvocation.getStack().findString(string.split(".")[0].replace("#", "")).getClass());
-				result = result.replace(string, valueExpresion);
-			}
-			else{
-				if(ognlValue != null){
-					result = result.replace(string, ognlValue);
-				}
-				else{
-					log.warn("String to replace OGNL expresion is null: " + string );
-					result = result.replace(string, "");
-				}
-			}	*/
-			if(ognlValue != null){
-				result = result.replace(string, ognlValue);
-			}
-			else{
-				log.warn("String to replace OGNL expresion is null: " + string );
-				result = result.replace(string, "");
-			}
-		}
-		return result;
-	}
-
-	private Set<String> getOgnlExpresions(String pELMessage) {
-		Set<String> result = new HashSet<String>();
-		//String patternString1 = "(#)(.+?)\\b";
-		String patternString1 = "(#)([\\p{Graph}]+)\\b";
-	    Pattern pattern = Pattern.compile(patternString1);
-	    Matcher matcher = pattern.matcher(pELMessage);
-
-	    while(matcher.find()) {
-	    	String match = matcher.group(1) + matcher.group(2);
-	    	result.add(match);
-	    }
-		return result;
+		return AuditUtil.createAudit(actionInvocation, pELMessage);
 	}
 
 	private void persistAudit( CallContext pContext ) {

@@ -141,71 +141,89 @@
 				<h2 class="about-header">
 						<s:text name="bolsos.contact.magasins"/>
 				</h2>
-				
+
 				<div class="row">
-				<div class="col-md-2 col-xs-3 col-sm-3 hidden-xs hidden-sm">
-				</div>
-				<!-- /.item -->
-				<div class="col-md-2 col-xs-4 col-sm-3">
-					<div class="box-image">
-						<div class="image img-circle">
-							<a href='http://bloguelemoment.com/'>
-								<img src="${images}/blogue-le-moment_600x600.png" alt="Le Moment"
+					<div class="col-md-2 col-xs-4 col-sm-3">
+						<div class="box-image">
+							<div class="image">
+								<a href='https://www.boucleetpapier.com/'> <img
+									src="${images}/Boucle&Papier_600x600.png" alt="Boucle & Papier"
 									class="img-magasin" />
-							</a>
+								</a>
+							</div>
 						</div>
 					</div>
-				</div>
-				<!-- /.item -->
-				<div class="col-md-2 col-xs-4 col-sm-3">
-					<div class="box-image">
-						<div class="image">
-							<a href='https://signelocal.com/'>
-								<img src="${images}/signe-local_600x600.png" alt="Signé Local"
+					<!-- /.item -->
+					<div class="col-md-2 col-xs-4 col-sm-3">
+						<div class="box-image">
+							<div class="image">
+								<a href='https://lepalaisbulles.ca/'> <img
+									src="${images}/Palais-Bulles_600x600.png" alt="Palais Bulles"
 									class="img-magasin" />
-							</a>
+								</a>
+							</div>
 						</div>
 					</div>
-				</div>
-				<!-- /.item -->
-				<div class="col-md-2 col-xs-4 col-sm-3">
-					<div class="box-image">
-						<div class="image">
-							<a href='https://www.boucleetpapier.com/'>
-								<img src="${images}/Boucle&Papier_600x600.png" alt="Boucle & Papier"
+					<!-- /.item -->
+					<div class="col-md-2 col-xs-4 col-sm-3">
+						<div class="box-image">
+							<div class="image">
+								<a href='https://www.lavitrinefamiliale.com/'> <img
+									src="${images}/La-Vitrine-Familiale_600x600.png"
+									alt="La Vitrine Familiale" class="img-magasin" />
+								</a>
+							</div>
+						</div>
+					</div>
+					<!-- /.item -->
+					<div class="col-md-2 col-xs-4 col-sm-3">
+						<div class="box-image">
+							<div class="image">
+								<a href='https://bouche-bee.ca/'> <img
+									src="${images}/Bouche-Bee_600x600.png" alt="Bouche Bée"
 									class="img-magasin" />
-							</a>
+								</a>
+							</div>
 						</div>
 					</div>
-				</div>
-				<!-- /.item -->
-				<div class="col-md-2 col-xs-4 col-sm-3 visibility-xs hidden-md hidden-lg">
-				</div>
-				<div class="col-md-2 col-xs-4 col-sm-3">
-					<div class="box-image">
-						<div class="image">
-							<a href='https://www.lepetitcocon.com/'>
-								<img src="${images}/LePetitCocon_600x600.png" alt="Le Petit Cocon"
-									class="img-magasin"/>
-							</a>
+					<!-- /.item -->
+					<div
+						class="col-md-2 col-xs-4 col-sm-3 hidden-xs hidden-md hidden-lg">
+					</div>
+					<div class="col-md-2 col-xs-4 col-sm-3">
+						<div class="box-image">
+							<div class="image">
+								<a href='https://www.lepetitcocon.com/'> <img
+									src="${images}/LePetitCocon_600x600.png" alt="Le Petit Cocon"
+									class="img-magasin" />
+								</a>
+							</div>
 						</div>
 					</div>
+					<!-- /.item -->
+					<div class="col-md-2 col-xs-4 col-sm-3">
+						<div class="box-image">
+							<div class="image">
+								<a href='https://signelocal.com/'> <img
+									src="${images}/signe-local_600x600.png" alt="Signé Local"
+									class="img-magasin" />
+								</a>
+							</div>
+						</div>
+					</div>
+					<!-- /.item -->
 				</div>
-				<!-- /.item -->
 			</div>
-		</div>
 				
 			</div>
 		</div>
 		<!-- /.col-md-9 -->
 	</div>
 	<!-- /.container -->
-</div>
+
 <!-- /#content -->
-
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCzCQPqMbWWCBUexMkXH2Pp0ydD9bBqZlQ"></script>
-
-
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzCQPqMbWWCBUexMkXH2Pp0ydD9bBqZlQ&callback=initialize"
+  type="text/javascript"></script>
 
 <script>
 	function initialize() {

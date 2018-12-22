@@ -17,7 +17,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.mg.entities.IDevice;
+import com.mg.entities.IDeviceAddable;
+import com.mg.entities.IDeviceCountable;
 import com.mg.util.CommonUtils;
 
 /**
@@ -25,7 +26,7 @@ import com.mg.util.CommonUtils;
  */
 @Entity
 @Table(name = "mg_device_component", schema = "bolsos")
-public class DeviceComponent implements java.io.Serializable, BasicModel, IDevice {
+public class DeviceComponent implements java.io.Serializable, BasicModel, IDeviceCountable {
 
 	private static final long serialVersionUID = -8703658762277072277L;
 	private int id;
@@ -161,14 +162,15 @@ public class DeviceComponent implements java.io.Serializable, BasicModel, IDevic
 		this.removeCount = removeCount;
 	}
 
-	public void add(DeviceComponent deviceComponent1) {
-		this.addCount = this.addCount + deviceComponent1.getAddCount();
-		this.count = this.count + deviceComponent1.getCount();
-		this.removeCount = this.removeCount + deviceComponent1.getRemoveCount();
-		this.sellCount = this.sellCount + deviceComponent1.getSellCount();
-		this.shareCount = this.shareCount + deviceComponent1.getShareCount();
-		this.creationDate = CommonUtils.getNewestDate(this.creationDate, deviceComponent1.getCreationDate());
-		this.lastModification = CommonUtils.getNewestDate(this.lastModification, deviceComponent1.getLastModification());
+	public void add(IDeviceAddable item) {
+		IDeviceCountable device = (IDeviceCountable)item;
+		this.addCount = this.addCount + device.getAddCount();
+		this.count = this.count + device.getCount();
+		this.removeCount = this.removeCount + device.getRemoveCount();
+		this.sellCount = this.sellCount + device.getSellCount();
+		this.shareCount = this.shareCount + device.getShareCount();
+		this.creationDate = CommonUtils.getNewestDate(this.creationDate, device.getCreationDate());
+		this.lastModification = CommonUtils.getNewestDate(this.lastModification, device.getLastModification());
 	}
 	
 	@Override

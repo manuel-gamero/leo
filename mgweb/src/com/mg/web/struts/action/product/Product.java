@@ -10,6 +10,7 @@ import com.mg.enums.ProductStatus;
 import com.mg.exception.CurrencyNoExistException;
 import com.mg.exception.ServiceException;
 import com.mg.exception.ServiceLocatorException;
+import com.mg.model.Audit;
 import com.mg.model.CustomComponentImage;
 import com.mg.service.ServiceLocator;
 import com.mg.service.dto.DTOFactory;
@@ -22,6 +23,7 @@ import com.mg.util.currency.CurrencyUtils;
 import com.mg.web.RequestAtributeConstants;
 import com.mg.web.WebConstants;
 import com.mg.web.struts.action.BasicAction;
+import com.mg.web.util.AuditUtil;
 import com.opensymphony.xwork2.Preparable;
 
 public class Product extends BasicAction implements Preparable {
@@ -46,7 +48,7 @@ public class Product extends BasicAction implements Preparable {
 	}
 
 	@Override
-	@Action(value="product = #id ")
+	@Action(value="product = #id , custom = #custom ")
 	public String execute(){
 		log.debug("Product debug execute id " + id);		
 		ProductDTO productDTO = null;
@@ -59,10 +61,14 @@ public class Product extends BasicAction implements Preparable {
 					if ( productDTO.getCustomProduct()){
 						log.debug("Getting list product suggestion for custom product");
 						listItem = DTOFactory.getItemViewDTOForItemList( ServiceLocator.getService(ProductServiceImpl.class).getListItemByProduct(id), getCurrentLanguage(), getCurrentCurrencyCode(), 3 );
+						//generateAuditSuggestion(listItem);
 					}
 					else{
 						log.debug("Getting list similar product for final product");
 						listItem = DTOFactory.getItemViewDTOForProductList( ServiceLocator.getService(ProductServiceImpl.class).getProductByCollection( productDTO.getCollection().getId(), false), id, getCurrentLanguage(), getCurrentCurrencyCode(), 3 );
+						//TODO esto lo tiene que hace una clase
+						//La clase deberia de hacer la sugerencia y guardar el audit
+						//generateAuditSuggestion(listItem);
 					}
 					setItemList( listItem );
 					
@@ -102,6 +108,16 @@ public class Product extends BasicAction implements Preparable {
 		}		
 		log.debug("Return SUCCESS");
 		return SUCCESS;
+	}
+
+	private void generateAuditSuggestion(List<ItemViewDTO> listItem) {
+		listItem.stream().forEach( p -> {
+			try {
+				Audit audit = AuditUtil.createAudit(null, "suggestion = " + p.getNameImage() + " type = CUSTOM_PRODUCT ");
+				ServiceLocator.getService(ConfigServiceImpl.class).saveAudit(audit);
+			} catch (Exception e) {
+				log.error(e);
+			}} );
 	}
 
 	private void setMetadataPage(ProductDTO productDTO) {

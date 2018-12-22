@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import com.mg.dao.core.DaoCommand;
 import com.mg.dao.core.DaoFactory;
 import com.mg.dao.impl.AuditDAO;
+import com.mg.dao.impl.ConfigDAO;
 import com.mg.dao.impl.TranslationDAO;
 import com.mg.exception.CacheException;
 import com.mg.exception.DaoException;
@@ -17,6 +18,7 @@ import com.mg.exception.InitializationException;
 import com.mg.exception.ServiceException;
 import com.mg.exception.ServiceLocatorException;
 import com.mg.model.Audit;
+import com.mg.model.Config;
 import com.mg.model.Translation;
 import com.mg.service.ServiceImpl;
 import com.mg.service.ServiceLocator;
@@ -474,6 +476,44 @@ public class ConfigServiceImpl extends ServiceImpl implements ConfigService{
 		return translation;
 	}
 
+	@Override
+	public Config getConfig( final String code ) throws ServiceException {
+		Config config = null;
+		try {
+			daoManager.setCommitTransaction(true);
+			config = (Config) daoManager
+					.executeAndHandle(new DaoCommand() {
+						@Override
+						public Object execute(EntityManager em)
+								throws DaoException {
+							return DaoFactory.getDAO(ConfigDAO.class, em).getValue( code );
+						}
+					});
+		} catch (DaoException de) {
+			throw (new ServiceException(de));
+		}
+		return config;
+	}
+	
+	@Override
+	public int updateConfig(final Config config) throws ServiceException {
+		int id = 0;
+		try {
+			daoManager.setCommitTransaction(true);
+			id = (Integer) daoManager
+					.executeAndHandle(new DaoCommand() {
+						@Override
+						public Object execute(EntityManager em)
+								throws DaoException {
+							return DaoFactory.getDAO(ConfigDAO.class, em).update( config ).getId();
+						}
+					});
+		} catch (DaoException de) {
+			throw (new ServiceException(de));
+		}
+		return id;
+	}
+	
 	@Override
 	public String[] getUrlAllow() {
 		return getPropertyAsStringArray(WEB_RESOURCE_UTL_ALLOW);

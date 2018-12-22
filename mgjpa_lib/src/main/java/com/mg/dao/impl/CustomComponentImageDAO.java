@@ -35,7 +35,19 @@ public class CustomComponentImageDAO extends GenericDaoImpl<CustomComponentImage
 	@Fetch (FetchMode.SELECT)
 	public List<CustomComponentImage> getAll(){
 		return  findResults(selectClause +
-							" where cci.statusCode = 'ACTIVE' ");
+							" where cci.statusCode = 'ACTIVE' "	+ 
+							" and ccc.statusCode = 'ACTIVE' ");
+	}
+	
+
+	public List<CustomComponentImage> getAllByImageId(int imageId){
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("imageId", imageId);
+		
+		return  findResults(selectClause +
+							" where cci.statusCode = 'ACTIVE' "	+ 
+							" and ccc.statusCode = 'ACTIVE' " +
+							" and cci.imageByImageId.id = :imageId" , parameters);
 	}
 	
 	public CustomComponentImage findEntityById(int id){

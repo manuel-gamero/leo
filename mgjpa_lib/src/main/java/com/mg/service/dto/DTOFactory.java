@@ -264,8 +264,10 @@ public final class DTOFactory {
 			Set<CustomComponentImage> customComponentImageSet,
 			String lang) {
 		List<String> descriptionList = new ArrayList<String>();
-		for (CustomComponentImage item : customComponentImageSet) {
-			descriptionList.add(TranslationUtils.getTranslation(item.getCustomComponentCollection().getTranslationByDescriptionTransId(), lang));
+		if(customComponentImageSet != null && customComponentImageSet.size() > 0 ){
+			for (CustomComponentImage item : customComponentImageSet) {
+				descriptionList.add(TranslationUtils.getTranslation(item.getCustomComponentCollection().getTranslationByDescriptionTransId(), lang));
+			}
 		}
 		return descriptionList;
 	}
@@ -287,20 +289,22 @@ public final class DTOFactory {
 	private static List<CustomComponentDTO> getCustomCompoentSet(
 			Set<CustomComponentImage> customoComponentImageSet, Collection collection, String lang) {
 		Map<CustomComponent, CustomComponentDTO> customComponentMap = new HashMap<CustomComponent, CustomComponentDTO>();
-		for (CustomComponentImage item : customoComponentImageSet){
-			if(!customComponentMap.containsKey(item.getCustomComponentCollection().getCustomComponent())){
-				CustomComponentDTO customComponent = new CustomComponentDTO();	
-				customComponent.setId(item.getCustomComponentCollection().getCustomComponent().getId());
-				CustomComponentCollectionDTO customComponentCollectionDTO = getCustomComponentCollectionDTO(item.getCustomComponentCollection(), collection, lang);
-				customComponentCollectionDTO.setCustomComponentImageId(item.getId());
-				customComponent.getCustomComponentCollections().add(customComponentCollectionDTO);
-				customComponent.setName(item.getCustomComponentCollection().getCustomComponent().getName());
-				customComponentMap.put(item.getCustomComponentCollection().getCustomComponent(), customComponent);
-			}
-			else{
-				CustomComponentCollectionDTO customComponentCollectionDTO = getCustomComponentCollectionDTO(item.getCustomComponentCollection(), collection, lang);
-				customComponentCollectionDTO.setCustomComponentImageId(item.getId());
-				customComponentMap.get(item.getCustomComponentCollection().getCustomComponent()).getCustomComponentCollections().add(customComponentCollectionDTO);
+		if(customoComponentImageSet!= null && customoComponentImageSet.size() > 0){
+			for (CustomComponentImage item : customoComponentImageSet){
+				if(!customComponentMap.containsKey(item.getCustomComponentCollection().getCustomComponent())){
+					CustomComponentDTO customComponent = new CustomComponentDTO();	
+					customComponent.setId(item.getCustomComponentCollection().getCustomComponent().getId());
+					CustomComponentCollectionDTO customComponentCollectionDTO = getCustomComponentCollectionDTO(item.getCustomComponentCollection(), collection, lang);
+					customComponentCollectionDTO.setCustomComponentImageId(item.getId());
+					customComponent.getCustomComponentCollections().add(customComponentCollectionDTO);
+					customComponent.setName(item.getCustomComponentCollection().getCustomComponent().getName());
+					customComponentMap.put(item.getCustomComponentCollection().getCustomComponent(), customComponent);
+				}
+				else{
+					CustomComponentCollectionDTO customComponentCollectionDTO = getCustomComponentCollectionDTO(item.getCustomComponentCollection(), collection, lang);
+					customComponentCollectionDTO.setCustomComponentImageId(item.getId());
+					customComponentMap.get(item.getCustomComponentCollection().getCustomComponent()).getCustomComponentCollections().add(customComponentCollectionDTO);
+				}
 			}
 		}
 		return new ArrayList<CustomComponentDTO>(customComponentMap.values());

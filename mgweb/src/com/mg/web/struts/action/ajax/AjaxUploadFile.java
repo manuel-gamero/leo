@@ -120,17 +120,6 @@ public class AjaxUploadFile extends BasicAction implements ServletResponseAware 
 		
 		return NONE;
     }
-    public String deleteProductImage(){
-		try {
-				if(imageId != null && imageId > 0){
-					ServiceLocator.getService(ProductServiceImpl.class).deleteProductImageEntity(imageId);
-				}
-		}
-		catch (Exception e) {
-			managerException(e);	
-		}
-		return  SUCCESS;
-	}
     
     private void fileType() throws IOException {    	
         InputStream is = null;

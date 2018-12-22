@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.log4j.Logger;
 
+import com.mg.enums.Language;
 import com.mg.service.ServiceLocator;
 import com.mg.service.dto.UserSessionDTO;
 import com.mg.service.init.ConfigService;
@@ -146,6 +147,10 @@ public final class LocaleUtils {
 		if (LoginUtils.isLogged(request)) {
 			UserSessionDTO user = LoginUtils.getUser(request);
 			user.setSiteLangId(WebConstants.getLanguageId(language));
+		}
+		if(language == null){
+			language = Language.FRENCH.getCode();
+			log.warn("Trying to set a null language.");
 		}
 		request.getSession().setAttribute(WebConstants.STRUTS_LOCALE, new Locale(language));
 	}

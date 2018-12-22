@@ -12,6 +12,8 @@ import com.mg.model.ShoppingCart;
 public abstract class CouponAbstract implements Coupon{
 
 	protected final static BigDecimal ZERO = new BigDecimal(0.00).setScale(2, RoundingMode.CEILING);
+	protected final static BigDecimal PERCENTAGE15 = new BigDecimal(0.15).setScale(2, RoundingMode.CEILING);
+	protected final static BigDecimal PERCENTAGE20 = new BigDecimal(0.20).setScale(2, RoundingMode.CEILING);
 	protected final static BigDecimal PERCENTAGE25 = new BigDecimal(0.25).setScale(2, RoundingMode.CEILING);
 	protected final static BigDecimal PERCENTAGE30 = new BigDecimal(0.30).setScale(2, RoundingMode.CEILING);
 	protected final static BigDecimal PERCENTAGE50 = new BigDecimal(0.50).setScale(2, RoundingMode.CEILING);

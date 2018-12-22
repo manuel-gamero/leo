@@ -136,6 +136,8 @@ public class BasicShoppingCart extends BasicAction {
 					taxes = shoppingCart.getShippingAddressId().getProvince().getTax();
 				}
 			}
+			log.debug("taxes: " + taxes);
+			log.debug("getSubTotal(): " + getSubTotal());
 			return (getSubTotal().add(getShippingPrice()).add(getExtraTextPrice())).multiply(taxes.divide(new BigDecimal(100)));
 		}
 		catch(Exception e){

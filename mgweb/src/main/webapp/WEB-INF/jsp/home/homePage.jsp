@@ -316,10 +316,10 @@
 <section class="bar background-white no-mb">
 		<div id="magasins" class="container magasins-section" data-animate="fadeInUpBig">
 			<div class="row">
-				<div class="col-md-2 col-xs-3 col-sm-3 hidden-xs hidden-sm">
-				</div>
+				<!-- <div class="col-md-2 col-xs-3 col-sm-3 hidden-xs hidden-sm">
+				</div> -->
 				<!-- /.item -->
-				<div class="col-md-2 col-xs-4 col-sm-3">
+				<%-- <div class="col-md-2 col-xs-4 col-sm-3">
 					<div class="box-image">
 						<div class="image img-circle">
 							<a href='http://bloguelemoment.com/'>
@@ -328,18 +328,7 @@
 							</a>
 						</div>
 					</div>
-				</div>
-				<!-- /.item -->
-				<div class="col-md-2 col-xs-4 col-sm-3">
-					<div class="box-image">
-						<div class="image">
-							<a href='https://signelocal.com/'>
-								<img src="${images}/signe-local_600x600.png" alt="Signé Local"
-									class="img-magasin" />
-							</a>
-						</div>
-					</div>
-				</div>
+				</div> --%>
 				<!-- /.item -->
 				<div class="col-md-2 col-xs-4 col-sm-3">
 					<div class="box-image">
@@ -352,7 +341,40 @@
 					</div>
 				</div>
 				<!-- /.item -->
-				<div class="col-md-2 col-xs-4 col-sm-3 visibility-xs hidden-md hidden-lg">
+				<div class="col-md-2 col-xs-4 col-sm-3">
+					<div class="box-image">
+						<div class="image">
+							<a href='https://lepalaisbulles.ca/'>
+								<img src="${images}/Palais-Bulles_600x600.png" alt="Palais Bulles"
+									class="img-magasin" />
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- /.item -->
+				<div class="col-md-2 col-xs-4 col-sm-3">
+					<div class="box-image">
+						<div class="image">
+							<a href='https://www.lavitrinefamiliale.com/'>
+								<img src="${images}/La-Vitrine-Familiale_600x600.png" alt="La Vitrine Familiale"
+									class="img-magasin" />
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- /.item -->
+				<div class="col-md-2 col-xs-4 col-sm-3">
+					<div class="box-image">
+						<div class="image">
+							<a href='https://bouche-bee.ca/'>
+								<img src="${images}/Bouche-Bee_600x600.png" alt="Bouche Bée"
+									class="img-magasin" />
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- /.item -->
+				<div class="col-md-2 col-xs-4 col-sm-3 hidden-xs hidden-md hidden-lg">
 				</div>
 				<div class="col-md-2 col-xs-4 col-sm-3">
 					<div class="box-image">
@@ -360,6 +382,17 @@
 							<a href='https://www.lepetitcocon.com/'>
 								<img src="${images}/LePetitCocon_600x600.png" alt="Le Petit Cocon"
 									class="img-magasin"/>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- /.item -->
+				<div class="col-md-2 col-xs-4 col-sm-3">
+					<div class="box-image">
+						<div class="image">
+							<a href='https://signelocal.com/'>
+								<img src="${images}/signe-local_600x600.png" alt="Signé Local"
+									class="img-magasin" />
 							</a>
 						</div>
 					</div>

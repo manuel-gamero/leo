@@ -753,7 +753,7 @@ $("#containment-wrapper").mousemove(function(e){
   
   $('[id^=deletePI]').click(function() {
 		var id = $(this).attr('id').split('_')[1];
-		$.getJSON('ajax/deleteProductImage.action', {imageId : id}, function(a) {
+		$.getJSON('ajax/deleteProductImage.action', {id : id}, function(a) {
 			$('#pi_tr_' + id).remove();
 		});
 	});

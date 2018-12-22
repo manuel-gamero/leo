@@ -31,6 +31,7 @@ import com.mg.util.translation.IBasicTranslation;
  */
 @Entity
 @Table(name = "mg_coupons_type", schema = "bolsos")
+//@EntityListeners(CouponListener.class)
 public class CouponsType implements java.io.Serializable, BasicModel, IBasicTranslation {
 
 	private static final long serialVersionUID = 3205429201576696876L;
@@ -198,7 +199,7 @@ public class CouponsType implements java.io.Serializable, BasicModel, IBasicTran
 	}
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "image_en_id")
+	@JoinColumn(name = "image_en_id", nullable = true)
 	public Image getImageEn() {
 		return this.imageEn;
 	}
@@ -208,7 +209,7 @@ public class CouponsType implements java.io.Serializable, BasicModel, IBasicTran
 	}
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "image_fr_id")
+	@JoinColumn(name = "image_fr_id", nullable = true)
 	public Image getImageFr() {
 		return this.imageFr;
 	}
@@ -218,7 +219,7 @@ public class CouponsType implements java.io.Serializable, BasicModel, IBasicTran
 	}
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name = "url_trans_id")
+	@JoinColumn(name = "url_trans_id", nullable = true)
 	public Translation getTranslationByUrlTransId() {
 		return this.translationByUrlTransId;
 	}

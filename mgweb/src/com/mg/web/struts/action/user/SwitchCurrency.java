@@ -8,6 +8,7 @@ import java.util.Currency;
 import org.apache.commons.lang.StringUtils;
 
 import com.mg.exception.ServiceLocatorException;
+import com.mg.util.currency.CurrencyUtils;
 import com.mg.web.struts.action.BasicAction;
 import com.mg.web.util.LocaleUtils;
 
@@ -28,6 +29,12 @@ public class SwitchCurrency extends BasicAction  {
 	public String execute() {
 		try{
 			// set a new language for this session 
+			
+			//if there is not currency, I set up one by default.
+			if(currency == null){
+				currency = CurrencyUtils.DEFAULT_CURRENCY;
+				log.warn("Trying to set a null language for request: " + getRequest().getRequestURI());
+			}
 			LocaleUtils.setSessionCurrency(request, Currency.getInstance(currency));
 			
 			// set the url where this action come from 

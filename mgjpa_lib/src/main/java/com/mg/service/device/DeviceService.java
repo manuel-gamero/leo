@@ -21,5 +21,4 @@ public interface DeviceService extends Service {
 	DeviceProduct getDeviceProductGroupByProduc( final Integer productId ) throws ServiceException;
 	List<DeviceProduct> getDeviceProductGroupByProduc() throws ServiceException;
 	List<DeviceProduct> getDeviceProduct(final Integer productId) throws ServiceException;
-	
 }

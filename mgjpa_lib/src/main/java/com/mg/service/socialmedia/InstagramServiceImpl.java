@@ -31,13 +31,12 @@ public class InstagramServiceImpl extends ServiceImpl implements InstagramServic
 	
 	@Override
 	public synchronized void initialize() {
-		
 		log.debug("initialize InstagramServiceImpl" );
 		List<InstagramDTO> instagramFeed = getFeedFromInstagram();
 		
-		log.debug("instagramFeed inizialize with "+ instagramFeed.size() + " images" );
-		//If we get images from Instagram
 		if( instagramFeed != null ){
+			log.debug("instagramFeed inizialize with "+ instagramFeed.size() + " images" );
+			//If we get images from Instagram
 			feed = instagramFeed;
 		}
 	}

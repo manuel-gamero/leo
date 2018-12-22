@@ -32,6 +32,9 @@ public class UserActionFactory {
 		else if( userAction.contains("removeItem")){
 			creationObj = new UserActionRemoveProduct();
 		}
+		else if( userAction.contains("suggestion")){
+			creationObj = new UserActionSuggestion();
+		}
 		else if( isLookProductAction( userAction ) ){
 			creationObj = new UserActionLookProduct();
 		}

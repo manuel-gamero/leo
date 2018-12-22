@@ -17,7 +17,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.mg.entities.IDevice;
+import com.mg.entities.IDeviceAddable;
+import com.mg.entities.IDeviceCountable;
 import com.mg.util.CommonUtils;
 
 /**
@@ -25,7 +26,7 @@ import com.mg.util.CommonUtils;
  */
 @Entity
 @Table(name = "mg_device_product", schema = "bolsos")
-public class DeviceProduct implements java.io.Serializable, BasicModel, IDevice {
+public class DeviceProduct implements java.io.Serializable, BasicModel, IDeviceCountable {
 
 	private static final long serialVersionUID = -8508988226948233174L;
 	private int id;
@@ -158,14 +159,15 @@ public class DeviceProduct implements java.io.Serializable, BasicModel, IDevice 
 		this.removeCount = removeCount;
 	}
 
-	public void add(DeviceProduct deviceProduct1) {
-		this.addCount = this.addCount + deviceProduct1.getAddCount();
-		this.count = this.count + deviceProduct1.getCount();
-		this.removeCount = this.removeCount + deviceProduct1.getRemoveCount();
-		this.sellCount = this.sellCount + deviceProduct1.getSellCount();
-		this.shareCount = this.shareCount + deviceProduct1.getShareCount();
-		this.creationDate = CommonUtils.getNewestDate(this.creationDate, deviceProduct1.getCreationDate());
-		this.lastModification = CommonUtils.getNewestDate(this.lastModification, deviceProduct1.getLastModification());
+	public void add(IDeviceAddable item) {
+		IDeviceCountable device = (IDeviceCountable)item;
+		this.addCount = this.addCount + device.getAddCount();
+		this.count = this.count + device.getCount();
+		this.removeCount = this.removeCount + device.getRemoveCount();
+		this.sellCount = this.sellCount + device.getSellCount();
+		this.shareCount = this.shareCount + device.getShareCount();
+		this.creationDate = CommonUtils.getNewestDate(this.creationDate, device.getCreationDate());
+		this.lastModification = CommonUtils.getNewestDate(this.lastModification, device.getLastModification());
 	}
 	
 	@Override
@@ -175,5 +177,4 @@ public class DeviceProduct implements java.io.Serializable, BasicModel, IDevice 
 				sellCount + ", " + shareCount + ", " +
 			    removeCount + " )";
 	}
-
 }

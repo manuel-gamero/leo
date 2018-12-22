@@ -6,9 +6,9 @@
     <session-factory>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.password">raphaele</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://192.168.1.68:5432/atelierleodb?searchpath=bolsos</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://leo.database:5432/atelierleodb?searchpath=bolsos</property>
         <property name="hibernate.connection.username">raphaele</property>
         <property name="hibernate.default_schema">bolsos</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.ProgressDialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
     </session-factory>
 </hibernate-configuration>

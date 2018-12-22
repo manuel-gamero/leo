@@ -32,9 +32,6 @@ import com.mg.enums.ImageType;
 @Table(name = "mg_image", schema = "bolsos")
 public class Image implements java.io.Serializable, BasicModel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5959491795329436736L;
 	private int id;
 	private String name;
@@ -53,7 +50,7 @@ public class Image implements java.io.Serializable, BasicModel {
 	private Date creationDate;
 	private Set<CustomComponentText> customComponentTexts = new HashSet<CustomComponentText>(0);
 	private Set<CustomComponentImage> customComponentImagesForImageId = new HashSet<CustomComponentImage>(0);
-
+	
 	public Image() {
 	}
 

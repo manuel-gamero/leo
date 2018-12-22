@@ -19,10 +19,8 @@ import com.mg.service.ServiceLocator;
 import com.mg.service.dto.ItemDTO;
 import com.mg.service.image.ImageServiceImpl;
 import com.mg.service.product.CollectionServiceImpl;
+import com.mg.service.product.ProductServiceImpl;
 import com.mg.web.struts.action.BasicListActionSupport;
-
-
-
 
 public class AdminPageAjax<T> extends BasicListActionSupport<T> {
 	
@@ -238,6 +236,18 @@ public class AdminPageAjax<T> extends BasicListActionSupport<T> {
 			return ERROR;
 		}
 		return SUCCESS;
+	}
+	
+	public String deleteProductImage(){
+		try {
+				if( id > 0){
+					ServiceLocator.getService(ProductServiceImpl.class).deleteProductImageEntity(id);
+				}
+		}
+		catch (Exception e) {
+			managerException(e);	
+		}
+		return  SUCCESS;
 	}
 	/*
 	@SuppressWarnings("unchecked")

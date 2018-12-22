@@ -34,13 +34,14 @@ public class MiningDataAction extends BasicAction {
 			collection.groupingSessions();
 			collection.getDevices();
 			collection.saveDevices();
+			System.out.println( collection );
 			//collection.saveAudtiHistory(auditList);
-			DataSetCreator<Product,Attribute> bc = new ProductDataSetCreatorImpl();
-			List<DataItem<Product,Attribute>> productData = bc.createLearningData();
-			GenericKMeansClustererImpl<Product,Attribute> clusterer = new GenericKMeansClustererImpl<Product,Attribute>(
-					productData, 12);
-			clusterer.cluster();
-			System.out.println(clusterer.toString());
+		//	DataSetCreator<Product,Attribute> bc = new ProductDataSetCreatorImpl();
+		//	List<DataItem<Product,Attribute>> productData = bc.createLearningData();
+		//	GenericKMeansClustererImpl<Product,Attribute> clusterer = new GenericKMeansClustererImpl<Product,Attribute>(
+		//			productData, 8);
+		//	clusterer.cluster();
+		//	System.out.println(clusterer.toString());
 			return SUCCESS;
 		} catch (Exception e) {
 			managerException(e);

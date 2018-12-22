@@ -120,4 +120,7 @@ public interface ImageService extends Service{
 
 
 	Set<CustomComponentImage> getCustomComponentImages(int imageId) throws ServiceException, CacheException, ServiceLocatorException;
+
+
+	List<CustomComponentImage> getAllCustomComponentImageByImageId(int imageId) throws ServiceException;
 }

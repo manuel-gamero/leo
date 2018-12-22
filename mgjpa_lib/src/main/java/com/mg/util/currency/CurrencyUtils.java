@@ -20,7 +20,7 @@ import com.mg.util.text.StringUtils;
 public class CurrencyUtils {
 	
 	private static final String ZERO = "0.00"; 
-	private static final String DEFAULT_CURRENCY = "CAD";
+	public static final String DEFAULT_CURRENCY = "CAD";
 
 	public static void getPrice(ICurrency currencyObj,
 			Set<PriceEntry> priceEntries) {

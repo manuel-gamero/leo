@@ -5,6 +5,7 @@ import java.util.List;
 import com.mg.exception.InitializationException;
 import com.mg.exception.ServiceException;
 import com.mg.model.Audit;
+import com.mg.model.Config;
 import com.mg.model.Translation;
 import com.mg.service.Service;
 import com.mg.service.search.autocompleter.core.AutocompleterConfigurator;
@@ -219,4 +220,8 @@ public interface ConfigService extends Service{
 	String getLuceneIndexPath();
 
 	String getImagePath();
+
+	int updateConfig(Config config) throws ServiceException;
+
+	Config getConfig(String code) throws ServiceException;
 }

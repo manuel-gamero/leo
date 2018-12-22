@@ -37,7 +37,6 @@ import com.mg.exception.CacheException;
 import com.mg.exception.DaoException;
 import com.mg.exception.ServiceException;
 import com.mg.exception.ServiceLocatorException;
-import com.mg.model.CustomComponentCollection;
 import com.mg.model.CustomComponentImage;
 import com.mg.model.CustomComponentText;
 import com.mg.model.Image;
@@ -371,6 +370,25 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 		}
 		return resultList;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CustomComponentImage> getAllCustomComponentImageByImageId(final int imageId)
+			throws ServiceException {
+		List<CustomComponentImage> resultList;
+		try {
+			daoManager.setCommitTransaction(true);
+			resultList = (List<CustomComponentImage>) daoManager.executeAndHandle(new DaoCommand() {
+				@Override
+				public Object execute(EntityManager em) throws DaoException {
+					return DaoFactory.getDAO(CustomComponentImageDAO.class, em).getAllByImageId(imageId);
+				}
+			});
+		} catch (DaoException e) {
+			throw (new ServiceException(e));
+		}
+		return resultList;
+	}
 
 	@Override
 	public void generatePNGImage( Item item, boolean socialImage) throws ServiceException {
@@ -595,7 +613,9 @@ public class ImageServiceImpl extends ServiceImpl implements ImageService {
 		else{
 			image = DaoFactory.getDAO(ImageDAO.class, em).find(imageId);
 		}
-		image.setUploadDate(new Date());
+		if(image!=null){
+			image.setUploadDate(new Date());
+		}
 		return image;
 	}
 

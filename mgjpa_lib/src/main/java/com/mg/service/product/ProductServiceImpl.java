@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 
 import com.mg.dao.core.DaoCommand;
 import com.mg.dao.core.DaoFactory;
+import com.mg.dao.impl.CustomComponentImageDAO;
 import com.mg.dao.impl.ImageDAO;
 import com.mg.dao.impl.ItemDAO;
 import com.mg.dao.impl.PriceDAO;
@@ -30,6 +31,7 @@ import com.mg.exception.CacheException;
 import com.mg.exception.DaoException;
 import com.mg.exception.ServiceException;
 import com.mg.exception.ServiceLocatorException;
+import com.mg.model.Collection;
 import com.mg.model.CustomComponentImage;
 import com.mg.model.CustomComponentText;
 import com.mg.model.Image;
@@ -171,6 +173,17 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override 
+	public Product getProductForAdmin(Integer id) throws ServiceException, ServiceLocatorException, CacheException{
+		Product product = ServiceLocator.getService(ProductServiceImpl.class)
+				.getProduct(id, false);
+		Collection collection = ServiceLocator.getService(CollectionServiceImpl.class).getCollection(product.getCollection().getId(), true);
+		product.setCollection(collection);
+		//Map<Integer, Set<CustomComponentImage>> mapImages = (Map<Integer, Set<CustomComponentImage>>) ServiceLocator.getService(CacheServiceImpl.class).getDefaultCache().fetch(Hashtable.class + "_Product_Images");
+		product.getImage().setCustomComponentImagesForImageId(new HashSet<CustomComponentImage>(ServiceLocator.getService(ImageServiceImpl.class).getAllCustomComponentImageByImageId(product.getImage().getId())));
+		return product;
+	}
 	
 	@Override
 	public Product getProduct(final Integer id, boolean useCache) throws ServiceException {
@@ -322,7 +335,9 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 							if (customComponentImageList != null) {
 								for (CustomComponentImageDTO item : customComponentImageList) {
 									if (item != null && item.getImageDTO() != null && item.getImageDTO().getFile() != null) {
-										ServiceLocator.getService(ImageServiceImpl.class).saveImage(item.getImageDTO().getFile(), path, getName(product,item.getImage().getName()), true);
+										if(item.getImage().getName().length() > 0){
+											ServiceLocator.getService(ImageServiceImpl.class).saveImage(item.getImageDTO().getFile(), path, getName(em, product,item.getImage().getName()), true);
+										}
 									}
 								}
 							}
@@ -352,10 +367,11 @@ public class ProductServiceImpl extends ServiceImpl implements ProductService {
 		return 0;
 	}
 	
-	protected String getName(Product product, String name) throws ServiceException, CacheException, ServiceLocatorException {
+	protected String getName(EntityManager em, Product product, String name) throws ServiceException, CacheException, ServiceLocatorException {
 		String newName = name;
-		for (CustomComponentImage item : ServiceLocator.getService(ImageServiceImpl.class).getCustomComponentImages(product.getImage().getId())) {
-			if(item.getImageByImageMaskId().getName().equals(name)){
+		//for (CustomComponentImage item : ServiceLocator.getService(ImageServiceImpl.class).getCustomComponentImages(product.getImage().getId())) {
+		for (CustomComponentImage item : DaoFactory.getDAO(CustomComponentImageDAO.class, em).getAllByImageId(product.getImage().getId())) {
+			if(name.equals(item.getImageByImageMaskId().getName())){
 				newName = product.getId() + "_" + item.getCustomComponentCollection().getId() + "_" + item.getImageByImageMaskId().getId() + ".png";
 				item.getImageByImageMaskId().setName(newName);
 				return(newName);

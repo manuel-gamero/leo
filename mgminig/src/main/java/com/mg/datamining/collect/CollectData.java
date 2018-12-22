@@ -178,6 +178,15 @@ public class CollectData {
 	public void setDevices(HashMap<String, Device> devices) {
 		this.devices = devices;
 	}
+	
+	@Override
+	public String toString(){
+		String info = "";
+		for (String key : devices.keySet()) {
+			info = info + "\r\n" + devices.get(key);
+		}
+		return info;
+	}
 
 	public static void main(String[] args) {
 	

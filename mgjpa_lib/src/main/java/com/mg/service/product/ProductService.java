@@ -98,4 +98,6 @@ public interface ProductService extends Service {
 
 	List<Product> getAllSaleProduct(String currencyCode)
 			throws ServiceException, CacheException, ServiceLocatorException;
+
+	Product getProductForAdmin(Integer id) throws ServiceException, ServiceLocatorException, CacheException;
 }

@@ -4,6 +4,8 @@ import com.mg.coupon.Coupon;
 import com.mg.coupon.type.Coupon1MediumTaxFree;
 import com.mg.coupon.type.Coupon1WalletTaxFree;
 import com.mg.coupon.type.CouponDiscount2thFor50;
+import com.mg.coupon.type.CouponDiscountBasket20;
+import com.mg.coupon.type.CouponDiscountCustom15;
 import com.mg.coupon.type.CouponDiscountTaxes;
 import com.mg.coupon.type.CouponDiscountTotal25;
 import com.mg.coupon.type.CouponDiscountTotal30;
@@ -22,6 +24,18 @@ public enum CouponType implements BasicEnum{
 		@Override
 		public Coupon getCoupon() {
 			return new CouponDiscountTaxes();
+		}
+	},
+	DISCOUNTBASKET20("DISCOUNTBASKET20") {
+		@Override
+		public Coupon getCoupon() {
+			return new CouponDiscountBasket20();
+		}
+	},
+	DISCOUNTCUSTOM15("DISCOUNTCUSTOM15") {
+		@Override
+		public Coupon getCoupon() {
+			return new CouponDiscountCustom15();
 		}
 	},
 	DISCOUNTTOTAL25("DISCOUNTTOTAL25") {
