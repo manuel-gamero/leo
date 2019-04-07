@@ -7,12 +7,16 @@ import com.mg.exception.ServiceLocatorException;
 import com.mg.model.Audit;
 import com.mg.model.Device;
 import com.mg.model.DeviceSuggestions;
+import com.mg.util.text.StringUtils;
 
 public class UserActionSuggestion extends UserActionBasicUrl implements IDeviceSuggestionsAction{
 
 	@Override
 	public void apply(Device device, Audit audit) throws NumberFormatException, ServiceException, ServiceLocatorException {
-		DeviceSuggestionHelper.create(device, audit, this);
+		String message = audit.getMessage();
+		String codeSuggestion = StringUtils.getListRegexMatches(message, "suggestion = [a-zA-Z0-9|_|,|.|;|/|:|+|-|'|(|)]*").get(0).split("=")[1].trim();
+		String codeSuggestionSearch = codeSuggestion.substring(codeSuggestion.lastIndexOf("/")+1, codeSuggestion.length()); //.split("\\.")[0].trim();
+		DeviceSuggestionHelper.create(device, audit, this, codeSuggestionSearch);
 	}
 
 	@Override

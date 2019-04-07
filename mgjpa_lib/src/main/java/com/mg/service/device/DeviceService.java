@@ -1,5 +1,6 @@
 package com.mg.service.device;
 
+import java.util.Date;
 import java.util.List;
 
 import com.mg.exception.ServiceException;
@@ -18,6 +19,7 @@ public interface DeviceService extends Service {
 	DeviceComponent getDeviceComponent(Integer deviceId, Integer componentId) throws ServiceException;
 	int saveDevice(final Device device) throws ServiceException;
 	int saveAuditHist(final Audit auditHist) throws ServiceException;
+	void saveAuditHist(final Date startDate, final Date endDate) throws ServiceException;
 	DeviceProduct getDeviceProductGroupByProduc( final Integer productId ) throws ServiceException;
 	List<DeviceProduct> getDeviceProductGroupByProduc() throws ServiceException;
 	List<DeviceProduct> getDeviceProduct(final Integer productId) throws ServiceException;

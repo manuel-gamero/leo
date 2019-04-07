@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
+import com.mg.datamining.actions.UserActionBasicCount;
 import com.mg.datamining.interfaces.IDeviceProductHistAction;
 import com.mg.exception.ServiceException;
 import com.mg.exception.ServiceLocatorException;
@@ -15,18 +18,25 @@ import com.mg.service.ServiceLocator;
 import com.mg.service.product.ProductServiceImpl;
 
 public class DeviceProductHistHelper {
+	
+	private static final Logger log = Logger.getLogger(DeviceProductHistHelper.class);
 
 	public static void create(Device device, Audit audit, IDeviceProductHistAction action, int id) throws ServiceException, ServiceLocatorException{
 		if( id > 0){
 			DeviceProductHist item = createDeviceItem(device, audit, id);
-			action.applyAction(audit, item);
-			if( device.getDeviceProductHists() == null ){
-				Set<DeviceProductHist> itemSet = new HashSet<DeviceProductHist>();
-				itemSet.add(item);
-				device.setDeviceProductHists(itemSet);
+			if(item.getProduct() != null){
+				action.applyAction(audit, item);
+				if( device.getDeviceProductHists() == null ){
+					Set<DeviceProductHist> itemSet = new HashSet<DeviceProductHist>();
+					itemSet.add(item);
+					device.setDeviceProductHists(itemSet);
+				}
+				else{
+					device.getDeviceProductHists().add(item);
+				}
 			}
 			else{
-				device.getDeviceProductHists().add(item);
+				log.warn("Product null " + audit);
 			}
 		}
 	}

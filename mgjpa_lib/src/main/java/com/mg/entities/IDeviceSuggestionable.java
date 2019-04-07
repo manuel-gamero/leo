@@ -1,6 +1,5 @@
 package com.mg.entities;
 
-public interface IDeviceSuggestionable extends IDeviceAddable{
-	 public Integer getCount();
-	 public Integer getCountRight();
+public interface IDeviceSuggestionable extends IDeviceCountable{
+	 public Integer getCountSuggested();
 }

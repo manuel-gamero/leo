@@ -47,4 +47,7 @@
   <table-filter match-schema="bolsos" match-name="mg_config"/>
   <table-filter match-schema="bolsos" match-name="mg_product_data"/>
   <table-filter match-schema="bolsos" match-name="mg_device_suggestions"/>
+  <table-filter match-schema="bolsos" match-name="mg_suggestions"/>
+  <table-filter match-schema="bolsos" match-name="mg_suggestions_user"/>
+  <table-filter match-schema="bolsos" match-name="mg_suggestions_product"/>
 </hibernate-reverse-engineering>

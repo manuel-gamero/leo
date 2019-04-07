@@ -32,8 +32,12 @@ public class DeviceSuggestions implements java.io.Serializable, BasicModel, IDev
 	private Device device;
 	private String codeSuggestion;
 	private String typeSuggestion;
+	private Integer countSuggested;
 	private Integer count;
-	private Integer countRight;
+	private Integer shareCount;
+	private Integer addCount;
+	private Integer sellCount;
+	private Integer removeCount;
 	private Date lastModification;
 	private Date creationDate;
 
@@ -47,14 +51,14 @@ public class DeviceSuggestions implements java.io.Serializable, BasicModel, IDev
 		this.typeSuggestion = typeSuggestion;
 	}
 
-	public DeviceSuggestions(int id, Device device, String codeSuggestion, String typeSuggestion, Integer count,
-			Integer countRight, Date updateDate, Date creationDate) {
+	public DeviceSuggestions(int id, Device device, String codeSuggestion, String typeSuggestion, Integer countSuggested,
+			Integer count, Date updateDate, Date creationDate) {
 		this.id = id;
 		this.device = device;
 		this.codeSuggestion = codeSuggestion;
 		this.typeSuggestion = typeSuggestion;
+		this.countSuggested = countSuggested;
 		this.count = count;
-		this.countRight = countRight;
 		this.lastModification = updateDate;
 		this.creationDate = creationDate;
 	}
@@ -99,6 +103,15 @@ public class DeviceSuggestions implements java.io.Serializable, BasicModel, IDev
 		this.typeSuggestion = typeSuggestion;
 	}
 
+	@Column(name = "count_suggested")
+	public Integer getCountSuggested() {
+		return this.countSuggested;
+	}
+
+	public void setCountSuggested(Integer countSuggested) {
+		this.countSuggested = countSuggested;
+	}
+
 	@Column(name = "count")
 	public Integer getCount() {
 		return this.count;
@@ -107,14 +120,23 @@ public class DeviceSuggestions implements java.io.Serializable, BasicModel, IDev
 	public void setCount(Integer count) {
 		this.count = count;
 	}
-
-	@Column(name = "count_right")
-	public Integer getCountRight() {
-		return this.countRight;
+	
+	@Column(name = "add_count")
+	public Integer getAddCount() {
+		return this.addCount;
 	}
 
-	public void setCountRight(Integer countRight) {
-		this.countRight = countRight;
+	public void setAddCount(Integer addCount) {
+		this.addCount = addCount;
+	}
+	
+	@Column(name = "remove_count")
+	public Integer getRemoveCount() {
+		return this.removeCount;
+	}
+
+	public void setRemoveCount(Integer removeCount) {
+		this.removeCount = removeCount;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -140,8 +162,12 @@ public class DeviceSuggestions implements java.io.Serializable, BasicModel, IDev
 	@Override
 	public void add(IDeviceAddable item) {
 		IDeviceSuggestionable iDevice = (IDeviceSuggestionable)item;
+		this.countSuggested = this.countSuggested + iDevice.getCountSuggested();
 		this.count = this.count + iDevice.getCount();
-		this.countRight = this.countRight + iDevice.getCountRight();
+		this.addCount = this.addCount + iDevice.getAddCount();
+		this.removeCount = this.removeCount + iDevice.getRemoveCount();
+		this.sellCount = this.sellCount + iDevice.getSellCount();
+		this.shareCount = this.shareCount + iDevice.getShareCount();
 		this.creationDate = CommonUtils.getNewestDate(this.creationDate, iDevice.getCreationDate());
 		this.lastModification = CommonUtils.getNewestDate(this.lastModification, iDevice.getLastModification());
 	}
@@ -149,7 +175,26 @@ public class DeviceSuggestions implements java.io.Serializable, BasicModel, IDev
 	@Override
 	public String toString(){
 		return "Suggestion : " + getCodeSuggestion() + 
-			   " ( " +  getCount() + ", " + getCountRight() + " )";
+			   " ( " +  countSuggested +  count + ", " + addCount + ", " + 
+						sellCount + ", " + shareCount + ", " +
+					    removeCount + " )";
 	}
 
+	@Column(name = "sell_count")
+	public Integer getSellCount() {
+		return sellCount;
+	}
+
+	public void setSellCount(Integer sellCount) {
+		this.sellCount = sellCount;
+	}
+	
+	@Column(name = "share_count")
+	public Integer getShareCount() {
+		return shareCount;
+	}
+
+	public void setShareCount(Integer shareCount) {
+		this.shareCount = shareCount;
+	}
 }

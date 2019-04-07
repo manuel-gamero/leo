@@ -91,6 +91,7 @@ public class Product implements java.io.Serializable, BasicModel, ICurrency, IBa
 	private Boolean newProduct;
 	private Boolean customText;
 	private Integer customLink;
+	private Set<DeviceProduct> deviceProducts = new HashSet<DeviceProduct>(0);
 
 	public Product() {
 	}
@@ -330,5 +331,14 @@ public class Product implements java.io.Serializable, BasicModel, ICurrency, IBa
 
 	public void setCustomLink(Integer customLink) {
 		this.customLink = customLink;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+	public Set<DeviceProduct> getDeviceProducts() {
+		return this.deviceProducts;
+	}
+
+	public void setDeviceProducts(Set<DeviceProduct> deviceProducts) {
+		this.deviceProducts = deviceProducts;
 	}
 }

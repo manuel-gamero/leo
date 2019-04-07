@@ -8,6 +8,7 @@ import com.mg.datamining.helpers.DeviceCustomComponentHelper;
 import com.mg.datamining.helpers.DeviceCustomComponentHistHelper;
 import com.mg.datamining.helpers.DeviceProductHelper;
 import com.mg.datamining.helpers.DeviceProductHistHelper;
+import com.mg.datamining.helpers.DeviceSuggestionHelper;
 import com.mg.enums.UserActionType;
 import com.mg.exception.ServiceException;
 import com.mg.exception.ServiceLocatorException;
@@ -17,6 +18,7 @@ import com.mg.model.DeviceComponent;
 import com.mg.model.DeviceComponentHist;
 import com.mg.model.DeviceProduct;
 import com.mg.model.DeviceProductHist;
+import com.mg.model.DeviceSuggestions;
 import com.mg.util.text.StringUtils;
 
 public class UserActionRemoveProduct extends UserActionBasicCount {
@@ -35,6 +37,8 @@ public class UserActionRemoveProduct extends UserActionBasicCount {
 				if(productId != null && productId != "" && StringUtils.isNumber(productId) ){
 					DeviceProductHelper.create(device, audit, this, Integer.valueOf(productId));
 					DeviceProductHistHelper.create(device, audit, this, Integer.valueOf(productId));
+					//Update Suggestion
+					DeviceSuggestionHelper.update(device, audit, this, Integer.valueOf(productId));
 				}
 				else{
 					log.warn(productId + " is NOT a Product number");
@@ -82,6 +86,12 @@ public class UserActionRemoveProduct extends UserActionBasicCount {
 	public void applyAction(Audit audit, DeviceComponent item) {
 		item.setRemoveCount( item.getRemoveCount() + 1 ); 
 		item.setLastModification(audit.getCreationDate());		
+	}
+
+	@Override
+	public void applyAction(Device device, Audit audit, DeviceSuggestions item) {
+		item.setRemoveCount( item.getRemoveCount() + 1 );
+		item.setLastModification(audit.getCreationDate());
 	}
 
 }

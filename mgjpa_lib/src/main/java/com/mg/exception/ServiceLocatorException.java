@@ -10,6 +10,10 @@ public class ServiceLocatorException extends Exception {
 
 	private static final long serialVersionUID = -7151158236549019001L;
 
+	public ServiceLocatorException() {
+		super();
+	}
+	
 	public ServiceLocatorException(String s) {
 		super(s);
 	}

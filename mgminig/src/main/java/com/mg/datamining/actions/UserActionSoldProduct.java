@@ -2,6 +2,7 @@ package com.mg.datamining.actions;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -10,6 +11,7 @@ import com.mg.datamining.helpers.DeviceCustomComponentHelper;
 import com.mg.datamining.helpers.DeviceCustomComponentHistHelper;
 import com.mg.datamining.helpers.DeviceProductHelper;
 import com.mg.datamining.helpers.DeviceProductHistHelper;
+import com.mg.datamining.helpers.DeviceSuggestionHelper;
 import com.mg.datamining.helpers.DeviceUrlHelper;
 import com.mg.enums.UserActionParamType;
 import com.mg.enums.UserActionType;
@@ -21,6 +23,7 @@ import com.mg.model.DeviceComponent;
 import com.mg.model.DeviceComponentHist;
 import com.mg.model.DeviceProduct;
 import com.mg.model.DeviceProductHist;
+import com.mg.model.DeviceSuggestions;
 import com.mg.model.DeviceUrl;
 
 public class UserActionSoldProduct extends UserActionBasicCount {
@@ -38,7 +41,8 @@ public class UserActionSoldProduct extends UserActionBasicCount {
 						addComponent = true;
 						DeviceProductHelper.create(device, audit, this, element.getProduct().getId());
 						DeviceProductHistHelper.create(device, audit, this, element.getProduct().getId());
-						
+						//Update Suggestion
+						DeviceSuggestionHelper.update(device, audit, this, element.getProduct().getId());
 					}
 				}
 			}
@@ -71,21 +75,24 @@ public class UserActionSoldProduct extends UserActionBasicCount {
 	 * sell counter of the right product.
 	 */
 	private boolean isInProductRangeTime(Device device, Audit audit, DeviceProduct element) {
-		Date dateInf = getDateLastSell( device );
-		log.debug("+++ +++ +++ Date element: " + element.getLastModification() + " element id : " + element.getProduct().getId());
-		log.debug("+++ +++ +++ Start sale : " + dateInf.toString());
-		if( dateInf != null ){
-			Date dateSup = audit.getCreationDate();
-			log.debug("+++ +++ +++ End sale : " + dateSup.toString());
-			for (DeviceProductHist item : device.getDeviceProductHists()) {
-				if( item.getProduct().getId() == element.getProduct().getId() &&
-						dateInf.before(item.getActionDate()) &&
-						dateSup.after(item.getActionDate()) &&
-						item.getUserAction().equals(UserActionType.ADDED)){
-					return true;
+		if(device.getDeviceUrls() != null && device.getDeviceUrls().size() > 0 && element.getProduct() != null){
+			Date dateInf = getDateLastSell( device );
+			log.debug("+++ +++ +++ Date element: " + element.getLastModification() + " element id : " + element.getProduct().getId());
+			log.debug("+++ +++ +++ Start sale : " + dateInf.toString());
+			if( dateInf != null ){
+				Date dateSup = audit.getCreationDate();
+				log.debug("+++ +++ +++ End sale : " + dateSup.toString());
+				for (DeviceProductHist item : device.getDeviceProductHists()) {
+					if( item.getProduct().getId() == element.getProduct().getId() &&
+							dateInf.before(item.getActionDate()) &&
+							dateSup.after(item.getActionDate()) &&
+							item.getUserAction().equals(UserActionType.ADDED)){
+						return true;
+					}
 				}
 			}
 		}
+		log.warn(audit);
 		return false;
 	}
 	
@@ -111,19 +118,26 @@ public class UserActionSoldProduct extends UserActionBasicCount {
 	 * Otherwise return the date that the client reach the page.
 	 */
 	private Date getDateLastSell(Device device) {
-		
-		for (DeviceUrl url : device.getDeviceUrls()) {
-			if( url.getUrl().contains("ShoppingCartPaymentSend") || 
-				url.getUrl().contains("shoppingCartPaypalSend") ){
-				return url.getActionDate();
-			}
-		}
-		if(device.getDeviceUrls().size() > 0){
-			return device.getDeviceUrls().get(0).getActionDate();
+	
+		Optional<DeviceUrl> deviceUrl = device.getDeviceUrls().stream().filter(u -> u.getUrl().contains("ShoppingCartPaymentSend") || 
+				u.getUrl().contains("shoppingCartPaypalSend")).findFirst();
+//		for (DeviceUrl url : device.getDeviceUrls()) {
+//			if( url.getUrl().contains("ShoppingCartPaymentSend") || 
+//				url.getUrl().contains("shoppingCartPaypalSend") ){
+//				return url.getActionDate();
+//			}
+//		}
+		if(deviceUrl.isPresent()){
+			return deviceUrl.get().getActionDate();
 		}
 		else{
-			log.info("Date not found.");
-			return null;
+			if(device.getDeviceUrls().size() > 0){
+				return device.getDeviceUrls().get(0).getActionDate();
+			}
+			else{
+				log.warn("Date not found. " + device);
+				return null;
+			}
 		}
 	}
 	
@@ -157,6 +171,12 @@ public class UserActionSoldProduct extends UserActionBasicCount {
 		item.setSellCount( item.getSellCount() + 1 );
 		item.setLastModification(audit.getCreationDate());
 		
+	}
+
+	@Override
+	public void applyAction(Device device, Audit audit, DeviceSuggestions item) {
+		item.setSellCount( item.getSellCount() + 1 );
+		item.setLastModification(audit.getCreationDate());
 	}
 
 }

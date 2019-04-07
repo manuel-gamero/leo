@@ -1,5 +1,7 @@
 package com.mg.datamining.actions;
 
+import org.apache.log4j.Logger;
+
 import com.mg.datamining.helpers.DeviceUserHelper;
 import com.mg.datamining.interfaces.IDeviceUserAction;
 import com.mg.exception.ServiceException;
@@ -11,6 +13,8 @@ import com.mg.util.text.StringUtils;
 
 public class UserActionLogin extends UserActionBasic implements IDeviceUserAction{
 
+	private static Logger log = Logger.getLogger(UserActionLogin.class);
+	
 	@Override
 	public void apply(Device device, Audit audit) throws NumberFormatException, ServiceException, ServiceLocatorException {
 		String message = audit.getMessage();
@@ -20,6 +24,11 @@ public class UserActionLogin extends UserActionBasic implements IDeviceUserActio
 	
 	@Override
 	public void applyAction(Audit audit, DeviceUser item) {
-		item.setCount( item.getCount() + 1 );
+		if(item != null){
+			item.setCount( item.getCount() + 1 );
+		}
+		else{
+			log.warn(audit);
+		}
 	}
 }

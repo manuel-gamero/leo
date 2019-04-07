@@ -14,6 +14,7 @@ import com.mg.model.Audit;
 import com.mg.model.Product;
 import com.mg.service.ServiceLocator;
 import com.mg.service.application.ApplicationServiceImpl;
+import com.mg.service.datamining.DataminigServiceImpl;
 import com.mg.web.struts.action.BasicAction;
 
 public class MiningDataAction extends BasicAction {
@@ -36,12 +37,14 @@ public class MiningDataAction extends BasicAction {
 			collection.saveDevices();
 			System.out.println( collection );
 			//collection.saveAudtiHistory(auditList);
-		//	DataSetCreator<Product,Attribute> bc = new ProductDataSetCreatorImpl();
-		//	List<DataItem<Product,Attribute>> productData = bc.createLearningData();
-		//	GenericKMeansClustererImpl<Product,Attribute> clusterer = new GenericKMeansClustererImpl<Product,Attribute>(
-		//			productData, 8);
-		//	clusterer.cluster();
-		//	System.out.println(clusterer.toString());
+			collection.saveAudtiHistory(startDate, endDate);
+			DataSetCreator<Product,Attribute> bc = new ProductDataSetCreatorImpl();
+			List<DataItem<Product,Attribute>> productData = bc.createLearningData();
+			GenericKMeansClustererImpl<Product,Attribute> clusterer = new GenericKMeansClustererImpl<Product,Attribute>(
+					productData, 16);
+			clusterer.cluster();
+			ServiceLocator.getService(DataminigServiceImpl.class).saveDataminingProduct(clusterer.getClusters());
+			System.out.println(clusterer.toString());
 			return SUCCESS;
 		} catch (Exception e) {
 			managerException(e);

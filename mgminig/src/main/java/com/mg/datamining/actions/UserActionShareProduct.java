@@ -3,10 +3,12 @@ package com.mg.datamining.actions;
 import com.mg.enums.UserActionParamType;
 import com.mg.enums.UserActionType;
 import com.mg.model.Audit;
+import com.mg.model.Device;
 import com.mg.model.DeviceComponent;
 import com.mg.model.DeviceComponentHist;
 import com.mg.model.DeviceProduct;
 import com.mg.model.DeviceProductHist;
+import com.mg.model.DeviceSuggestions;
 
 public class UserActionShareProduct extends UserActionBasicCount {
 	
@@ -37,6 +39,12 @@ public class UserActionShareProduct extends UserActionBasicCount {
 		item.setShareCount( item.getShareCount() + 1 );
 		item.setLastModification(audit.getCreationDate());
 		
+	}
+
+	@Override
+	public void applyAction(Device device, Audit audit, DeviceSuggestions item) {
+		item.setShareCount( item.getShareCount() + 1 );
+		item.setLastModification(audit.getCreationDate());
 	}
 
 }

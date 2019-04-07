@@ -53,6 +53,7 @@ public class ClusterImpl<T,E> implements ItemCluster<T,E> {
 		items.add(item);
 	}
 
+	@Override
 	public List<DataItem<T,E>> getItems() {
 		return items;
 	}

@@ -34,14 +34,16 @@ public class DeviceCustomComponentHelper {
 		}
 		else{
 			CustomComponentImage customComponentImage = ServiceLocator.getService(ImageServiceImpl.class).getCustomComponentImage(id);
-			DeviceComponent deviceComponent = getDeviceComponent(device, customComponentImage.getCustomComponentCollection().getId());
-			if( deviceComponent == null ){
-				deviceComponent = createDeviceComponent(device, audit, id);
-				if(deviceComponent != null){
-					device.getDeviceComponents().add(deviceComponent);
+			if(customComponentImage != null && customComponentImage.getCustomComponentCollection() != null ){
+				DeviceComponent deviceComponent = getDeviceComponent(device, customComponentImage.getCustomComponentCollection().getId());
+				if( deviceComponent == null ){
+					deviceComponent = createDeviceComponent(device, audit, id);
+					if(deviceComponent != null){
+						device.getDeviceComponents().add(deviceComponent);
+					}
 				}
+				action.applyAction(audit, deviceComponent);
 			}
-			action.applyAction(audit, deviceComponent);
 		}
 	}
 	
@@ -92,6 +94,7 @@ public class DeviceCustomComponentHelper {
 		}
 		else{
 			log.info("CustomComponentCollection doesn't exist id : " + customComponentCollectioId);
+			log.error(audit);
 			return null;
 		}
 	}

@@ -147,5 +147,20 @@ public class BasicAudit{
 	public void setCallDuration(Integer callDuration) {
 		this.callDuration = callDuration;
 	}
+	
+	@Override
+	public String toString(){
+		String info = " id: " + id;
+		info = info + "\r\n" + " username: " + username;
+		info = info + "\r\n" + " location: " + location;
+		info = info + "\r\n" + " sessionGuid: " + sessionGuid;
+		info = info + "\r\n" + " requestGuid: " + requestGuid;
+		info = info + "\r\n" + " actionUser: " + actionUser;
+		info = info + "\r\n" + " outcome: " + outcome;
+		info = info + "\r\n" + " message: " + message;
+		info = info + "\r\n" + " serverName: " + serverName;
+		info = info + "\r\n" + " url: " + url;
+		return info;
+	}
 
 }

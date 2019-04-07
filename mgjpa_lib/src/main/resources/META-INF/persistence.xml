@@ -52,6 +52,8 @@
 		<class>com.mg.model.Paypal</class>
 		<class>com.mg.model.Jobs</class>
 		<class>com.mg.model.Config</class>
+		<class>com.mg.model.Suggestions</class>
+		<class>com.mg.model.ProductData</class>
 
 		<properties>
 			<property name="hibernate.connection.datasource" value="java:comp/env/jdbc/postgresDS" />
@@ -62,7 +64,7 @@
 				value=" false" />
 			<property name="hibernate.archive.autodetection" value="class" />
 			<property name="hibernate.show_sql" value="false" />
-			<property name="hibernate.format_sql" value="false" />
+			<property name="hibernate.format_sql" value="true" />
 			<!-- <property name="hibernate.hbm2ddl.auto" value="validate"/> -->
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="connection.autocommit" value="false" />

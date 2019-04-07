@@ -1,6 +1,7 @@
 package com.mg.service.device;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -45,7 +46,7 @@ public class DeviceServiceImpl extends ServiceImpl implements DeviceService {
 						@Override
 						public Object execute(EntityManager em)
 								throws DaoException {
-							return DaoFactory.getDAO(DeviceDAO.class, em).findEntityByFingerPrint(fingerPrint);
+							return DaoFactory.getDAO(DeviceDAO.class, em).getDevice(fingerPrint); // findEntityByFingerPrint(fingerPrint);
 						}
 					});
 		} catch (DaoException de) {
@@ -230,6 +231,28 @@ public class DeviceServiceImpl extends ServiceImpl implements DeviceService {
 			throw new ServiceException(de);
 		}
 		return id;
+	}
+	
+	@Override
+	public void saveAuditHist(final Date startDate, final Date endDate) throws ServiceException {
+		try {
+			daoManager.setCommitTransaction(true);
+			daoManager.executeAndHandle(new DaoCommand() {
+				@Override
+				public Object execute(EntityManager em) throws DaoException {
+					try {
+						DaoFactory.getDAO(AuditDAO.class, em).saveAuditHistRangeDate(startDate, endDate);
+						DaoFactory.getDAO(AuditDAO.class, em).deleteAuditRangeDate(startDate, endDate);
+						return null;
+					} catch (Exception e) {
+						e.printStackTrace();
+						throw new DaoException(e);
+					}
+				}
+			});
+		} catch (DaoException de) {
+			throw new ServiceException(de);
+		}
 	}
 	
 	private AuditHist createAuditHist(Audit audit) {

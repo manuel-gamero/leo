@@ -621,6 +621,19 @@ public final class DTOFactory {
 		itemViewDTO.setPrice(productDTO.getMsrp());
 		return itemViewDTO;
 	}
+	
+	public static ItemViewDTO getItemViewDTOForItem(String nameImage, int productId, String lang, String country) throws CurrencyNoExistException, ServiceException, ServiceLocatorException, CacheException {
+		ItemViewDTO itemViewDTO = new ItemViewDTO();
+		ProductDTO productDTO = getProductDTO(productId, lang, country, false);
+		itemViewDTO.setId(productDTO.getId());
+		String pathImage = ServiceLocator.getService(ConfigServiceImpl.class).getWebImageTmp();
+		pathImage = pathImage + nameImage;
+		itemViewDTO.setItemCustomUrl(productDTO.getUrl()+ "/" + nameImage.replace(".png", ""));
+		itemViewDTO.setNameImage(pathImage);
+		itemViewDTO.setItemName(productDTO.getName());
+		itemViewDTO.setPrice(productDTO.getMsrp());
+		return itemViewDTO;
+	}
 
 	public static List<ItemViewDTO> getItemViewDTOForProductList( List<Product> productByCollection, Integer id, String lang, String country, Integer size) throws ServiceException, ServiceLocatorException, CurrencyNoExistException, CacheException {
 		List<ItemViewDTO> listItemViewDTO = new ArrayList<ItemViewDTO>();

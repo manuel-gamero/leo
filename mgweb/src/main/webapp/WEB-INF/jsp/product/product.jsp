@@ -305,13 +305,13 @@
 									<div class="flip-container">
 										<div class="flipper">
 											<div class="front">
-												<a href='<s:text name="url.product"/>/<s:property value="productDTO.url"/>/<s:property value="itemCustomUrl" />'>
+												<a href='<s:text name="url.product"/>/<s:property value="itemCustomUrl" />'>
 													<img src="<s:property value="nameImage" />" alt="<s:property value="itemName" />"
 													class="img-responsive">
 												</a>
 											</div>
 											<div class="back">
-												<a href='<s:text name="url.product"/>/<s:property value="productDTO.url"/>/<s:property value="itemCustomUrl" />'>
+												<a href='<s:text name="url.product"/>/<s:property value="itemCustomUrl" />'>
 													<img src="<s:property value="nameImage" />" alt="<s:property value="itemName" />" class="img-responsive">
 												</a>
 											</div>
@@ -321,7 +321,7 @@
 										<img src="<s:property value="nameImage" />" alt="<s:property value="itemName" />" class="img-responsive">
 									</a>
 									<div class="text">
-										<a href='<s:text name="url.product"/>/<s:property value="productDTO.url"/>/<s:property value="itemCustomUrl" />'>
+										<a href='<s:text name="url.product"/>/<s:property value="itemCustomUrl" />'>
 											<h3><s:property value="itemName" /></h3>
 										</a>
 										<p class="price">

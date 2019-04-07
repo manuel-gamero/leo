@@ -1,6 +1,7 @@
 package com.mg.datamining.collect;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -43,8 +44,8 @@ public class CollectData {
 						action.apply(device, audit);
 					}
 					catch(Exception e){
-						System.out.println(audit.getMessage());
-						e.printStackTrace();
+						log.error(e.getStackTrace());
+						log.error("Error treating : " + audit);
 					}
 				}
 				else{
@@ -61,6 +62,13 @@ public class CollectData {
 		for (Audit audit : auditList) {
 			deviceService.saveAuditHist(audit);
 		}
+		log.info("<<< End proces of archiving auidt.");
+	}
+	
+	public void saveAudtiHistory(final Date startDate, final Date endDate) throws NumberFormatException, ServiceException, ServiceLocatorException{
+		log.info(">>> Start proces of archiving auidt.");
+		DeviceService deviceService = ServiceLocator.getService(DeviceServiceImpl.class);
+		deviceService.saveAuditHist(startDate, endDate);
 		log.info("<<< End proces of archiving auidt.");
 	}
 

@@ -2,16 +2,21 @@ package com.mg.web.struts.action.product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
 
 import com.mg.annotation.Action;
 import com.mg.enums.ProductStatus;
+import com.mg.exception.CacheException;
 import com.mg.exception.CurrencyNoExistException;
 import com.mg.exception.ServiceException;
 import com.mg.exception.ServiceLocatorException;
 import com.mg.model.Audit;
 import com.mg.model.CustomComponentImage;
+import com.mg.model.Item;
+import com.mg.model.Suggestions;
 import com.mg.service.ServiceLocator;
 import com.mg.service.dto.DTOFactory;
 import com.mg.service.dto.ItemViewDTO;
@@ -19,6 +24,7 @@ import com.mg.service.dto.ProductDTO;
 import com.mg.service.image.ImageServiceImpl;
 import com.mg.service.init.ConfigServiceImpl;
 import com.mg.service.product.ProductServiceImpl;
+import com.mg.service.suggestion.SuggestionServiceImpl;
 import com.mg.util.currency.CurrencyUtils;
 import com.mg.web.RequestAtributeConstants;
 import com.mg.web.WebConstants;
@@ -60,8 +66,18 @@ public class Product extends BasicAction implements Preparable {
 					List<ItemViewDTO> listItem = null;
 					if ( productDTO.getCustomProduct()){
 						log.debug("Getting list product suggestion for custom product");
-						listItem = DTOFactory.getItemViewDTOForItemList( ServiceLocator.getService(ProductServiceImpl.class).getListItemByProduct(id), getCurrentLanguage(), getCurrentCurrencyCode(), 3 );
-						//generateAuditSuggestion(listItem);
+						//listItem = DTOFactory.getItemViewDTOForItemList( ServiceLocator.getService(ProductServiceImpl.class).getListItemByProduct(id), getCurrentLanguage(), getCurrentCurrencyCode(), 3 );
+						List<Object[]> suggestionsList = ServiceLocator.getService(SuggestionServiceImpl.class).getSuggestionByCustomProduct(id, ServletActionContext.getRequest().getSession().getId(), getCurrentCurrencyCode());
+						listItem = suggestionsList.stream().map( i -> {
+							try {
+								return DTOFactory.getItemViewDTOForItem((String)i[0],(Integer)i[1],getCurrentLanguage(), getCurrentCurrencyCode());
+							} catch (Exception e) {
+								managerException(e, "productId: " + id);
+								return null;
+							}
+						}).limit(3).collect(Collectors.toList());
+						//listItem = DTOFactory.getItemViewDTOForItemList( suggestionsList.stream().map(i -> (Item)i[0]).collect(Collectors.toList()), getCurrentLanguage(), getCurrentCurrencyCode(), 3 );
+						generateAuditSuggestion(suggestionsList, 3);
 					}
 					else{
 						log.debug("Getting list similar product for final product");
@@ -110,11 +126,12 @@ public class Product extends BasicAction implements Preparable {
 		return SUCCESS;
 	}
 
-	private void generateAuditSuggestion(List<ItemViewDTO> listItem) {
-		listItem.stream().forEach( p -> {
+	private void generateAuditSuggestion(List<Object[]> listItem, int size) {
+		listItem.subList(0, size).stream().forEach( p -> {
 			try {
-				Audit audit = AuditUtil.createAudit(null, "suggestion = " + p.getNameImage() + " type = CUSTOM_PRODUCT ");
+				Audit audit = AuditUtil.createAudit(null, "suggestion = " + ((String)p[0]) + " type = CUSTOM_PRODUCT ");
 				ServiceLocator.getService(ConfigServiceImpl.class).saveAudit(audit);
+				ServiceLocator.getService(SuggestionServiceImpl.class).saveSuggestion(null, ServletActionContext.getRequest().getSession().getId(), (Integer)p[1], ((String)p[0]), p[2]!=null?(Integer)p[2]:null, p[3]!=null?(Integer)p[3]:null);
 			} catch (Exception e) {
 				log.error(e);
 			}} );

@@ -125,4 +125,10 @@ public class HierarchialClusteringImpl<T,E> implements Clusterer<T,E> {
 		}
 		return sb.toString();
 	}
+
+	@Override
+	public List<ItemCluster<T, E>> getClusters() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

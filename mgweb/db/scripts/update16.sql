@@ -30,7 +30,7 @@ CREATE TABLE bolsos.mg_product_data(
     creation_date timestamp without time zone DEFAULT now()
 );
 
-ALTER TABLE bolsos.mg_product_data ADD CONSTRAINT mg_product_data_id_pk FOREIGN KEY (id) REFERENCES bolsos.mg_product (id) MATCH FULL;
+ALTER TABLE bolsos.mg_product_data ADD CONSTRAINT mg_product_data_id_pk PRIMARY KEY (id);
 ALTER TABLE bolsos.mg_product_data ADD CONSTRAINT mg_product_data_product_id_pk FOREIGN KEY (product_id) REFERENCES bolsos.mg_product (id) MATCH FULL;
 
 CREATE TABLE bolsos.mg_device_suggestions(

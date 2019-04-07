@@ -21,7 +21,7 @@ import com.mg.web.listener.schedule.QuartzSchedulerListener;
 
 public class GenerateDataJob implements Job {
 
-	private static final Logger log = Logger.getLogger(ResetFeedJob.class);
+	private static final Logger log = Logger.getLogger(GenerateDataJob.class);
 	private static final String DATE_FORMAT = "dd/MM/yyyy HH:mm";
 	
 	public void execute(JobExecutionContext context) throws JobExecutionException {

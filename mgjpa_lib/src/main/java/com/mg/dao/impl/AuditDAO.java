@@ -32,5 +32,26 @@ public class AuditDAO extends GenericDaoImpl<Audit> {
 						   " and a.creationDate <= :endDate " +
 						   " order by a.sessionGuid, a.creationDate asc ", parameters);
 	}
+	
+	public boolean saveAuditHistRangeDate(Date startDate, Date endDate){
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("startDate", startDate);
+		parameters.put("endDate", endDate);
+		
+		return updateQuery(" insert into AuditHist (id,username,location,sessionGuid,requestGuid,creationDate,actionUser,outcome,message,serverName,browser,url,callDuration) " +
+						   " select id,username,location,sessionGuid,requestGuid,creationDate,actionUser,outcome,message,serverName,browser,url,callDuration from Audit a " +
+						   " where a.creationDate >= :startDate " +
+						   " and a.creationDate <= :endDate ", parameters);
+	}
+	
+	public void deleteAuditRangeDate(Date startDate, Date endDate){
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("startDate", startDate);
+		parameters.put("endDate", endDate);
+		
+		updateQuery("delete from Audit a " +
+					" where a.creationDate >= :startDate " +
+					" and a.creationDate <= :endDate ", parameters);
+	}
 
 }

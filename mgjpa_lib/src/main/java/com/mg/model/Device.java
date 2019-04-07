@@ -242,7 +242,7 @@ public class Device implements java.io.Serializable, BasicModel {
 		this.deviceComponentHists = deviceComponentHists;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "device", cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "device", cascade=CascadeType.ALL)
 	public Set<DeviceProduct> getDeviceProducts() {
 		return this.deviceProducts;
 	}
@@ -261,7 +261,7 @@ public class Device implements java.io.Serializable, BasicModel {
 		this.deviceCollections = deviceCollections;
 	}*/
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "device", cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "device", cascade=CascadeType.ALL)
 	public Set<DeviceComponent> getDeviceComponents() {
 		return this.deviceComponents;
 	}
@@ -280,7 +280,7 @@ public class Device implements java.io.Serializable, BasicModel {
 		this.deviceProductHists = deviceProductHists;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "device", cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "device", cascade=CascadeType.ALL)
 	public Set<DeviceUser> getDeviceUsers() {
 		return this.deviceUsers;
 	}
@@ -317,7 +317,7 @@ public class Device implements java.io.Serializable, BasicModel {
 		this.deviceSessions = deviceSessions;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "device", cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "device", cascade=CascadeType.ALL)
 	public Set<DeviceSuggestions> getDeviceSuggestions() {
 		return this.deviceSuggestions;
 	}

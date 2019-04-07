@@ -62,6 +62,7 @@ public class DeviceProductDAO extends GenericDaoImpl<DeviceProduct> {
 							  " sum(dp.sellCount) as sellCount, " +
 							  " sum(dp.removeCount) as removeCount " +
 							  " from DeviceProduct dp " +
+							  " join dp.product " + 
 							  " group by dp.product.id  " );
 	}
 

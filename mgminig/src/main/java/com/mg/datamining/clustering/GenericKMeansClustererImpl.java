@@ -118,4 +118,9 @@ public class GenericKMeansClustererImpl<T,E> implements Clusterer<T,E> {
 				productData, 12);
 		clusterer.cluster();
 	}
+
+	@Override
+	public List<ItemCluster<T, E>> getClusters() {
+		return clusters;
+	}
 }
