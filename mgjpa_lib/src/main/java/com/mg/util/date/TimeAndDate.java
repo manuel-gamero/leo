@@ -4,13 +4,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 public class TimeAndDate extends GregorianCalendar implements Cloneable
 {	
 	private static final long serialVersionUID = -9063146162361143727L;
 
-	private static Logger log = Logger.getLogger(TimeAndDate.class);
+	private static Logger log = LogManager.getLogger(TimeAndDate.class);
 	
     public static String CURRENT_YEAR = "2005";
 

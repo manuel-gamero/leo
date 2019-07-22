@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.exception.ServiceLocatorException;
 
@@ -21,7 +21,7 @@ import com.mg.exception.ServiceLocatorException;
  */
 public class ServiceLocator {
 	
-	private static final Logger log = Logger.getLogger(ServiceLocator.class);
+	private static final Logger log = LogManager.getLogger(ServiceLocator.class);
 	private static Map<Class<?>, Object> services = new HashMap<Class<?>, Object>();
 	
 	private static final ServiceLocator INSTANCE = new ServiceLocator();

@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.datamining.interfaces.IDeviceComponentAction;
 import com.mg.exception.ServiceException;
@@ -20,7 +20,7 @@ import com.mg.service.image.ImageServiceImpl;
 
 public class DeviceCustomComponentHelper {
 	
-	private static final Logger log = Logger.getLogger(DeviceCustomComponentHelper.class);
+	private static final Logger log = LogManager.getLogger(DeviceCustomComponentHelper.class);
 
 	public static void create(Device device, Audit audit, IDeviceComponentAction action, int id) throws ServiceException, ServiceLocatorException{
 		if( device.getDeviceComponents() == null || device.getDeviceComponents().size() == 0 ){
@@ -93,8 +93,7 @@ public class DeviceCustomComponentHelper {
 			return item;
 		}
 		else{
-			log.info("CustomComponentCollection doesn't exist id : " + customComponentCollectioId);
-			log.error(audit);
+			log.warn("CustomComponentCollection doesn't exist id : " + customComponentCollectioId + audit);
 			return null;
 		}
 	}

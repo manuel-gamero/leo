@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.exception.CurrencyNoExistException;
 import com.mg.exception.ServiceException;
@@ -28,7 +28,7 @@ import com.opensymphony.xwork2.Action;
 
 public class ExpressCheckout extends AbstractPaypalAction {
 
-	private static Logger log = Logger.getLogger(ExpressCheckout.class);
+	private static Logger log = LogManager.getLogger(ExpressCheckout.class);
 	public ExpressCheckout(ShoppingCartPaylPalCheckout shoppingCartAction){
 		setShoppingCartAction(shoppingCartAction);
 	}

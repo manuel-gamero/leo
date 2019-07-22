@@ -1,6 +1,6 @@
 package com.mg.web.struts.action.shopping;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.model.ShoppingCart;
 import com.mg.service.ServiceLocator;
@@ -13,7 +13,7 @@ public class ShoppingCartValidate extends BasicAction {
 	 * 
 	 */
 	private static final long serialVersionUID = -8169779400392417426L;
-	private static Logger log = Logger.getLogger(ShoppingCartValidate.class);
+	private static Logger log = LogManager.getLogger(ShoppingCartValidate.class);
 	private boolean validate;
 	
 

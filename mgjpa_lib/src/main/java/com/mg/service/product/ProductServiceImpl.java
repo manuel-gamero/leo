@@ -12,7 +12,7 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.dao.core.DaoCommand;
 import com.mg.dao.core.DaoFactory;
@@ -61,7 +61,7 @@ import com.mg.util.translation.Translations;
 @Transactional
 public class ProductServiceImpl extends ServiceImpl implements ProductService {
 
-	private static final Logger log = Logger.getLogger(ProductServiceImpl.class);
+	private static final Logger log = LogManager.getLogger(ProductServiceImpl.class);
 	private static final Comparator<Object[]> ITEM_COMPARATOR_COUNT = new Comparator<Object[]>() {
 		public int compare(Object[] item1, Object[] item2) {
 			return ((Long)item2[2]).compareTo((Long)item1[2]);

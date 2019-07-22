@@ -1,5 +1,9 @@
 package com.mg.dao.impl;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.mg.model.ProductData;
 
 public class ProductDataDAO extends GenericDaoImpl<ProductData> {
@@ -14,5 +18,9 @@ public class ProductDataDAO extends GenericDaoImpl<ProductData> {
 	public void joinTransaction() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void deleteProductData(){
+		updateQuery(" delete from ProductData pd ");
 	}
 }

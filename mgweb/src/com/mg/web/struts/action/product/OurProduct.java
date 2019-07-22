@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.annotation.Action;
 import com.mg.enums.ProductType;
@@ -32,7 +32,7 @@ public class OurProduct extends BasicAction implements Preparable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1155604242419622177L;
-	private static Logger log = Logger.getLogger(OurProduct.class);
+	private static Logger log = LogManager.getLogger(OurProduct.class);
 	private List<ProductDTO> list;
 	private ProductType type;
 	private Integer collectionId;
@@ -122,6 +122,10 @@ public class OurProduct extends BasicAction implements Preparable {
 			type = ProductType.POUCHES;
 		else if(nameUrlType2.equals("pochettes"))
 			type = ProductType.POUCHES;
+		else if(nameUrlType2.equals("sac-a-lunch"))
+			type = ProductType.LUNCH_BAG;
+		else if(nameUrlType2.equals("lunch-bag"))
+			type = ProductType.LUNCH_BAG;
 
 		return type;
 	}

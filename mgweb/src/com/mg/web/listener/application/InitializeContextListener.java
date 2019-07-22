@@ -5,7 +5,7 @@ import java.util.Enumeration;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.coupon.PromotionManager;
 import com.mg.exception.InitializationException;
@@ -26,7 +26,7 @@ public class InitializeContextListener implements ServletContextListener{
 
 	private static final String A_PROBLEM_LOOKING = "A problem has happened while looking up the config service.";
 	private static final String A_PROBLEM_ACCESSING = "A problem has happened while accessing the config service.";
-	private static Logger log = Logger.getLogger(InitializeContextListener.class);
+	private static Logger log = LogManager.getLogger(InitializeContextListener.class);
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {		
 		try {

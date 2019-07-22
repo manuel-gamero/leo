@@ -27,7 +27,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.exception.ServiceLocatorException;
 import com.mg.service.ServiceLocator;
@@ -37,7 +37,7 @@ import com.mg.util.io.FileUtils;
 
 public class Mail {
 
-	private static final Logger log = Logger.getLogger(Mail.class);
+	private static final Logger log = LogManager.getLogger(Mail.class);
 	private static ConfigService configService;
 	static {
 		try {

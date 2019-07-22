@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+		
+		<JDBC name="databaseAppender" tableName="bolsos.mg_logs">
+			<DataSource jndiName="java:/comp/env/jdbc/postgresDS" />
+			<!-- <Column name="id" pattern="bolsos.seq_logs_id.NEXTVAL" /> -->
+			<!-- <DriverManager connectionString="jdbc:postgresql://leo.database:5432/atelierleodb?searchpath=bolsos" 
+	        driverClassName="org.postgresql.Driver"
+	        username="joselog" 
+	        password="pepa2josearaHal" /> -->
+	        <Column name="id" literal="nextval('bolsos.seq_logs_id')" />
+			<Column name="log_time" isEventTimestamp="true" />
+			<Column name="severity" pattern="%level"  isUnicode="false"/>
+			<Column name="category" pattern="%logger" isUnicode="false"/>
+			<Column name="message" pattern="%message" isUnicode="false"/>
+			<Column name="server_name" pattern="$${env:COMPUTERNAME}" isUnicode="false"/>
+		</JDBC>
+	</Appenders>
+	
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="Console" />
+		</Root>
+		<Logger name="org.hibernate.SQL" level="info" additivity="false">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="com.mg.web.struts.action.product" level="debug" additivity="false">
+			<AppenderRef ref="databaseAppender" />
+		</Logger>
+	</Loggers>
+</Configuration>

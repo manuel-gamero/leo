@@ -10,7 +10,7 @@ import java.util.NavigableSet;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.exception.AutocompleterException;
 import com.mg.service.search.autocompleter.cache.LRUCache;
@@ -41,7 +41,7 @@ import com.mg.service.search.autocompleter.core.NormalizerStrategy;
 public class AutocompleterImpl<K, V extends Completable<V>> implements
 		Autocompleter<K, V> {
 
-	private static final Logger log = Logger.getLogger(AutocompleterImpl.class);
+	private static final Logger log = LogManager.getLogger(AutocompleterImpl.class);
 	
 	/*
 	 * Natural ordering tree set to host our elements. It is ordered by its

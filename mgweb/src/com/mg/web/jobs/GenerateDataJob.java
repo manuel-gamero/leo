@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
@@ -21,7 +21,7 @@ import com.mg.web.listener.schedule.QuartzSchedulerListener;
 
 public class GenerateDataJob implements Job {
 
-	private static final Logger log = Logger.getLogger(GenerateDataJob.class);
+	private static final Logger log = LogManager.getLogger(GenerateDataJob.class);
 	private static final String DATE_FORMAT = "dd/MM/yyyy HH:mm";
 	
 	public void execute(JobExecutionContext context) throws JobExecutionException {
@@ -41,9 +41,8 @@ public class GenerateDataJob implements Job {
 				CollectData collection = new CollectData();
 				collection.collectSessions(auditList);
 				log.debug("Getting sessions");
-				collection.getSessions();
 				collection.groupingSessions();
-				collection.getDevices();
+				//collection.getDevices();
 				log.debug("Saving sessions");
 				collection.saveAudtiHistory(auditList);
 				
@@ -54,6 +53,8 @@ public class GenerateDataJob implements Job {
 				ServiceLocator.getService(ConfigServiceImpl.class).updateConfig( confiDataMinig );
 				
 				log.info("GenerateDataJob executed from " + startDate + " to " +  endDate);
+				Date dateLastRun = ServiceLocator.getService(ApplicationServiceImpl.class).updateJobRunDate("GenerateDataJob");
+				log.info("GenerateDataJob executed at " + dateLastRun + "." );
 			}
 		} catch (Exception e) {
 			ExceptionHandler.handleException(e, null, null);

@@ -2,7 +2,7 @@ package com.mg.web.struts.action.application;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 import org.apache.struts2.ServletActionContext;
 
 import com.mg.web.struts.action.BasicAction;
@@ -10,7 +10,7 @@ import com.mg.web.struts.action.BasicAction;
 public class ErrorUrl extends BasicAction {
 
 	private static final long serialVersionUID = 1155604242419622177L;
-	private static final Logger log = Logger.getLogger(ErrorUrl.class);
+	private static final Logger log = LogManager.getLogger(ErrorUrl.class);
 	
 	@Override
 	public void prepare() throws Exception {

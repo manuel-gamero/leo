@@ -2,7 +2,7 @@ package com.mg.web.struts.action.home;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.annotation.Action;
 import com.mg.exception.ServiceLocatorException;
@@ -21,7 +21,7 @@ import com.mg.web.struts.action.BasicAction;
 public class HomePage extends BasicAction {
 
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = Logger.getLogger(HomePage.class);
+	private static final Logger log = LogManager.getLogger(HomePage.class);
 	private List<InstagramDTO> instagramFeed;
 
 	public HomePage() throws ServiceLocatorException {

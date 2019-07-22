@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
@@ -69,7 +69,7 @@ public class BasicAction extends ActionSupport implements ServletRequestAware,
 	protected static final String DESCR_PAGE_PARAM = "bolsos.pages.description.param";
 	protected static final String URL_PAGE_PARAM = "bolsos.pages.url.param";
 	
-	protected Logger log = Logger.getLogger(this.getClass());
+	protected Logger log = LogManager.getLogger(this.getClass());
 
 	protected HttpServletRequest request;
 

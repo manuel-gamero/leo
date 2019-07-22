@@ -3,7 +3,7 @@ package com.mg.web.struts.action.shopping.payment.paypal.beans;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.exception.CurrencyNoExistException;
 import com.mg.exception.ServiceException;
@@ -14,7 +14,7 @@ import com.opensymphony.xwork2.Action;
 
 public class ExpressCheckoutDetails extends AbstractPaypalAction{
 
-	private static Logger log = Logger.getLogger(ExpressCheckoutDetails.class);
+	private static Logger log = LogManager.getLogger(ExpressCheckoutDetails.class);
 	
 	public ExpressCheckoutDetails(ShoppingCartPaypal shoppingCartAction){
 		setShoppingCartAction(shoppingCartAction);

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.datamining.interfaces.IDeviceSuggestionsAction;
 import com.mg.exception.ServiceException;
@@ -22,7 +22,7 @@ import com.mg.util.text.StringUtils;
 
 public class DeviceSuggestionHelper {
 
-	private static final Logger log = Logger.getLogger(DeviceSuggestionHelper.class);
+	private static final Logger log = LogManager.getLogger(DeviceSuggestionHelper.class);
 	
 	public static void create(Device device, Audit audit, IDeviceSuggestionsAction action, String suggestion) throws ServiceException, ServiceLocatorException{
 		if( device.getDeviceSuggestions() == null || device.getDeviceSuggestions().size() == 0 ){

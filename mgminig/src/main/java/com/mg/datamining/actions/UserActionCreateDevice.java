@@ -2,7 +2,8 @@ package com.mg.datamining.actions;
 
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.mg.exception.ServiceException;
 import com.mg.exception.ServiceLocatorException;
@@ -12,7 +13,7 @@ import com.mg.util.text.StringUtils;
 
 public class UserActionCreateDevice extends UserActionBasic{
 
-	private static final Logger log = Logger.getLogger(UserActionCreateDevice.class);
+	private static final Logger log = LogManager.getLogger(UserActionCreateDevice.class);
 	
 	@Override
 	public void apply(Device device, Audit audit) throws NumberFormatException, ServiceException, ServiceLocatorException {

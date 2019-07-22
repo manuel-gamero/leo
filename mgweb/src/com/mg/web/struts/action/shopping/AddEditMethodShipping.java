@@ -2,7 +2,7 @@ package com.mg.web.struts.action.shopping;
 
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.enums.Country;
 import com.mg.enums.MethodShippingStatus;
@@ -17,7 +17,7 @@ import com.mg.web.struts.action.BasicTranslationAction;
 public class AddEditMethodShipping extends BasicTranslationAction {
 
 	private static final long serialVersionUID = 1155604242419622177L;
-	private static final Logger log = Logger.getLogger(AddEditMethodShipping.class);
+	private static final Logger log = LogManager.getLogger(AddEditMethodShipping.class);
 	private Integer id;
 	private MethodShipping methodShipping;
 	private int descrTranslationId;

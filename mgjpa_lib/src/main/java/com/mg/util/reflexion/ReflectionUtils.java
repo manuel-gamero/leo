@@ -20,13 +20,13 @@ import java.util.jar.JarFile;
 import javax.persistence.Id;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.annotation.FieldView;
 
 public class ReflectionUtils {
 
-	private final static Logger log = Logger.getLogger(ReflectionUtils.class);
+	private final static Logger log = LogManager.getLogger(ReflectionUtils.class);
 	private final static String COUPON_TYPE_NAMESPACE = "com.mg.coupon.type";
 
 	private static Hashtable<String, PropertyDescriptor> pkPropertyPerClass;

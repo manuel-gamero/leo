@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.datamining.helpers.DeviceCustomComponentHelper;
 import com.mg.datamining.helpers.DeviceCustomComponentHistHelper;
@@ -28,7 +28,7 @@ import com.mg.model.DeviceUrl;
 
 public class UserActionSoldProduct extends UserActionBasicCount {
 	
-	private static Logger log = Logger.getLogger(UserActionSoldProduct.class);
+	private static Logger log = LogManager.getLogger(UserActionSoldProduct.class);
 	
 	@Override
 	public void apply(Device device, Audit audit) throws NumberFormatException, ServiceException, ServiceLocatorException {

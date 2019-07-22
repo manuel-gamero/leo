@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.datamining.interfaces.IDeviceComponentActionHist;
 import com.mg.exception.ServiceException;
@@ -19,7 +19,7 @@ import com.mg.service.image.ImageServiceImpl;
 
 public class DeviceCustomComponentHistHelper {
 
-	private static Logger log = Logger.getLogger(DeviceCustomComponentHistHelper.class);
+	private static Logger log = LogManager.getLogger(DeviceCustomComponentHistHelper.class);
 	
 	public static void create(Device device, Audit audit, IDeviceComponentActionHist action, int id) throws ServiceException, ServiceLocatorException{
 		if(id > 0)

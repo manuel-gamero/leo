@@ -4,7 +4,7 @@
 //
 //import javax.persistence.EntityManager;
 //
-//import org.apache.log4j.Logger;
+//import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 //
 //import com.mg.dao.core.DaoCommand;
 //import com.mg.dao.core.DaoFactory;
@@ -22,7 +22,7 @@
 //
 //public class SuggestionServiceImpl extends ServiceImpl implements SuggestionService{
 //
-//private static final Logger log = Logger.getLogger(DeviceServiceImpl.class);
+//private static final Logger log = LogManager.getLogger(DeviceServiceImpl.class);
 //	
 //	public SuggestionServiceImpl() {
 //		super();
@@ -140,7 +140,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.dao.core.DaoCommand;
 import com.mg.dao.core.DaoFactory;
@@ -156,7 +156,7 @@ import com.mg.service.device.DeviceServiceImpl;
 
 public class SuggestionServiceImpl extends ServiceImpl implements SuggestionService{
 
-private static final Logger log = Logger.getLogger(DeviceServiceImpl.class);
+private static final Logger log = LogManager.getLogger(DeviceServiceImpl.class);
 	
 	public SuggestionServiceImpl() {
 		super();

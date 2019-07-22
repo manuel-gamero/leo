@@ -1,12 +1,12 @@
 package com.mg.service.cache;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.service.ServiceLocator;
 
 public class ResetCacheDefaultTask extends Thread {
 
-	protected Logger log = Logger.getLogger(this.getClass());
+	protected Logger log = LogManager.getLogger(this.getClass());
 	
 	@Override
 	public void run() {

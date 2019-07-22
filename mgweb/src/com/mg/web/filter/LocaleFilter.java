@@ -10,7 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.web.util.LocaleUtils;
 
@@ -23,7 +23,7 @@ import com.mg.web.util.LocaleUtils;
  */
 public class LocaleFilter implements Filter {
 	
-	private static Logger log = Logger.getLogger(LocaleFilter.class);
+	private static Logger log = LogManager.getLogger(LocaleFilter.class);
 		
 	protected FilterConfig filterConfig = null;
 	

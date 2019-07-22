@@ -9,6 +9,7 @@ package com.mg.enums;
 public enum ProductType implements BasicEnum{
 	
 	BAG("BAG"),
+	LUNCH_BAG("LUNCH_BAG"),
 	WALLET("WALLET"),
 	LARGE_POUCH("LARGE_POUCH"),
 	MEDIUM_POUCH("MEDIUM_POUCH"),

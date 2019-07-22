@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.enums.UserAddressType;
 import com.mg.exception.ServiceException;
@@ -19,7 +19,7 @@ import com.opensymphony.xwork2.Preparable;
 
 public class ShoppingCartAddress extends BasicShoppingCart implements Preparable {
 
-	private static Logger log = Logger.getLogger(ShoppingCartAddress.class);
+	private static Logger log = LogManager.getLogger(ShoppingCartAddress.class);
 	private static final long serialVersionUID = 1155604242419622177L;
 	private List<ItemUserAddressDTO> shippingList;
 	private List<ItemUserAddressDTO> billingList;

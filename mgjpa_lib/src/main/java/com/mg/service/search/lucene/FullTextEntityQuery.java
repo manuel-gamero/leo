@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 import javax.persistence.EntityManager;
 
 import org.apache.commons.lang3.NotImplementedException;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
 import org.hibernate.search.jpa.FullTextQuery;
@@ -16,7 +16,7 @@ import org.hibernate.search.jpa.Search;
 
 public class FullTextEntityQuery<E> implements QueryResults<E> {
 
-	private final static Logger log = Logger.getLogger( FullTextEntityQuery.class );
+	private final static Logger log = LogManager.getLogger( FullTextEntityQuery.class );
 	
 	public enum Mode {
 		DEFAULT,

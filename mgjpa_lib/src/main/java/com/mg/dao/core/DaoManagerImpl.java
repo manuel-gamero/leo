@@ -2,7 +2,7 @@ package com.mg.dao.core;
 
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.exception.DaoException;
 
@@ -15,7 +15,7 @@ import com.mg.exception.DaoException;
  */
 public class DaoManagerImpl extends AbstractDaoManager {
 	
-	private static final Logger log = Logger.getLogger(DaoManagerImpl.class);
+	private static final Logger log = LogManager.getLogger(DaoManagerImpl.class);
 	
 	protected static final String ERROR_MSG = "You can't use Dao Manager in this mode.";
 	

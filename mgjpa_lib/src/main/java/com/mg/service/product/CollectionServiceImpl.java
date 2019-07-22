@@ -9,7 +9,7 @@ import java.util.Set;
 
 import javax.persistence.EntityManager;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.dao.core.DaoCommand;
 import com.mg.dao.core.DaoFactory;
@@ -50,7 +50,7 @@ import com.mg.util.translation.Translations;
  */
 public class CollectionServiceImpl extends ServiceImpl implements CollectionService {
  
-	private static final Logger log = Logger.getLogger(CollectionServiceImpl.class);
+	private static final Logger log = LogManager.getLogger(CollectionServiceImpl.class);
 	private static final Comparator<Object[]> COLLECTION_COMPARATOR_COUNT = new Comparator<Object[]>() {
 		public int compare(Object[] item1, Object[] item2) {
 			return ((Long)item2[1]).compareTo((Long)item1[1]);

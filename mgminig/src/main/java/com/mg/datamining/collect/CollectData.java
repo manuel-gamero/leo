@@ -3,12 +3,15 @@ package com.mg.datamining.collect;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.mg.datamining.actions.UserActionFactory;
 import com.mg.datamining.helpers.DeviceSessionHelper;
@@ -26,14 +29,16 @@ import com.mg.util.text.StringUtils;
 
 public class CollectData {
 	
-	private static final Logger log = Logger.getLogger(CollectData.class);
+	private static final Logger log = LogManager.getLogger(CollectData.class);
 	
 	private HashMap<String, Device> sessions =  new HashMap<String, Device>();
 	private HashMap<String, Device> devices =  new HashMap<String, Device>();
+	private String session = "";
+	
 	public static final String UNKNOWN_FINGERPRINT = "UNKNOWN";
 
 	public void collectSessions(List<Audit> auditList) throws NumberFormatException, ServiceException, ServiceLocatorException{
-		log.info(">>> Start proces of collecting data.");
+		log.info(">>> Start proces of collecting data size: " + auditList.size());
 		for (Audit audit : auditList) {
 			if( isAuditValid(audit) ){
 				ICreation action = UserActionFactory.getInstace().getUserAction(audit);
@@ -57,7 +62,7 @@ public class CollectData {
 	}
 	
 	public void saveAudtiHistory(List<Audit> auditList) throws NumberFormatException, ServiceException, ServiceLocatorException{
-		log.info(">>> Start proces of archiving auidt.");
+		log.info(">>> Start proces of archiving auidt size: " + auditList.size());
 		DeviceService deviceService = ServiceLocator.getService(DeviceServiceImpl.class);
 		for (Audit audit : auditList) {
 			deviceService.saveAuditHist(audit);
@@ -75,8 +80,55 @@ public class CollectData {
 	public void groupingSessions() throws ServiceException, ServiceLocatorException{
 		log.info(">>> Start proces of grouping sessions.");
 		boolean add;
+		Device deviceItem = null;
 		if(sessions.size() > 0){
+			log.info("+++ sessions size: " + sessions.size());
 			for (String keySession : sessions.keySet()) {
+				add = true;
+				Device device = sessions.get(keySession);
+				String keyDevice = device.getFingerprint();
+				if(keyDevice == null ){
+					keyDevice = UNKNOWN_FINGERPRINT;
+					device.setFingerprint(keyDevice);
+				}
+				DeviceSessionHelper.create(device);
+				//Remove admin session from UNKNOWN fingerprint
+				if(DeviceSessionHelper.isAdminUser(device) && device.getFingerprint().equals(UNKNOWN_FINGERPRINT)){
+					removeAdminSession(device);
+				}
+				//If the session is from admin user then don't treat it
+				else if(DeviceSessionHelper.isAdminUser(device) && !device.getFingerprint().equals(UNKNOWN_FINGERPRINT)){
+					add = false;
+				}
+				log.debug("+++ +++ +++ Device: " + keyDevice + " session: " + keySession + " add: " + add );
+				if(add){
+					if( deviceItem != null ){
+						deviceItem.add(device);
+					}
+					else{
+						deviceItem = device;
+					}
+				}
+				
+				if(sessionToSave(keySession)){
+					saveSession(deviceItem);
+					//Remove session to indicate next session
+					deviceItem = null;
+				}
+			}
+		}
+		//Improvement memory use.
+		sessions = null;
+		log.info("<<< End proces of grouping sessions.");
+	}
+	
+	public void groupingSessionsDevice() throws ServiceException, ServiceLocatorException{
+		log.info(">>> Start proces of grouping sessions.");
+		boolean add;
+		if(sessions.size() > 0){
+			log.info("+++ sessions size: " + sessions.size());
+			Set<String> keySet = new HashSet<>(sessions.keySet());
+			for (String keySession : keySet) {
 				add = true;
 				Device device = sessions.get(keySession);
 				String keyDevice = device.getFingerprint();
@@ -101,13 +153,29 @@ public class CollectData {
 					else{
 						devices.put(keyDevice, device);
 					}
+					//Improve memory use.
+					sessions.remove(keySession);
+					log.info("+++ Remove session: " + keySession + " size: " + sessions.size());
 				}
 				
 			}
 		}
+		//Improvement memory use.
+		sessions = null;
 		log.info("<<< End proces of grouping sessions.");
 	}
 	
+	private boolean sessionToSave(String keySession) {
+		if ( "".equals(session) ){ //First session
+			session = keySession;
+		}
+		if(!keySession.equals(session)){ //It the time to save session
+			session = keySession;
+			return true;
+		}
+		return false;
+	}
+
 	private void removeAdminSession(Device device) {
 		if(device.getDeviceUsers() != null){
 			for (DeviceUser item : device.getDeviceUsers()) {
@@ -122,23 +190,11 @@ public class CollectData {
 	public void saveDevices() throws ServiceLocatorException, ServiceException{
 		log.info(">>> Start proces of saving devices in database.");
 		if( devices != null && devices.size() > 0 ){
-			DeviceService deviceService = ServiceLocator.getService(DeviceServiceImpl.class);
-			for (String keyFingerPrint : devices.keySet()) {
-				Device device = devices.get(keyFingerPrint);
-				log.debug("+++ +++ +++ keyFingerPrint: " + keyFingerPrint);
+			log.info("+++ devices size: " + devices.size());
+			Set<String> keySet = new HashSet<>(devices.keySet());
+			for (String keyFingerPrint : keySet) {
 				Long start = System.currentTimeMillis(); 
-				Device deviceDatabase = deviceService.getDevice(keyFingerPrint);
-				if ( deviceDatabase != null ){
-					log.debug("+++ +++ +++ Adding device." );
-					//device.add(deviceDatabase);
-					//deviceService.saveDevice(device);
-					deviceDatabase.addDevice(device);
-					deviceService.saveDevice(deviceDatabase);
-				}
-				else{
-					log.debug("+++ +++ +++ Saving device." );
-					deviceService.saveDevice(device);
-				}
+				saveSession(keyFingerPrint);
 				Long finish = System.currentTimeMillis(); 
 				Long millis = finish - start;
 				log.debug("Saving duraction: "  + 
@@ -148,10 +204,56 @@ public class CollectData {
 		else{
 			log.warn("There is no any device.");
 		}
+		//Improvement memory use.
+		devices = null;
+		System.gc();
 		log.info("<<< End proces of saving devices in database.");
 	}
 	
+	private void saveSession(String keyFingerPrint) throws ServiceException, ServiceLocatorException {
+		DeviceService deviceService = ServiceLocator.getService(DeviceServiceImpl.class);
+		Device device = devices.get(keyFingerPrint);
+		log.info("+++ +++ +++ keyFingerPrint: " + keyFingerPrint);
+		Device deviceDatabase = deviceService.getDevice(keyFingerPrint);
+		if ( deviceDatabase != null ){
+			log.debug("+++ +++ +++ Adding device." );
+			//device.add(deviceDatabase);
+			//deviceService.saveDevice(device);
+			deviceDatabase.addDevice(device);
+			deviceService.saveDevice(deviceDatabase);
+			//Improve memory use.
+			devices.remove(keyFingerPrint);
+			log.info("+++ Remove device: " + keyFingerPrint + " size: " + devices.size());
+		}
+		else{
+			log.debug("+++ +++ +++ Saving device." );
+			deviceService.saveDevice(device);
+		}
+		
+	}
 	
+	private void saveSession(Device device) throws ServiceException, ServiceLocatorException {
+		DeviceService deviceService = ServiceLocator.getService(DeviceServiceImpl.class);
+		if(device == null){
+			log.error("Device null");
+		}
+		else{
+			String keyFingerPrint = device.getFingerprint();
+			log.info("+++ +++ +++ keyFingerPrint: " + keyFingerPrint);
+			Device deviceDatabase = deviceService.getDevice(keyFingerPrint);
+			if ( deviceDatabase != null ){
+				log.debug("+++ +++ +++ Adding device." );
+				//device.add(deviceDatabase);
+				//deviceService.saveDevice(device);
+				deviceDatabase.addDevice(device);
+				deviceService.saveDevice(deviceDatabase);
+			}
+			else{
+				log.debug("+++ +++ +++ Saving device." );
+				deviceService.saveDevice(device);
+			}
+		}
+	}
 
 	private boolean isAuditValid(Audit audit) {
 		if( audit.getActionUser().toLowerCase().contains("bot") ||
@@ -179,22 +281,22 @@ public class CollectData {
 		return device;
 	}
 	
-	public HashMap<String, Device> getDevices() {
-		return devices;
-	}
-
-	public void setDevices(HashMap<String, Device> devices) {
-		this.devices = devices;
-	}
-	
-	@Override
-	public String toString(){
-		String info = "";
-		for (String key : devices.keySet()) {
-			info = info + "\r\n" + devices.get(key);
-		}
-		return info;
-	}
+//	public HashMap<String, Device> getDevices() {
+//		return devices;
+//	}
+//
+//	public void setDevices(HashMap<String, Device> devices) {
+//		this.devices = devices;
+//	}
+//	
+//	@Override
+//	public String toString(){
+//		String info = "";
+//		for (String key : devices.keySet()) {
+//			info = info + "\r\n" + devices.get(key);
+//		}
+//		return info;
+//	}
 
 	public static void main(String[] args) {
 	

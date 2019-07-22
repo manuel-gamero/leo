@@ -76,7 +76,7 @@
 			<property name="hibernate.jdbc.batch_size" value="50" />
 			
 			<!-- Statistics log -->
-			<property name="hibernate.generate_statistics" value="true"/>
+			<property name="hibernate.generate_statistics" value="false"/>
 
 			<!-- Index lucene properties -->
 			<property name="hibernate.search.default.directory_provider" value="filesystem" />

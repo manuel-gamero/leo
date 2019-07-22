@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.TimeZone;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.service.ServiceLocator;
 import com.mg.service.init.ConfigService;
@@ -24,7 +24,7 @@ import com.redfin.sitemapgenerator.WebSitemapUrl;
 
 public class GenerateSitemap {
 
-	private static Logger log = Logger.getLogger(GenerateSitemap.class);
+	private static Logger log = LogManager.getLogger(GenerateSitemap.class);
 	private static File myDir;
 	private static String urlSitemap = "http://latelierdeleo.local.com";
 	private static ConfigService configService;

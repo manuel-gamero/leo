@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.annotation.Action;
 import com.mg.exception.CurrencyNoExistException;
@@ -27,7 +27,7 @@ import com.opensymphony.xwork2.Preparable;
 public class ShoppingCartPaymentSend extends BasicShoppingCart  implements Preparable{
 
 	private static final long serialVersionUID = 5889902524032581061L;
-	private static final Logger log = Logger.getLogger(ShoppingCartPaymentSend.class);
+	private static final Logger log = LogManager.getLogger(ShoppingCartPaymentSend.class);
 	private String sTexteLibre = "Texte Libre";
 	private String bankUrl;
 	private String sChaineMAC;

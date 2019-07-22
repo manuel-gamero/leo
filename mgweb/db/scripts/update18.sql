@@ -25,7 +25,7 @@ CREATE INDEX mg_suggestions_suggestion_session_guid_idx ON bolsos.mg_suggestions
 CREATE INDEX mg_suggestions_session_guid_idx ON bolsos.mg_suggestions (session_guid);
 
 insert into bolsos.mg_jobs
-values(nextval('bolsos.seq_jobs_id'),'GenerateMinigDataJob','atelier1','16',null,null,current_timestamp, current_timestamp);
+values(nextval('bolsos.seq_jobs_id'),'GenerateMinigDataJob','atelier1','0 0 12 * * ?','16',null,current_timestamp, current_timestamp);
 
 --Change size server_name in mg_audit_hist table
 alter table bolsos.mg_audit_hist alter column server_name type character varying(40);

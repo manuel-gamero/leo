@@ -1,6 +1,6 @@
 package com.mg.web.struts.action.coupon;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.annotation.Action;
 import com.mg.coupon.CouponAbstract;
@@ -15,7 +15,7 @@ import com.opensymphony.xwork2.ActionContext;
 public class CouponManager extends BasicAction {
 
 	private static final long serialVersionUID = 1155604242419622177L;
-	private static final Logger log = Logger.getLogger(CouponManager.class);
+	private static final Logger log = LogManager.getLogger(CouponManager.class);
 	private String couponName;
 	private Coupons coupon;
 	

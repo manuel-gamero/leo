@@ -5,7 +5,7 @@ import java.util.List;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.Job;
 import org.quartz.JobBuilder;
@@ -23,7 +23,7 @@ import com.mg.util.exception.ExceptionHandler;
 
 public class QuartzSchedulerListener implements ServletContextListener {
 	
-	private static final Logger log = Logger.getLogger(QuartzSchedulerListener.class);
+	private static final Logger log = LogManager.getLogger(QuartzSchedulerListener.class);
 	private static final String TRIGER_SUBFIX = "Trigger";
 	private static final String PACKAGE_JOBS = "com.mg.web.jobs.";
 	public static final String VALUE_1 = "key1";

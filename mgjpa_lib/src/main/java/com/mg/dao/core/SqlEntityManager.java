@@ -6,7 +6,7 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 /**
  *  
@@ -17,7 +17,7 @@ public class SqlEntityManager {
 
 	public SqlEntityManager(){}
 
-	private static final Logger log = Logger.getLogger(SqlEntityManager.class);
+	private static final Logger log = LogManager.getLogger(SqlEntityManager.class);
 
 	/*
 	 *  Once created, the SqlSessionFactory should exist for the duration of application execution. 

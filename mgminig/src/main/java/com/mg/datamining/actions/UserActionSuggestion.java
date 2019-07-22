@@ -21,7 +21,7 @@ public class UserActionSuggestion extends UserActionBasicUrl implements IDeviceS
 
 	@Override
 	public void applyAction(Device device, Audit audit, DeviceSuggestions item) {
-		item.setCount( item.getCount() + 1 );
+		item.setCountSuggested(item.getCountSuggested()+ 1); 
 		item.setLastModification(audit.getCreationDate());
 	}
 }

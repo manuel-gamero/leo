@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 import org.apache.struts2.ServletActionContext;
 
 import com.mg.model.Audit;
@@ -22,7 +22,7 @@ import ognl.OgnlException;
 
 public class AuditUtil {
 	
-	private static final Logger log = Logger.getLogger(AuditUtil.class);
+	private static final Logger log = LogManager.getLogger(AuditUtil.class);
 
 	public static Audit createAudit(ActionInvocation actionInvocation, String pELMessage) throws OgnlException{
 		Audit audit = new Audit();

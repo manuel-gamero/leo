@@ -73,7 +73,7 @@ public class ItemDAO extends GenericDaoImpl<Item> {
 										" join pp.priceEntries ppp " +
 										" join p.items i " +
 										" join i.itemComponents ic " +
-										"join ic.customComponentCollection icccc " +
+										" join ic.customComponentCollection icccc " +
 										" left join p.deviceProducts dp " +
 										" left join Suggestions s on (s.suggestion = i.nameImage and s.sessionGuid = :session)" +
 										" where pd1.cluster in (select pd2.cluster " +

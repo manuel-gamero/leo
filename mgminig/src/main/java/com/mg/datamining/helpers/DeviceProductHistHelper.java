@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.datamining.actions.UserActionBasicCount;
 import com.mg.datamining.interfaces.IDeviceProductHistAction;
@@ -19,7 +19,7 @@ import com.mg.service.product.ProductServiceImpl;
 
 public class DeviceProductHistHelper {
 	
-	private static final Logger log = Logger.getLogger(DeviceProductHistHelper.class);
+	private static final Logger log = LogManager.getLogger(DeviceProductHistHelper.class);
 
 	public static void create(Device device, Audit audit, IDeviceProductHistAction action, int id) throws ServiceException, ServiceLocatorException{
 		if( id > 0){

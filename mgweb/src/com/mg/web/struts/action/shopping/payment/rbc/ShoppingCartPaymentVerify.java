@@ -1,6 +1,6 @@
 package com.mg.web.struts.action.shopping.payment.rbc;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.enums.ShoppingCartStatus;
 import com.mg.model.ShoppingCart;
@@ -13,7 +13,7 @@ import com.opensymphony.xwork2.Preparable;
 public class ShoppingCartPaymentVerify extends BasicAction  implements Preparable{
 
 	private static final long serialVersionUID = 5889902524032581061L;
-	private static final Logger log = Logger.getLogger(ShoppingCartPaymentVerify.class);
+	private static final Logger log = LogManager.getLogger(ShoppingCartPaymentVerify.class);
 
 	@Override
 	public void prepare() {

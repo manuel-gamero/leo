@@ -8,7 +8,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.persistence.EntityManager;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.dao.core.DaoCommand;
 import com.mg.dao.core.DaoFactory;
@@ -35,7 +35,7 @@ import com.mg.util.communication.Receipt;
  */
 public class UserServiceImpl extends ServiceImpl implements UserService {
 
-	private static final Logger log = Logger.getLogger(UserServiceImpl.class);
+	private static final Logger log = LogManager.getLogger(UserServiceImpl.class);
 
 	public UserServiceImpl() {
 		super();

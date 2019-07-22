@@ -2,7 +2,7 @@ package com.mg.web.jobs;
 
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
@@ -15,7 +15,7 @@ import com.mg.util.exception.ExceptionHandler;
 
 public class ResetFeedJob implements Job {
 	
-	private static final Logger log = Logger.getLogger(ResetFeedJob.class);
+	private static final Logger log = LogManager.getLogger(ResetFeedJob.class);
 	
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		log.debug("Calling ResetFeedJob." );

@@ -150,7 +150,7 @@ public class BasicAudit{
 	
 	@Override
 	public String toString(){
-		String info = " id: " + id;
+		String info = "\r\n" + " id: " + id;
 		info = info + "\r\n" + " username: " + username;
 		info = info + "\r\n" + " location: " + location;
 		info = info + "\r\n" + " sessionGuid: " + sessionGuid;

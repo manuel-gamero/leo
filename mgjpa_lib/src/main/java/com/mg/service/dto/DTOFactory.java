@@ -13,7 +13,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.enums.CollectionStatus;
 import com.mg.enums.ImageType;
@@ -57,7 +57,7 @@ import com.mg.util.translation.TranslationUtils;
  */
 public final class DTOFactory {
 
-	private static Logger log = Logger.getLogger(DTOFactory.class);
+	private static Logger log = LogManager.getLogger(DTOFactory.class);
 	protected static final DecimalFormat df = new DecimalFormat("0.00", new DecimalFormatSymbols(Locale.US));
 
 	private DTOFactory(){}
@@ -600,26 +600,13 @@ public final class DTOFactory {
 		boolean reachSize = false;
 		while (i != listItemByProduct.size() && !reachSize){
 			Item item = listItemByProduct.get(i);
-			listItemViewDTO.add( getItemViewDTOForItem(item, lang, country));
+			listItemViewDTO.add( getItemViewDTOForItem(item.getNameImage(), item.getProduct().getId(), lang, country));
 			i++;
 			if( size != null && i >= size){
 				reachSize = true;
 			}
 		}
 		return listItemViewDTO;
-	}
-
-	private static ItemViewDTO getItemViewDTOForItem(Item item, String lang, String country) throws CurrencyNoExistException, ServiceException, ServiceLocatorException, CacheException {
-		ItemViewDTO itemViewDTO = new ItemViewDTO();
-		ProductDTO productDTO = getProductDTO(item.getProduct().getId(), lang, country, false);
-		itemViewDTO.setId(productDTO.getId());
-		String pathImage = ServiceLocator.getService(ConfigServiceImpl.class).getWebImageTmp();
-		pathImage = pathImage + item.getNameImage();
-		itemViewDTO.setItemCustomUrl(item.getNameImage().replace(".png", ""));
-		itemViewDTO.setNameImage(pathImage);
-		itemViewDTO.setItemName(productDTO.getName());
-		itemViewDTO.setPrice(productDTO.getMsrp());
-		return itemViewDTO;
 	}
 	
 	public static ItemViewDTO getItemViewDTOForItem(String nameImage, int productId, String lang, String country) throws CurrencyNoExistException, ServiceException, ServiceLocatorException, CacheException {

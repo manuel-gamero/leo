@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.dao.core.DaoCommand;
 import com.mg.dao.core.DaoFactory;
@@ -31,7 +31,7 @@ import com.mg.service.product.ProductServiceImpl;
 
 public class DeviceServiceImpl extends ServiceImpl implements DeviceService {
 
-	private static final Logger log = Logger.getLogger(DeviceServiceImpl.class);
+	private static final Logger log = LogManager.getLogger(DeviceServiceImpl.class);
 	
 	public DeviceServiceImpl() {
 		super();

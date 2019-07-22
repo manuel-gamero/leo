@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 //import org.apache.commons.collections15.EnumerationUtils;
 
 
 public class ClassFinder {
 	
-	private final static Logger log = Logger.getLogger( ClassFinder.class );
+	private final static Logger log = LogManager.getLogger( ClassFinder.class );
 	
 	public static List<Class<?>> getClasses( String packageName ) {
 		List<Class<?>> clazzes = new ArrayList<Class<?>>();

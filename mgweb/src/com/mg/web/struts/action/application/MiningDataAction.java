@@ -28,16 +28,16 @@ public class MiningDataAction extends BasicAction {
 		try{
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			Date d = sdf.parse("21/08/2016");
-			List<Audit> auditList= ServiceLocator.getService(ApplicationServiceImpl.class).getAuditByDates(startDate, endDate);
+			//List<Audit> auditList= ServiceLocator.getService(ApplicationServiceImpl.class).getAuditByDates(startDate, endDate);
 			CollectData collection = new CollectData();
-			collection.collectSessions(auditList);
-			collection.getSessions();
-			collection.groupingSessions();
-			collection.getDevices();
+			collection.collectSessions(ServiceLocator.getService(ApplicationServiceImpl.class).getAuditByDates(startDate, endDate));
+			//auditList = null;
+			//collection.groupingSessions();
+			collection.groupingSessionsDevice();
 			collection.saveDevices();
 			System.out.println( collection );
 			//collection.saveAudtiHistory(auditList);
-			collection.saveAudtiHistory(startDate, endDate);
+			//collection.saveAudtiHistory(startDate, endDate);
 			DataSetCreator<Product,Attribute> bc = new ProductDataSetCreatorImpl();
 			List<DataItem<Product,Attribute>> productData = bc.createLearningData();
 			GenericKMeansClustererImpl<Product,Attribute> clusterer = new GenericKMeansClustererImpl<Product,Attribute>(

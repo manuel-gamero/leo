@@ -7,7 +7,7 @@ import java.util.Set;
 
 import javax.persistence.EntityManager;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 import org.hibernate.LazyInitializationException;
 
 import com.mg.dao.core.DaoFactory;
@@ -21,7 +21,7 @@ import com.mg.service.init.ConfigServiceImpl;
 
 public class TranslationUtils {
 	
-	private static final Logger log = Logger.getLogger(TranslationUtils.class);
+	private static final Logger log = LogManager.getLogger(TranslationUtils.class);
 	
 	/**
 	 * @param translationEntrySet

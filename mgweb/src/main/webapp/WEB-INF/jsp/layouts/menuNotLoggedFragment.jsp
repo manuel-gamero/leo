@@ -339,7 +339,7 @@
 										<div class="banner">
 											<a href='<s:text name="url.ourproduct.type.pouches"/>'> 
 												<img
-												src="${images}/Travel-pouch.png" class="img img-responsive type-imag center-block"
+												src="${images}/pouch_400x600.png" class="img img-responsive type-imag center-block"
 												alt='<s:text name="enum.user.type.pouches"/>' />
 											</a>
 											<div class="name text-center">
@@ -355,13 +355,45 @@
 										<div class="banner">
 											<a href='<s:text name="url.ourproduct.type.baskets"/>'> 
 												<img
-												src="${images}/Basket-pot-holder.png" class="img img-responsive type-imag center-block"
+												src="${images}/basket_400x600.png" class="img img-responsive type-imag center-block"
 												alt='<s:text name="enum.user.type.baskets"/>' />
 											</a>
 											<div class="name text-center">
 												<h4>
 													<a href='<s:text name="url.ourproduct.type.baskets"/>'> 
 													<s:text name="enum.user.type.baskets"/>
+													</a>
+												</h4>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-3 col-md-2">
+										<div class="banner">
+											<a href='<s:text name="url.ourproduct.type.lunch_bag"/>'> 
+												<img
+												src="${images}/sac-a-lunch.jpg" class="img img-responsive type-imag center-block"
+												alt='<s:text name="enum.user.type.lunch_bag"/>' />
+											</a>
+											<div class="name text-center">
+												<h4>
+													<a href='<s:text name="url.ourproduct.type.lunch_bag"/>'> 
+													<s:text name="enum.user.type.lunch_bag"/>
+													</a>
+												</h4>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-3 col-md-2">
+										<div class="banner">
+											<a href='<s:text name="url.ourproduct.type.laptop_pouch"/>'> 
+												<img
+												src="${images}/laptop-sleeve_400x600.jpg" class="img img-responsive type-imag center-block"
+												alt='<s:text name="enum.user.type.laptop_pouch.title"/>' />
+											</a>
+											<div class="name text-center">
+												<h4>
+													<a href='<s:text name="url.ourproduct.type.laptop_pouch"/>'> 
+													<s:text name="enum.user.type.laptop_pouch.title"/>
 													</a>
 												</h4>
 											</div>

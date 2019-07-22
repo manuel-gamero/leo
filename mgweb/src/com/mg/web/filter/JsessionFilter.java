@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 /**
  * When no cookies allowed on client browser (disabled or unsupported), servers
@@ -30,7 +30,7 @@ import org.apache.log4j.Logger;
  */
 public class JsessionFilter implements Filter{
 
-	private static Logger log = Logger.getLogger(JsessionFilter.class);
+	private static Logger log = LogManager.getLogger(JsessionFilter.class);
 	
 	protected boolean truncateJsession;
 	

@@ -1,12 +1,12 @@
 package com.mg.web.struts.action.shopping;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.opensymphony.xwork2.Preparable;
 
 public class ShoppingCartPaymentMethod extends BasicShoppingCart implements Preparable {
 
-	private static Logger log = Logger.getLogger(ShoppingCartPaymentMethod.class);
+	private static Logger log = LogManager.getLogger(ShoppingCartPaymentMethod.class);
 	private static final long serialVersionUID = 1155604242419622177L;
 	private String methodCode;
 	

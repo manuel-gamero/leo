@@ -6,7 +6,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.exception.ServiceLocatorException;
 import com.mg.service.ServiceLocator;
@@ -20,7 +20,7 @@ import com.mg.util.communication.Mail;
  */
 public class ExceptionHandler {
 
-	private static final Logger log = Logger.getLogger(ExceptionHandler.class);
+	private static final Logger log = LogManager.getLogger(ExceptionHandler.class);
 	private static ConfigService configService;
 	static {
 		try {

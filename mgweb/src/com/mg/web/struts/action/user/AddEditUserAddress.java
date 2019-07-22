@@ -1,6 +1,6 @@
 package com.mg.web.struts.action.user;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.enums.UserAddressType;
 import com.mg.model.UserAddress;
@@ -17,7 +17,7 @@ public class AddEditUserAddress extends BasicAction {
 	 * 
 	 */
 	private static final long serialVersionUID = 1155604242419622177L;
-	private static Logger log = Logger.getLogger(AddEditUserAddress.class); 
+	private static Logger log = LogManager.getLogger(AddEditUserAddress.class); 
 	
 	private Integer id;
 	private UserAddress userAddress;

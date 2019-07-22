@@ -13,7 +13,7 @@ import java.io.PrintStream;
 import java.io.StringWriter;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.util.text.StringUtils;
 
@@ -26,7 +26,7 @@ import com.mg.util.text.StringUtils;
 public final class FileUtils
 {		
 	
-	private static final Logger log = Logger.getLogger(FileUtils.class);
+	private static final Logger log = LogManager.getLogger(FileUtils.class);
 	
 	private FileUtils(){}
 	

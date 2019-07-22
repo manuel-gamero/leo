@@ -2,7 +2,7 @@ package com.mg.web.struts.action.ajax;
 
 import java.math.BigDecimal;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.exception.CacheException;
 import com.mg.exception.ServiceLocatorException;
@@ -21,7 +21,7 @@ import com.mg.web.struts.action.BasicListActionSupport;
 public class PriceAjax extends BasicListActionSupport<String> {
 	
 	private static final long serialVersionUID = 1L;
-	protected Logger log = Logger.getLogger(this.getClass());
+	protected Logger log = LogManager.getLogger(this.getClass());
 	private Integer objId;
     private String price;
     private String currency;

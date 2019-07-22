@@ -23,7 +23,7 @@ import java.util.Set;
 import javax.imageio.ImageIO;
 import javax.persistence.EntityManager;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.dao.core.DaoCommand;
 import com.mg.dao.core.DaoFactory;
@@ -57,7 +57,7 @@ import com.mg.util.text.StringUtils;
 
 public class ImageServiceImpl extends ServiceImpl implements ImageService {
 
-	private static final Logger log = Logger.getLogger(ImageServiceImpl.class);
+	private static final Logger log = LogManager.getLogger(ImageServiceImpl.class);
 
 	private final static String SLAGE="/";	
 	private final static String IMAGEN_LARGE = "large" + SLAGE;

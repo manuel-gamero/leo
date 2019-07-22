@@ -1,7 +1,7 @@
 package com.mg.web.struts.action.ajax;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.model.Users;
 import com.mg.service.ServiceLocator;
@@ -13,7 +13,7 @@ import com.mg.web.util.LoginUtils;
 public class LostUserOrPwdAjax extends BasicAction{
 	
 	private static final long serialVersionUID = 7640068153357889448L;
-	private static Logger log = Logger.getLogger(LostUserOrPwdAjax.class);
+	private static Logger log = LogManager.getLogger(LostUserOrPwdAjax.class);
 	
 	private String email;
 	private String result;

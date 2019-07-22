@@ -27,7 +27,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.exception.CurrencyNoExistException;
 import com.mg.exception.ServiceException;
@@ -44,7 +44,7 @@ import com.mg.web.util.ConnectionWebUtils;
 
 public abstract class AbstractPaypalAction implements PaypalAction {
 	
-	private static Logger log = Logger.getLogger(AbstractPaypalAction.class);
+	private static Logger log = LogManager.getLogger(AbstractPaypalAction.class);
 	private static final String FILE_PAYPAL_P12 = "paypal_cert.p12";
 	private static final String CACERTS_PSW = "changeit";
 	private static final String SUCCESS_RESPONDE = "Success";

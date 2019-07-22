@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.time.DateFormatUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.enums.Language;
 import com.mg.service.ServiceLocator;
@@ -26,7 +26,7 @@ import com.mg.web.WebConstants;
  */
 public final class LocaleUtils {
 	
-	private static final Logger log = Logger.getLogger(LocaleUtils.class);
+	private static final Logger log = LogManager.getLogger(LocaleUtils.class);
 	
 	// Utility class, no instantiation
 	private LocaleUtils(){};

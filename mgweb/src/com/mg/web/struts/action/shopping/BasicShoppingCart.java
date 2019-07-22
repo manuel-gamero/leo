@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.coupon.CouponAbstract;
 import com.mg.enums.CouponStatus;
@@ -36,7 +36,7 @@ import com.mg.web.struts.action.BasicAction;
 
 public class BasicShoppingCart extends BasicAction {
 
-	private static Logger log = Logger.getLogger(BasicShoppingCart.class);
+	private static Logger log = LogManager.getLogger(BasicShoppingCart.class);
 	private static final long serialVersionUID = 1155604242419622177L;
 	public static final BigDecimal ZERO = new BigDecimal(0.00).setScale(2, RoundingMode.CEILING);
 	

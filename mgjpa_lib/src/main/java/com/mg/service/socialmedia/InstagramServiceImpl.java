@@ -3,7 +3,7 @@ package com.mg.service.socialmedia;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 import org.jinstagram.Instagram;
 import org.jinstagram.auth.model.Token;
 import org.jinstagram.entity.users.feed.MediaFeed;
@@ -24,7 +24,7 @@ import com.mg.util.exception.ExceptionHandler;
  */
 public class InstagramServiceImpl extends ServiceImpl implements InstagramService{
 	
-	private static final Logger log = Logger.getLogger(InstagramServiceImpl.class);
+	private static final Logger log = LogManager.getLogger(InstagramServiceImpl.class);
 
 	private static List<InstagramDTO> feed;
 	private static final int MAX_NUM = 12;

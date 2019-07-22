@@ -18,7 +18,7 @@ import java.util.Hashtable;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.enums.Language;
 import com.mg.enums.UserStatus;
@@ -44,7 +44,7 @@ import com.mg.util.translation.TranslationUtils;
 
 public class Receipt {
 
-	private static final Logger log = Logger.getLogger(Receipt.class);
+	private static final Logger log = LogManager.getLogger(Receipt.class);
 	public static final BigDecimal ZERO = new BigDecimal(0.00).setScale(2, RoundingMode.CEILING);
 	private static ConfigService configService;
 	static {

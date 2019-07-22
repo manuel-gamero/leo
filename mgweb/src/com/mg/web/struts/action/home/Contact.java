@@ -3,7 +3,7 @@ package com.mg.web.struts.action.home;
 import java.sql.Date;
 import java.sql.Time;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.service.ServiceLocator;
 import com.mg.service.init.ConfigServiceImpl;
@@ -12,7 +12,7 @@ import com.mg.web.struts.action.BasicAction;
 
 public class Contact extends BasicAction{
 
-	private static Logger log = Logger.getLogger(Contact.class);
+	private static Logger log = LogManager.getLogger(Contact.class);
 	private static final long serialVersionUID = 1155604242419622177L;
 	private String firstName;
 	private String lastName;

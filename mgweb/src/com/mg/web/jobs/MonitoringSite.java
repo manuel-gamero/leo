@@ -1,7 +1,7 @@
 package com.mg.web.jobs;
 
 import java.net.HttpURLConnection;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.service.ServiceLocator;
 import com.mg.service.init.ConfigService;
@@ -11,7 +11,7 @@ import com.mg.web.util.ConnectionWebUtils;
 
 public class MonitoringSite {
 
-	private static Logger log = Logger.getLogger(MonitoringSite.class);
+	private static Logger log = LogManager.getLogger(MonitoringSite.class);
 	private static final String subject = "MonitoringSite Error status - " + ConnectionWebUtils.getHostName();
 	/**
 	 * @param args

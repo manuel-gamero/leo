@@ -2,7 +2,7 @@ package com.mg.web.struts.action.ajax;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.annotation.Action;
 import com.mg.exception.ServiceLocatorException;
@@ -23,7 +23,7 @@ import com.mg.web.struts.action.BasicAction;
 public class ShoppingCartAjax extends BasicAction {
 		
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = Logger.getLogger(ShoppingCartAjax.class);
+	private static final Logger log = LogManager.getLogger(ShoppingCartAjax.class);
 	private int id;
 	private String resutl;
 

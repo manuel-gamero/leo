@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.exception.ServiceLocatorException;
 import com.mg.service.ServiceLocator;
@@ -20,7 +20,7 @@ import com.mg.util.exception.ExceptionHandler;
 
 public class RequestFilter implements Filter {
 
-	private final static Logger log = Logger.getLogger(RequestFilter.class);
+	private final static Logger log = LogManager.getLogger(RequestFilter.class);
 
 	public void doFilter(ServletRequest req, ServletResponse resp,
 			FilterChain chain) throws IOException, ServletException {

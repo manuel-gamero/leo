@@ -12,12 +12,12 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
 //import org.apache.coyote.RequestInfo;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 
 public class TimingFilter implements Filter {
 
-	private final static Logger log = Logger.getLogger(TimingFilter.class);
+	private final static Logger log = LogManager.getLogger(TimingFilter.class);
 
 	public void doFilter(ServletRequest req, ServletResponse resp,
             FilterChain chain) throws IOException, ServletException {

@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.datamining.interfaces.IDeviceProductAction;
 import com.mg.exception.ServiceException;
@@ -19,7 +19,7 @@ import com.mg.service.product.ProductServiceImpl;
 
 public class DeviceProductHelper {
 
-	private static final Logger log = Logger.getLogger(DeviceProductHelper.class);
+	private static final Logger log = LogManager.getLogger(DeviceProductHelper.class);
 	
 	public static void create(Device device, Audit audit, IDeviceProductAction action, int id) throws ServiceException, ServiceLocatorException{
 		if( device.getDeviceProducts() == null || device.getDeviceProducts().size() == 0 ){

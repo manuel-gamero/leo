@@ -3,7 +3,7 @@ package com.mg.service.product;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.exception.ServiceException;
 import com.mg.exception.ServiceLocatorException;
@@ -13,7 +13,7 @@ import com.mg.service.ServiceLocator;
 
 public class ProductManager {
 	
-	private static final Logger log = Logger.getLogger(ProductManager.class);
+	private static final Logger log = LogManager.getLogger(ProductManager.class);
 	private static List<Product> prodcutSaleList;
 	
 	public static void initialize() throws ServiceException, ServiceLocatorException{

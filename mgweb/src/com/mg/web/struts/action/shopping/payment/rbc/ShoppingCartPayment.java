@@ -8,7 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.annotation.Action;
 import com.mg.enums.PaymentCVX;
@@ -28,7 +28,7 @@ import com.mg.web.struts.action.ecommerce.CMCIC_Tpe;
 public class ShoppingCartPayment extends BasicAction {
 	
 	private static final long serialVersionUID = 8439090570963991085L;
-	private static Logger log = Logger.getLogger(ShoppingCartPayment.class);
+	private static Logger log = LogManager.getLogger(ShoppingCartPayment.class);
 	private InputStream inputStream;
 	
 	private String montant ;

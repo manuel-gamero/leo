@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.exception.ServiceException;
 import com.mg.util.constant.BackEndConstants;
@@ -36,7 +36,7 @@ import com.mg.util.text.StringUtils;
  *
  */
 public final class CommonUtils {
-	private static Logger log = Logger.getLogger(CommonUtils.class);
+	private static Logger log = LogManager.getLogger(CommonUtils.class);
 	protected static final DecimalFormat df = new DecimalFormat("0.00", new DecimalFormatSymbols(Locale.US));
 	
 	private CommonUtils(){}

@@ -1,6 +1,6 @@
 package com.mg.datamining.actions;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.enums.UserActionParamType;
 import com.mg.enums.UserActionType;
@@ -14,7 +14,7 @@ import com.mg.model.DeviceSuggestions;
 
 public class UserActionAddProduct extends UserActionBasicCount{
 
-	private static final Logger log = Logger.getLogger(UserActionBasicCount.class);
+	private static final Logger log = LogManager.getLogger(UserActionBasicCount.class);
 	
 	@Override
 	public void applyAction(Audit audit, DeviceProduct item) {

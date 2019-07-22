@@ -1,6 +1,6 @@
 package com.mg.web.struts.action.ecommerce;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.exception.ServiceLocatorException;
 import com.mg.service.ServiceLocator;
@@ -16,7 +16,7 @@ import com.mg.service.init.ConfigServiceImpl;
 
 class CMCIC_Config
 {
-	private static final Logger log = Logger.getLogger(CMCIC_Config.class);
+	private static final Logger log = LogManager.getLogger(CMCIC_Config.class);
 	private static ConfigService configService;
 	static {
 		try {

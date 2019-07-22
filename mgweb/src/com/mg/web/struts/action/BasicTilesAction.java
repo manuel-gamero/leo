@@ -1,6 +1,6 @@
 package com.mg.web.struts.action;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.exception.ServiceLocatorException;
 import com.mg.web.RequestAtributeConstants;
@@ -14,7 +14,7 @@ import com.mg.web.RequestAtributeConstants;
 public class BasicTilesAction extends BasicAction {
 		
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = Logger.getLogger(BasicTilesAction.class);
+	private static final Logger log = LogManager.getLogger(BasicTilesAction.class);
 	private String resource;
 	
 	public BasicTilesAction() throws ServiceLocatorException {

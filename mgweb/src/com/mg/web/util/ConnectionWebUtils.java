@@ -8,11 +8,11 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.net.UnknownHostException;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 public class ConnectionWebUtils {
 
-	private static Logger log = Logger.getLogger(ConnectionWebUtils.class);
+	private static Logger log = LogManager.getLogger(ConnectionWebUtils.class);
 	private static final String USERAGENT = "atelierBot";
 	public static final int CONNECTIONTIMEMAX = 20000; //20 seg
 	

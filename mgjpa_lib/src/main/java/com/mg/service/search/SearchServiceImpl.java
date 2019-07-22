@@ -8,7 +8,7 @@ import java.util.Timer;
 
 import javax.persistence.EntityManager;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 import org.apache.lucene.search.Query;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
@@ -40,7 +40,7 @@ import com.mg.service.search.lucene.ProductFullTextEntityQuery;
  */
 public class SearchServiceImpl extends ServiceImpl implements SearchService {
 
-	private static final Logger log = Logger.getLogger(SearchServiceImpl.class);
+	private static final Logger log = LogManager.getLogger(SearchServiceImpl.class);
 	
 	// Java timers work with milliseconds
 	private static final long TIME_UNIT_ONE_SECOND = 1000;

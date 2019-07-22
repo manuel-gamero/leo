@@ -1,6 +1,6 @@
 package com.mg.util.constant;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.enums.Language;
 
@@ -13,7 +13,7 @@ import com.mg.enums.Language;
  */
 public final class BackEndConstants {
 
-	private static final Logger LOG = Logger.getLogger(BackEndConstants.class);
+	private static final Logger LOG = LogManager.getLogger(BackEndConstants.class);
 	public static final String HTTP = "http://";
 	public static final String URLPATTERN = "^http(s{0,1})://[a-zA-Z0-9_/\\-\\.]+\\.([A-Za-z/]{2,5})[a-zA-Z0-9_/\\&\\?\\=\\-\\.\\~\\%]*";
 	

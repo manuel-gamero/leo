@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.dao.core.DaoCommand;
 import com.mg.dao.core.DaoFactory;
@@ -39,7 +39,7 @@ import com.mg.util.io.PropertiesFileWrapper;
  */
 public class ConfigServiceImpl extends ServiceImpl implements ConfigService{
 	
-	private static final Logger log = Logger.getLogger(ConfigServiceImpl.class);
+	private static final Logger log = LogManager.getLogger(ConfigServiceImpl.class);
 		
 	/**
 	 * General properties file name.
@@ -126,6 +126,9 @@ public class ConfigServiceImpl extends ServiceImpl implements ConfigService{
 	private static final String SITEMAP_URL 		= "mg.sitemap.url";
 	private static final String FILTER_REQUES_EXT 	= "mg.filter.request.ext";
 	private static final String FILTER_FORWARD 		= "mg.filter.reques.forward";
+	
+	//Dataminig
+	private static final String DATAMINIG_ENABLE	= "mg.dataminig.enable";
 	
 	//Debug
 	private static final String DEBUG_SEND_EMAIL = "mg.debug.sendEmail";
@@ -642,5 +645,10 @@ public class ConfigServiceImpl extends ServiceImpl implements ConfigService{
 	@Override
 	public String getInstagramUserId() {
 		return getProperty(INSTAGRAM_USERID);
+	}
+	
+	@Override
+	public boolean isDataminigEnable() {
+		return getGeneralProps().getPropertyAsBoolean(DATAMINIG_ENABLE);
 	}
 }

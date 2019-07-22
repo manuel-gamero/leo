@@ -1,6 +1,6 @@
 package com.mg.web.struts.action.ajax.validation;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.exception.InvalidUserException;
 import com.mg.exception.ServiceException;
@@ -13,7 +13,7 @@ import com.mg.web.struts.action.BasicListActionSupport;
 public class ValidationAjax extends BasicListActionSupport {
 	
 	private static final long serialVersionUID = 1L;
-	protected transient Logger log = Logger.getLogger(this.getClass());
+	protected transient Logger log = LogManager.getLogger(this.getClass());
 	private transient Users user;
 	private String username;
 	private String password;

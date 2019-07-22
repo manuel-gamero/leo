@@ -2,14 +2,14 @@ package com.mg.web.struts.action.product;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.model.Item;
 
 public class UpdateProduct extends Product{
 
 	private static final long serialVersionUID = 1L;
-	private static Logger log = Logger.getLogger(UpdateProduct.class);
+	private static Logger log = LogManager.getLogger(UpdateProduct.class);
 	private Item item;
 	private Integer index;
 	

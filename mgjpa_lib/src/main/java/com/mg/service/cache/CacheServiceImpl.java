@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.exception.CacheException;
 import com.mg.exception.ServiceLocatorException;
@@ -39,7 +39,7 @@ import net.sf.ehcache.CacheManager;
  */
 public class CacheServiceImpl extends ServiceImpl implements CacheService {
 
-	private static final Logger log = Logger.getLogger(CacheServiceImpl.class);
+	private static final Logger log = LogManager.getLogger(CacheServiceImpl.class);
 	
 	public static final String CACHE_CONFIG_FILE = "/ehcache.xml";
 	

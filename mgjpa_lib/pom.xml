@@ -24,10 +24,17 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 		</dependency>
+		<!-- <dependency> <groupId>log4j</groupId> <artifactId>log4j</artifactId> 
+			<version>1.2.12</version> </dependency> -->
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.12</version>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.11.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.11.2</version>
 		</dependency>
 		<!-- hibernate -->
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-search-orm -->
@@ -77,18 +84,18 @@
 			<version>1.7.12</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.jboss.logging</groupId>
 			<artifactId>jboss-logging</artifactId>
 			<version>3.3.0.Final</version>
-		</dependency>
+		</dependency> -->
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.6.4</version>
 		</dependency>
-
+ -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -118,12 +125,12 @@
 			<artifactId>javassist</artifactId>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging-annotations -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.jboss.logging</groupId>
 			<artifactId>jboss-logging-annotations</artifactId>
 			<version>2.0.1.Final</version>
 			<scope>provided</scope>
-		</dependency>
+		</dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/org.jboss.spec.javax.transaction/jboss-transaction-api_1.2_spec -->
 		<dependency>
@@ -199,7 +206,7 @@
 			<artifactId>jInstagram</artifactId>
 			<version>1.2.2</version>
 		</dependency>
-		
+
 	</dependencies>
 
 	<build>

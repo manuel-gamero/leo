@@ -224,4 +224,6 @@ public interface ConfigService extends Service{
 	int updateConfig(Config config) throws ServiceException;
 
 	Config getConfig(String code) throws ServiceException;
+
+	boolean isDataminigEnable();
 }

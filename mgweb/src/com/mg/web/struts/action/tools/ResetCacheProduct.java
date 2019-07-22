@@ -1,6 +1,6 @@
 package com.mg.web.struts.action.tools;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.service.cache.ResetCacheDefaultTask;
 import com.mg.service.cache.ResetCacheProductTask;
@@ -11,7 +11,7 @@ import com.mg.web.struts.action.BasicAction;
 public class ResetCacheProduct extends BasicAction {
 
 	private static final long serialVersionUID = 1155604242419622177L;
-	private static Logger log = Logger.getLogger(ResetCacheProduct.class);	
+	private static Logger log = LogManager.getLogger(ResetCacheProduct.class);	
 	
 	
 	@Override

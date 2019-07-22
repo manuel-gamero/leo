@@ -2,7 +2,7 @@ package com.mg.web.struts.action.shopping;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.annotation.Action;
 import com.mg.exception.CurrencyNoExistException;
@@ -19,7 +19,7 @@ import com.opensymphony.xwork2.Preparable;
 
 public class ShoppingCart extends BasicShoppingCart implements Preparable {
 
-	private static Logger log = Logger.getLogger(ShoppingCart.class);
+	private static Logger log = LogManager.getLogger(ShoppingCart.class);
 	private static final long serialVersionUID = 1155604242419622177L;
 	private Product product;
 	private List<String> customComponentCollection;

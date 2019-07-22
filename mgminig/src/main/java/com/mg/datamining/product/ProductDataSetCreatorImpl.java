@@ -3,7 +3,7 @@ package com.mg.datamining.product;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.datamining.clustering.DataItem;
 import com.mg.datamining.clustering.DataItemImpl;
@@ -19,7 +19,7 @@ import com.mg.service.device.DeviceServiceImpl;
 
 public class ProductDataSetCreatorImpl implements DataSetCreator<Product,Attribute> {
 
-	private static final Logger log = Logger.getLogger(ProductDataSetCreatorImpl.class);
+	private static final Logger log = LogManager.getLogger(ProductDataSetCreatorImpl.class);
 	
 	@Override
 	public List<DataItem<Product,Attribute>> createLearningData() throws Exception {

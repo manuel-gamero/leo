@@ -1,6 +1,6 @@
 package com.mg.web.struts.action.application;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.enums.Language;
 import com.mg.model.Translation;
@@ -14,7 +14,7 @@ import com.mg.web.struts.action.BasicAction;
 public class AddEditTranslation extends BasicAction {
 
 	private static final long serialVersionUID = 1155604242419622177L;
-	private static final Logger log = Logger.getLogger(AddEditTranslation.class);
+	private static final Logger log = LogManager.getLogger(AddEditTranslation.class);
 	private Integer id;
 	private String textEn;
 	private String textFr;

@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.annotation.FieldView;
 import com.mg.dao.GenericDao;
@@ -20,7 +20,7 @@ import com.mg.util.reflexion.ReflectionUtils;
 import com.mg.web.struts.action.BasicListAction;
 
 public class AbstractEntity <T, D extends GenericDao<T>> {
-	private static final Logger log = Logger.getLogger(BasicListAction.class);
+	private static final Logger log = LogManager.getLogger(BasicListAction.class);
 	private Class<T> entityClass;
 	private Class<D> entityClassDAO;
 	private List<T> itemList;

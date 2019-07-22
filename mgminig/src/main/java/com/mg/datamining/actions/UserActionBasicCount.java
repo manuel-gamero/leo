@@ -2,7 +2,7 @@ package com.mg.datamining.actions;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.datamining.helpers.DeviceCustomComponentHelper;
 import com.mg.datamining.helpers.DeviceCustomComponentHistHelper;
@@ -30,7 +30,7 @@ import com.mg.util.text.StringUtils;
 
 public abstract class UserActionBasicCount extends UserActionBasicUrl implements  IDeviceComponentAction, IDeviceComponentActionHist, IDeviceProductAction, IDeviceProductHistAction, IDeviceSuggestionsAction {
 
-	private static final Logger log = Logger.getLogger(UserActionBasicCount.class);
+	private static final Logger log = LogManager.getLogger(UserActionBasicCount.class);
 	
 	@Override
 	public void apply(Device device, Audit audit) throws NumberFormatException, ServiceException, ServiceLocatorException, CacheException {

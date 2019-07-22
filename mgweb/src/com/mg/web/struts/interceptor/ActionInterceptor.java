@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.annotation.Action;
 import com.mg.exception.ServiceLocatorException;
@@ -37,7 +37,7 @@ import ognl.OgnlException;
 public class ActionInterceptor implements Interceptor{
 
 	private static final long serialVersionUID = 1791550069973083781L;
-	private static final Logger log = Logger.getLogger(ActionInterceptor.class);
+	private static final Logger log = LogManager.getLogger(ActionInterceptor.class);
 	
 	@Override
 	public void destroy() {}

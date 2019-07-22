@@ -1,6 +1,6 @@
 package com.mg.web.struts.action.user;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.enums.Language;
 import com.mg.model.UserAddress;
@@ -20,7 +20,7 @@ public class ModifyUser extends BasicAction implements ModelDriven<UserDTO>, Pre
 
 	private static final long serialVersionUID = 1155604242419622177L;
 
-	private static Logger log = Logger.getLogger(ModifyUser.class);
+	private static Logger log = LogManager.getLogger(ModifyUser.class);
 	private UserDTO user;
 	private String urlRedirect;
 	private Integer id;

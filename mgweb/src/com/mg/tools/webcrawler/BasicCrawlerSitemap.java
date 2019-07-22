@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.service.ServiceLocator;
 import com.mg.service.init.ConfigServiceImpl;
@@ -15,7 +15,7 @@ import com.mg.web.util.ConnectionWebUtils;
 
 public class BasicCrawlerSitemap extends NaiveCrawler {
 	
-	private static Logger log = Logger.getLogger(BasicCrawlerSitemap.class);
+	private static Logger log = LogManager.getLogger(BasicCrawlerSitemap.class);
 	private List<CrawlerUrl> urlSitemap = null;
 	private long max = 0;
 	private long min  = 9999999999l;

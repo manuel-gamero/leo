@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.TimeZone;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.enums.PaymentCVX;
 import com.mg.enums.PaymentCodeReturn;
@@ -31,7 +31,7 @@ public class ExpressCheckoutPayment extends AbstractPaypalAction {
 
 	private ShoppingCart shoppingCart;
 	
-	private static Logger log = Logger.getLogger(ExpressCheckoutPayment.class);
+	private static Logger log = LogManager.getLogger(ExpressCheckoutPayment.class);
 	
 	public ExpressCheckoutPayment(ShoppingCartPaypal shoppingCartAction){
 		setShoppingCartAction(shoppingCartAction);

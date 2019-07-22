@@ -2,7 +2,7 @@ package com.mg.datamining.actions;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.datamining.helpers.DeviceCustomComponentHelper;
 import com.mg.datamining.helpers.DeviceCustomComponentHistHelper;
@@ -23,7 +23,7 @@ import com.mg.util.text.StringUtils;
 
 public class UserActionRemoveProduct extends UserActionBasicCount {
 	
-	private static Logger log = Logger.getLogger(UserActionRemoveProduct.class);
+	private static Logger log = LogManager.getLogger(UserActionRemoveProduct.class);
 	
 	@Override
 	public void apply(Device device, Audit audit) throws NumberFormatException, ServiceException, ServiceLocatorException {
@@ -50,17 +50,17 @@ public class UserActionRemoveProduct extends UserActionBasicCount {
 							DeviceCustomComponentHistHelper.create(device, audit, this, Integer.valueOf(customComponentId));
 						}
 						else{
-							log.warn(customComponentId + " is NOT a customComponet number");
+							log.warn(customComponentId + " is NOT a customComponet number " + audit);
 						}
 					}
 				}
 			}
 			else{
-				log.warn(" There is NOT customComponentCollection : " + message);
+				log.warn(" There is NOT customComponentCollection : " + message + audit);
 			}
 		}
 		else{
-			log.warn(" There is NOT Product : " + message);
+			log.warn(" There is NOT Product : " + message + audit);
 		}
 	}
 	

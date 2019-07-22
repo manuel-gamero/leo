@@ -18,13 +18,13 @@ import java.util.Queue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.web.util.ConnectionWebUtils;
 
 public class NaiveCrawler {
 
-	private static Logger log = Logger.getLogger(NaiveCrawler.class);
+	private static Logger log = LogManager.getLogger(NaiveCrawler.class);
 	private static final String USER_AGENT = "User-agent:";
 	private static final String DISALLOW = "Disallow:";
 	public static final String REGEXP_HTTP = "<a href=[\"|\']http://(.)*[\"|\']>";

@@ -2,7 +2,7 @@ package com.mg.coupon.type;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.coupon.CouponAbstract;
 import com.mg.exception.CurrencyNoExistException;
@@ -12,7 +12,7 @@ import com.mg.util.currency.CurrencyUtils;
 
 public class CouponDiscount2thFor50 extends CouponAbstract{
 	
-	private static Logger log = Logger.getLogger(CouponDiscount2thFor50.class);
+	private static Logger log = LogManager.getLogger(CouponDiscount2thFor50.class);
 	
 	@Override
 	protected void applyCoupon(ShoppingCart shoppingCart, List<Item> itemList, String currencyCode) {

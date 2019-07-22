@@ -3,7 +3,7 @@ package com.mg.web.struts.action.ajax;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.annotation.Action;
 import com.mg.model.Item;
@@ -19,7 +19,7 @@ import com.mg.web.struts.action.BasicListActionSupport;
 public class SocialImageAjax extends BasicListActionSupport<String> {
 	
 	private static final long serialVersionUID = 1L;
-	protected Logger log = Logger.getLogger(this.getClass());
+	protected Logger log = LogManager.getLogger(this.getClass());
 	private int id;
     private Float xpos;
     private Float ypos;

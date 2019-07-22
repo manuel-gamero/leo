@@ -3,7 +3,7 @@ package com.mg.web.struts.action.user;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.annotation.Action;
 import com.mg.enums.UserAddressType;
@@ -22,7 +22,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class AddEditUser extends BasicAction implements ModelDriven<Users>{
 
 	private static final long serialVersionUID = 1155604242419622177L;
-	private static Logger log = Logger.getLogger(AddEditUser.class);
+	private static Logger log = LogManager.getLogger(AddEditUser.class);
 	
 	private Users user = new Users();
 	private Integer id;

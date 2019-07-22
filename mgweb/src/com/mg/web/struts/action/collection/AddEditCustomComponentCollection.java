@@ -2,7 +2,7 @@ package com.mg.web.struts.action.collection;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.model.CustomComponentCollection;
 import com.mg.service.ServiceLocator;
@@ -14,7 +14,7 @@ import com.opensymphony.xwork2.Preparable;
 public class AddEditCustomComponentCollection extends BasicTranslationAction implements Preparable {
 
 	private static final long serialVersionUID = 1155604242419622177L;
-	private static final Logger log = Logger.getLogger(AddEditCustomComponentCollection.class);
+	private static final Logger log = LogManager.getLogger(AddEditCustomComponentCollection.class);
 	private Integer id;
 	private CustomComponentCollection customComponentCollection;
 	private int descrTranslationId;

@@ -1,6 +1,6 @@
 package com.mg.web.struts.action.ajax;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.annotation.Action;
 import com.mg.exception.ServiceLocatorException;
@@ -15,7 +15,7 @@ import com.mg.web.struts.action.BasicAction;
 public class AuditActionAjax extends BasicAction {
 		
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = Logger.getLogger(AuditActionAjax.class);
+	private static final Logger log = LogManager.getLogger(AuditActionAjax.class);
 	private String audit;
 	
 	public AuditActionAjax() throws ServiceLocatorException {

@@ -14,7 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.mg.exception.ServiceException;
@@ -39,7 +39,7 @@ import com.mg.web.struts.action.BasicAction;
 public class AjaxUploadFile extends BasicAction implements ServletResponseAware {
 
     private static final long serialVersionUID = 6748857432950840322L; 
-    private static final Logger log = Logger.getLogger(AjaxUploadFile.class);
+    private static final Logger log = LogManager.getLogger(AjaxUploadFile.class);
     
     private static String realPath;
    

@@ -1,6 +1,6 @@
 package com.mg.web.struts.action.ajax;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.annotation.Action;
 import com.mg.model.CustomComponentImage;
@@ -14,7 +14,7 @@ import com.mg.web.struts.action.BasicListActionSupport;
 public class ImageAjax extends BasicListActionSupport<String> {
 	
 	private static final long serialVersionUID = 1L;
-	protected Logger log = Logger.getLogger(this.getClass());
+	protected Logger log = LogManager.getLogger(this.getClass());
 	private int productId;
     private int componentImageId;
     private String path;

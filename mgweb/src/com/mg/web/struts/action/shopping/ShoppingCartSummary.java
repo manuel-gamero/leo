@@ -2,7 +2,7 @@ package com.mg.web.struts.action.shopping;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.model.MethodShipping;
 import com.mg.model.ShoppingCart;
@@ -17,7 +17,7 @@ import com.opensymphony.xwork2.Preparable;
 public class ShoppingCartSummary extends BasicShoppingCart implements Preparable {
 
 	private static final long serialVersionUID = 5889902524032581061L;
-	private static final Logger log = Logger.getLogger(ShoppingCartSummary.class);
+	private static final Logger log = LogManager.getLogger(ShoppingCartSummary.class);
 	private static final String ACTION_PAYPAL = "shoppingCartPaypalSend";
 	private static final String ACTION_DESJARDINS = "shoppingCartPaymentSend";
 	private String methodCode;

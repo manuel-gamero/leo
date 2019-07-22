@@ -6,6 +6,7 @@ import com.mg.exception.ServiceException;
 import com.mg.model.Product;
 import com.mg.model.Users;
 import com.mg.service.Service;
+import com.mg.service.dto.ItemViewDTO;
 
 public interface SuggestionService extends Service {
 
@@ -17,5 +18,4 @@ public interface SuggestionService extends Service {
 			throws ServiceException;
 
 	public int saveSuggestion(final Users users, final String sessionGuid, final Integer productId, final String suggestion, final Integer count, final Integer suggestionId) throws ServiceException;
-
 }

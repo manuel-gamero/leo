@@ -1,6 +1,6 @@
 package com.mg.web.struts.action.shopping.payment.paypal;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.annotation.Action;
 import com.mg.web.struts.action.shopping.BasicShoppingCart;
@@ -11,7 +11,7 @@ import com.opensymphony.xwork2.Preparable;
 public class ShoppingCartPaylPalCheckoutResponde extends BasicShoppingCart implements Preparable,ShoppingCartPaypal{
 
 	private static final long serialVersionUID = 1L;
-	private static Logger log = Logger.getLogger(ShoppingCartPaylPalCheckoutResponde.class);
+	private static Logger log = LogManager.getLogger(ShoppingCartPaylPalCheckoutResponde.class);
 	private String token;
 	private String payerID;
 

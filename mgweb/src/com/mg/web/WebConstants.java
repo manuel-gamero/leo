@@ -1,6 +1,6 @@
 package com.mg.web;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.enums.ComponentAttributeType;
 import com.mg.enums.ComponentType;
@@ -25,7 +25,7 @@ import com.mg.service.init.ConfigServiceImpl;
  */
 public final class WebConstants {
 
-	private static final Logger LOG = Logger.getLogger(WebConstants.class);
+	private static final Logger LOG = LogManager.getLogger(WebConstants.class);
 	private static ConfigService configService;
 	static {
 		try {

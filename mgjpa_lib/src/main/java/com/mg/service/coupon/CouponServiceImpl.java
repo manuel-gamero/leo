@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.dao.core.DaoCommand;
 import com.mg.dao.core.DaoFactory;
@@ -32,7 +32,7 @@ import com.mg.util.translation.Translations;
  */
 public class CouponServiceImpl extends ServiceImpl implements CouponService {
 
-	private static final Logger log = Logger.getLogger(CouponServiceImpl.class);
+	private static final Logger log = LogManager.getLogger(CouponServiceImpl.class);
 
 	public CouponServiceImpl() {
 		super();

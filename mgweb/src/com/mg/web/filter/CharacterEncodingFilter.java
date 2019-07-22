@@ -9,7 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 /**
  * This filter sets character encoding for all incoming requests.
@@ -21,7 +21,7 @@ import org.apache.log4j.Logger;
  */
 public class CharacterEncodingFilter implements Filter {
 	
-	private static Logger log = Logger.getLogger(CharacterEncodingFilter.class); 
+	private static Logger log = LogManager.getLogger(CharacterEncodingFilter.class); 
 	
 	protected String encoding = "UTF-8";
 	protected FilterConfig filterConfig = null;

@@ -3,7 +3,7 @@ package com.mg.coupon.type;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.coupon.CouponAbstract;
 import com.mg.enums.ProductType;
@@ -13,7 +13,7 @@ import com.mg.util.currency.CurrencyUtils;
 
 public class Coupon1WalletTaxFree extends CouponAbstract {
 
-	private static Logger log = Logger.getLogger(Coupon1WalletTaxFree.class);
+	private static Logger log = LogManager.getLogger(Coupon1WalletTaxFree.class);
 
 	@Override
 	protected void applyCoupon(ShoppingCart shoppingCart, List<Item> itemList,

@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;
 
 import com.mg.dao.core.DaoCommand;
 import com.mg.dao.core.DaoFactory;
@@ -20,7 +20,7 @@ import com.mg.service.ServiceImpl;
 
 public class DataminigServiceImpl extends ServiceImpl implements DataminigService {
 
-	private static final Logger log = Logger.getLogger(DataminigServiceImpl.class);
+	private static final Logger log = LogManager.getLogger(DataminigServiceImpl.class);
 
 	public DataminigServiceImpl() {
 		super();
@@ -35,6 +35,9 @@ public class DataminigServiceImpl extends ServiceImpl implements DataminigServic
 				public Object execute(EntityManager em) throws DaoException {
 					try {
 						ProductDataDAO dao = DaoFactory.getDAO(ProductDataDAO.class, em);
+						//Delete table before insert new data
+						dao.deleteProductData();
+						
 						for (ItemCluster<Product, Attribute> itemCluster : itemClusterList) {
 							for (DataItem<Product, Attribute> dataItem : itemCluster.getItems()) {
 								ProductData productData = new ProductData(dataItem.getData(), String.valueOf(itemCluster.getClusterId()));
